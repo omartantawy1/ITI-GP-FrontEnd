@@ -1,0 +1,120 @@
+.navbar-props{
+    min-width: 100% !important;
+    position: fixed ;
+    overflow: auto;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+  
+
+}
+
+li:hover{
+   color: white; 
+   background-color:#A6C5E229;
+   border: 2px solid transparent;
+   border-radius: 10px;
+   color: white;
+   cursor: pointer;
+}
+
+a{
+    color: white;
+}
+
+.board-button{
+    border: #1A2980;
+    background-color: #1A2980;
+}
+
+/***** Work visible buttons ********************************/
+.list-workspace{
+width: 380px;
+height: 300px;
+top: 60px;
+left: 200px; 
+position: absolute;
+border: 1px #1A2980  solid;
+border-radius: 20px;
+z-index: 1;
+}
+
+.workspace-visible-section{
+    position: relative;
+}
+.full-visibility{
+    font-size: 12px;
+}
+
+.private-icon{
+color: #e2483d
+}
+
+
+.public-icon{
+color: #2abb7f
+}
+
+
+
+/*----------------------------background's color change button  -------------------------------*/
+
+.swatchy-element {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    padding: 2px 12px;
+    height: 30px;
+    background: white;
+    border-radius: 8px;
+    min-width: 80px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    background-color:rgba(0, 0, 0, 0.449);
+}
+
+.swatchy-swatches {
+    display: grid;
+    grid-template-columns: repeat(11, 24px);
+    justify-items: center;
+    grid-gap: 8px 2px;
+    
+}
+
+.swatchy-color-button {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: none;
+}
+
+.swatchy-color-button {
+    cursor: pointer;
+}
+
+.swatchy-display {
+    margin: 4px;
+    height: 100%;
+    max-width: 48px;
+    border-radius: 8px;
+    border: none;
+}
+
+
+/* From uiverse.io by @Voxybuns */
+.swatchy-button {
+border-radius: 50%;
+font-weight: lighter;
+width: 30px;
+height: 30px;
+margin: 0px 20px;
+border: 3px solid white;
+background: linear-gradient(to right, #1A2980, #26D0CE); 
+color: white;
+
+}
+
+
+
+

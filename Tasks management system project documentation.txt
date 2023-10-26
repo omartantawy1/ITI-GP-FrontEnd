@@ -1,0 +1,68 @@
+Task management system is a Web-based that helps individuals and teams efficiently organize, track, and complete tasks.
+
+@ Main functionalities:
+
+* authentication (login,registration,email verification), Social media Authentication.
+
+* user can create multiple boards for different projects.
+
+* cards can be organized into lists or categories allowing users to group tasks together.
+
+* You can attach files, images, documents, or links to their card.
+
+* each user can invite other users inviting them through their emails .
+
+* Tasks can be assigned to specific users.
+
+* Users can set due dates for tasks.
+
+* Users can leave comments related to specific card.
+
+* You can add team members to your  boards, and each member can be assigned to specific tasks.
+
+
+@ Secondary functionalities :
+-- user can receive reminders through their e-mails about his tasks.
+
+-- Integration with calendar apps allows users to view tasks.
+
+-- indicators of task progress, such as status icons or progress bars.
+
+-- user can pick a background color or image for his workspace.
+
+-- project can has many views like : board - table - calendar - timeline.
+
+-- orientation on how to use website (first login in the website).
+
+
+
+Website user scenario:
+
+1- the user will sign up then sign in.
+2- after sign in it will land him to the creating/viewing and guest workspaces page,user has the ability to create many workspaces.
+3- customer can pick background color or upload backgroud image
+4- after creating the workspace, inside the workspace the user can create projects (boards) as much as he can.  the projects are splitted into phases (to-do, doing, done) and he can add another phases.
+5- inside each phase it has Cards.
+6- user can add cards in phases and add a description for every card.
+7- inside the cards user can add tasks, these tasks can be splitted into  smaller tasks
+8- member or owner user can add comment for any task an card
+9- the user can move the card from one phase to another one.
+10- the user can invite members to his workspace , projects and tasks by emails.
+11- user can assign category for each card
+12- user can attach file or link inside card
+13- user can set deadline for card
+14- user can add card to archive or delete it
+
+
+Pages :
+1- home page
+2- login page
+3- registration page
+4- workspaces page
+5- projects page
+6- specific board page
+7- about page
+8- profile page
+
+
+omar123@

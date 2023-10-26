@@ -1,0 +1,36 @@
+
+ 
+ task management system is a Web-based that helps individuals and teams efficiently organize, track, and complete tasks.
+
+ .authentication (login,registration,email verification), Social media Authentication.
+
+ .user can create multiple boards for different projects ,tasks can be organized into lists or categories allowing users to group tasks together.
+
+ .You can attach files, images, documents, or links to their box, making it easy to reference relevant information and keep all project-related materials in one place.
+
+ .each user has his own box that represents their individual tasks which they can share with other members by inviting them through their emails .
+
+ .Tasks can be assigned to specific individuals or team members, clarifying responsibility and accountability.
+
+ . Users can set due dates for tasks and receive reminders through their e-mails.
+
+ . Users can leave comments, notes, or messages related to specific tasks and collaboration.
+
+ .indicators of task progress, such as status icons or progress bars.
+
+ .Integration with calendar apps allows users to view tasks.
+
+ .You can add team members to your  boards, and each member can be assigned to specific tasks. This feature promotes collaboration and transparency within teams, as it allows you 
+
+ to see who is responsible for each task.
+
+
+
+
+
+
+
+
+
+
+

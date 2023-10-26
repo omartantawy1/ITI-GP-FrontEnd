@@ -1,0 +1,8 @@
+.main-filter{
+    background-color: rgba(0, 0, 0, 0.538);
+    width: 300px;
+    border:1px solid black;
+    border-radius: 20px;
+    color: white;
+    font-size: 13px;
+}
