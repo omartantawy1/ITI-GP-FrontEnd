@@ -26,11 +26,12 @@ swatches = [
   workspaceListVisible: boolean = false;
 
 
-  showFilterButton = false; 
-  toggleFilterButton() {
-    this.showFilterButton = !this.showFilterButton;
+  isFilterVisible: boolean = false;
+
+  // Function to toggle the visibility
+  toggleFilter() {
+    this.isFilterVisible = !this.isFilterVisible;
   }
-  
 
 
   @Output() newItemEvent = new EventEmitter<string>();
