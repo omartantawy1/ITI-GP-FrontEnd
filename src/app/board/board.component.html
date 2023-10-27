@@ -1,35 +1,27 @@
-
-<body class="background" [style.background]="backgroundcolor" >
-
+<body class="background" [style.background]="backgroundcolor">
   <div class="my-board">
-  
     <app-second-nav (newItemEvent)="changebackground($event)"></app-second-nav>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="container "  >
+    <br><br><br><br><br>
+    <div class="container">
       <div class="row">
-        <div class="col-9" style="display: flex;"  >
-          <div class="board" style="display: flex; flex-wrap: nowrap;" cdkDropListGroup cdkDropList cdkDropListOrientation="horizontal"  (cdkDropListDropped)="onlistDrop($event)"    >
-            <app-list   *ngFor="let list of lists" [list]="list" cdkDrag>{{list}}   </app-list > 
+        <div class="col-9" style="display: flex;">
+          <div class="board" style="display: flex; flex-wrap: nowrap;" cdkDropListGroup cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="onlistDrop($event)">
+            <app-list *ngFor="let list of lists" [list]="list" cdkDrag>{{ list }}</app-list>
           </div>
           <div class="col-3">
             <button
               type="button"
-              class=" btn btn-primary "
+              class="btn btn-primary"
               (click)="addlist()"
-                >
-              Add Another 
+            >
+              {{ buttonText }}
             </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  </body>
+</body>
     
 
 

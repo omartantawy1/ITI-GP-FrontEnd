@@ -1,17 +1,21 @@
-<div class="container main-filter">
+
+<div class="container main-filter bg-dark" >
+
     <h6 class="text-center">Filter</h6>
     <p>Keyword</p>
     <form role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="margin-bottom: 5px;">
     </form>
     
-    <div class="fluid-container">
+    <div class="fluid-container " >
+
       <p>Members</p>
 
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="checkbox1">
         <label class="form-check-label" for="checkbox1">
-          <i class="fa fa-user"></i> User 1
+          <div class="fa fa-user"></div> 
+          <p>No Members </p> 
         </label>
       </div>
   
@@ -19,35 +23,70 @@
       <div class="form-check">
         <input class="form-check-input" type="checkbox" id="checkbox2">
         <label class="form-check-label" for="checkbox2">
-          <i class="fa fa-user"></i> User 2
+          <div class="fa fa-user"></div>
+          <p> Cards Assigned To me </p>
+        </label>
+        </div>
+        
+      <div class="form-check" >
+        <input class="form-check-input" type="checkbox" id="checkbox2" style="margin-top:7px ;">
+        <label class="form-check-label" for="checkbox2">
+          <select class="form-select form-select-sm" aria-label="Small select example"  style="margin-bottom:10px" >
+            <option selected>Select Members</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </label>
+        </div>
+
+
+
+
+       </div>
+
+
+
+
+    
+
+
+    <div class="fluid-container">
+      <p>Due Date</p>
+    
+      <div class="form-check" *ngFor="let item of initialdateItems; let i = index">
+        <input class="form-check-input" type="checkbox" [id]="item.id">
+        <label class="form-check-label" [for]="item.id">
+          <i [ngClass]="item.icon"></i>
+          <p>{{ item.text }}</p>
+        </label>
+      </div>
+    
+      <div class="fluid-container" style="display: flex;">
+        <a (click)="toggleShowMore()" class="show-options-button">Show More Options</a>
+        <i class="bi bi-arrow-down-short "></i>
+      </div>
+    
+      <div class="form-check" *ngFor="let item of additionaldateItems; let i = index" [hidden]="!showAdditionalOptions">
+        <input class="form-check-input" type="checkbox" [id]="item.id">
+        <label class="form-check-label" [for]="item.id">
+          <i [ngClass]="item.icon"></i>
+          <p>{{ item.text }}</p>
         </label>
       </div>
     </div>
 
 
     <div class="fluid-container">
-        <p>Members</p>
-
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="checkbox2">
-            <label class="form-check-label" for="checkbox2">
-              <i class="fa fa-user"></i> User 2
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="checkbox2">
-            <label class="form-check-label" for="checkbox2">
-              <i class="fa fa-user"></i> User 2
-            </label>
-          </div>
-
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="checkbox2">
-            <label class="form-check-label" for="checkbox2">
-              <i class="fa fa-user"></i> User 2
-            </label>
-          </div>
+      <p>Labels</p>
+    
+      <div class="form-check" *ngFor="let label of labels; let i = index">
+        <input class="form-check-input" type="checkbox" [id]="label.id" [name]="label.name">
+        <label class="form-check-label" [for]="label.id">
+          <div class="{{label.color.toLowerCase()}}-block custom-block" [style.backgroundColor]="label.backgroundColor"></div>
+        </label>
+      </div>
     </div>
+
+
   </div>

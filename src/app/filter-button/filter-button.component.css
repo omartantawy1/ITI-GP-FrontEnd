@@ -1,8 +1,94 @@
 .main-filter{
-    background-color: rgba(0, 0, 0, 0.538);
-    width: 300px;
+    width: 250px;
     border:1px solid black;
     border-radius: 20px;
     color: white;
     font-size: 13px;
 }
+
+.form-check-label{
+  display: flex;
+}
+
+  .form-check {
+    margin-bottom: 15px;
+  }
+  
+  .fa {
+  margin-right: 5px;
+  margin-top: 2px;
+    color: white; 
+  }
+  .bi{
+    margin-right: 5px;
+  }
+ .bi-arrow-down-short{
+  margin-bottom: 10px;
+  font-size: 15px;
+ }
+
+
+
+.show-options-button{
+  background-color: transparent;
+  color: #579DFF;
+  cursor: pointer;
+  text-decoration: none;
+
+}
+
+
+.green-block {
+    background-color: #216E4E ; 
+    width: 250px;             
+    height: 25px;            
+    display: inline-block; 
+    border: 1px solid #216E4E;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+
+  .yellow-block {
+    background-color: #7f5f01; 
+    width: 250px;             
+    height: 25px;            
+    display: inline-block; 
+    border: 1px solid #7f5f01;
+    border-radius: 5px; 
+    margin-bottom: 15px;
+  }
+
+  .blue-block {
+    background-color: #0c66e4; 
+    width: 250px;             
+    height: 25px;            
+    display: inline-block; 
+    border: 1px solid #0c66e4;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+
+
+  .red-block {
+    background-color: #dc3545; 
+    width: 250px;             
+    height: 25px;            
+    display: inline-block; 
+    border: 1px solid #dc3545;
+    border-radius: 5px; 
+    margin-bottom: 15px;
+  }
+
+  
+
+
+  .purple-block {
+    background-color: #6f42c1; 
+    width: 250px;             
+    height: 25px;            
+    display: inline-block; 
+    border: 1px solid #6f42c1;
+  border-radius: 5px;
+    margin-bottom: 15px;
+  }
+

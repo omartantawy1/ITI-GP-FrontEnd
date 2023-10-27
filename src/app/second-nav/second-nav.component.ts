@@ -25,6 +25,11 @@ swatches = [
   popupVisible: boolean = false;
   workspaceListVisible: boolean = false;
 
+
+  showFilterButton = false; 
+  toggleFilterButton() {
+    this.showFilterButton = !this.showFilterButton;
+  }
   
 
 
