@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light navbar-props">
+<nav class="navbar navbar-light navbar-props px-3">
         <!--     
             <button
               class="navbar-toggler"
@@ -43,19 +43,23 @@
 
 
     <!-- Right elements -->
-    <div class="d-flex align-items-center ">
+    <div class="right-second-nav">
       <!-- Icon -->
       <ul class="navbar-nav flex-row align-items-center">
         
         <li class="nav-item"  >
-          <i class="bi bi-filter"></i>
-          <a (click)="toggleFilter()">Filter</a>
+          <a (click)="toggleFilter()">
+            <i class="bi bi-filter"></i>
+            Filter
+          </a>
         </li>
 
 
         <li class="nav-item">
-          <strong> Share</strong>  
-          <i class="bi bi-person-plus-fill"></i> 
+          <a class="fw-bolder nav-link text-white">
+            <i class="bi bi-person-plus-fill"></i> 
+              Share
+          </a>  
         </li>
       
         <li>
@@ -63,7 +67,7 @@
           </button>
         </li>
         
-        <li>
+        <li >
           <input type="hidden" class="swatchy-output swatchy-display" disabled [style.backgroundColor]="selectedColor" [value]="selectedColor">
         </li>
       </ul>
