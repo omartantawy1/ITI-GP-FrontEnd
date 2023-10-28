@@ -23,29 +23,34 @@
     padding: 5px 10px;
     border: 2px solid transparent;
     border: 2px solid transparent;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.board-button{
-    border: #1A2980;
-    background-color: #1A2980;
-    transition: 0.3s;
-}
 .left-second-nav li a:hover, 
-.left-second-nav .star-icon-nav:hover,
-.board-button:hover{
+.left-second-nav .star-icon-nav:hover{
    background-color:#A6C5E229;
 }
 
+.board-button{
+    color: black;
+    background-color:#ccc;
+    transition: 0.3s;
+}
+.board-button:hover {
+    background-color: white;
+}
+
 /*********** right side into nav *******/
+.right-second-nav li{
+    margin-left: 5px;
+}
 
 .right-second-nav li a{
-    margin-left: 15px;
-    padding: 5px 10px !important;
-    border-radius: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -58,7 +63,17 @@
 
 }
 
-.right-second-nav li button:hover {
+.right-second-nav li .btn-share {
+    color: black;
+    background-color:#ddd;
+    transition: 0.3s;
+}
+.right-second-nav li .btn-share:hover {
+    background-color: white;
+}
+
+
+.right-second-nav li .btn-color:hover {
     transform: scale(1.1,1.1);
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.492);
     transition: all 0.3s ease-in-out;
@@ -68,13 +83,12 @@
 /* on medium screen 780px  */
 @media (max-width:780px) {
     .navbar-props{
-        display: flex !important;
-        justify-content: space-between;
+        justify-content: right;
     }
-/*     .left-second-nav {
-        display: block !important;
+     .left-second-nav {
         position: absolute !important;
-        z-index: 1000;
+        display: flex !important;
+        flex-direction: column !important;
         top: 0;
         left: 0;
         background-color: black !important;
@@ -82,7 +96,7 @@
 
     .left-second-nav li a {
         background-color: blue;
-    } */
+    }
     
 }
 
