@@ -10,6 +10,22 @@
 }
 
 
+::-webkit-scrollbar{
+  background-color: #b7b7b75a;
+  height: 15px;
+  border-radius: 5px;
+  
+}
+
+::-webkit-scrollbar-thumb:horizontal{
+  
+  height: 15px;
+  background-color: #00000094;
+  border-radius: 5px;
+  size: 25px;
+}
+
+
 
 
 
