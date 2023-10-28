@@ -58,6 +58,13 @@
 
 }
 
+.right-second-nav li button:hover {
+    transform: scale(1.1,1.1);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.492);
+    transition: all 0.3s ease-in-out;
+
+}
+
 /* on medium screen 780px  */
 @media (max-width:780px) {
     .navbar-props{
