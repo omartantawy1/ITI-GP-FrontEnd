@@ -11,12 +11,7 @@
 
 }
 
-.navbar-props{
-    transition: 0.3s;
-}
-
 /************ left side into nav ************/
-
 .left-second-nav li {
     margin-right: 1px;
 }
@@ -49,6 +44,10 @@
 }
 
 /*********** right side into nav *******/
+.right-second-nav{
+    position: relative;
+}
+
 .right-second-nav li{
     margin-left: 5px;
 }
@@ -85,25 +84,6 @@
 
 }
 
-/* on medium screen 650px  */
-@media (max-width:650px) {
-    .navbar-props{
-        justify-content: center;
-    }
-    .navbar-props div:first-of-type{
-        margin: 8px 0;
-    }
-
-
-}
-
-
-/* on medium screen 400px  */
-@media (max-width:400px) {
-    .left-second-nav ul li span , .right-second-nav ul li span{
-        display: none;
-    }
-}
 
 
 
@@ -140,20 +120,20 @@ color: #2abb7f
 /*----------------------------background's color change button  -------------------------------*/
 
 .swatchy-element {
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    padding: 2px 12px;
     height: 30px;
-    border-radius: 8px;
     min-width: 80px;
+    position: absolute;
+    bottom: -50px;
+    right: 5px;
+    padding: 2px 12px;
+    border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     background-color:rgba(0, 0, 0, 0.449);
 }
 
 .swatchy-swatches {
     display: grid;
-    grid-template-columns: repeat(11, 24px);
+    grid-template-columns: repeat(11,24px);
     justify-items: center;
     grid-gap: 8px 2px;
     
@@ -170,28 +150,53 @@ color: #2abb7f
     cursor: pointer;
 }
 
-.swatchy-display {
-    margin: 4px;
-    height: 100%;
-    max-width: 48px;
-    border-radius: 8px;
-    border: none;
-}
+
 
 
 /* From uiverse.io by @Voxybuns */
 .swatchy-button {
-border-radius: 50%;
-font-weight: lighter;
-width: 30px;
-height: 30px;
-margin: 0px 20px;
-border: 3px solid white;
-background: linear-gradient(to right, #1A2980, #26D0CE); 
-color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-weight: lighter;
+    border: 3px solid white;
+    background: linear-gradient(to right, #1A2980, #26D0CE); 
+    color: white;
 
 }
 
 
+/* on medium screen 650px  */
+@media (max-width:650px) {
+    /* nav bar */
+    .navbar-props{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .navbar-props div:first-of-type{
+        margin: 8px 0;
+    }
+    /* button change background color */
+
+    .swatchy-element {
+        top: 110%;
+        height: fit-content;
+        width: 30px;
+        right: -50px;
+    }
+
+    .swatchy-swatches {
+        display: grid;
+        row-gap: 8px;
+        grid-template-rows:  repeat(11,25px);
+        grid-template-columns: none;
+    }
+}
+/* on small screen 400px  */
+@media (max-width:400px) {
+    .left-second-nav ul li span , .right-second-nav ul li span{
+        display: none;
+    }
+}
 
 

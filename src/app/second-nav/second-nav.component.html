@@ -1,16 +1,4 @@
 <nav class="navbar navbar-light navbar-props px-3">
-        <!--     
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse" 
-              data-bs-target="#navbarSupportedContent" >
-              <i class="fas fa-bars"></i>
-            </button> -->
-
-
-
-
 
     <!-- Collapsible wrapper -->
     <div class="left-second-nav" id="navbarSupportedContent">
@@ -40,12 +28,10 @@
     </div>
     <!-- Collapsible wrapper -->
 
-
-
     <!-- Right elements -->
     <div class="right-second-nav">
       <!-- Icon -->
-      <ul class="navbar-nav flex-row align-items-center">
+      <ul class="navbar-nav flex-row align-items-center d-relative">
         
         <li class="nav-item"  >
           <a (click)="toggleFilter()">
@@ -53,7 +39,6 @@
             <span>Filter</span>
           </a>
         </li>
-
 
         <li class="nav-item">
           <button class="btn btn-light border-0 fw-semibold btn-share">
@@ -67,11 +52,16 @@
           </button>
         </li>
         
-        <li >
+        <li>
           <input type="hidden" class="swatchy-output swatchy-display" disabled [style.backgroundColor]="selectedColor" [value]="selectedColor">
         </li>
+
       </ul>
-      
+      <div class="swatchy-element" [style.display]="popupVisible ? 'block' : 'none'">
+        <div class="swatchy-swatches">
+          <div *ngFor="let swatch of swatches" class="swatchy-color-button" [style.background]=swatch (click)="selectColor(swatch)"></div>
+        </div>
+      </div>
     </div>
 </nav>
 
@@ -79,11 +69,7 @@
 
 
 
-<div class="swatchy-element" [style.display]="popupVisible ? 'block' : 'none'">
-  <div class="swatchy-swatches">
-    <div *ngFor="let swatch of swatches" class="swatchy-color-button" [style.background]=swatch (click)="selectColor(swatch)"></div>
-  </div>
-</div>
+
 
 <div class="list-workspace bg-dark" *ngIf="workspaceListVisible">
   <div class="container full-visibility">
