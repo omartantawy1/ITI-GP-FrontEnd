@@ -4,8 +4,8 @@
     background-attachment:fixed;
     background-size: cover;
     color: #fff; 
-    height: 100vh;
-    min-width: 100%;
+    height: fit-content;
+    min-height: 100vh;
     overflow:auto;
 }
 
@@ -17,13 +17,14 @@
   
 }
 
-::-webkit-scrollbar-thumb:horizontal{
+::-webkit-scrollbar-thumb{
   
   height: 15px;
   background-color: #00000094;
   border-radius: 5px;
   size: 25px;
 }
+
 
 
 

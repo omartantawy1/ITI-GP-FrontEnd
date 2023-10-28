@@ -8,19 +8,14 @@
     backdrop-filter: blur(30px);
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
     font-size: 13px;
-
 }
-
-::-webkit-scrollbar {
-    height: 4px;              /* height of horizontal scrollbar ← You're missing this */
-    width: 4px;               /* width of vertical scrollbar */
-    border: 1px solid #d5d5d5;
-  }
   
 
 /************ left side into nav ************/
 .left-second-nav li {
-    margin-right: 1px;
+    margin-right: 10px;
+        
+
 }
 
 .left-second-nav li a, 
@@ -172,6 +167,15 @@ color: #2abb7f
 
 }
 
+/************ filter *********/
+.filter {
+    position: absolute;
+    top: 50px;
+    right: 5px;
+    transition: 0.5s;
+}
+
+
 /**************** media query **************/
 
 /* on medium screen 650px  */
@@ -199,6 +203,10 @@ color: #2abb7f
         padding: 5px;
         grid-template-rows:  repeat(10,30px);
         grid-template-columns: none;
+    }
+    /* filter */
+    .filter {
+        right: -180px;
     }
 }
 

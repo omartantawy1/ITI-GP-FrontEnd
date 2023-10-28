@@ -33,11 +33,15 @@
       <!-- Icon -->
       <ul class="navbar-nav flex-row align-items-center d-relative">
         
-        <li class="nav-item"  >
+        <li class="nav-item position-relative"  >
           <a (click)="toggleFilter()">
             <i class="bi bi-filter"></i>
             <span>Filter</span>
           </a>
+          <div class="filter">
+            <app-filter-button *ngIf="isFilterVisible"></app-filter-button>
+          </div>
+          
         </li>
 
         <li class="nav-item">
@@ -65,7 +69,6 @@
     </div>
 </nav>
 
-<app-filter-button *ngIf="isFilterVisible"></app-filter-button>
 
 
 

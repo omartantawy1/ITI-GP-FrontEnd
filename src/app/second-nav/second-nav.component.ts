@@ -52,6 +52,5 @@ swatches = [
     this.workspaceListVisible = !this.workspaceListVisible;
   }
 
- 
 
 }
