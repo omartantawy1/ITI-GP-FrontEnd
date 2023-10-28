@@ -12,7 +12,13 @@
 
 }
 
-.navbar-props li a{
+/************ left side into nav ************/
+
+.navbar-props .left-second-nav li {
+    margin-right: 3px;
+}
+
+.navbar-props .left-second-nav li a,.star-icon-nav{
     padding: 5px 10px;
     border: 2px solid transparent;
     border-radius: 10px;
@@ -21,18 +27,24 @@
     transition: 0.3s;
 }
 
-.navbar-props a:hover{
-   background-color:#A6C5E229;
-}
-
 .board-button{
     border: #1A2980;
     background-color: #1A2980;
+    transition: 0.3s;
 }
+.left-second-nav li a:hover,.left-second-nav .star-icon-nav:hover,.board-button:hover{
+   background-color:#A6C5E229;
+}
+
+/*********** right side into nav *******/
 
 /* on medium screen 780px  */
 @media (max-width:780px) {
-    .left-second-nav {
+    .navbar-props{
+        display: flex !important;
+        justify-content: space-between;
+    }
+/*     .left-second-nav {
         display: block !important;
         position: absolute !important;
         z-index: 1000;
@@ -43,7 +55,7 @@
 
     .left-second-nav li a {
         background-color: blue;
-    }
+    } */
     
 }
 
