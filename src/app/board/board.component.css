@@ -9,6 +9,10 @@
     overflow:auto;
 }
 
+.add-list-btn{
+  margin-top: 40px;
+}
+
 
 ::-webkit-scrollbar{
   background-color: #b7b7b75a;
