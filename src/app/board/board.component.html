@@ -6,12 +6,12 @@
     <div class="container">
       <div class="d-flex align-items-start align-items-center">
         <div class="board" style="display: flex; flex-wrap: nowrap;" cdkDropListGroup cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="onlistDrop($event)">
-        <app-list *ngFor="let list of lists" [list]="list" cdkDrag>{{ list }}</app-list>
+        <app-phase *ngFor="let phase of phases" [phase]="phase" cdkDrag>{{ phase}}</app-phase>
         </div>
         <div class="">
           <div *ngIf="showInput">
             <div class="d-flex flex-column align-items-center bg-light rounded p-3" style="width: 200px;height: 100px;">
-              <input [(ngModel)]="newPhase" class="form-control mb-2 add-task-input" width="100%" placeholder="Enter title" required>
+              <input [(ngModel)]="newPhase" class="form-control mb-2 add-card-input" width="100%" placeholder="Enter title" required>
               <div class="d-flex justify-content-between">
                 <button type="button" class="btn btn-success btn-sm me-2" (click)="savePhase()">OK</button>
                 <i class="bi bi-x-lg text-dark icon-cancel" style="cursor: pointer;" (click)="cancelPhase()"></i>
@@ -20,8 +20,8 @@
           </div>
           <button *ngIf="!showInput" style="width: 150px !important;background-color: rgba(0, 0, 0, 0.314);border-color: transparent;"
             type="button"
-            class="btn btn-primary add-list-btn"
-            (click)="addlist()"
+            class="btn btn-primary add-phase-btn"
+            (click)="addphase()"
           >
             {{ buttonText }}
           </button>

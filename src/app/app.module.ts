@@ -14,11 +14,11 @@ import { DropDownButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
 import {CdkMenu, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
 import { HomeComponent } from './home/home.component';
-import { ListComponent } from './list/list.component';
 import { FilterButtonComponent } from './filter-button/filter-button.component';
 import { EditMyProfileComponent } from './edit-my-profile/edit-my-profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountButtonComponent } from './account-button/account-button.component';
+import { PhaseComponent } from './phase/phase.component';
 
 
 @NgModule({
@@ -29,10 +29,10 @@ import { AccountButtonComponent } from './account-button/account-button.componen
     BoardComponent,
     SecondNavComponent,
        HomeComponent,
-       ListComponent,
       FilterButtonComponent,
     EditMyProfileComponent,
     AccountButtonComponent,
+    PhaseComponent,
         
  
 
