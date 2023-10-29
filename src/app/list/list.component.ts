@@ -1,5 +1,6 @@
 import { Component,Input } from '@angular/core';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
+import { PhaseInterface } from '../interfaces/phase-interface';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -9,12 +10,7 @@ import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} fr
   export class ListComponent {
   
   
-    @Input() list: { id: number; title: string; tasks: string[] } = {
-      id: 0,
-      title: '',
-      tasks: [],
-    };
-
+    @Input() list! : PhaseInterface;
     
   
     showInput: boolean = false;
@@ -38,16 +34,16 @@ import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} fr
 
   
     saveTask() {
-      if (this.newTask) {
-        if (this.editIndex === -1) {
-          this.list.tasks.push(this.newTask);
-        } else {
-          this.list.tasks[this.editIndex] = this.newTask;
-          this.editIndex = -1; 
-        }
-        this.newTask = '';
-        this.showInput = false;
-      }
+      // if (this.newTask) {
+      //   if (this.editIndex === -1) {
+      //     this.list.tasks.push(this.newTask);
+      //   } else {
+      //     this.list.tasks[this.editIndex] = this.newTask;
+      //     this.editIndex = -1; 
+      //   }
+      //   this.newTask = '';
+      //   this.showInput = false;
+      // }
     }
   
     cancelTask() {
@@ -57,8 +53,8 @@ import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} fr
     }
   
     editTask(index: number) {
-      this.newTask = this.list.tasks[index];
-      this.editIndex = index;
+      // this.newTask = this.list.tasks[index];
+      // this.editIndex = index;
     }
   
    

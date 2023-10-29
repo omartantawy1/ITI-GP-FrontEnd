@@ -1,5 +1,7 @@
 import { Component,Input,Output } from '@angular/core';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
+import { PhaseService } from '../services/phase.service';
+import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 
 @Component({
   selector: 'app-board',
@@ -11,7 +13,26 @@ export class BoardComponent {
 
   backgroundcolor!: any;
 
-  lists: { id: number; title: string; tasks: string[] }[] = [];
+  lists!:Array<Phase> ;
+ 
+
+  constructor(private phaseservice: PhaseService){
+
+
+    
+  };
+
+
+  ngOnInit(){
+    this.phaseservice.getAllPhases().subscribe(
+      (data:any) => (this.lists = data.data),
+      (error)=>  console.log(error),
+    );
+}
+
+
+
+  
   showAddlistButton: boolean = true;
   buttonText: string = 'Add List'; 
 
@@ -23,7 +44,7 @@ export class BoardComponent {
         title: '',
         tasks: [],
       };
-      this.lists.push(newlist);
+      // this.lists.push(newlist);
       this.buttonText = this.lists.length > 0 ? 'Add Another List' : 'Add List';
     
     }
