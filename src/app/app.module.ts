@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { BoardComponent } from './board/board.component';
-
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { SecondNavComponent } from './second-nav/second-nav.component';
@@ -15,10 +14,8 @@ import { DropDownButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
 import {CdkMenu, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
 import { HomeComponent } from './home/home.component';
-
 import { ListComponent } from './list/list.component';
 import { FilterButtonComponent } from './filter-button/filter-button.component';
-
 
 
 
@@ -30,7 +27,7 @@ import { FilterButtonComponent } from './filter-button/filter-button.component';
     BoardComponent,
     SecondNavComponent,
        HomeComponent,
-     
+    
        ListComponent,
              FilterButtonComponent,
             
@@ -51,7 +48,8 @@ import { FilterButtonComponent } from './filter-button/filter-button.component';
     CdkDrag,
     CdkMenuTrigger,
      CdkMenu, 
-     CdkMenuItem
+     CdkMenuItem,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

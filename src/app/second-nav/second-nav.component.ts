@@ -25,7 +25,13 @@ swatches = [
   popupVisible: boolean = false;
   workspaceListVisible: boolean = false;
 
-  
+
+  isFilterVisible: boolean = false;
+
+  // Function to toggle the visibility
+  toggleFilter() {
+    this.isFilterVisible = !this.isFilterVisible;
+  }
 
 
   @Output() newItemEvent = new EventEmitter<string>();

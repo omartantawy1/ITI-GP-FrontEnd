@@ -64,7 +64,8 @@
           
           <li class="nav-item "  style="margin-left: 10px;">
             <i class="bi bi-filter m-2"></i>
-            <strong>Filter</strong>
+            <a (click)="toggleFilter()">Filter</a>
+
           </li>
           
            
@@ -88,6 +89,10 @@
       </div>
     </div>
   </nav>
+  <app-filter-button *ngIf="isFilterVisible"></app-filter-button>
+
+
+
   <div class="swatchy-element" [style.display]="popupVisible ? 'block' : 'none'">
     <div class="swatchy-swatches">
       <div *ngFor="let swatch of swatches" class="swatchy-color-button" [style.background]=swatch (click)="selectColor(swatch)"></div>
@@ -96,10 +101,9 @@
 
 <div class="list-workspace bg-dark" *ngIf="workspaceListVisible">
   <div class="container full-visibility">
-   
+    <div>
     <p class="text-center">Change Visibility</p>
-   
-
+  </div>
     <div>
       <i class="fas fa-lock private-icon"></i>
       <p style="display: inline; margin-left:10px">Private</p>

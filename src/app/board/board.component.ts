@@ -11,11 +11,9 @@ export class BoardComponent {
 
   backgroundcolor!: any;
 
-  lists: { id: number; title: string; tasks: string[] }[] = [
-
-
-  ];
+  lists: { id: number; title: string; tasks: string[] }[] = [];
   showAddlistButton: boolean = true;
+  buttonText: string = 'Add List'; 
 
 
   addlist() {
@@ -26,6 +24,7 @@ export class BoardComponent {
         tasks: [],
       };
       this.lists.push(newlist);
+      this.buttonText = this.lists.length > 0 ? 'Add Another List' : 'Add List';
     
     }
   }
