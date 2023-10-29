@@ -11,23 +11,23 @@ export class PhaseService {
 
   constructor(private http: HttpClient) { }
 
-  getAllPhases(): Observable<Phase[]> {
-    return this.http.get<Phase[]>(this.api_phases);
+  getAllPhases() {
+    return this.http.get(this.api_phases);
   }
 
-  getPhase(phaseId: number): Observable<Phase> {
-    return this.http.get<Phase>(`${this.api_phases}/${phaseId}`);
+  getPhase(phaseId: number) {
+    return this.http.get(`${this.api_phases}/${phaseId}`);
   }
 
-  createPhase(phase: Phase): Observable<Phase> {
-    return this.http.post<Phase>(this.api_phases, phase);
+  createPhase(phase: any) {
+    return this.http.post(this.api_phases,phase);
   }
 
-  updatePhase(phaseId: number, phase: Phase): Observable<Phase> {
-    return this.http.put<Phase>(`${this.api_phases}/${phaseId}`, phase);
+  updatePhase( phase: any,phaseId: number) {
+    return this.http.put(`${this.api_phases}/${phaseId}`, phase);
   }
 
-  deletePhase(phaseId: number): Observable<void> {
-    return this.http.delete<void>(`${this.api_phases}/${phaseId}`);
+  deletePhase(phaseId: number) {
+    return this.http.delete(`${this.api_phases}/${phaseId}`);
   }
 }

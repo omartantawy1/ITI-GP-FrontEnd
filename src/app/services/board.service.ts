@@ -11,23 +11,23 @@ export class BoardService {
 
   constructor(private http: HttpClient) { }
 
-  getAllBoards(): Observable<Board[]> {
-    return this.http.get<Board[]>(this.api_boards);
+  getAllBoards() {
+    return this.http.get(this.api_boards);
   }
 
-  getBoard(boardId: number): Observable<Board> {
-    return this.http.get<Board>(`${this.api_boards}/${boardId}`);
+  getBoard(boardId: number) {
+    return this.http.get(`${this.api_boards}/${boardId}`);
   }
 
-  createBoard(board: Board): Observable<Board> {
-    return this.http.post<Board>(this.api_boards, board);
+  createBoard(board: Board) {
+    return this.http.post(this.api_boards, board);
   }
 
-  updateBoard(boardId: number, board: Board): Observable<Board> {
-    return this.http.put<Board>(`${this.api_boards}/${boardId}`, board);
+  updateBoard(boardId: number, board: Board) {
+    return this.http.put(`${this.api_boards}/${boardId}`, board);
   }
 
-  deleteBoard(boardId: number): Observable<void> {
-    return this.http.delete<void>(`${this.api_boards}/${boardId}`);
+  deleteBoard(boardId: number) {
+    return this.http.delete(`${this.api_boards}/${boardId}`);
   }
 }

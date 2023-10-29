@@ -1,8 +1,8 @@
 export interface PhaseInterface {
-     title: string;
+    id: number;
+    title: string;
     position: number;
-    board_id: number;
+    board: number|any|null;
     updated_at: string |null;
     created_at: string |null;
-    id: number |null;
 }

@@ -6,6 +6,6 @@ export interface BoardInterface {
     workspace_id:number;
     updated_at: string |null;
     created_at: string |null;
-    id: number |null;
+    id: number|any |null;
 
 }
