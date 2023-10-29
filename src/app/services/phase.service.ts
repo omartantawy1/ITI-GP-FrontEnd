@@ -23,7 +23,7 @@ export class PhaseService {
     return this.http.post(this.api_phases,phase);
   }
 
-  updatePhase(phaseId: number, phase: Phase) {
+  updatePhase( phase: any,phaseId: number) {
     return this.http.put(`${this.api_phases}/${phaseId}`, phase);
   }
 

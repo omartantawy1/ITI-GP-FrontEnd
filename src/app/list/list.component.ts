@@ -1,6 +1,7 @@
 import { Component,Input } from '@angular/core';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
 import { PhaseInterface as Phase } from '../interfaces/phase-interface';
+import { PhaseService } from '../services/phase.service';
 
 @Component({
   selector: 'app-list',
@@ -16,15 +17,31 @@ import { PhaseInterface as Phase } from '../interfaces/phase-interface';
   
     showInput: boolean = false;
     newTask: string = '';
+    newPhase: string = '';
     editIndex: number = -1;
     editableTitle: boolean = false;
   
+    constructor(private phaseService:PhaseService){};
+
     enableTitleEdit() {
+      
       this.editableTitle = true;
     }
   
     disableTitleEdit() {
+      if (this.list.title) {
+        let phase = {
+          'title':this.list.title,
+          'position': this.list.position,
+          'board_id': this.list.board.id
+        };
+        this.phaseService.updatePhase(phase,this.list.id).subscribe(
+          (res:any) => (this.list = res.data),
+          (error)=>  console.log(error),
+          );
+      }
       this.editableTitle = false;
+
     }
   
     addTask() {

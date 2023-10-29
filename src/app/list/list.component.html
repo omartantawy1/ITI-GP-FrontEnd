@@ -11,8 +11,8 @@
   <div class="card-header d-flex justify-content-between">
     <ng-container *ngIf="!editableTitle; else titleEdit">
       <div class="d-flex align-items-center">
-        <ng-container *ngIf="!list.title; else showTitle">
-          <strong (click)="enableTitleEdit()" class="card-title">Enter your title</strong>
+        <ng-container *ngIf="list.title; else showTitle">
+          <strong (click)="enableTitleEdit()" class="card-title">{{list.title}}</strong>
         </ng-container>
         <ng-template #showTitle>
           {{ list.title }}

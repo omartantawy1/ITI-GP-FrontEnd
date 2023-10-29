@@ -45,7 +45,7 @@ export class BoardComponent {
     if (this.newPhase) {
       let phase = {
         'title':this.newPhase,
-        'position': 1,
+        'position': this.lists.length,
         'board_id': 16
       };
       this.phaseservice.createPhase(phase).subscribe(
@@ -63,14 +63,27 @@ export class BoardComponent {
     this.showInput = false;
   }
 
-  editTask(index: number) {
-    // this.newTask = this.list.tasks[index];
-    // this.editIndex = index;
-  }
-
 
   onlistDrop(event: CdkDragDrop<Phase>) {
     moveItemInArray(this.lists, event.previousIndex, event.currentIndex);
+    console.log();
+    if(event.currentIndex!=event.previousIndex){
+      let phasePosition = this.lists.find(p=>p.position==event.previousIndex)
+      if(phasePosition){
+        console.log(phasePosition);
+        let phase = {
+          'title':phasePosition.title,
+          'position': event.currentIndex,
+          'board_id': phasePosition.board.id
+        };
+        this.phaseservice.updatePhase(phase,phasePosition.id).subscribe(
+          (res:any) => (this.lists.push(res.data)),
+          (error)=>  console.log(error.error),
+          );
+
+      }
+      console.log();
+    }
   }
 
 
