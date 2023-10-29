@@ -16,7 +16,8 @@ import {CdkMenu, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
 import { HomeComponent } from './home/home.component';
 import { ListComponent } from './list/list.component';
 import { FilterButtonComponent } from './filter-button/filter-button.component';
-
+import { EditMyProfileComponent } from './edit-my-profile/edit-my-profile.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -27,10 +28,10 @@ import { FilterButtonComponent } from './filter-button/filter-button.component';
     BoardComponent,
     SecondNavComponent,
        HomeComponent,
-    
        ListComponent,
-             FilterButtonComponent,
-            
+      FilterButtonComponent,
+    EditMyProfileComponent,
+        
  
 
 
@@ -49,6 +50,7 @@ import { FilterButtonComponent } from './filter-button/filter-button.component';
     CdkMenuTrigger,
      CdkMenu, 
      CdkMenuItem,
+     HttpClientModule,
     
   ],
   providers: [],

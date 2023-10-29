@@ -1,5 +1,8 @@
 import { Component,Input } from '@angular/core';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
+import { PhaseInterface as Phase } from '../interfaces/phase-interface';
+import { PhaseService } from '../services/phase.service';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -9,25 +12,36 @@ import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} fr
   export class ListComponent {
   
   
-    @Input() list: { id: number; title: string; tasks: string[] } = {
-      id: 0,
-      title: '',
-      tasks: [],
-    };
-
+    @Input() list! : Phase;
     
   
     showInput: boolean = false;
     newTask: string = '';
+    newPhase: string = '';
     editIndex: number = -1;
     editableTitle: boolean = false;
   
+    constructor(private phaseService:PhaseService){};
+
     enableTitleEdit() {
+      
       this.editableTitle = true;
     }
   
     disableTitleEdit() {
+      if (this.list.title) {
+        let phase = {
+          'title':this.list.title,
+          'position': this.list.position,
+          'board_id': this.list.board.id
+        };
+        this.phaseService.updatePhase(phase,this.list.id).subscribe(
+          (res:any) => (this.list = res.data),
+          (error)=>  console.log(error),
+          );
+      }
       this.editableTitle = false;
+
     }
   
     addTask() {
@@ -38,16 +52,16 @@ import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} fr
 
   
     saveTask() {
-      if (this.newTask) {
-        if (this.editIndex === -1) {
-          this.list.tasks.push(this.newTask);
-        } else {
-          this.list.tasks[this.editIndex] = this.newTask;
-          this.editIndex = -1; 
-        }
-        this.newTask = '';
-        this.showInput = false;
-      }
+      // if (this.newTask) {
+      //   if (this.editIndex === -1) {
+      //     this.list.tasks.push(this.newTask);
+      //   } else {
+      //     this.list.tasks[this.editIndex] = this.newTask;
+      //     this.editIndex = -1; 
+      //   }
+      //   this.newTask = '';
+      //   this.showInput = false;
+      // }
     }
   
     cancelTask() {
@@ -57,8 +71,8 @@ import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} fr
     }
   
     editTask(index: number) {
-      this.newTask = this.list.tasks[index];
-      this.editIndex = index;
+      // this.newTask = this.list.tasks[index];
+      // this.editIndex = index;
     }
   
    
