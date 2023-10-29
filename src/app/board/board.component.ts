@@ -12,7 +12,7 @@ import { PhaseInterface as Phase, PhaseInterface } from '../interfaces/phase-int
 export class BoardComponent {
 
   backgroundcolor!: any;
-  lists!:Array<Phase> ;
+  lists:Array<Phase>=[];
   showAddlistButton: boolean = true;
   buttonText: string = 'Add List'; 
   showInput:boolean = false;
@@ -26,7 +26,11 @@ export class BoardComponent {
       (data:any) => (this.lists = data.data),
       (error)=>  console.log(error),
     );
+  }
+  
+  ngOnChanges(){
     this.buttonText = this.lists.length > 0 ? 'Add Another List' : 'Add List'; 
+
   }
   
 
@@ -66,23 +70,53 @@ export class BoardComponent {
 
   onlistDrop(event: CdkDragDrop<Phase>) {
     moveItemInArray(this.lists, event.previousIndex, event.currentIndex);
-    console.log();
     if(event.currentIndex!=event.previousIndex){
-      let phasePosition = this.lists.find(p=>p.position==event.previousIndex)
+      let phasePosition = this.lists.find(p=>p.position === event.previousIndex);
       if(phasePosition){
-        console.log(phasePosition);
-        let phase = {
-          'title':phasePosition.title,
-          'position': event.currentIndex,
-          'board_id': phasePosition.board.id
-        };
-        this.phaseservice.updatePhase(phase,phasePosition.id).subscribe(
-          (res:any) => (this.lists.push(res.data)),
-          (error)=>  console.log(error.error),
-          );
+        if(event.currentIndex<event.previousIndex){
 
+          let temp = this.lists.filter(p=>p.position>=event.currentIndex&& p.position<event.previousIndex);
+     
+            temp.forEach(element => {
+              let phase = {
+                'title':element.title,
+                'position': ++element.position,
+                'board_id': element.board.id
+              };
+              let index = this.lists.indexOf(element);
+              this.phaseservice.updatePhase(phase,element.id).subscribe(
+                (res:any) => (this.lists[index] = res.data),
+                (error)=>  console.log(error.error),
+                );
+            });
+        }else{
+          let temp = this.lists.filter(p=>p.position<=event.currentIndex&& p.position>event.previousIndex);
+     
+            temp.forEach(element => {
+              let phase = {
+                'title':element.title,
+                'position': --element.position,
+                'board_id': element.board.id
+              };
+              let index = this.lists.indexOf(element);
+              this.phaseservice.updatePhase(phase,element.id).subscribe(
+                (res:any) => (this.lists[index] = res.data),
+                (error)=>  console.log(error.error),
+                );
+            });
+          }
+          let phase = {
+            'title':phasePosition.title,
+            'position': event.currentIndex,
+            'board_id': phasePosition.board.id
+          };
+  
+          let index = this.lists.indexOf(phasePosition);
+          this.phaseservice.updatePhase(phase,phasePosition.id).subscribe(
+            (res:any) => (this.lists[index] = res.data),
+            (error)=>  console.log(error.error),
+            );
       }
-      console.log();
     }
   }
 
