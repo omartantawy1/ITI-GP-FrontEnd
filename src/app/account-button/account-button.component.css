@@ -1,0 +1,36 @@
+.list-account{
+width: 230px;
+top: 60px;
+right: 20px; 
+position: absolute;
+border: 1px #1A2980 solid;
+border-radius: 10px;
+z-index: 1;
+color: white;
+    
+}
+    
+.full-visibility{
+font-size: 14px;
+}
+
+.account-det:hover,.man-acc :hover,.sw-acc:hover ,.log-out:hover{
+background-color:#A6C5E229;
+cursor: pointer;
+border-radius: 10px;    
+}
+.close-acc-icon:hover{
+    background-color:#A6C5E229;
+cursor: pointer;
+}
+
+a{
+text-decoration: none;
+color: white;
+}
+    
+.account-det img{
+width: 40px;
+height: 40px;
+border-radius: 50%;
+}

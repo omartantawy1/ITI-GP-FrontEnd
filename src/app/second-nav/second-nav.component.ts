@@ -22,6 +22,7 @@ swatches = [
     
   ];
   selectedColor: string = '';
+  selectedBackgroundColor: string = '';
   popupVisible: boolean = false;
   workspaceListVisible: boolean = false;
 
@@ -35,9 +36,18 @@ swatches = [
 
 
   @Output() newItemEvent = new EventEmitter<string>();
+  
 
+  getContrastColor(background: string): string {
+    const rgb = [parseInt(background.slice(1, 3), 16), parseInt(background.slice(3, 5), 16), parseInt(background.slice(5, 7), 16)];
+    const luminance = 0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2];
+    return luminance > 128 ? 'black' : 'white';
+  }
+
+  
   selectColor(color: string) {
     this.selectedColor = color;
+    this.selectedBackgroundColor = color;
     document.body.style.backgroundColor = color;
     this.togglePopup();
     this.newItemEvent.emit(this.selectedColor);

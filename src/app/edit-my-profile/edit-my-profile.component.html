@@ -3,159 +3,145 @@
 <head>
     <!-- Include your CSS and other meta tags here -->
 </head>
-<body>
-    <br>
-    <br>
-    <br>
-    
+<body class="background">
 
-    <div class="fluid-container" style="display: flex; flex-direction: column; align-items: center; ">
-        <h3 style="margin-right: 10px;">My Profile and visibility</h3>
-        <strong class="col-6">Manage your personal information, and control which information other people see and apps may access.</strong>
-        <br>
-        <br>
-    </div>
-    
-        <div class="container   ">
-            <div class="row  big-box ">
-                <div class="col-md-8">
-                    <!-- Profile Heading -->
-                    <!-- =============================== -->
-                    <div class="panel">
-                        <div class="panel-bg-cover">
-                            <img class="img-responsive" src="../../assets/images/header.avif" alt="Image">
-                        </div>
+    <br>
+    <br>
 
-                        <div class="panel-media">
-                            <img src="https://bootdey.com/img/Content/user_6.jpg" class="panel-media-img img-circle img-border-light" alt="Profile Picture">
-                            <div class="row">
-                                <div class="col-md-7">
-                                    <h3 class="panel-media-heading">Omar Ashraf</h3>
-                                    <a href="#" class="btn-link">My Boards</a>
-                                    <p class="text-muted mar-btm">Web and Graphic designer</p>
-                                </div>
-                                <div class="col-md-5 pull-right">
-                                    <strong>Who can see this profile ?</strong>
-                                </div>
+    <div class="container">
+        <div class="row big-box">
+            <div class="col-md-8">
+                <!-- Profile Heading -->
+                <div class="panel">
+                    <form action="" class="panel-bg-cover">
+                        <label for="cover-image" class="cover-label">
+                            <img class="img-responsive" [src]="coverImageSrc" alt="Cover Image">
+                            <input type="file" id="cover-image" accept="image/*" style="display: none" (change)="onCoverImageSelected($event)">
+                        </label>
+                    </form>
+    
+                    <div class="panel-media">
+                        <label for="profile-image" class="profile-label">
+                            <img [src]="profileImageSrc" class="panel-media-img img-circle img-border-light" alt="Profile Picture">
+                            <input type="file" id="profile-image" accept="image/*" style="display: none" (change)="onProfileImageSelected($event)">
+                        </label>
+    
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h3 class="panel-media-heading">Omar Ashraf</h3>
+                                <a href="#" class="btn-link">My Boards</a>
+                                <p class="text-muted mar-btm">Web and Graphic designer</p>
+                            </div>
+                            <div class="col-md-5 pull-right">
+                                <strong>Who can see this profile ?</strong>
                             </div>
                         </div>
                     </div>
-                    <!-- =============================== -->
                 </div>
             </div>
         </div>
+    </div>
 
-        <br>
-        <div class="container">
-          <div class="row">
-              <div class="col-md-6 offset-md-3">
-                  <div class="signup-form">
-                      <form action="" class="mt-5 border p-4 bg-light shadow">
-                          <h4 class="mb-5 text-secondary">About You</h4>
-                          <div class="row">
-                              <div class="mb-3 col-md-6">
-                                  <label>Full Name<span class="text-danger">*</span></label>
-                                  <input type="text" name="full-name" class="form-control" placeholder="Enter First Name">
-                              </div>
-      
-                              <div class="mb-3 col-md-6">
-                                  <label>who can see this ?<span class="text-danger">*</span></label>
-                                  <select class="form-select form-select-sm" aria-label="Small select example">
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="signup-form form">
+                    <form action="" class="mt-5 border p-4 bg-light shadow" method="get">
+                        <h4 class="mb-5 text-secondary">About You</h4>
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label>Full Name<span class="text-danger">*</span></label>
+                                <ng-container *ngIf="!editingFullName; else editFullName">
+                                    <p (click)="editingFullName = true">Your Full Name</p>
+                                </ng-container>
+                                <ng-template #editFullName>
+                                    <input type="text" name="full-name" class="form-control form-control-sm" placeholder="Enter Full Name">
+                                </ng-template>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label>Who can see this?<span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm" aria-label="Small select example">
                                     <option selected>Open this select menu</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
-                                  </select>
-                              </div>
-
-                              <div class="mb-3 col-md-6">
-                                <label>Last Name<span class="text-danger">*</span></label>
-                                <input type="text" name="Lname" class="form-control" placeholder="Enter Last Name">
-                              </div>
-
-                              <div class="mb-3 col-md-6">
-                                <label>Last Name<span class="text-danger">*</span></label>
-                                <select class="form-select form-select-sm" aria-label="Small select example">
-                                  <option selected>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
                                 </select>
-                              </div>
-      
-                              <div class="mb-3 col-md-6">
-                                <label>Last Name<span class="text-danger">*</span></label>
-                                <input type="text" name="Lname" class="form-control" placeholder="Enter Last Name">
-                              </div>
-
-                              <div class="mb-3 col-md-6">
-                                <label>Last Name<span class="text-danger">*</span></label>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label>Public Name<span class="text-danger">*</span></label>
+                                <ng-container *ngIf="!editingPublicName; else editPublicName">
+                                    <p (click)="editingPublicName = true">Your Public Name</p>
+                                </ng-container>
+                                <ng-template #editPublicName>
+                                    <input type="text" name="public-name" class="form-control form-control-sm" placeholder="Enter Public Name">
+                                </ng-template>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label>Who can see this?<span class="text-danger">*</span></label>
                                 <select class="form-select form-select-sm" aria-label="Small select example">
-                                  <option selected>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
                                 </select>
-                              </div>
-                              
-                              <div class="mb-3 col-md-6">
-                                <label>Last Name<span class="text-danger">*</span></label>
-                                <input type="text" name="Lname" class="form-control" placeholder="Enter Last Name">
-                              </div>
-
-                              <div class="mb-3 col-md-6">
-                                <label>Last Name<span class="text-danger">*</span></label>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label>Job Title<span class="text-danger">*</span></label>
+                                <ng-container *ngIf="!editingJobTitle; else editJobTitle">
+                                    <p (click)="editingJobTitle = true">Your Job Title</p>
+                                </ng-container>
+                                <ng-template #editJobTitle>
+                                    <input type="text" name="job-title" class="form-control form-control-sm" placeholder="Enter Job Title">
+                                </ng-template>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label>Who can see this?<span class="text-danger">*</span></label>
                                 <select class="form-select form-select-sm" aria-label="Small select example">
-                                  <option selected>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
                                 </select>
-                              </div>
-                             
-                              <div class="col-md-7">
-                                 <button class="btn btn-primary float-end">Update </button>
-                              </div>
-                          </div>
-                      </form>
-                    
-                  </div>
-              </div>
-          </div>
-      </div>
-
-      
-
-      <div class="container">
+                            </div>
+                            <div class="col-md-7">
+                                <button class="btn btn-primary float-end">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <div class="signup-form">
+                <div class="signup-form ">
                     <form action="" class="mt-5 border p-4 bg-light shadow">
                         <h4 class="mb-5 text-secondary">Contact</h4>
                         <div class="row">
                             <div class="mb-3 col-md-6">
-                                <label>Full Name<span class="text-danger">*</span></label>
-                                <input type="text" name="full-name" class="form-control" placeholder="Enter First Name">
+                                <label>Email Address<span class="text-danger">*</span></label>
+                                <strong>amoraashraf2000@gmail.com</strong>
                             </div>
-    
                             <div class="mb-3 col-md-6">
-                                <label>Last Name<span class="text-danger">*</span></label>
-                                <input type="text" name="Lname" class="form-control" placeholder="Enter Last Name">
+                                <label>Who can see this ?<span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm" aria-label="Small select example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
                             </div>
-
-                           
-    
-                           
-                            
                         </div>
                     </form>
-                  
                 </div>
             </div>
         </div>
     </div>
 
-
+    <br>
+    <br>
 
 </body>
 </html>
