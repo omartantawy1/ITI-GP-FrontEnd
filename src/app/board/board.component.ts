@@ -15,12 +15,7 @@ export class BoardComponent {
 
   lists!:Array<Phase> ;
  
-
-  constructor(private phaseservice: PhaseService){
-
-
-    
-  };
+  constructor(private phaseservice: PhaseService){};
 
 
   ngOnInit(){

@@ -1,6 +1,7 @@
 import { Component,Input } from '@angular/core';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
-import { PhaseInterface } from '../interfaces/phase-interface';
+import { PhaseInterface as Phase } from '../interfaces/phase-interface';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -10,7 +11,7 @@ import { PhaseInterface } from '../interfaces/phase-interface';
   export class ListComponent {
   
   
-    @Input() list! : PhaseInterface;
+    @Input() list! : Phase;
     
   
     showInput: boolean = false;
