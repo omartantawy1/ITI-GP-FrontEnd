@@ -1,3 +1,13 @@
+.background {
+  background-image: url('../../assets/hand-painted-watercolor-abstract-watercolor-background_23-2149009911.jpg'); /* Replace 'path-to-your-image.jpg' with the image URL */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+
+
 .panel {
   box-shadow: 0 2px 0 rgba(0,0,0,0.05);
   border-radius: 20px;
@@ -35,8 +45,9 @@
   justify-content: center;
   align-items: center;
 
-
 }
+
+
 .about-content{
   text-align: center;
 }

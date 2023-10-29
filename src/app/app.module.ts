@@ -18,6 +18,7 @@ import { ListComponent } from './list/list.component';
 import { FilterButtonComponent } from './filter-button/filter-button.component';
 import { EditMyProfileComponent } from './edit-my-profile/edit-my-profile.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AccountButtonComponent } from './account-button/account-button.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
        ListComponent,
       FilterButtonComponent,
     EditMyProfileComponent,
+    AccountButtonComponent,
         
  
 

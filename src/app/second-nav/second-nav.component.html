@@ -52,7 +52,7 @@
         </li>
       
         <li>
-          <button class="swatchy-button swatchy-trigger btn-color" (click)="togglePopup()">
+          <button class="swatchy-button swatchy-trigger btn-color" [style.background]="selectedBackgroundColor" [style.color]="getContrastColor(selectedBackgroundColor)" (click)="togglePopup()">
           </button>
         </li>
         
