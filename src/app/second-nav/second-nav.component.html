@@ -1,103 +1,78 @@
-<nav class="navbar navbar-expand-lg navbar-light navbar-props">
-    <div class="container-fluid">
-      
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse" 
-        data-bs-target="#navbarSupportedContent" 
-      >
-        <i class="fas fa-bars"></i>
-      </button>
-  
+<nav class="navbar navbar-light navbar-props px-3">
 
+    <!-- Collapsible wrapper -->
+    <div class="left-second-nav" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <!-- Left links -->
+      <ul class="navbar-nav flex-row align-items-center">
+        <li class="nav-item">
+          <a class="nav-link">My Board</a>
+        </li>
+        <li class="nav-item">
+          <i class="bi bi-star star-icon-nav"></i>
+        </li>
 
+        <li class="workspace-visible-section" >
+          <a class="workspace-visible-link" (click)="toggleWorkspaceList()" style="text-decoration: none;">
+            <i class="bi bi-people-fill"></i> <span>Workspace Visible</span>
+          </a>
+        </li>
+        
+        <li class="nav-item" style="margin-left: 10px;">
+          <button class="btn btn-light border-0 fw-semibold board-button">
+            <i class="bi bi-box" ></i> Board
+          </button>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
 
-
-      <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Navbar brand -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="#">
-          <!-- <img
-            src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-            height="15"
-            alt="MDB Logo"
-            loading="lazy"
-          /> -->
-
-        </a>
-        <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center">
-          <li class="nav-item">
-            <a class="nav-link" href="#">My Board</a>
-          </li>
-          <li class="nav-item me-3">
-            <i class="bi bi-star m-2"></i>
-          </li>
-
-          <div class="workspace-visible-section" >
-            <a class="workspace-visible-link" href="#" (click)="toggleWorkspaceList()" style="text-decoration: none;">
-              <i class="bi bi-people-fill"></i> Workspace Visible
-            </a>
+    <!-- Right elements -->
+    <div class="right-second-nav">
+      <!-- Icon -->
+      <ul class="navbar-nav flex-row align-items-center d-relative">
+        
+        <li class="nav-item position-relative"  >
+          <a (click)="toggleFilter()">
+            <i class="bi bi-filter"></i>
+            <span>Filter</span>
+          </a>
+          <div class="filter">
+            <app-filter-button *ngIf="isFilterVisible"></app-filter-button>
           </div>
           
-          <li class="nav-item" style="margin-left: 10px;">
-            <button class="btn btn-success d-flex align-items-center board-button">
-              <i class="bi bi-box me-2" ></i> Board
-            </button>
-          </li>
-        </ul>
-        <!-- Left links -->
-      </div>
-      <!-- Collapsible wrapper -->
-  
+        </li>
 
-
-
-
-
-
-      <!-- Right elements -->
-      <div class="d-flex align-items-center">
-        <!-- Icon -->
-        <ul class="navbar-nav me-auto m-3  d-flex">
-          
-          <li class="nav-item "  style="margin-left: 10px;">
-            <i class="bi bi-filter m-2"></i>
-            <a (click)="toggleFilter()">Filter</a>
-
-          </li>
-          
-           
-  
-           <li class="nav-item  " style="margin-left: 20px;">
-            <strong> Share</strong>  
-            <i class="bi bi-person-plus-fill m-2"></i> 
-            
-          </li>
+        <li class="nav-item">
+          <button class="btn btn-light border-0 fw-semibold btn-share">
+            <i class="bi bi-person-plus-fill"></i> 
+              Share
+          </button>  
+        </li>
+      
+        <li>
+          <button class="swatchy-button swatchy-trigger btn-color" (click)="togglePopup()">
+          </button>
+        </li>
         
-          <li>
-            <button class="swatchy-button swatchy-trigger" (click)="togglePopup()">
-            </button>
-          </li>
-          
-          <li>
-            <input type="hidden" class="swatchy-output swatchy-display" disabled [style.backgroundColor]="selectedColor" [value]="selectedColor">
-          </li>
-        </ul>
-        
+        <li>
+          <input type="hidden" class="swatchy-output swatchy-display" disabled [style.backgroundColor]="selectedColor" [value]="selectedColor">
+        </li>
+
+      </ul>
+      <div class="swatchy-element" [style.display]="popupVisible ? 'block' : 'none'">
+        <div class="swatchy-swatches">
+          <div *ngFor="let swatch of swatches" class="swatchy-color-button" [style.background]=swatch (click)="selectColor(swatch)"></div>
+        </div>
       </div>
     </div>
-  </nav>
-  <app-filter-button *ngIf="isFilterVisible"></app-filter-button>
+</nav>
 
 
 
-  <div class="swatchy-element" [style.display]="popupVisible ? 'block' : 'none'">
-    <div class="swatchy-swatches">
-      <div *ngFor="let swatch of swatches" class="swatchy-color-button" [style.background]=swatch (click)="selectColor(swatch)"></div>
-    </div>
-  </div>
+
+
 
 <div class="list-workspace bg-dark" *ngIf="workspaceListVisible">
   <div class="container full-visibility">

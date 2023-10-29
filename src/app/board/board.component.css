@@ -4,10 +4,28 @@
     background-attachment:fixed;
     background-size: cover;
     color: #fff; 
+    height: fit-content;
     height: 100vh;
-    min-width: 100%;
+    width: 100% ;
     overflow:auto;
 }
+
+
+::-webkit-scrollbar{
+  background-color: #b7b7b75a;
+  height: 15px;
+  border-radius: 5px;
+  
+}
+
+::-webkit-scrollbar-thumb{
+  
+  height: 15px;
+  background-color: #00000094;
+  border-radius: 5px;
+  size: 25px;
+}
+
 
 
 

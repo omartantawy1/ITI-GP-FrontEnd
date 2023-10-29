@@ -1,36 +1,95 @@
+/***************** nav bar ***************/
 .navbar-props{
-    min-width: 100% !important;
-    position: fixed;
-    overflow: auto;
-    top: 0;
+    width: 100%;
+    position: absolute;
+    top:0;
     left: 0;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(30px);
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
     font-size: 13px;
-    height: 55px;
-    overflow-y: hidden; 
+
+    z-index: 100;
+}
   
 
+/************ left side into nav ************/
+.left-second-nav li {
+    margin-right: 10px;
+        
+
 }
 
-li:hover{
-   color: white; 
-   background-color:#A6C5E229;
-   border: 2px solid transparent;
-   border-radius: 10px;
-   color: white;
-   cursor: pointer;
-}
-
-a{
+.left-second-nav li a, 
+.left-second-nav .star-icon-nav{
+    padding: 5px 10px;
+    border-radius: 5px;
     color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.left-second-nav li a i{
+    margin-right: 5px;
+}
+
+.left-second-nav li a:hover, 
+.left-second-nav .star-icon-nav:hover{
+   background-color:#A6C5E229;
 }
 
 .board-button{
-    border: #1A2980;
-    background-color: #1A2980;
+    color: black;
+    background-color:#ccc;
+    transition: 0.3s;
 }
+.board-button:hover {
+    background-color: white;
+}
+
+/*********** right side into nav *******/
+.right-second-nav{
+    position: relative;
+}
+
+.right-second-nav li{
+    margin-left: 15px;
+}
+
+.right-second-nav li a{
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.right-second-nav li a i {
+    margin-right: 5px;
+}
+
+.right-second-nav li a:hover {
+    background-color:#A6C5E229;
+
+}
+
+.right-second-nav li .btn-share {
+    color: black;
+    background-color:#ddd;
+    transition: 0.3s;
+}
+.right-second-nav li .btn-share:hover {
+    background-color: white;
+}
+
+
+.right-second-nav li .btn-color:hover {
+    transform: scale(1.1,1.1);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.492);
+    transition: all 0.3s ease-in-out;
+
+}
+
+
+
 
 /***** Work visible buttons ********************************/
 .list-workspace{
@@ -65,21 +124,20 @@ color: #2abb7f
 /*----------------------------background's color change button  -------------------------------*/
 
 .swatchy-element {
-    position: fixed;
-    top: 70px;
-    right: 20px;
-    padding: 2px 12px;
     height: 30px;
-    background: white;
-    border-radius: 8px;
-    min-width: 80px;
+    min-width: 80px;    
+    position: absolute;
+    bottom: -50px;
+    right: 10px;
+    padding: 2px 12px;
+    border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     background-color:rgba(0, 0, 0, 0.449);
 }
 
 .swatchy-swatches {
     display: grid;
-    grid-template-columns: repeat(11, 24px);
+    grid-template-columns: repeat(11,24px);
     justify-items: center;
     grid-gap: 8px 2px;
     
@@ -96,28 +154,70 @@ color: #2abb7f
     cursor: pointer;
 }
 
-.swatchy-display {
-    margin: 4px;
-    height: 100%;
-    max-width: 48px;
-    border-radius: 8px;
-    border: none;
-}
+
 
 
 /* From uiverse.io by @Voxybuns */
 .swatchy-button {
-border-radius: 50%;
-font-weight: lighter;
-width: 30px;
-height: 30px;
-margin: 0px 20px;
-border: 3px solid white;
-background: linear-gradient(to right, #1A2980, #26D0CE); 
-color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-weight: lighter;
+    border: 3px solid white;
+    background: linear-gradient(to right, #1A2980, #26D0CE); 
+    color: white;
 
 }
 
+/************ filter *********/
+.filter {
+    position: absolute;
+    top: 50px;
+    right: 5px;
+    transition: 0.5s;
+    overflow: auto;
+}
 
+
+/**************** media query **************/
+
+/* on medium screen 650px  */
+@media (max-width:650px) {
+    /* nav bar */
+    .navbar-props{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .navbar-props div:first-of-type{
+        margin: 8px 0;
+    }
+    /* button change background color */
+
+    .swatchy-element {
+        top: 110%;
+        height: fit-content;
+        width: fit-content;
+        right: -50px;
+    }
+
+    .swatchy-swatches {
+        display: grid;
+        row-gap: 8px;
+        padding: 5px;
+        grid-template-rows:  repeat(10,30px);
+        grid-template-columns: none;
+    }
+    /* filter */
+    .filter {
+        right: -180px;
+    }
+}
+
+/* on small screen 400px  */
+@media (max-width:400px) {
+    .left-second-nav ul li span , .right-second-nav ul li span{
+        display: none;
+    }
+}
 
 
