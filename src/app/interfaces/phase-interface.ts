@@ -5,4 +5,5 @@ export interface PhaseInterface {
     board: number|any|null;
     updated_at: string |null;
     created_at: string |null;
+    cards: Array<any>|null;
 }
