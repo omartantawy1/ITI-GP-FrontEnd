@@ -1,5 +1,5 @@
 export interface PhaseInterface {
-     title: string;
+    title: string;
     position: number;
     board_id: number;
     updated_at: string |null;

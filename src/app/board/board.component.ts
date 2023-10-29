@@ -1,7 +1,7 @@
 import { Component,Input,Output } from '@angular/core';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
 import { PhaseService } from '../services/phase.service';
-import { PhaseInterface as Phase } from '../interfaces/phase-interface';
+import { PhaseInterface as Phase, PhaseInterface } from '../interfaces/phase-interface';
 
 @Component({
   selector: 'app-board',
@@ -12,9 +12,12 @@ import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 export class BoardComponent {
 
   backgroundcolor!: any;
-
   lists!:Array<Phase> ;
- 
+  showAddlistButton: boolean = true;
+  buttonText: string = 'Add List'; 
+  showInput:boolean = false;
+  newPhase:string = '';
+
   constructor(private phaseservice: PhaseService){};
 
 
@@ -23,30 +26,50 @@ export class BoardComponent {
       (data:any) => (this.lists = data.data),
       (error)=>  console.log(error),
     );
-}
-
+    this.buttonText = this.lists.length > 0 ? 'Add Another List' : 'Add List'; 
+  }
+  
 
 
   
-  showAddlistButton: boolean = true;
-  buttonText: string = 'Add List'; 
+
 
 
   addlist() {
-     {
-      const newlist = {
-        id: this.lists.length + 1,
-        title: '',
-        tasks: [],
+    this.showInput= true;
+    this.newPhase = '';
+  }
+
+   
+  savePhase() {
+    if (this.newPhase) {
+      let phase = {
+        'title':this.newPhase,
+        'position': 1,
+        'board_id': 16
       };
-      // this.lists.push(newlist);
-      this.buttonText = this.lists.length > 0 ? 'Add Another List' : 'Add List';
-    
+      this.phaseservice.createPhase(phase).subscribe(
+        (res:any) => (this.lists.push(res.data)),
+        (error)=>  console.log(error),
+        );
+      this.newPhase = '';
+      this.showInput = false;
     }
+      
+  }
+
+  cancelPhase() {
+    this.newPhase = '';
+    this.showInput = false;
+  }
+
+  editTask(index: number) {
+    // this.newTask = this.list.tasks[index];
+    // this.editIndex = index;
   }
 
 
-  onlistDrop(event: CdkDragDrop<{ id: number; title: string; tasks: string[] }[]>) {
+  onlistDrop(event: CdkDragDrop<Phase>) {
     moveItemInArray(this.lists, event.previousIndex, event.currentIndex);
   }
 

@@ -4,12 +4,21 @@
       <app-second-nav (newItemEvent)="changebackground($event)"></app-second-nav>
     </div>
     <div class="container">
-      <div class="d-flex align-items-start">
+      <div class="d-flex align-items-start align-items-center">
         <div class="board" style="display: flex; flex-wrap: nowrap;" cdkDropListGroup cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="onlistDrop($event)">
         <app-list *ngFor="let list of lists" [list]="list" cdkDrag>{{ list }}</app-list>
         </div>
         <div class="">
-          <button style="width: 150px !important"
+          <div *ngIf="showInput">
+            <div class="d-flex flex-column align-items-center bg-light rounded p-3" style="width: 200px;height: 100px;">
+              <input [(ngModel)]="newPhase" class="form-control mb-2 add-task-input" width="100%" placeholder="Enter title" required>
+              <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-success btn-sm me-2" (click)="savePhase()">OK</button>
+                <i class="bi bi-x-lg text-dark icon-cancel" style="cursor: pointer;" (click)="cancelPhase()"></i>
+              </div>
+            </div>
+          </div>
+          <button *ngIf="!showInput" style="width: 150px !important;background-color: rgba(0, 0, 0, 0.314);border-color: transparent;"
             type="button"
             class="btn btn-primary add-list-btn"
             (click)="addlist()"

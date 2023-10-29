@@ -19,8 +19,8 @@ export class PhaseService {
     return this.http.get(`${this.api_phases}/${phaseId}`);
   }
 
-  createPhase(phase: Phase) {
-    return this.http.post(this.api_phases, phase);
+  createPhase(phase: any) {
+    return this.http.post(this.api_phases,phase);
   }
 
   updatePhase(phaseId: number, phase: Phase) {
