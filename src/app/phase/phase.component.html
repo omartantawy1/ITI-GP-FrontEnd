@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-  <!-- Your content here -->
-</body>
-</html>
+
 <div class="card m-2" style="width: 16rem;" >
   <div class="card-header d-flex justify-content-between">
-    <ng-container *ngIf="!editableTitle; else titleEdit">
+    <ng-container *ngIf="!editPhaseTitle; else titleEdit">
       <div class="d-flex align-items-center">
         <ng-container *ngIf="phase.title; else showTitle">
           <strong (click)="enableTitleEdit()" class="card-title">{{phase.title}}</strong>
@@ -28,12 +20,12 @@
 
  
   <ul class="list-group list-group-flush example-list">
-<!--     <div cdkDropList [cdkDropListData]="phase.cards" class="example-list my-2" (cdkDropListDropped)="onDrop($event)">
+    <div cdkDropList [cdkDropListData]="phase.cards" class="example-list my-2" (cdkDropListDropped)="onDrop($event)">
     <li class="list-group-item m-2" *ngFor="let card of phase.cards; let i = index"  cdkDrag>
 
       <div *ngIf="editIndex !== i; else editcardField">
-        
-        <i class="bi bi-pen-fill"  (click)="editcard(i)"></i>
+        {{card.title}}
+        <i class="bi bi-pen-fill"  (click)="enableCardTitleEdit(i)"></i>
       </div>
       
       <ng-template #editcardField>
@@ -46,7 +38,7 @@
 
 
     </li>
-    </div> -->
+    </div>
 
 
 

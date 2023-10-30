@@ -18,26 +18,24 @@ export class BoardComponent {
   showInput:boolean = false;
   newPhase:string = '';
 
-  constructor(private phaseservice: PhaseService){};
+  constructor(private phaseService: PhaseService){};
 
 
   ngOnInit(){
-    this.phaseservice.getAllPhases().subscribe(
+    this.phaseService.getAllPhases().subscribe(
       (data:any) => (this.phases = data.data),
       (error)=>  console.log(error),
+      ()=>{
+        this.buttonText = this.phases.length > 0 ? 'Add Another phase' : 'Add phase'; 
+      }
     );
   }
   
   ngOnChanges(){
-    this.buttonText = this.phases.length > 0 ? 'Add Another phase' : 'Add phase'; 
+    
 
   }
   
-
-
-  
-
-
 
   addphase() {
     this.showInput= true;
@@ -52,7 +50,7 @@ export class BoardComponent {
         'position': this.phases.length,
         'board_id': 5
       };
-      this.phaseservice.createPhase(phase).subscribe(
+      this.phaseService.createPhase(phase).subscribe(
         (res:any) => (this.phases.push(res.data)),
         (error)=>  console.log(error),
         );
@@ -84,7 +82,7 @@ export class BoardComponent {
                 'board_id': element.board.id
               };
               let index = this.phases.indexOf(element);
-              this.phaseservice.updatePhase(phase,element.id).subscribe(
+              this.phaseService.updatePhase(phase,element.id).subscribe(
                 (res:any) => (this.phases[index] = res.data),
                 (error)=>  console.log(error.error),
                 );
@@ -99,7 +97,7 @@ export class BoardComponent {
                 'board_id': element.board.id
               };
               let index = this.phases.indexOf(element);
-              this.phaseservice.updatePhase(phase,element.id).subscribe(
+              this.phaseService.updatePhase(phase,element.id).subscribe(
                 (res:any) => (this.phases[index] = res.data),
                 (error)=>  console.log(error.error),
                 );
@@ -112,7 +110,7 @@ export class BoardComponent {
           };
   
           let index = this.phases.indexOf(phasePosition);
-          this.phaseservice.updatePhase(phase,phasePosition.id).subscribe(
+          this.phaseService.updatePhase(phase,phasePosition.id).subscribe(
             (res:any) => (this.phases[index] = res.data),
             (error)=>  console.log(error.error),
             );

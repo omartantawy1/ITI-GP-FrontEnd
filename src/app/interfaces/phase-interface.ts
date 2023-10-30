@@ -1,3 +1,5 @@
+import { CardInterface as Card } from "./card-interface";
+
 export interface PhaseInterface {
     id: number;
     title: string;
@@ -5,5 +7,5 @@ export interface PhaseInterface {
     board: number|any|null;
     updated_at: string |null;
     created_at: string |null;
-    cards: Array<any>|null;
+    cards: Array<Card>|null;
 }

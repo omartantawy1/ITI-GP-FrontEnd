@@ -2,6 +2,8 @@ import { Component,Input } from '@angular/core';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
 import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 import { PhaseService } from '../services/phase.service';
+import { CardService } from '../services/card.service';
+import { CardInterface as Card } from '../interfaces/card-interface';
 
 @Component({
   selector: 'app-phase',
@@ -13,17 +15,18 @@ export class PhaseComponent {
   @Input() phase! : Phase;
     
   
-  showInput: boolean = false;
   newcard: string = '';
   newPhase: string = '';
   editIndex: number = -1;
-  editableTitle: boolean = false;
+  showInput: boolean = false;
+  editCardTitle: boolean = false;
+  editPhaseTitle: boolean = false;
 
-  constructor(private phaseService:PhaseService){};
+  constructor(private phaseService: PhaseService,private cardService: CardService){};
 
   enableTitleEdit() {
     
-    this.editableTitle = true;
+    this.editPhaseTitle = true;
   }
 
   disableTitleEdit() {
@@ -38,44 +41,45 @@ export class PhaseComponent {
         (error)=>  console.log(error),
         );
     }
-    this.editableTitle = false;
+    this.editPhaseTitle = false;
 
   }
 
   addcard() {
     this.showInput = true;
     this.newcard = ''; 
-    this.editIndex = -1; 
   }
 
 
   savecard() {
-    // if (this.newcard) {
-    //   if (this.editIndex === -1) {
-    //     this.phase.cards.push(this.newcard);
-    //   } else {
-    //     this.phase.cards[this.editIndex] = this.newcard;
-    //     this.editIndex = -1; 
-    //   }
-    //   this.newcard = '';
-    //   this.showInput = false;
-    // }
+    if (this.newcard) {
+      let card = {
+        'title': this.newcard,
+        'position': this.phase.cards!.length,
+        'phase_id': this.phase.id
+      };
+        this.cardService.createCard(card).subscribe(
+          (res:any) => (this.phase.cards!.push(res.data)),
+          (error)=>  console.log(error),
+          ()=>console.log('success')
+          );
+      }
+      this.newcard = '';
+      this.showInput = false;
   }
 
   cancelcard() {
     this.newcard = '';
     this.showInput = false;
-    this.editIndex = -1; 
   }
 
-  editcard(index: number) {
-    // this.newcard = this.phase.cards[index];
-    // this.editIndex = index;
+  enableCardTitleEdit(index: number) {
+    this.editCardTitle = true;
   }
 
- 
+  
 
-  onDrop(event: CdkDragDrop<string[]>) {
+  onDrop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
