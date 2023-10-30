@@ -30,12 +30,6 @@ export class BoardComponent {
       }
     );
   }
-  
-  ngOnChanges(){
-    
-
-  }
-  
 
   addphase() {
     this.showInput= true;

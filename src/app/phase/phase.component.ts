@@ -13,6 +13,7 @@ import { CardInterface as Card } from '../interfaces/card-interface';
 export class PhaseComponent {
 
   @Input() phase! : Phase;
+  @Input() phases : Array<Phase>= [];
     
   
   newcard: string = '';
@@ -23,6 +24,14 @@ export class PhaseComponent {
   editPhaseTitle: boolean = false;
 
   constructor(private phaseService: PhaseService,private cardService: CardService){};
+
+  
+  ngOnInit(){
+    this.phaseService.getAllPhases().subscribe(
+      (data:any) => (this.phases = data.data),
+      (error)=>  console.log(error),
+    );
+  }
 
   enableTitleEdit() {
     
@@ -106,6 +115,10 @@ export class PhaseComponent {
         event.previousIndex,
         event.currentIndex,
       );
+      let id = event.previousContainer.data.id;
+      let array = id.split("-");
+      console.log(id) ;
+      console.log(array) ;
     }
     console.log(event.container)
     console.log(event.previousContainer)
