@@ -51,7 +51,7 @@ export class PhaseComponent {
   }
 
 
-  savecard() {
+  saveCard() {
     if (this.newcard) {
       let card = {
         'title': this.newcard,
@@ -65,7 +65,7 @@ export class PhaseComponent {
           );
       }
       this.newcard = '';
-      this.showInput = false;
+      
   }
 
   cancelcard() {
@@ -74,7 +74,24 @@ export class PhaseComponent {
   }
 
   enableCardTitleEdit(index: number) {
-    this.editCardTitle = true;
+    this.newcard = this.phase.cards![index].title;
+    this.editIndex = index;
+  }
+
+  updateCardTitle(index:number){
+    if (this.newcard) {
+      let card = {
+        'title': this.newcard,
+        'phase_id': this.phase.id
+      };
+        this.cardService.updateCard(card,this.phase.cards![index].id).subscribe(
+          (res:any) => (this.phase.cards![index]= res.data),
+          (error)=>  console.log(error),
+          ()=>console.log('success')
+          );
+      }
+      this.newcard = '';
+      this.editIndex = -1;
   }
 
   
@@ -90,5 +107,9 @@ export class PhaseComponent {
         event.currentIndex,
       );
     }
+    console.log(event.container)
+    console.log(event.previousContainer)
+    console.log(event.currentIndex)
+    console.log(event.previousIndex)
   }
 }

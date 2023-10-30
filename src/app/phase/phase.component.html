@@ -23,19 +23,18 @@
     <div cdkDropList [cdkDropListData]="phase.cards" class="example-list my-2" (cdkDropListDropped)="onDrop($event)">
     <li class="list-group-item m-2" *ngFor="let card of phase.cards; let i = index"  cdkDrag>
 
-      <div *ngIf="editIndex !== i; else editcardField">
+      <ng-container *ngIf="editIndex !== i;else editCardField">
         {{card.title}}
-        <i class="bi bi-pen-fill"  (click)="enableCardTitleEdit(i)"></i>
-      </div>
-      
-      <ng-template #editcardField>
+        <i class="bi bi-pen-fill"  (click)="enableCardTitleEdit(i); editCardField"></i>
+      </ng-container>
+      <ng-template #editCardField>
         <input [(ngModel)]="newcard" class="form-control mb-2" placeholder="Edit card">
         <div class="d-flex">
-          <button type="button" class="btn btn-success btn-sm mr-2" (click)="savecard()">OK</button>
+          <button type="button" class="btn btn-success btn-sm mr-2" (click)="updateCardTitle(i)">OK</button>
           <i class="bi bi ml-2" (click)="cancelcard()"></i>
         </div>
       </ng-template>
-
+      
 
     </li>
     </div>
@@ -46,7 +45,7 @@
       <div class="d-flex flex-column align-items-center">
         <input [(ngModel)]="newcard" class="form-control mb-2 add-card-input" placeholder="Enter new card">
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-success btn-sm me-2" (click)="savecard()">OK</button>
+          <button type="button" class="btn btn-success btn-sm me-2" (click)="saveCard()">OK</button>
           <i class="bi bi-x-lg icon-cancel" style="cursor: pointer;" (click)="cancelcard()"></i>
         </div>
       </div>
