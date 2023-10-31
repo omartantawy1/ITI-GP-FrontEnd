@@ -31,8 +31,8 @@ export class PhaseComponent {
       (data:any) => (this.phases = data.data),
       (error)=>  console.log(error),
     );
-  }
 
+    }
   enableTitleEdit() {
     
     this.editPhaseTitle = true;
@@ -106,7 +106,7 @@ export class PhaseComponent {
   
 
   onDrop(event: CdkDragDrop<any>) {
-    if (event.previousContainer === event.container) {
+     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(
@@ -115,14 +115,54 @@ export class PhaseComponent {
         event.previousIndex,
         event.currentIndex,
       );
-      let id = event.previousContainer.data.id;
-      let array = id.split("-");
-      console.log(id) ;
-      console.log(array) ;
+      /* let pre = event.previousContainer.id.split("-"); */
+      let current = event.container.id.split("-");
+      let phaseNext = this.phases.find(p=>p.position== +current[current.length-1]-1);
+      let thisCard = event.container.data[event.currentIndex];
+      if(thisCard&&phaseNext&&phaseNext.cards){
+        let newPositionCardsCurrentPhase = event.container.data.filter((card:Card)=>card.position! >= event.currentIndex && card.id!=thisCard.id);
+        let newPositionCardsPreiousPhase = event.previousContainer.data.filter((card:Card)=>(card.position! >event.previousIndex));
+        console.log(newPositionCardsCurrentPhase);
+        console.log(newPositionCardsPreiousPhase);
+        if(newPositionCardsCurrentPhase&&newPositionCardsPreiousPhase){
+          
+          this.rankingCard(newPositionCardsCurrentPhase,'+');
+          this.rankingCard(newPositionCardsPreiousPhase,'-');
+          
+          let card = {
+            'title': thisCard.title,
+            'position': event.currentIndex,
+            'phase_id': phaseNext.id
+          };
+            this.cardService.updateCard(card,thisCard.id).subscribe(
+              (res:any) => (""),
+              (error)=>  console.log(error)
+              );
+          
+        }
+      }
     }
-    console.log(event.container)
+   /* console.log(event.container)
     console.log(event.previousContainer)
     console.log(event.currentIndex)
-    console.log(event.previousIndex)
+    console.log(event.previousIndex)*/
+  } 
+
+
+  rankingCard(cards:Array<Card>,assign:string){
+        cards.forEach((element:Card)=>{
+          let card = {
+            'title': element.title,
+            'position': assign === '+'?++element.position!:--element.position!,
+            'phase_id': element.phase
+          };
+          let index = this.phase.cards!.indexOf(element);
+          console.log("for each phase "+element.phase+": "+element.position);
+          this.cardService.updateCard(card,element.id).subscribe(
+            (res:any) => (assign==='+'?element.phase.cards![index]=res.data:this.phase.cards![index]=res.data),
+            (error)=>  console.log(error)
+            );
+        });
+
   }
 }
