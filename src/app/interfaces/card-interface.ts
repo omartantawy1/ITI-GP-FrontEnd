@@ -8,6 +8,5 @@ export interface CardInterface {
             status_icon :string|null,
             position :number|null,
             phase_id : number|null,
-            phase : Phase|null,
             groups : Array<any>|null,
 }

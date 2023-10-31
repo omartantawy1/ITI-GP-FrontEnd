@@ -4,7 +4,7 @@ import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 import { PhaseService } from '../services/phase.service';
 import { CardService } from '../services/card.service';
 import { CardInterface as Card } from '../interfaces/card-interface';
-import { elementAt } from 'rxjs';
+
 
 @Component({
   selector: 'app-phase',
@@ -24,7 +24,7 @@ export class PhaseComponent {
   editCardTitle: boolean = false;
   editPhaseTitle: boolean = false;
 
-  constructor(private phaseService: PhaseService,private cardService: CardService){};
+  constructor(private phaseService: PhaseService,private cardService: CardService,private cardService2: CardService){};
 
   
   ngOnInit(){
@@ -109,86 +109,39 @@ export class PhaseComponent {
 
   onDrop(event: CdkDragDrop<any>) {
      if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-      let current = event.container.id.split("-");
-      let phaseNext = this.phases.find(p=>p.position== +current[current.length-1]-1);
-      if(phaseNext){
-        event.container.data.forEach((element:Card)=>{
-          let index = event.container.data.indexOf(element);
-          let card = {
-            'title': element.title,
-            'position': index,
-            'phase_id': phaseNext!.id
-          };
-          this.cardService.updateCard(card,element.id).subscribe(
-            (res:any) => {/* 
-              event.container.data[index].position = res.data.position;
-              event.container.data[index].phase_id=res.data.phase.id */},
-            (error)=>  console.log(error)
-            );
-          });
-        }
-        
-      event.previousContainer.data.forEach((element:Card)=>{
-        let index = event.previousContainer.data.indexOf(element);
-        let card = {
-          'title': element.title,
-          'position': index,
-          'phase_id': element.phase_id
-        };
-        this.cardService.updateCard(card,element.id).subscribe(
-          (res:any) => {/* 
-            event.previousContainer.data[index].position = res.data.position;
-            event.previousContainer.data[index].phase_id=res.data.phase.id */},
-          (error)=>  console.log(error)
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        this.rankingCardCurrent(event.container.data,null,event);
+      } else {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
           );
-      });
+        let current = event.container.id.split("-");
+        let phaseNext = this.phases.find(p=>p.position== +current[current.length-1]-1);
+        if(phaseNext){
 
-      /*let thisCard = event.container.data[event.currentIndex];
-
-      if(thisCard&&phaseNext&&phaseNext.cards){
-
-        let newPositionCardsCurrentPhase = event.container.data.filter((card:Card)=>card.position! >= event.currentIndex && card.id!=thisCard.id);
-        let newPositionCardsPreiousPhase = event.previousContainer.data.filter((card:Card)=>(card.position! >=event.previousIndex));
-
-        if(newPositionCardsCurrentPhase||newPositionCardsPreiousPhase){
-          this.rankingCard(newPositionCardsCurrentPhase,'+');
-          this.rankingCard(newPositionCardsPreiousPhase,'-');       
+          this.rankingCardCurrent(event.container.data,phaseNext.id,event);
+          this.rankingCardCurrent(event.previousContainer.data,null,event);
         }
-        let card = {
-          'title': thisCard.title,
-          'position': event.currentIndex,
-          'phase_id': phaseNext.id
-        };
-          this.cardService.updateCard(card,thisCard.id).subscribe(
-            (res:any) => {event.container.data[event.currentIndex] = res.data; console.log(event.container.data)},
-            (error)=>  console.log(error)
-            );
-        
-      }*/
-    } 
+          
+        } 
   } 
 
+  rankingCardCurrent(cards: Array<Card>, phase_id: number|null, event: CdkDragDrop<any>) {
+    cards.forEach(element => {
+      const index = cards.indexOf(element);
+      element.position = index;
+      element.phase_id = phase_id??element.phase_id;
+      this.cardService.updateCard(element, element.id).subscribe(
+        (res:any)=>(""),
+        (error)=>(console.log(error)),
+      );
+    });
+  
 
-  /* rankingCard(cards:Array<Card>,assign:string){
-        cards.forEach((element:Card)=>{
-          let card = {
-            'title': element.title,
-            'position': assign === '+'?++element.position!:--element.position!,
-            'phase_id': element.phase_id
-          };
-          this.cardService.updateCard(card,element.id).subscribe(
-            (res:any) => (element = res.data),
-            (error)=>  console.log(error)
-            );
-        });
-
-  } */
+  }
+  
+  
 }
