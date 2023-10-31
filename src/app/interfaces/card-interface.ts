@@ -1,4 +1,4 @@
-import { PhaseInterface } from "./phase-interface";
+import { PhaseInterface as Phase } from "./phase-interface";
 
 export interface CardInterface {
             id : number,
@@ -7,6 +7,7 @@ export interface CardInterface {
             due_date :string|null,
             status_icon :string|null,
             position :number|null,
-            phase : number|PhaseInterface|any,
+            phase_id : number|null,
+            phase : Phase|null,
             groups : Array<any>|null,
 }
