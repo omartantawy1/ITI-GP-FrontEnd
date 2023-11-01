@@ -124,10 +124,6 @@ export class PhaseComponent {
           );
         let current = event.container.id.split("-");
         let phaseNext = this.phases.find(p=>p.position== +current[current.length-1]-1);
-        console.log(phaseNext!.id);
-        console.log(current);
-        console.log(event.container.id);
-        console.log(event.previousContainer.id);
         if(phaseNext){
           
            this.rankingCardCurrent(event.container.data,phaseNext.id,event);
@@ -151,7 +147,6 @@ export class PhaseComponent {
           this.allMoves.push(element);
         }
       });
-      console.log(this.allMoves);
       this.cards.emit(this.allMoves); 
     }
 

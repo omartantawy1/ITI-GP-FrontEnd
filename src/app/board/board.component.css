@@ -10,11 +10,23 @@
     overflow:auto;
 }
 
+/* buttom add new phase */
 .add-phase-btn{
-  margin-top: 40px;
+  width: 200px !important;
+  margin-top: 10px;
+  transition: 0.4s;
+  margin-right: 200px; 
+  background-color: rgba(0, 0, 0, 0.314);
+  border-color: transparent;
+  font-weight: 600;
 }
 
+.add-phase-btn:hover{
+background-color: white;
+color: black;
+}
 
+/* scrollbar design */
 ::-webkit-scrollbar{
   background-color: #b7b7b75a;
   height: 15px;
@@ -30,6 +42,8 @@
   size: 25px;
 }
 
+
+ِ/* design input title for phase */
 .icon-cancel{
   transition: 0.3s;
   border-radius: 5px;

@@ -184,7 +184,7 @@ color: #2abb7f
 /**************** media query **************/
 
 /* on medium screen 650px  */
-@media (max-width:650px) {
+@media (max-width:700px) {
     /* nav bar */
     .navbar-props{
         flex-direction: column;
@@ -216,9 +216,19 @@ color: #2abb7f
 }
 
 /* on small screen 400px  */
-@media (max-width:400px) {
+@media (max-width:450px) {
     .left-second-nav ul li span , .right-second-nav ul li span{
         display: none;
+    }
+    .shareBtn,.boardBtn{
+        display: inline !important;
+    }
+}
+
+
+@media (max-width:320px) {
+    .shareBtn,.boardBtn{
+        display: none !important;
     }
 }
 

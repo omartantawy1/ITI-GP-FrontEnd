@@ -5,21 +5,21 @@
     </div>
     <div class="container">
       <button *ngIf="showButton" (click)="saveBtn()" [disabled]="buttonSaveText!='Save'" class="btn btn-success">{{buttonSaveText}}</button>
-      <div class="d-flex align-items-start align-items-start">
-        <div class="board" style="display: flex; flex-wrap: nowrap;" cdkDropListGroup cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="onlistDrop($event)">
+      <div class="d-flex">
+        <div class="board d-flex" cdkDropListGroup cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="onlistDrop($event)">
         <app-phase *ngFor="let phase of phases" [phase]="phase" (unSave)="toggleBtnSave($event)" (cards)="setAllMoves($event)" cdkDrag>{{ phase}}</app-phase>
         </div>
         <div class="">
           <div *ngIf="showInput">
-            <div class="d-flex flex-column align-items-start bg-light rounded p-3" style="width: 200px;height: 100px;margin-top: 10px;">
-              <input [(ngModel)]="newPhase" class="form-control mb-2 add-card-input" width="100%" placeholder="Enter title" required>
+            <div class="bg-light rounded p-3 " style="width: 200px;margin-top: 10px;margin-right: 200px;">
+              <input [(ngModel)]="newPhase" class="form-control mb-3 add-card-input" width="100%" placeholder="Enter title" required>
               <div class="d-flex justify-content-between">
-                <button type="button" class="btn btn-success btn-sm me-2" (click)="savePhase()">OK</button>
+                <button type="button" class="btn btn-success btn-sm" (click)="savePhase()">OK</button>
                 <i class="bi bi-x-lg text-dark icon-cancel" style="cursor: pointer;" (click)="cancelPhase()"></i>
               </div>
             </div>
           </div>
-          <button *ngIf="!showInput" style="width: 200px !important;margin-right: 50px; background-color: rgba(0, 0, 0, 0.314);border-color: transparent;"
+          <button *ngIf="!showInput"
             type="button"
             class="btn btn-primary add-phase-btn"
             (click)="addphase()">
