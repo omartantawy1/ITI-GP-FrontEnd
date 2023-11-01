@@ -50,7 +50,7 @@ export class BoardComponent {
       let phase = {
         'title':this.newPhase,
         'position': this.phases.length,
-        'board_id': 5
+        'board_id': 6
       };
       this.phaseservice.createPhase(phase).subscribe(
         (res:any) => (this.phases.push(res.data)),

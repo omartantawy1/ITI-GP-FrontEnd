@@ -1,0 +1,233 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              My Workspaces
+            </a>
+            <ul class="dropdown-menu ml-5">
+              <li *ngFor="let workspace of myWorkspaces">
+                <a class="nav-link" (click)="selectWorkspace(workspace.id)">{{ workspace.name }}</a>
+              </li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="position-sticky">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/dashboard">
+            My Workspaces
+          </a>
+        </li>
+        <div *ngFor="let workspace of myWorkspaces">
+          <li class="nav-item">
+            <a class="nav-link" (click)="selectWorkspace(workspace.id)">{{ workspace.name }}</a>
+          </li>
+        </div>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">
+            Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/workspace">
+            Workspaces
+          </a>
+        </li>
+       
+        <!-- Add more navigation links as needed -->
+      </ul>
+    </div>
+  </nav>
+
+
+  
+      <!-- Main Content Area -->
+      <main class="col-md-10 ms-sm-auto">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+          <!-- Content Goes Here -->
+          <!-- <div>
+            <input [(ngModel)]="newWorkspaceName" placeholder="Enter workspace name" />
+            <button (click)="createWorkspace()">Create Workspace</button>
+          </div> -->
+      
+      
+          <!-- <div *ngIf="selectedWorkspaceId !== 0">
+            <div>
+                <button (click)="createBoard()">Create Board</button>
+              <input [(ngModel)]="newBoardName" placeholder="Enter board name" />
+              
+            </div>
+      
+            <h2>{{ getSelectedWorkspaceName() }} Boards  </h2>
+            <ul>
+              <li *ngFor="let board of getBoardsInSelectedWorkspace()">
+                {{ board.name }}
+              </li>
+            </ul>
+          </div> -->
+        </div>
+
+
+       
+        <div class="create-board" (click)="isCreateBoardVisible = !isCreateBoardVisible" *ngIf="selectedWorkspaceId">
+          <p class="text-center">Create new board</p>
+        </div>
+      
+        <div class="created-boards">
+          <div *ngFor="let board of boards" [style.background]="board.background">
+            <p>{{ board.title }}</p>
+          </div>
+        </div>
+
+      <!--  Board Option Selectors  --->
+
+
+      <div class="container main-board-selectors bg-dark" *ngIf="isCreateBoardVisible" >
+
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="mx-auto">
+            <p class="mb-0 text-center">Create Board</p>
+          </div>
+          <div >
+              <p class="mb-0">
+                <i class="bi bi-x close-acc-icon" style="font-size: 18px; " (click)="toggleCreateBoardSection()"></i>
+              </p>
+            </div>
+        </div>
+ 
+       
+
+        <div class="form-group">
+          <label for="boardTitle">Board Title</label>
+          <input type="text" class="form-control form-control-sm" id="boardTitle" placeholder="Enter Board Title" [(ngModel)]="newBoardName">
+         </div>
+         <br>
+
+         <p style="margin-bottom: 5px;">background Color</p>
+      
+    
+         <div class="board-background  d-flex justify-content-between ">
+
+          <div class="first-color" (click)="toggleSelectedColor(0)" [class.selected]="selectedColorIndex === 0">
+            <i class="bi bi-check" [hidden]="selectedColorIndex !== 0"></i>
+          </div>
+
+
+           <div class="second-color" (click)="toggleSelectedColor(1)" [class.selected]="selectedColorIndex === 1">
+         <i class="bi bi-check" [hidden]="selectedColorIndex !== 1"></i>
+         </div>
+
+          <div class="third-color"  (click)="toggleSelectedColor(2)" [class.selected]="selectedColorIndex === 2" >
+            <i class="bi bi-check" [hidden]="selectedColorIndex !== 2"></i>
+          </div>
+
+          <div class="fourth-color" (click)="toggleSelectedColor(3)" [class.selected]="selectedColorIndex === 3" >
+            <i class="bi bi-check" [hidden]="selectedColorIndex !== 3"></i>
+          </div>
+
+          <div class="fifth-color" (click)="toggleSelectedColor(4)" [class.selected]="selectedColorIndex === 4">
+            <i class="bi bi-check" [hidden]="selectedColorIndex !== 4"></i>
+          </div>
+
+          <div class="sixth-color" (click)="toggleSelectedColor(5)" [class.selected]="selectedColorIndex === 5">
+            <i class="bi bi-check" [hidden]="selectedColorIndex !== 5"></i>
+          </div>
+
+          <div class="seventh-color" (click)="toggleSelectedColor(6)" [class.selected]="selectedColorIndex === 6">
+            <i class="bi bi-check" [hidden]="selectedColorIndex !== 6"></i>
+          </div>
+    
+           </div>
+
+
+
+
+           <div class="fluid-container">
+            <p>WorkSpace</p>
+
+            <!-- <select class="form-select form-select-sm" aria-label="Small select example"  #ayhaga (change)="selectWorkspace(+ayhaga.value)">
+              <option default>my workspace</option>
+              <option *ngFor="let workspace of workspaces" (value)="workspace.id"  >{{workspace.name}}</option>
+            </select> -->
+            <p>{{workspaces[selectedWorkspaceId-1].name}}</p>
+
+           </div>
+           <br>
+           <br>
+                     
+           <div class="container justify-content-center d-flex " style="margin-right: 10px;">
+            <button class="btn btn-primary text-center col-10" (click)="createBoard()">
+              create
+            </button>  
+            </div>
+
+           <br>  
+      </div>
+
+
+    
+
+      </main>
+
+      <!---- Modal Content   ---->
+      
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Launch static backdrop modal
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Your WorkSpace</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- Left Side with Inputs and Centered Button -->
+                  <div class="text-center">
+                    <div class="form-group">
+                      <label for="input1">WorkSpace Name</label>
+                      <input type="text" class="form-control" id="input1" [(ngModel)]="newWorkspaceNameInModal">
+                    </div>
+                    <div class="form-group">
+                      <label for="input2">Workspace Description</label>
+                      <input type="text" class="form-control" id="input2" [(ngModel)]="newWorkspaceDescriptionInModal">
+                    </div>
+                    <br>
+                    <button class="btn btn-primary" (click)="addWorkspaceInModal()">Submit</button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <!-- Right Side with Image -->
+                  <img src="../../assets/man-holding-clock-time-management-concept_23-2148823171.jpg" alt="Your Image" class="img-fluid">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
