@@ -21,7 +21,8 @@
  
   <ul class="list-group list-group-flush example-list">
     <div cdkDropList [cdkDropListData]="phase.cards" class="example-list my-2" (cdkDropListDropped)="onDrop($event)">
-    <li class="list-group-item m-2" *ngFor="let card of phase.cards; let i = index"  cdkDrag>
+        <div class="list-item  bg-transparent" aria-disabled="true" style="height: 5px !important"></div >
+      <li class="list-group-item m-2" *ngFor="let card of phase.cards; let i = index"  cdkDrag>
 
       <ng-container *ngIf="editIndex !== i;else editCardField">
         {{card.title}}
@@ -42,7 +43,7 @@
 
 
     <div *ngIf="showInput">
-      <div class="d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-center mt-3">
         <input [(ngModel)]="newcard" class="form-control mb-2 add-card-input" placeholder="Enter new card">
         <div class="d-flex justify-content-between">
           <button type="button" class="btn btn-success btn-sm me-2" (click)="saveCard()">OK</button>
