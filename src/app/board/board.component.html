@@ -4,13 +4,14 @@
       <app-second-nav (newItemEvent)="changebackground($event)"></app-second-nav>
     </div>
     <div class="container">
-      <div class="d-flex align-items-start align-items-center">
+      <button *ngIf="showButton" (click)="saveBtn()" [disabled]="buttonSaveText!='Save'" class="btn btn-success">{{buttonSaveText}}</button>
+      <div class="d-flex align-items-start align-items-start">
         <div class="board" style="display: flex; flex-wrap: nowrap;" cdkDropListGroup cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="onlistDrop($event)">
-        <app-phase *ngFor="let phase of phases" [phase]="phase" cdkDrag>{{ phase}}</app-phase>
+        <app-phase *ngFor="let phase of phases" [phase]="phase" (unSave)="toggleBtnSave($event)" (cards)="setAllMoves($event)" cdkDrag>{{ phase}}</app-phase>
         </div>
         <div class="">
           <div *ngIf="showInput">
-            <div class="d-flex flex-column align-items-center bg-light rounded p-3" style="width: 200px;height: 100px;">
+            <div class="d-flex flex-column align-items-start bg-light rounded p-3" style="width: 200px;height: 100px;margin-top: 10px;">
               <input [(ngModel)]="newPhase" class="form-control mb-2 add-card-input" width="100%" placeholder="Enter title" required>
               <div class="d-flex justify-content-between">
                 <button type="button" class="btn btn-success btn-sm me-2" (click)="savePhase()">OK</button>
@@ -18,11 +19,10 @@
               </div>
             </div>
           </div>
-          <button *ngIf="!showInput" style="width: 150px !important;background-color: rgba(0, 0, 0, 0.314);border-color: transparent;"
+          <button *ngIf="!showInput" style="width: 200px !important;margin-right: 50px; background-color: rgba(0, 0, 0, 0.314);border-color: transparent;"
             type="button"
             class="btn btn-primary add-phase-btn"
-            (click)="addphase()"
-          >
+            (click)="addphase()">
             {{ buttonText }}
           </button>
         </div>

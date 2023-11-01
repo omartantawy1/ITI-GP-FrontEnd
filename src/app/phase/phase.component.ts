@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input,Output,EventEmitter } from '@angular/core';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
 import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 import { PhaseService } from '../services/phase.service';
@@ -15,7 +15,12 @@ export class PhaseComponent {
 
   @Input() phase! : Phase;
   @Input() phases : Array<Phase>= [];
-    
+
+  @Output() unSave = new EventEmitter<boolean>();
+  @Output() cards = new EventEmitter<Array<Card>>();
+  
+  isUnSave: boolean = false;
+  allMoves: Array<Card> = [];
   
   newcard: string = '';
   newPhase: string = '';
@@ -24,8 +29,7 @@ export class PhaseComponent {
   editCardTitle: boolean = false;
   editPhaseTitle: boolean = false;
 
-  constructor(private phaseService: PhaseService,private cardService: CardService,private cardService2: CardService){};
-
+  constructor(private phaseService: PhaseService,private cardService: CardService){};
   
   ngOnInit(){
     this.phaseService.getAllPhases().subscribe(
@@ -106,12 +110,12 @@ export class PhaseComponent {
   }
 
   
-
-  onDrop(event: CdkDragDrop<any>) {
-     if (event.previousContainer === event.container) {
-        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-        this.rankingCardCurrent(event.container.data,null,event);
-      } else {
+  
+ async onDrop(event: CdkDragDrop<any>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      this.rankingCardCurrent(event.container.data,null,event);
+    } else {
         transferArrayItem(
           event.previousContainer.data,
           event.container.data,
@@ -120,28 +124,36 @@ export class PhaseComponent {
           );
         let current = event.container.id.split("-");
         let phaseNext = this.phases.find(p=>p.position== +current[current.length-1]-1);
+        console.log(phaseNext!.id);
+        console.log(current);
+        console.log(event.container.id);
+        console.log(event.previousContainer.id);
         if(phaseNext){
-
-          this.rankingCardCurrent(event.container.data,phaseNext.id,event);
-          this.rankingCardCurrent(event.previousContainer.data,null,event);
-        }
           
+           this.rankingCardCurrent(event.container.data,phaseNext.id,event);
+           
+           this.rankingCardCurrent(event.previousContainer.data,null,event);
+          }
         } 
-  } 
+        this.unSave.emit(true);
+        
+    } 
+      
+    rankingCardCurrent(cards: Array<Card>, phase_id: number|null, event: CdkDragDrop<any>) {
+      cards.forEach( element => {
+        const index = cards.indexOf(element);
+        element.position = index;
+        element.phase_id = phase_id?phase_id:element.phase_id;
+        if(this.allMoves.length>0){
+          let indexMove = this.allMoves.indexOf(element);
+          this.allMoves.includes(element)?this.allMoves[indexMove]=element:this.allMoves.push(element);
+        }else {
+          this.allMoves.push(element);
+        }
+      });
+      console.log(this.allMoves);
+      this.cards.emit(this.allMoves); 
+    }
 
-  rankingCardCurrent(cards: Array<Card>, phase_id: number|null, event: CdkDragDrop<any>) {
-    cards.forEach(element => {
-      const index = cards.indexOf(element);
-      element.position = index;
-      element.phase_id = phase_id??element.phase_id;
-      this.cardService.updateCard(element, element.id).subscribe(
-        (res:any)=>(""),
-        (error)=>(console.log(error)),
-      );
-    });
-  
-
-  }
-  
   
 }
