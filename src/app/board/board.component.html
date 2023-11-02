@@ -1,4 +1,6 @@
 <body class="background" [style.background]="backgroundcolor">
+  
+
   <div class="my-board">
     <div class="second-nav" style="width: 100%;min-height: 150px;">
       <app-second-nav (newItemEvent)="changebackground($event)"></app-second-nav>
@@ -26,6 +28,7 @@
             {{ buttonText }}
           </button>
         </div>
+        
       </div>
     </div>
   </div>
