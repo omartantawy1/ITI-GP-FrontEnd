@@ -25,6 +25,9 @@ import {MatButtonModule} from '@angular/material/button';
 import{MatFormFieldModule} from '@angular/material/form-field';
 import{MatInputModule} from '@angular/material/input';
 import { WorkspaceComponent } from './workspace/workspace.component';
+import { MainNavbarComponent } from './main-navbar/main-navbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-create-workspace.component';
 
 
 @NgModule({
@@ -41,6 +44,10 @@ import { WorkspaceComponent } from './workspace/workspace.component';
     PhaseComponent,
     ShareDialogComponent,
     WorkspaceComponent,
+    MainNavbarComponent,
+    SidebarComponent,
+    PopupCreateWorkspaceComponent
+  
         
  
 

@@ -1,0 +1,20 @@
+/* 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+   ::ng-deep :root{
+    --myFont:'Poppins', sans-serif;
+   }
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--myFont);
+}
+@media (max-width:768px) {
+ .workspace{
+    justify-self: center !important;
+ }
+ .sidebar{
+    margin-left:0 !important;
+ }
+} */
