@@ -10,11 +10,23 @@
     overflow:auto;
 }
 
+/* buttom add new phase */
 .add-phase-btn{
-  margin-top: 40px;
+  width: 200px !important;
+  margin-top: 10px;
+  transition: 0.4s;
+  margin-right: 200px; 
+  background-color: rgba(0, 0, 0, 0.314);
+  border-color: transparent;
+  font-weight: 600;
 }
 
+.add-phase-btn:hover{
+background-color: white;
+color: black;
+}
 
+/* scrollbar design */
 ::-webkit-scrollbar{
   background-color: #b7b7b75a;
   height: 15px;
@@ -23,13 +35,14 @@
 }
 
 ::-webkit-scrollbar-thumb{
-  
   height: 15px;
   background-color: #00000094;
   border-radius: 5px;
   size: 25px;
 }
 
+
+ِ/* design input title for phase */
 .icon-cancel{
   transition: 0.3s;
   border-radius: 5px;
@@ -46,10 +59,13 @@
 
 /****************** The Full Card Styles Drag and drop appearance ****************/
 
+.cdk-drag {
+ height: min-content;
+}
 
 .cdk-drag-preview {
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 10px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
               0 8px 10px 1px rgba(0, 0, 0, 0.14),
               0 3px 14px 2px rgba(0, 0, 0, 0.12);

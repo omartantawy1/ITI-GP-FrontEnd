@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-  <!-- Your content here -->
-</body>
-</html>
+
 <div class="card m-2" style="width: 16rem;" >
   <div class="card-header d-flex justify-content-between">
-    <ng-container *ngIf="!editableTitle; else titleEdit">
+    <ng-container *ngIf="!editPhaseTitle; else titleEdit">
       <div class="d-flex align-items-center">
         <ng-container *ngIf="phase.title; else showTitle">
-          <strong (click)="enableTitleEdit()" class="card-title">{{phase.title}}</strong>
+          <strong (click)="enableTitleEdit()" class="card-title">{{phase.title}} </strong>
         </ng-container>
         <ng-template #showTitle>
           {{ phase.title }}
@@ -28,33 +20,33 @@
 
  
   <ul class="list-group list-group-flush example-list">
-<!--     <div cdkDropList [cdkDropListData]="phase.cards" class="example-list my-2" (cdkDropListDropped)="onDrop($event)">
-    <li class="list-group-item m-2" *ngFor="let card of phase.cards; let i = index"  cdkDrag>
+    <div cdkDropList [cdkDropListData]="phase.cards" class="example-list my-2" (cdkDropListDropped)="onDrop($event)">
+        <div class="list-item  bg-transparent" aria-disabled="true" style="height: 5px !important"></div >
+      <li class="list-group-item m-2" *ngFor="let card of phase.cards; let i = index"  cdkDrag>
 
-      <div *ngIf="editIndex !== i; else editcardField">
-        
-        <i class="bi bi-pen-fill"  (click)="editcard(i)"></i>
-      </div>
-      
-      <ng-template #editcardField>
+      <ng-container *ngIf="editIndex !== i;else editCardField">
+        {{card.title}}
+        <i class="bi bi-pen-fill"  (click)="enableCardTitleEdit(i); editCardField"></i>
+      </ng-container>
+      <ng-template #editCardField>
         <input [(ngModel)]="newcard" class="form-control mb-2" placeholder="Edit card">
         <div class="d-flex">
-          <button type="button" class="btn btn-success btn-sm mr-2" (click)="savecard()">OK</button>
+          <button type="button" class="btn btn-success btn-sm mr-2" (click)="updateCardTitle(i)">OK</button>
           <i class="bi bi ml-2" (click)="cancelcard()"></i>
         </div>
       </ng-template>
-
+      
 
     </li>
-    </div> -->
+    </div>
 
 
 
     <div *ngIf="showInput">
-      <div class="d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-center mt-3">
         <input [(ngModel)]="newcard" class="form-control mb-2 add-card-input" placeholder="Enter new card">
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-success btn-sm me-2" (click)="savecard()">OK</button>
+          <button type="button" class="btn btn-success btn-sm me-2" (click)="saveCard()">OK</button>
           <i class="bi bi-x-lg icon-cancel" style="cursor: pointer;" (click)="cancelcard()"></i>
         </div>
       </div>
