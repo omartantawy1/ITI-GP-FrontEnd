@@ -1,10 +1,10 @@
 
-<div class="card m-2" style="width: 16rem;" >
+<div class="card m-2" style="width: 16rem;cursor: pointer;" >
   <div class="card-header d-flex justify-content-between">
     <ng-container *ngIf="!editPhaseTitle; else titleEdit">
       <div class="d-flex align-items-center">
         <ng-container *ngIf="phase.title; else showTitle">
-          <strong (click)="enableTitleEdit()" class="card-title">{{phase.title}} </strong>
+          <strong (click)="enableTitleEdit()" class="card-title" style="cursor: pointer;">{{phase.title}} </strong>
         </ng-container>
         <ng-template #showTitle>
           {{ phase.title }}
@@ -14,7 +14,7 @@
     <ng-template #titleEdit>
       <input class="form-control title-input" [(ngModel)]="phase.title" (keyup.enter)="disableTitleEdit()">
     </ng-template>
-    <i class="bi bi-three-dots" ></i>
+    <i class="bi bi-three-dots" style="cursor: pointer;"></i>
   </div>
 
 
@@ -24,9 +24,9 @@
         <div class="list-item  bg-transparent" aria-disabled="true" style="height: 5px !important"></div >
       <li class="list-group-item m-2" *ngFor="let card of phase.cards; let i = index"  cdkDrag>
 
-      <ng-container *ngIf="editIndex !== i;else editCardField">
+      <ng-container *ngIf="editIndex !== i;else editCardField" style="cursor: pointer;">
         {{card.title}}
-        <i class="bi bi-pen-fill"  (click)="enableCardTitleEdit(i); editCardField"></i>
+        <i class="bi bi-pen-fill"  (click)="enableCardTitleEdit(i); editCardField" style="cursor: text;"></i>
       </ng-container>
       <ng-template #editCardField>
         <input [(ngModel)]="newcard" class="form-control mb-2" placeholder="Edit card">
