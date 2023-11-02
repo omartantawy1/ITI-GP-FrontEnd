@@ -1,0 +1,75 @@
+<!-- navbar design  -->
+<nav class="navbar navbar-expand-lg py-0 text-white" id="main_nav">
+    <a class="navbar-brand text-white fs-2 " style="visibility: hidden;" id="nav-link"   >
+      <i class="bi bi-grid-3x3-gap-fill"></i>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" 
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-elem">
+        <ul class="navbar-nav mr-auto fs-5">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home 
+            </a>
+          </li>
+
+          <div class="dropdown workspace-drop">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              My Workspaces
+            </button>
+            <ul class="dropdown-menu ml-5">
+              <li *ngFor="let workspace of workspaces">
+                <span class="me-2">{{workspace.name[0]}} </span>  {{ workspace.name }} 
+                <!-- <a class="nav-link" (click)="selectWorkspace(workspace.id)">{{ workspace.name }}</a> -->
+              </li>
+              
+            </ul>
+          </div>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Recent <i class="bi bi-chevron-down"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Starred <i class="bi bi-chevron-down"></i></a>
+          </li>
+          
+        </ul>
+        <button class="btn text-dark btn-info btn-outline-info my-2 my-sm-0 rounded" id="btn-submit" type="submit" [cdkMenuTriggerFor]="menu" class="example-standalone-trigger">Create</button>
+        
+        <ng-template #menu>
+          <div class="example-menu" cdkMenu>
+            <button class="example-menu-item" cdkMenuItem data-bs-toggle="modal" data-bs-target="#staticBackdrop">Workspace</button>
+       
+          
+          </div>
+        </ng-template>
+        
+        <form class="form" action="" method="get">
+            <div class="input-box border border-white">
+                <input type="text" placeholder="Search">
+                <span class="icon">
+                    <i class="bi bi-search" id="search-icon"></i>
+                </span>
+            </div>
+          </form>
+         
+    </div>
+    
+  </nav>
+
+
+  <ng-container *ngIf="create ; else createworkspace">
+
+  </ng-container>
+
+  <ng-template  #createworkspace >
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <app-popup-create-workspace (newWorkspace)="addWorkspace($event)"></app-popup-create-workspace>
+    </div>
+    
+
+  </ng-template>
+ 
+

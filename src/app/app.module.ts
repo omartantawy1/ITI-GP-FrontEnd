@@ -19,6 +19,16 @@ import { EditMyProfileComponent } from './edit-my-profile/edit-my-profile.compon
 import { HttpClientModule } from '@angular/common/http';
 import { AccountButtonComponent } from './account-button/account-button.component';
 import { PhaseComponent } from './phase/phase.component';
+import { ShareDialogComponent } from './share-dialog/share-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import{MatFormFieldModule} from '@angular/material/form-field';
+import{MatInputModule} from '@angular/material/input';
+import { WorkspaceComponent } from './workspace/workspace.component';
+import { MainNavbarComponent } from './main-navbar/main-navbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-create-workspace.component';
+import { CardComponent } from './card/card.component';
 
 
 @NgModule({
@@ -33,6 +43,13 @@ import { PhaseComponent } from './phase/phase.component';
     EditMyProfileComponent,
     AccountButtonComponent,
     PhaseComponent,
+    ShareDialogComponent,
+    WorkspaceComponent,
+    MainNavbarComponent,
+    SidebarComponent,
+    PopupCreateWorkspaceComponent,
+    CardComponent
+  
         
  
 
@@ -52,8 +69,11 @@ import { PhaseComponent } from './phase/phase.component';
     CdkMenuTrigger,
      CdkMenu, 
      CdkMenuItem,
+     MatDialogModule, 
      HttpClientModule,
-    
+     MatButtonModule,
+     MatFormFieldModule,
+     MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

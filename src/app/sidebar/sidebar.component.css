@@ -1,0 +1,47 @@
+::ng-deep :root{
+    --sidebar-bg-color: #105FA5;
+    --sidebar-active-color :#add9ff;
+    }
+    .nav-link.active{
+        background-color: var(--sidebar-active-color);
+    }
+    #side-bar{
+        position: absolute;
+        background-color: var(--sidebar-bg-color);
+        height: 93.70vh;
+        z-index: 1000;
+    }
+    #profile-title{
+        border-bottom: 4px white;
+    }
+    
+    .nav-link.link-light:hover{
+        background-color: rgb(255, 255, 255 ,0.2);
+       }
+    .sidebar-btn{
+        position: absolute;
+        top:5px;
+        left:55px;
+        color: #fff;
+        z-index: 500;
+    }
+    .hidden{
+        display: none !important;
+    }
+    
+.nav-link,
+.fs-5 {
+    font-size: 14px; /* Adjust the size to your preference */
+}
+
+.fs-4,
+.fs-1 {
+    font-size: 12px; /* Adjust the size to your preference */
+}
+
+
+
+.nav-link.link-light:hover {
+    font-size: 14px; /* Adjust the size to your preference */
+    /* Additional hover styles here */
+}
