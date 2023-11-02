@@ -38,6 +38,21 @@ export class PhaseComponent {
     );
 
     }
+    
+
+
+   
+    isCardOpen:boolean=true;
+    card!:Card;
+
+    openCard(card:Card){
+     this.isCardOpen=false;
+     this.card=card;
+    }
+    
+    
+
+
   enableTitleEdit() {
     
     this.editPhaseTitle = true;

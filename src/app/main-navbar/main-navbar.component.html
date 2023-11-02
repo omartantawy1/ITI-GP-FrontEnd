@@ -40,9 +40,7 @@
         <ng-template #menu>
           <div class="example-menu" cdkMenu>
             <button class="example-menu-item" cdkMenuItem data-bs-toggle="modal" data-bs-target="#staticBackdrop">Workspace</button>
-            <ng-container *ngIf="create ; else createworkspace">
-
-            </ng-container>
+       
           
           </div>
         </ng-template>
@@ -60,11 +58,17 @@
     
   </nav>
 
-  <ng-template class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"  #createworkspace tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
 
-    <app-popup-create-workspace (newWorkspace)="addWorkspace($event)"></app-popup-create-workspace>
-   
+  <ng-container *ngIf="create ; else createworkspace">
 
+  </ng-container>
+
+  <ng-template  #createworkspace >
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <app-popup-create-workspace (newWorkspace)="addWorkspace($event)"></app-popup-create-workspace>
+    </div>
+    
 
   </ng-template>
  

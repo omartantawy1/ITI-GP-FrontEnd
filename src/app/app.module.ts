@@ -28,6 +28,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 import { MainNavbarComponent } from './main-navbar/main-navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-create-workspace.component';
+import { CardComponent } from './card/card.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-cr
     WorkspaceComponent,
     MainNavbarComponent,
     SidebarComponent,
-    PopupCreateWorkspaceComponent
+    PopupCreateWorkspaceComponent,
+    CardComponent
   
         
  

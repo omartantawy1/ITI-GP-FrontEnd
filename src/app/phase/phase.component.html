@@ -22,7 +22,7 @@
   <ul class="list-group list-group-flush example-list">
     <div cdkDropList [cdkDropListData]="phase.cards" class="example-list my-2" (cdkDropListDropped)="onDrop($event)">
         <div class="list-item  bg-transparent" aria-disabled="true" style="height: 5px !important"></div >
-      <li class="list-group-item m-2" *ngFor="let card of phase.cards; let i = index"  cdkDrag>
+      <li class="list-group-item m-2" *ngFor="let card of phase.cards; let i = index"  cdkDrag  (click)="openCard(card)"   data-bs-toggle="modal" data-bs-target="#exampleModal"  >
 
       <ng-container *ngIf="editIndex !== i;else editCardField">
         {{card.title}}
@@ -59,3 +59,17 @@
 
 
 </div>
+
+
+
+<ng-container *ngIf="isCardOpen ; else openThisCard">
+
+</ng-container>
+
+<ng-template #openThisCard   >
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <app-card [card]="card" ></app-card>
+    </div>
+
+
+</ng-template>
