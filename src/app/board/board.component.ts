@@ -80,6 +80,7 @@ export class BoardComponent {
         'title':this.newPhase,
         'position': this.phases.length,
         'board_id': 16
+
       };
       this.phaseService.createPhase(phase).subscribe(
         (res:any) => (this.phases.push(res.data)),

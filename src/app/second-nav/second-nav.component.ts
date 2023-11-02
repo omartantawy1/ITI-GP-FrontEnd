@@ -1,5 +1,7 @@
 import { Component, Input, Output,EventEmitter } from '@angular/core';
-
+import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-second-nav',
   templateUrl: './second-nav.component.html',
@@ -25,9 +27,11 @@ swatches = [
   selectedBackgroundColor: string = '';
   popupVisible: boolean = false;
   workspaceListVisible: boolean = false;
-
-
   isFilterVisible: boolean = false;
+  
+
+
+  
 
   // Function to toggle the visibility
   toggleFilter() {
@@ -56,6 +60,7 @@ swatches = [
   togglePopup() {
     this.popupVisible = !this.popupVisible;
   }
+
 
 
   toggleWorkspaceList() {
