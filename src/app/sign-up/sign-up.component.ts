@@ -12,13 +12,16 @@ import { SignUpService } from '../services/sign-up.service';
 export class SignUpComponent implements OnInit {
   signupForm!: FormGroup; // Add '!' to indicate it will be initialized later
   submitted = false;
+  errorarr: any = '';
 
   constructor(private fb: FormBuilder, private router: Router, private SignUpService: SignUpService) {}
+
+  
 
   ngOnInit() {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      name: ['', [Validators.required, Validators.pattern(/^[^\s]{4,}$/)]],
+      name: ['', [Validators.required, Validators.pattern(/\w+/), Validators.minLength(8)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
     }, {
@@ -44,6 +47,10 @@ export class SignUpComponent implements OnInit {
     }
   }
 
+  clearApiError(){
+    this.errorarr = '';
+  }
+
   onSubmit() {
     this.submitted = true;
 
@@ -56,8 +63,8 @@ export class SignUpComponent implements OnInit {
       },
       (error) => {
         // Registration failed, handle the error here
-        console.error(this.signupForm, error.error.errors);
-        const errorarr = error.error.errors;
+        this.errorarr = error.error.errors;
+        console.error(this.errorarr.email[0]);
       }
       );
       // this.router.navigate(["sign-in"]);
