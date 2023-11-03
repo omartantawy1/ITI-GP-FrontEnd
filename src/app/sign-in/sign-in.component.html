@@ -6,13 +6,7 @@
     <div class="col-md-6">
       <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
         <br /><br /><br /><br /><br />
-        <div
-          *ngIf="submitted && signInForm.controls['email'].valid"
-          class="form-text text-danger text-center"
-        >
-          <strong *ngIf="errormsg">{{ errormsg }}</strong
-          ><br /><br />
-        </div>
+
         <div class="form-group">
           <h3 class="text-center">Log In To Your Account</h3>
           <label for="email">Email</label>
@@ -55,6 +49,13 @@
           </div>
         </div>
         <br />
+        <div
+          *ngIf="submitted && signInForm.controls['email'].valid"
+          class="form-text text-danger text-center"
+        >
+          <strong *ngIf="errormsg">{{ errormsg }}</strong
+          ><br /><br />
+        </div>
         <div class="text-center">
           <button type="submit" class="btn btn-primary col-md-8">
             Sign In
