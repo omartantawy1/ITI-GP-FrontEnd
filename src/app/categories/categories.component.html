@@ -1,0 +1,98 @@
+<button (click)="togglecreateCategories()" class="btn btn-primary custom-button d-flex align-items-center mb-2">
+    <i class="bi bi-tag"></i> 
+    <span style="margin-left: 10px;"> Category</span>
+</button>
+
+<!-- Labels Toggle Div -->
+<div class="container create-categories-popup" [hidden]="!showcreateCategories">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="mx-auto">
+            <p class="mb-0 text-center">Category</p>
+        </div>
+        <div (click)="togglecreateCategories()">
+            <p class="mb-0">
+                <i class="bi bi-x close-acc-icon close-icon" style="font-size: 18px;"></i>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <div class="form-outline">
+                <input id="search-input" type="search" id="form1" class="form-control" />
+                <label class="form-label" for="form1">Search</label>
+            </div>
+            <button id="search-button" type="button" class="btn btn-primary" style="height: 35px; margin-left:5px">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <div class="text-center " style="margin-top: 20px; margin-left:15px">
+            <button class="btn btn-primary d-flex" (click)="toggleCategories()">Create new Category</button>
+        </div> 
+
+        <br>
+
+
+        <div class="category-container">
+            <div class="category-item" *ngFor="let category of categories; let i = index">
+              <div class="row flex-d">
+                <input class="form-check-input checkbox-color" type="checkbox" [value]="category" (change)="toggleCategorySelection(category)" [checked]="isSelectedCategory(category)">
+                <div class="category-color" [style.background-color]="category.color">
+                  <div class="category-title">{{ category.title }}</div>
+                </div>
+                <button class="btn btn-danger btn-sm" (click)="deleteCategory(i)">Delete</button>
+              </div>
+            </div>
+          </div>
+
+
+          
+
+         </div>
+
+    <div class="container categories-popup" [hidden]="!showCategories">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="mx-auto">
+                <p class="mb-0 text-center"> Create New Category</p>
+            </div>
+            <div (click)="toggleCategories()">
+                <p class="mb-0">
+                    <i class="bi bi-x close-acc-icon close-icon" style="font-size: 18px;"></i>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <div class="form-group">
+                <input type="text" class="form-control" id="newCategory" placeholder="Enter a new category" [(ngModel)]="newCategoryTitle">
+            </div>
+
+            <br>
+
+            <p class="p-0 m-0">Select A Color</p>
+            <div class="color-list">
+                <div class="color-item" *ngFor="let color of colors">
+                    <div class="circle" [style.background-color]="color.color" (click)="selectColor(color.id)">
+                        <i class="bi bi-check checked-icon" [hidden]="selectedColor !== color.id"></i>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="text-center d-flex ml-5">
+                <button class="btn btn-primary" (click)="createCategory()">Create Category</button>
+            </div>
+
+        
+
+              </div>
+
+
+              <div class="selected-category">
+                <div class="row flex-d">
+                  <div class="category-color-moved" *ngFor="let selectedCategory of selectedCategories" [style.background-color]="selectedCategory.color">
+                    <div class="category-title">{{ selectedCategory.title }}</div>
+                  </div>
+                </div>
+              </div>

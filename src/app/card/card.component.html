@@ -182,44 +182,13 @@
 
 
               
-              <button (click)="toggleLabels()" class="btn btn-primary custom-button d-flex align-items-center mb-2">
+              <button  class="btn btn-primary custom-button d-flex align-items-center mb-2">
                 <i class="bi bi-tag"></i> 
                 <span style="margin-left: 10px;"> Labels</span>
               </button>
               
               <!-- Labels Toggle Div -->
-              <div class="container labels-popup" [hidden]="!showLabels">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="mx-auto">
-                    <p class="mb-0 text-center">Labels</p>
-                  </div>
-                  <div (click)="toggleLabels()">
-                    <p class="mb-0">
-                      <i class="bi bi-x close-acc-icon" style="font-size: 18px;"></i>
-                    </div>
-                  </div>
-
-                <div class="form-check" *ngFor="let label of labels; let i = index">
-                <div class="d-flex align-items-center">
-                  <!-- Checkbox Input -->
-                  <input class="form-check-input" type="checkbox" [id]="label.id" >
-
-                  <!-- Label Block with Color and Edit Button -->
-                  <label class="form-check-label" [for]="label.id">
-                    <div class="{{label.color.toLowerCase()}}-block custom-block" [style.backgroundColor]="label.backgroundColor">
-                    </div>
-                  </label>
-
-                  <!-- Pen Icon -->
-                  <i class="fas fa-pen" style="margin-left: 5px;"></i>
-                </div>
-              </div>
               
-                  <!-- Center the "Save" button using Bootstrap classes -->
-                  <div class="d-flex justify-content-center mt-3">
-                    <button class="btn btn-primary col-5">Save</button>
-                  </div>
-                </div>
               
 
               

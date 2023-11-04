@@ -105,21 +105,6 @@ export class CardComponent {
 
 
 
-  showLabels = false; // Initialize the "Labels" section as hidden
-
-  toggleLabels() {
-    this.showLabels = !this.showLabels; // Toggle the visibility of the "Labels" section
-  }  
-  
-  labels = [
-    { id: 'green-label',  backgroundColor: '#216E4E', color: 'Green', title:'' },
-    { id: 'yellow-label',  backgroundColor: '#7f5f01', color: 'Yellow',title:'' },
-    { id: 'purple-label',  backgroundColor: '#6f42c1', color: 'Purple', title:'' },
-    { id: 'red-label',  backgroundColor: '#dc3545', color: 'red', title:'' },
-    { id: 'blue-label',  backgroundColor: '#0c66e4', color: 'blue', title:'' },
-  ];
-
-
 
 
  
