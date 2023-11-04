@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SignUpService } from '../services/sign-up.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,13 +12,16 @@ import { Router } from '@angular/router';
 export class SignUpComponent implements OnInit {
   signupForm!: FormGroup; // Add '!' to indicate it will be initialized later
   submitted = false;
+  errorarr: any = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private SignUpService: SignUpService) {}
+
+  
 
   ngOnInit() {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required, Validators.pattern(/^[^\s]{4,}$/)]],
+      name: ['', [Validators.required, Validators.pattern(/\w+/), Validators.minLength(8)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
     }, {
@@ -43,14 +47,29 @@ export class SignUpComponent implements OnInit {
     }
   }
 
+  clearApiError(){
+    this.errorarr = '';
+  }
+
   onSubmit() {
     this.submitted = true;
 
     if (this.signupForm.valid) {
-      console.log('Form is valid. Navigating...');
-      this.router.navigate(["sign-in"]);
+      this.SignUpService.createUser(this.signupForm.value).subscribe(
+
+      (response) => {
+          console.log('User registered successfully', response);
+          this.router.navigate(['sign-in']);
+      },
+      (error) => {
+        // Registration failed, handle the error here
+        this.errorarr = error.error.errors;
+        console.error(this.errorarr.email[0]);
+      }
+      );
+      // this.router.navigate(["sign-in"]);
     } else {
-      console.log('Form is invalid. Not navigating...');
+      console.log('Form is invalid. Not navigating...', this.signupForm);
     }
   }
 }
