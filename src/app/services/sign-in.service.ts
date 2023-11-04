@@ -12,10 +12,10 @@ export class SignInService {
   constructor(private http: HttpClient, private tokenservice: TokenService) { }
 
   verifyUser(user: any){
-    let res: any = this.http.post(this.login_api,user);
-    if (res.status) {
-      this.tokenservice.setToken(res);
-    }
+    // let res: any = this.http.post(this.login_api,user);
+    // if (res.status) {
+    //   this.tokenservice.setToken(res.token);
+    // }
     return this.http.post(this.login_api,user);
   }
 }

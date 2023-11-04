@@ -1,49 +1,46 @@
 <div class="list-account bg-dark" *ngIf="isAccountListVisible">
-    <div class="container full-visibility">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="mx-auto">
-              <p class="mb-0 text-center">Your Account</p>
-            </div>
-            <div (click)="toggleAccountList()">
-                <p class="mb-0">
-                  <i class="bi bi-x close-acc-icon" style="font-size: 18px; "></i>
-                </p>
-              </div>
-          </div>
-      <br>
-
+  <div class="container full-visibility">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="mx-auto">
+        <p class="mb-0 text-center">Your Account</p>
+      </div>
+      <div (click)="toggleAccountList()">
+        <p class="mb-0">
+          <i class="bi bi-x close-acc-icon" style="font-size: 18px"></i>
+        </p>
+      </div>
+    </div>
+    <br />
 
     <div class="account-det d-flex">
-        <img src="http://placekitten.com/500/500"/>
+      <img src="http://placekitten.com/500/500" />
 
-        <p style="margin-top: 10px; margin-left:5px">amoraashraf@gmail.com</p>
-      </div>
-
-      <br>
-      
-
-      <div class="man-acc">
-        <a routerLink="edit-profile">
-        <i class="bi bi-person-check-fill"></i>
-        <p style="display: inline; margin-left:10px">Manage Account</p>
-        </a>
-      </div>
-
-      <br>
-
-      <div class="sw-acc">
-        <i class="bi bi-toggle-on"></i>
-        <p style="display: inline; margin-left:10px">Switch Account</p>
-      </div>
-
-      <br>
-
-        <div class="log-out"> 
-        <i class="bi bi-box-arrow-left"></i>
-        <p style="display: inline; margin-left:10px">Log Out</p>
-      </div>
-
-      <br>
-      
+      <p style="margin-top: 10px; margin-left: 5px">amoraashraf@gmail.com</p>
     </div>
+
+    <br />
+
+    <div class="man-acc">
+      <a routerLink="edit-profile">
+        <i class="bi bi-person-check-fill"></i>
+        <p style="display: inline; margin-left: 10px">Manage Account</p>
+      </a>
+    </div>
+
+    <br />
+
+    <div class="sw-acc">
+      <i class="bi bi-toggle-on"></i>
+      <p style="display: inline; margin-left: 10px">Switch Account</p>
+    </div>
+
+    <br />
+
+    <div class="log-out" (click)="logout()">
+      <i class="bi bi-box-arrow-left"></i>
+      <p style="display: inline; margin-left: 10px">Log Out</p>
+    </div>
+
+    <br />
   </div>
+</div>

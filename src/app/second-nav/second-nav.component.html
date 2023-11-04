@@ -1,118 +1,154 @@
 <nav class="navbar navbar-light navbar-props px-3">
+  <!-- Collapsible wrapper -->
+  <div class="left-second-nav" id="navbarSupportedContent">
+    <!-- Navbar brand -->
+    <!-- Left links -->
+    <ul class="navbar-nav flex-row align-items-center">
+      <li class="nav-item">
+        <a>My board</a>
+      </li>
 
-    <!-- Collapsible wrapper -->
-    <div class="left-second-nav" id="navbarSupportedContent">
-      <!-- Navbar brand -->
-      <!-- Left links -->
-      <ul class="navbar-nav flex-row align-items-center">
-        <li class="nav-item" >
-         <a >My board</a>
-        </li>
-       
-        <li class="nav-item">
-          <i class="bi bi-star star-icon-nav"></i>
-        </li>
+      <li class="nav-item">
+        <i class="bi bi-star star-icon-nav"></i>
+      </li>
 
-        <li class="workspace-visible-section" >
-          <a class="workspace-visible-link" (click)="toggleWorkspaceList()" style="text-decoration: none;">
-            <i class="bi bi-people-fill"></i> <span>Workspace Visible</span>
-          </a>
-        </li>
-        
-        <li class="nav-item" style="margin-left: 10px;">
-          <button class="btn btn-light border-0 fw-semibold board-button">
-            <i class="bi bi-box" ></i><span class="boardBtn"> Board</span>
-          </button>
-        </li>
-      </ul>
-      <!-- Left links -->
-    </div>
-    <!-- Collapsible wrapper -->
+      <li class="workspace-visible-section">
+        <a
+          class="workspace-visible-link"
+          (click)="toggleWorkspaceList()"
+          style="text-decoration: none"
+        >
+          <i class="bi bi-people-fill"></i> <span>Workspace Visible</span>
+        </a>
+      </li>
 
-    <!-- Right elements -->
-    <div class="right-second-nav">
-      <!-- Icon -->
-      <ul class="navbar-nav flex-row align-items-center d-relative">
-        
-        <li class="nav-item position-relative"  >
-          <a (click)="toggleFilter()">
-            <i class="bi bi-filter"></i>
-            <span>Filter</span>
-          </a>
-          <div class="filter">
-            <app-filter-button *ngIf="isFilterVisible"></app-filter-button>
-          </div>
-          
-        </li>
+      <li class="nav-item" style="margin-left: 10px">
+        <button class="btn btn-light border-0 fw-semibold board-button">
+          <i class="bi bi-box"></i><span class="boardBtn"> Board</span>
+        </button>
+      </li>
+    </ul>
+    <!-- Left links -->
+  </div>
+  <!-- Collapsible wrapper -->
 
-        <li class="nav-item">
-          <button class="btn btn-light border-0 fw-semibold btn-share" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  >
-            <i class="bi bi-person-plus-fill"></i> 
-             <span class="shareBtn">Share</span>
-          </button>  
-        </li>
-      
-        <li>
-          <button class="swatchy-button swatchy-trigger btn-color" [style.background]="selectedBackgroundColor" [style.color]="getContrastColor(selectedBackgroundColor)" (click)="togglePopup()">
-          </button>
-        </li>
-        
-        <li>
-          <input type="hidden" class="swatchy-output swatchy-display" disabled [style.backgroundColor]="selectedColor" [value]="selectedColor">
-        </li>
-
-      </ul>
-      <div class="swatchy-element" [style.display]="popupVisible ? 'block' : 'none'">
-        <div class="swatchy-swatches">
-          <div *ngFor="let swatch of swatches" class="swatchy-color-button" [style.background]=swatch (click)="selectColor(swatch)"></div>
+  <!-- Right elements -->
+  <div class="right-second-nav">
+    <!-- Icon -->
+    <ul class="navbar-nav flex-row align-items-center d-relative">
+      <li class="nav-item position-relative">
+        <a (click)="toggleFilter()">
+          <i class="bi bi-filter"></i>
+          <span>Filter</span>
+        </a>
+        <div class="filter">
+          <app-filter-button *ngIf="isFilterVisible"></app-filter-button>
         </div>
+      </li>
+
+      <li class="nav-item">
+        <button
+          class="btn btn-light border-0 fw-semibold btn-share"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          <i class="bi bi-person-plus-fill"></i>
+          <span class="shareBtn">Share</span>
+        </button>
+      </li>
+
+      <li>
+        <button
+          class="swatchy-button swatchy-trigger btn-color"
+          [style.background]="selectedBackgroundColor"
+          [style.color]="getContrastColor(selectedBackgroundColor)"
+          (click)="togglePopup()"
+        ></button>
+      </li>
+
+      <li>
+        <input
+          type="hidden"
+          class="swatchy-output swatchy-display"
+          disabled
+          [style.backgroundColor]="selectedColor"
+          [value]="selectedColor"
+        />
+      </li>
+
+      <li class="nav-item">
+        <button
+          class="btn btn-dark border-0 btn-circle fw-semibold"
+          (click)="showAccountMenu()"
+        >
+          <i class="bi bi-person-fill acc-ico"></i>
+        </button>
+        <div id="menu-comp" *ngIf="toggle">
+          <app-account-button></app-account-button>
+        </div>
+      </li>
+    </ul>
+    <div
+      class="swatchy-element"
+      [style.display]="popupVisible ? 'block' : 'none'"
+    >
+      <div class="swatchy-swatches">
+        <div
+          *ngFor="let swatch of swatches"
+          class="swatchy-color-button"
+          [style.background]="swatch"
+          (click)="selectColor(swatch)"
+        ></div>
       </div>
     </div>
+  </div>
 </nav>
 
-
-
-  <div class="modal fade share-modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-     <app-share-dialog></app-share-dialog>
-  </div>
-
-
-
+<div
+  class="modal fade share-modal"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <app-share-dialog></app-share-dialog>
+</div>
 
 <div class="list-workspace bg-dark" *ngIf="workspaceListVisible">
   <div class="container full-visibility">
     <div>
-    <p class="text-center">Change Visibility</p>
-  </div>
+      <p class="text-center">Change Visibility</p>
+    </div>
     <div>
       <i class="fas fa-lock private-icon"></i>
-      <p style="display: inline; margin-left:10px">Private</p>
-      <br>
-      <br>
-      <p style="margin-top: 10px;">Only board members can see and edit this board.</p>
+      <p style="display: inline; margin-left: 10px">Private</p>
+      <br />
+      <br />
+      <p style="margin-top: 10px">
+        Only board members can see and edit this board.
+      </p>
     </div>
-
-   
 
     <div>
       <i class="fas fa-users workspace-icon"></i>
-      <p style="display: inline; margin-left:10px" >Workspace</p>
-      <br>
-      <br>
-    <p>All members of the Omar Ashraf's workspace can see and edit this board.</p>  
+      <p style="display: inline; margin-left: 10px">Workspace</p>
+      <br />
+      <br />
+      <p>
+        All members of the Omar Ashraf's workspace can see and edit this board.
+      </p>
     </div>
-
-   
 
     <div>
       <i class="fas fa-globe public-icon"></i>
-      <p style="display: inline; margin-left:10px">Public</p>
-      <br>
-      <br>
-      <p> Anyone on the internet can see this board. Only board members can edit.</p>
+      <p style="display: inline; margin-left: 10px">Public</p>
+      <br />
+      <br />
+      <p>
+        Anyone on the internet can see this board. Only board members can edit.
+      </p>
     </div>
-
   </div>
 </div>
-
-  

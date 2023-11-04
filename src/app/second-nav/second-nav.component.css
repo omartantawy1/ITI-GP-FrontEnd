@@ -180,6 +180,18 @@ color: #2abb7f
     overflow: auto;
 }
 
+/************ account-button *********/
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+}
+
+.acc-ico {
+    margin-left: -5px;
+}
+
 
 /**************** media query **************/
 
