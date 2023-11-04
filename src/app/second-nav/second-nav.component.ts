@@ -67,5 +67,10 @@ swatches = [
     this.workspaceListVisible = !this.workspaceListVisible;
   }
 
+  toggle: boolean = false;
+  showAccountMenu(){
+    this.toggle = !this.toggle;
+  }
+
 
 }

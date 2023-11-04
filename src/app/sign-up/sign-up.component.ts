@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignUpService } from '../services/sign-up.service';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +15,7 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   errorarr: any = '';
 
-  constructor(private fb: FormBuilder, private router: Router, private SignUpService: SignUpService) {}
+  constructor(private fb: FormBuilder, private router: Router, private SignUpService: SignUpService, private tokenservice: TokenService) {}
 
   
 
@@ -57,8 +58,9 @@ export class SignUpComponent implements OnInit {
     if (this.signupForm.valid) {
       this.SignUpService.createUser(this.signupForm.value).subscribe(
 
-      (response) => {
+      (response: any) => {
           console.log('User registered successfully', response);
+          this.tokenservice.setToken(response.token);
           this.router.navigate(['sign-in']);
       },
       (error) => {

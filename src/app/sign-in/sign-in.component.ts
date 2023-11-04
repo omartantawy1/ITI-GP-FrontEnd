@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignInService } from '../services/sign-in.service';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,7 +15,7 @@ export class SignInComponent implements OnInit {
   errormsg: any = '';
   res: any = '';
 
-  constructor(private fb: FormBuilder, private router: Router, private SignInService: SignInService) {}
+  constructor(private fb: FormBuilder, private router: Router, private SignInService: SignInService, private tokenservice: TokenService) {}
 
   ngOnInit() {
     this.signInForm = this.fb.group({
@@ -29,8 +30,10 @@ export class SignInComponent implements OnInit {
     if (this.signInForm.valid) {
       this.SignInService.verifyUser(this.signInForm.value).subscribe(
 
-        (response) => {
+        (response: any) => {
             console.log('User logged in successfully', response);
+            // localStorage.setItem('token', response.token);
+            this.tokenservice.setToken(response.token);
             this.router.navigate(['workspace']);
         },
         (error) => {

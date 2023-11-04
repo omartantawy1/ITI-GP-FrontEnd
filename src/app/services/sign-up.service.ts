@@ -14,11 +14,11 @@ export class SignUpService {
 
   createUser(user: any){
     // response_api = 
-    let res: any = this.http.post(this.register_api,user);
-    if (res.status!) {
-      // this.response_api = this.http.post(this.register_api,user);
-      this.tokenservice.setToken(res);
-    }
+    // let res: any = this.http.post(this.register_api,user);
+    // if (res.status!) {
+    //   // this.response_api = this.http.post(this.register_api,user);
+    //   this.tokenservice.setToken(res);
     return this.http.post(this.register_api,user);
-  } 
+    }
+  
 }
