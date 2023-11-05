@@ -1,46 +1,146 @@
 ::ng-deep :root{
-    --sidebar-bg-color: #105FA5;
-    --sidebar-active-color :#add9ff;
-    }
-    .nav-link.active{
-        background-color: var(--sidebar-active-color);
-    }
-    #side-bar{
-        position: absolute;
-        background-color: var(--sidebar-bg-color);
-        height: 93.70vh;
-    }
-    #profile-title{
-        border-bottom: 4px white;
-    }
-    
-    .nav-link.link-light:hover{
-        background-color: rgb(255, 255, 255 ,0.2);
-       }
-    .sidebar-btn{
-        position: absolute;
-        top:5px;
-        left:55px;
-        color: #fff;
-        z-index: 500;
-    }
-    .hidden{
-        display: none !important;
-    }
-    
-.nav-link,
-.fs-5 {
-    font-size: 14px; /* Adjust the size to your preference */
+    --navsidebar-bg-title-color:#fffffb;
+    --navsidebar-font-title-color:#137AC4;
+    --navsidebar-bg-color:#0d74f5;
+}
+*{
+    box-sizing: border-box;
+}
+.side-nav{
+width: 350px;
+height: 100%;
+background: var(--navsidebar-bg-color);
+position: fixed;
+top: 50px;
+left: 0;
+padding: 20px 30px;
+}
+.workspace-title{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    margin-bottom:10px;
+}
+.workspace-image {
+    width: 50px;
+    height: 50px;
+    background-color: var(--navsidebar-bg-title-color);
+    border-radius: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navsidebar-font-title-color);
+    background-size: cover;
+    text-decoration: none;
+  }
+  .workspace-image span{
+    font-size: 2vw;
+    letter-spacing: -.01em;
+    line-height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-weight: 700;
+  }
+  .nav-items{
+    list-style: none;
+    position: relative;
+    padding: 12px 9PX;
+  }
+  .nav-items li{
+    padding: 14px 2px;
+  }
+  .nav-items li a{
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    height: 32px;
+    color: #fff;
+    text-transform: capitalize;
+  }
+  .nav-items li a p{
+    flex: 2;
+    font-size: 1.1rem;
+    margin: 0 0 0 12px;
+    color: var(--dynamic-text);
+    text-overflow: ellipsis;
+    white-space: nowrap
+  }
+  .nav-items li a i:nth-child(1){
+    font-size: 22px;
+    margin-right: 12px;
+  }
+  .sidebar-icon{
+    text-align: end;
+  }
+  .sidebar-icon i{
+    font-size: 19px !important;
+  }
+
+  .active{
+    background: #fff;
+    width: 100%;
+    height: 47px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(255, 255, 255, 0.4);
+    display: none;
+    transition: top .5s;
+  }
+  .nav-items li:hover a,
+  #workspace-views li.nav-item:hover a
+  {
+    color: var(--navsidebar-font-title-color);
+    transition: 0.3s;
+  }
+  #workspace-views li.nav-item:hover a,
+  #user-Boards li.nav-item:hover a{
+    color: var(--navsidebar-font-title-color) !important;
+    transition: 0.3s !important;
+  }
+.nav-items li:hover ~ .active{
+  display: block;
+}
+.nav-items li:nth-child(1):hover ~ .active{
+  top: 5.6%;
 }
 
-.fs-4,
-.fs-1 {
-    font-size: 12px; /* Adjust the size to your preference */
+.nav-items li:nth-child(2):hover ~ .active{
+  top: 38.3%;
 }
 
-
-
-.nav-link.link-light:hover {
-    font-size: 14px; /* Adjust the size to your preference */
-    /* Additional hover styles here */
+.nav-items li:nth-child(3):hover ~ .active{
+  top: 66%;
+}
+#workspace-views li:hover ~ .active{
+  display: block;
+}
+#workspace-views li:nth-child(1):hover ~ .active{
+  top: 12%;
+}
+@media only screen and (max-width:600px) {
+  .side-nav{
+    width: 110px;    
+  }
+  .workspace-title{
+    width: 110px;
+  }
+  .workspace-image{
+    width:42px
+  }
+  .nav-items li a p,
+  .nav-items li a  .sidebar-icon {
+    display: none;
+  }
+  .nav-items li a i{
+    margin-right: 0;
+  }
+  .nav-items li a {
+    justify-content: center;
+  }
 }
