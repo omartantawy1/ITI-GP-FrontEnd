@@ -4,6 +4,7 @@ import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 import { PhaseService } from '../services/phase.service';
 import { CardService } from '../services/card.service';
 import { CardInterface as Card } from '../interfaces/card-interface';
+import { FirebaseService } from '../services/firebase.service';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class PhaseComponent {
   editCardTitle: boolean = false;
   editPhaseTitle: boolean = false;
 
-  constructor(private phaseService: PhaseService,private cardService: CardService){};
+  constructor(private phaseService: PhaseService,private cardService: CardService,private firebaseService:FirebaseService){};
   
   ngOnInit(){
     this.phaseService.getAllPhases().subscribe(
@@ -66,7 +67,9 @@ export class PhaseComponent {
         'board_id': this.phase.board.id
       };
       this.phaseService.updatePhase(phase,this.phase.id).subscribe(
-        (res:any) => (this.phase = res.data),
+        (res:any) => {this.phase = res.data;
+          this.firebaseService.savePositions(res.data);  
+        },
         (error)=>  console.log(error),
         );
     }
@@ -88,7 +91,8 @@ export class PhaseComponent {
         'phase_id': this.phase.id
       };
         this.cardService.createCard(card).subscribe(
-          (res:any) => (this.phase.cards!.push(res.data)),
+          (res:any) => {this.phase.cards!.push(res.data)
+          this.firebaseService.savePositionsCardsByPhaseId(this.phase.id,res.data)},
           (error)=>  console.log(error),
           ()=>console.log('success')
           );
@@ -115,7 +119,8 @@ export class PhaseComponent {
         'phase_id': this.phase.id
       };
         this.cardService.updateCard(card,this.phase.cards![index].id).subscribe(
-          (res:any) => (this.phase.cards![index]= res.data),
+          (res:any) => {this.phase.cards![index]= res.data;
+            this.firebaseService.savePositionsCardsByPhaseId(this.phase.id,res.data)},
           (error)=>  console.log(error),
           ()=>console.log('success')
           );
@@ -146,8 +151,8 @@ export class PhaseComponent {
            this.rankingCardCurrent(event.previousContainer.data,null,event);
           }
         } 
-        this.unSave.emit(true);
-        
+        /* this.unSave.emit(true);
+         */
     } 
       
     rankingCardCurrent(cards: Array<Card>, phase_id: number|null, event: CdkDragDrop<any>) {
@@ -155,14 +160,15 @@ export class PhaseComponent {
         const index = cards.indexOf(element);
         element.position = index;
         element.phase_id = phase_id?phase_id:element.phase_id;
-        if(this.allMoves.length>0){
+        this.firebaseService.savePositionsCardsByPhaseId(element.phase_id!,element);
+       /*  if(this.allMoves.length>0){
           let indexMove = this.allMoves.indexOf(element);
           this.allMoves.includes(element)?this.allMoves[indexMove]=element:this.allMoves.push(element);
         }else {
           this.allMoves.push(element);
-        }
+        } */
       });
-      this.cards.emit(this.allMoves); 
+      /* this.cards.emit(this.allMoves);  */
     }
 
   

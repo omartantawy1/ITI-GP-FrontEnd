@@ -9,4 +9,5 @@ export interface CardInterface {
             position :number|null,
             phase_id : number|null,
             groups : Array<any>|null,
+            phase: Phase
 }

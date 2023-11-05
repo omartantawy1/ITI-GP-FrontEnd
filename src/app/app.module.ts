@@ -29,6 +29,10 @@ import { MainNavbarComponent } from './main-navbar/main-navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-create-workspace.component';
 import { CardComponent } from './card/card.component';
+import { environment } from 'src/environments/environment';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
 
 
 @NgModule({
@@ -49,12 +53,6 @@ import { CardComponent } from './card/card.component';
     SidebarComponent,
     PopupCreateWorkspaceComponent,
     CardComponent
-  
-        
- 
-
-
-
   ],
   imports: [
     BrowserModule,
@@ -73,7 +71,10 @@ import { CardComponent } from './card/card.component';
      HttpClientModule,
      MatButtonModule,
      MatFormFieldModule,
-     MatInputModule
+     MatInputModule,
+     provideFirebaseApp(() => initializeApp(environment.firebase)),
+     provideFirestore(() => getFirestore()),
+     provideDatabase(() => getDatabase()),
   ],
   providers: [],
   bootstrap: [AppComponent]

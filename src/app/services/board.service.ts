@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BoardInterface as Board }  from '../interfaces/board-interface';
 
@@ -7,27 +7,34 @@ import { BoardInterface as Board }  from '../interfaces/board-interface';
   providedIn: 'root'
 })
 export class BoardService {
-  private api_boards = 'http://127.0.0.1:8000/api/boards';
 
-  constructor(private http: HttpClient) { }
+/*   private api_boards = 'http://127.0.0.1:8000/api/boards'; */
+private api_boards = 'https://test-backend.exoticmarkets-co.com/api/boards';
+
+constructor(private http: HttpClient) { }
+private token = "2|W8NLCVm5cfu5hDOlu0i4SDzIu8FT8dJCxG6oIJAw5f915f2a";
+headers: HttpHeaders = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${this.token}`
+})
 
   getAllBoards() {
-    return this.http.get(this.api_boards);
+    return this.http.get(this.api_boards,{headers:this.headers});
   }
 
   getBoard(boardId: number) {
-    return this.http.get(`${this.api_boards}/${boardId}`);
+    return this.http.get(`${this.api_boards}/${boardId}`,{headers:this.headers});
   }
 
   createBoard(board: Board) {
-    return this.http.post(this.api_boards, board);
+    return this.http.post(this.api_boards, board,{headers:this.headers});
   }
 
   updateBoard(boardId: number, board: Board) {
-    return this.http.put(`${this.api_boards}/${boardId}`, board);
+    return this.http.put(`${this.api_boards}/${boardId}`, board,{headers:this.headers});
   }
 
   deleteBoard(boardId: number) {
-    return this.http.delete(`${this.api_boards}/${boardId}`);
+    return this.http.delete(`${this.api_boards}/${boardId}`,{headers:this.headers});
   }
 }
