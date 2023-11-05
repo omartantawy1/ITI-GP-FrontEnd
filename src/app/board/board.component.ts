@@ -57,19 +57,6 @@ export class BoardComponent {
     this.allMoves = [];
   }
 
-getPhases(){
-  this.phaseService.getAllPhases().subscribe(
-    (data:any) => (this.phases = data.data),
-    (error)=>  console.log(error),
-    ()=>{
-      this.buttonText = this.phases.length > 0 ? 'Add Another phase' : 'Add phase'; 
-    }
-  );
-}
-
-ngOnChanges(){
-  this.getPhases();
-}
 
   ngOnInit(){
     this.phaseService.getAllPhases().subscribe(
@@ -174,7 +161,6 @@ ngOnChanges(){
         let index = this.phases.findIndex(p=>p.id==id);
         if(index)
         this.phases.splice(index,1);
-      this.getPhases();
       },
       (error)=>{
         console.log(error);

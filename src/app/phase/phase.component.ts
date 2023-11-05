@@ -13,7 +13,7 @@ import { CardInterface as Card } from '../interfaces/card-interface';
 })
 export class PhaseComponent {
 
-  @Input() phase! : Phase;
+  @Input() phase! : any|Phase;
   @Input() phases : Array<Phase>= [];
 
   @Output() unSave = new EventEmitter<boolean>();
@@ -35,7 +35,9 @@ export class PhaseComponent {
   
   ngOnInit(){
     this.phaseService.getAllPhases().subscribe(
-      (data:any) => (this.phases = data.data),
+      (data:any) => {
+        this.phases = data.data;
+      },
       (error)=>  console.log(error),
     );
 
@@ -50,6 +52,7 @@ export class PhaseComponent {
     deletePhase(id:number){
     this.isThreeDotsVisible = false;
      this.delPhase.emit(id);
+     this.phase = null;
     }
 
 
