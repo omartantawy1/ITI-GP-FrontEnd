@@ -8,7 +8,7 @@ import { CardInterface } from '../interfaces/card-interface';
 })
 export class CardComponent {
 
-@Input() card!: CardInterface;
+  @Input() card!: CardInterface;
   showChecklist = false;
   checklistName: string = '';
   checklistid: number = 0;
