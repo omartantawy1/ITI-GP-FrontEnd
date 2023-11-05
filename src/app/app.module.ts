@@ -32,13 +32,14 @@ import { CardComponent } from './card/card.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
-
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { CategoriesComponent } from './categories/categories.component';
+import { UserInviteComponent } from './user-invite/user-invite.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -60,6 +61,9 @@ import { CategoriesComponent } from './categories/categories.component';
     PopupCreateWorkspaceComponent,
     CardComponent,
     CategoriesComponent,
+    UserInviteComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent,
    
     
   
