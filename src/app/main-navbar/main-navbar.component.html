@@ -21,7 +21,7 @@
               </button>
               <ul class="dropdown-menu ml-5 border border-1 rounded p-3 shadow-sm" *ngIf="workspaces.length>0">
                 <li *ngFor="let workspace of workspaces">
-                 <button class="d-flex align-items-center px-2 rounded border-0 bg-white btn-workspace">
+                 <button class="d-flex align-items-center px-2 rounded border-0 bg-white btn-workspace"(click)="selectWorkspace(workspace)">
                   <div class="bg-info rounded me-2 my-2 py-3 fw-bold" style="width: 50px;">{{workspace.name[0]}}</div> 
                   <p class=" p-0 m-0">{{ workspace.name }}</p>
                  </button>

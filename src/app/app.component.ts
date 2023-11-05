@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-
+import { Component , Input } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'graduation_project';
-
-
+   workspace:any;
+   getworkspace(workspace:any){
+    this.workspace=workspace;
+   }
+   setWorkSpace(workspace:any){
+    this.workspace=workspace;
+   }
 }
