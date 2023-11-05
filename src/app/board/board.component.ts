@@ -4,8 +4,6 @@ import { PhaseService } from '../services/phase.service';
 import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 import { CardInterface as Card } from '../interfaces/card-interface';
 import { CardService } from '../services/card.service';
-import { count } from 'rxjs';
-import { error } from 'jquery';
 
 @Component({
   selector: 'app-board',
