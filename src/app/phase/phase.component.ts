@@ -22,9 +22,7 @@ export class PhaseComponent {
   
   isUnSave: boolean = false;
   allMoves: Array<Card> = [];
-  
   newcard: string = '';
-  newPhase: string = '';
   editIndex: number = -1;
   showInput: boolean = false;
   editCardTitle: boolean = false;
