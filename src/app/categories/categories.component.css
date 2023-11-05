@@ -43,7 +43,7 @@
     height: 600px;
     border-radius: 10px;
     border-color: #1D212a;
-    z-index: 2; /* Set the z-index to 2 for .categories-popup (higher value) */
+    z-index: 1000; /* Set the z-index to 2 for .categories-popup (higher value) */
     color: white;
   }
 

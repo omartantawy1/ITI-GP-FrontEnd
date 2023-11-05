@@ -7,6 +7,7 @@ import { BoardInterface as Board }  from '../interfaces/board-interface';
   providedIn: 'root'
 })
 export class BoardService {
+  
   private api_boards = 'http://127.0.0.1:8000/api/boards';
 
   constructor(private http: HttpClient) { }

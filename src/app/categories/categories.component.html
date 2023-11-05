@@ -25,8 +25,8 @@
             </button>
         </div>
 
-        <div class="text-center " style="margin-top: 20px; margin-left:15px">
-            <button class="btn btn-primary d-flex" (click)="toggleCategories()">Create new Category</button>
+        <div class="text-center " style="margin-top: 20px;">
+            <button class="btn btn-primary d-flex create-new-categ-btn" (click)="toggleCategories()">Create new Category</button>
         </div> 
 
         <br>
@@ -34,15 +34,17 @@
 
         <div class="category-container">
             <div class="category-item" *ngFor="let category of categories; let i = index">
-              <div class="row flex-d">
-                <input class="form-check-input checkbox-color" type="checkbox" [value]="category" (change)="toggleCategorySelection(category)" [checked]="isSelectedCategory(category)">
-                <div class="category-color" [style.background-color]="category.color">
-                  <div class="category-title">{{ category.title }}</div>
+                <div class="row flex-d">
+                    <input class="form-check-input checkbox-color" type="checkbox" [value]="category" (change)="toggleCategorySelection(category)" [checked]="isSelectedCategory(category)">
+                    <div class="category-color" [style.background-color]="category.color">
+                        <div class="category-title">{{ category.title }}</div>
+                    </div>
+                   
+                        <i class="fas fa-trash" (click)="deleteCategory(i)"></i>
+                
                 </div>
-                <button class="btn btn-danger btn-sm" (click)="deleteCategory(i)">Delete</button>
-              </div>
             </div>
-          </div>
+        </div>
 
 
           
@@ -89,10 +91,4 @@
               </div>
 
 
-              <div class="selected-category">
-                <div class="row flex-d">
-                  <div class="category-color-moved" *ngFor="let selectedCategory of selectedCategories" [style.background-color]="selectedCategory.color">
-                    <div class="category-title">{{ selectedCategory.title }}</div>
-                  </div>
-                </div>
-              </div>
+           
