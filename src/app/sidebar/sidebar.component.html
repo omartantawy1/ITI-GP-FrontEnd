@@ -1,66 +1,43 @@
-<a class="fs-2 sidebar-btn" (click)="sidebar()" >
-    <i class="bi bi-grid-3x3-gap-fill"></i>
-  </a>
-  <div class="d-flex flex-column flex-shrink-0 ms-0 p-3" style="width: 300px;"   id="side-bar">
-      <a href="/" class="d-flex align-items-center mb-5 mb-md-0 me-md-auto link-light text-decoration-none">
-        <a href="#" class="d-flex align-items-center link-dark text-decoration-none " id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-         <div class="border border-white me-4 border rounded-3">
-          <div class="centered text-center py-2 px-2 rounded-3 " 
-          style="background: linear-gradient(90deg, #FF7A00 ,#FF4C00 66%); width: 66px;">
-          <span class="fs-1 fw-bolder" >O</span></div>
-         </div>
-        </a>
-        <span class="fs-4 font-weight-bold" style="font-size: 10px;">omar Ashraf's work space</span>
-      </a>
-      <hr style="font-size:700;color:#fff; position: relative;width: 100%;">
-      <ul class="nav nav-pills flex-column mb-3 text-capitalize fs-5">
-        <li class="nav-item ">
-          <a href="#" class="nav-link active " aria-current="page">
-            <i class="bi bi-trello fs-4"></i>
-          <span class="mx-4">Boards</span> 
-          </a>
-        </li>
-        <li class="nav-item ">
-          <a href="#" class="nav-link link-light">
-            <i class="bi bi-person fs-4"></i>
-            <span class="mx-4">members</span> 
-            <i class="bi bi-plus fs-2 " style="float: right; margin-top: -4px;"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link link-light">
-            <i class="bi bi-gear fs-4"></i>
-            <span class="mx-4">Work spaces</span> 
-          </a>
-          <!-- <ul *ngFor="let user of listuser">
-            <li>{{user.phone}}</li>
-          </ul> -->
-        </li>
-      </ul>
-      <hr style="font-size:700;color:#fff; position: relative;width: 100%;">
-      <ul class="nav nav-pills flex-column mb-3 text-capitalize fs-5 fw-lighter">
-        <span class="fs-4 mb-2 text-white fw-light">Work spaces views :</span>
-        <li class="nav-item">
-          <a href="#" class="nav-link link-light" aria-current="page">
-            <i class="bi bi-layout-text-sidebar"></i>
-                    <span class="mx-4">Tables</span> 
-          </a>
-        </li>
-        <li class="nav-item ">
-          <a href="#" class="nav-link link-light">
-            <i class="bi bi-calendar4-week fs-4 pt-2"></i> 
-            <span class="mx-4">Calender</span> 
-          </a>
-        </li>
-      </ul> 
-      <ul class="nav nav-pills flex-column mb-3 text-capitalize fs-5 fw-lighter">
-        <span class="fs-4 mb-2  text-white fw-light">Your Borders</span>
-        <li class="nav-item ">
-          <a href="#" class="nav-link link-light">
-            <i class="bi bi-clipboard-plus fs-4"></i>
-            <span class="mx-4">New Board</span> 
-          <i class="bi bi-plus fs-2 " style="float: right;"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
+
+<div class="side-nav">
+  <div class="workspace-title d-flex flex-row">
+    <a href="#" class="workspace-image">
+      <span>{{ workspace.name[0]?workspace.name[0]:""}}</span>
+    </a>
+    <span class="ms-3 fs-5">{{workspace.name}}</span>
+  </div>
+
+  <hr class="hr" style="width: 100%; border:2px solid #fff;" />
+  <ul class="nav-items">
+    <li><a href="#"><i class="fa-brands fa-trello"></i><p>Boards</p></a></li>
+    <li><a href="#"><i class="fa-regular fa-user"></i><p>members</p><span class="sidebar-icon"><i class="fa-solid fa-plus"></i></span></a></li>
+    <li><a href="#"><i class="fa-solid fa-gears"></i><p>workspace Settings</p><span class="sidebar-icon"><i class="fa-solid fa-chevron-down" ></i></span></a></li>
+  <div class="active"></div>
+</ul>
+<ul class="nav nav-pills flex-row mb-3 text-capitalize fs-5 fw-lighter" id="workspace-views">
+  <span class="fs-4 mb-2 text-white fw-light" >Work spaces views :</span>
+  <li class="nav-item">
+    <a href="#" class="nav-link link-light" aria-current="page">
+      <i class="bi bi-layout-text-sidebar"></i>
+       <span class="mx-4">Tables</span> 
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="#" class="nav-link link-light">
+      <i class="bi bi-calendar4-week fs-4 pt-2"></i> 
+      <span class="mx-4">Calender</span> 
+    </a>
+  </li>
+  <div class="active"></div>
+</ul> 
+<ul class="nav nav-pills flex-column mb-3 text-capitalize fs-5 fw-lighter" id="user-Boards">
+  <span class="fs-4 mb-2  text-white fw-light">Your Bords</span>
+  <li class="nav-item ">
+    <a href="#" class="nav-link link-light">
+      <i class="bi bi-clipboard-plus fs-4"></i>
+      <span class="mx-4">New Board</span> 
+    <i class="bi bi-plus fs-2 " style="float: right;"></i>
+    </a>
+  </li>
+</ul>
+</div>

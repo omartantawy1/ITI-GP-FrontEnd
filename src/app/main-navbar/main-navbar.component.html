@@ -14,19 +14,24 @@
             </a>
           </li>
 
-          <div class="dropdown workspace-drop">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              My Workspaces
-            </button>
-            <ul class="dropdown-menu ml-5">
-              <li *ngFor="let workspace of workspaces">
-                <span class="me-2">{{workspace.name[0]}} </span>  {{ workspace.name }} 
-                <!-- <a class="nav-link" (click)="selectWorkspace(workspace.id)">{{ workspace.name }}</a> -->
-              </li>
-              
-            </ul>
-          </div>
-
+          <li class="nav-item">
+            <div class="dropdown workspace-drop">
+              <button class="nav-link dropdown-toggle rounded btn-dropdown-workspace" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                My Workspaces
+              </button>
+              <ul class="dropdown-menu ml-5 border border-1 rounded p-3 shadow-sm" *ngIf="workspaces.length>0">
+                <li *ngFor="let workspace of workspaces">
+                 <button class="d-flex align-items-center px-2 rounded border-0 bg-white btn-workspace"(click)="selectWorkspace(workspace)">
+                  <div class="bg-info rounded me-2 my-2 py-3 fw-bold" style="width: 50px;">{{workspace.name[0]}}</div> 
+                  <p class=" p-0 m-0">{{ workspace.name }}</p>
+                 </button>
+                  <!-- <a class="nav-link" (click)="selectWorkspace(workspace.id)">{{ workspace.name }}</a> -->
+                </li>
+                
+              </ul>
+            </div>
+  
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Recent <i class="bi bi-chevron-down"></i></a>
           </li>
@@ -34,16 +39,23 @@
             <a class="nav-link" href="#">Starred <i class="bi bi-chevron-down"></i></a>
           </li>
           
+          <li class="nav-item">
+            <button id="btn-submit" type="submit" [cdkMenuTriggerFor]="menu" class="btn bg-white py-1 example-standalone-trigger">Create</button>
+            <ng-template #menu>
+                <div class="example-menu border border-1 rounded py-2 shadow-sm" cdkMenu>
+                  <button class="example-menu-item d-flex flex-column justify-content-start text-start px-2 mb-1 " cdkMenuItem data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <span><i class="bi bi-person-workspace me-2"></i>Create Workspace</span>
+                    <p class="fw-light m-0 p-0 text-secondary">A Workspace is a group of boards and people.</p>
+                </button>
+                <button class="example-menu-item d-flex flex-column justify-content-start text-start px-2" >
+                  <span><i class="bi bi-box-seam me-2"></i>Create Board</span>
+                  <p class="fw-light m-0 p-0 text-secondary">A board is a made up of cards ordered on phases.</p>
+              </button>
+                </div>
+            </ng-template>
+          </li>
         </ul>
-        <button class="btn text-dark btn-info btn-outline-info my-2 my-sm-0 rounded" id="btn-submit" type="submit" [cdkMenuTriggerFor]="menu" class="example-standalone-trigger">Create</button>
         
-        <ng-template #menu>
-          <div class="example-menu" cdkMenu>
-            <button class="example-menu-item" cdkMenuItem data-bs-toggle="modal" data-bs-target="#staticBackdrop">Workspace</button>
-       
-          
-          </div>
-        </ng-template>
         
         <form class="form" action="" method="get">
             <div class="input-box border border-white">
