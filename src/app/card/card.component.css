@@ -1,0 +1,215 @@
+body{
+    color: #B6C2CF;
+}
+
+.custom-button {
+width: 180px; 
+font-size: 14px;
+background-color: #454F59;
+border-color: #454F59;
+
+  }
+.image{
+width: 50px;
+
+border-radius: 50%;
+}
+
+
+  .custom-modal-dialog {
+   
+    min-width: 60% !important;
+  }
+  .comment-input::placeholder {
+    color: #ccc;
+  }
+  
+  .comment-input {
+    background-color: #22272b;
+    color: #b6c2cf;
+  }
+  
+  .comment-input:disabled {
+    background-color: #eee;
+    color: #888;
+  }
+
+
+  .desc-area::placeholder{
+    color: #ccc;
+  }
+
+  .desc-area{
+    background-color: #22272b;
+    color: #B6C2CF;
+  }
+
+ .custom-modal-content {
+
+    background-color: #585757;
+    color: #B6C2CF;
+  }
+  .circular-div {
+    width: 40px;
+    border-radius: 50%; 
+    background-color: #454F59; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white; 
+    font-size: 15px; 
+    margin-right: 5px;
+  
+  }
+
+    .checklist {
+        background-color:#1D212a;
+        border: 1px solid #ccc;
+        padding: 10px;
+        position: absolute;
+        top: 50px;
+        left: 650px;
+        width: 200px;
+        height: 200px;
+        border-radius: 20px;
+        border-color: #1D212a;
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .checklist {
+         top:100%;
+         right: 100%; /* Adjust the left position for smaller screens */
+        }
+      }
+
+      .checklist label {
+        margin-bottom: 10px;
+      }
+      
+      .checklist input[type="text"] {
+        padding: 5px;
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background-color: #22272b;
+        color: white;
+      }
+      
+      .checklist button {
+        width: 100%;
+        
+      }
+
+      .progress-bar-style{
+
+        height: 10px;
+      }
+
+.add-item-btn{
+    width: 100px;
+    background-color: #454F59;
+border-color: #454F59;
+margin-top:6px;
+    
+}
+
+.add-item-input{
+    width: 200px;
+    height: 30px;
+    margin-top: 6px;
+}
+
+.save-btn{
+    width: 80px;
+}
+
+
+      .delete-icon {
+        cursor: pointer;
+        color: black;
+        transition: color 0.3s;
+        font-size: 15px;
+      }
+      
+      .delete-icon:hover {
+        color: red; 
+      }
+
+   
+     .labels-popup{
+      background-color:#1D212a;
+      border: 1px solid #ccc;
+      padding: 10px;
+      position: absolute;
+      top: 50px;
+      left: 500px;
+      width: 300px;
+      height: 300px;
+      border-radius: 10px;
+      border-color: #1D212a;
+
+     }
+
+     /****labels****/
+
+     .green-block {
+      background-color: #216E4E ; 
+      width: 230px;       
+      height: 25px;            
+      display: inline-block; 
+      border: 1px solid #216E4E;
+      border-radius: 5px;
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+  
+    .yellow-block {
+      background-color: #7f5f01; 
+      width: 230px;         
+      height: 25px;            
+      display: inline-block; 
+      border: 1px solid #7f5f01;
+      border-radius: 5px; 
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+  
+    .blue-block {
+      background-color: #0c66e4; 
+      width: 230px;          
+      height: 25px;            
+      display: inline-block; 
+      border: 1px solid #0c66e4;
+      border-radius: 5px;
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+  
+  
+    .red-block {
+      background-color: #dc3545; 
+      width: 230px;          
+      height: 25px;            
+      display: inline-block; 
+      border: 1px solid #dc3545;
+      border-radius: 5px; 
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+  
+    
+  
+  
+    .purple-block {
+      background-color: #6f42c1; 
+      width: 230px;           
+      height: 25px;            
+      display: inline-block; 
+      border: 1px solid #6f42c1;
+      border-radius: 5px;
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+  
+  

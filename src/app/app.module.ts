@@ -29,6 +29,15 @@ import { MainNavbarComponent } from './main-navbar/main-navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-create-workspace.component';
 import { CardComponent } from './card/card.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatNativeDateModule } from '@angular/material/core';
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -48,7 +57,9 @@ import { CardComponent } from './card/card.component';
     MainNavbarComponent,
     SidebarComponent,
     PopupCreateWorkspaceComponent,
-    CardComponent
+    CardComponent,
+   
+    
   
         
  
@@ -73,7 +84,20 @@ import { CardComponent } from './card/card.component';
      HttpClientModule,
      MatButtonModule,
      MatFormFieldModule,
-     MatInputModule
+     MatInputModule,
+     MatInputModule,
+     NgxMatTimepickerModule,
+     FormsModule,
+     ReactiveFormsModule,
+     MatButtonModule,
+     BrowserAnimationsModule,
+     MatNativeDateModule, // Required for the date picker
+     MatFormFieldModule, 
+     MatDatepickerModule,
+    
+   
+
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
