@@ -18,6 +18,7 @@ export class PhaseComponent {
 
   @Output() unSave = new EventEmitter<boolean>();
   @Output() cards = new EventEmitter<Array<Card>>();
+  @Output() delPhase = new EventEmitter<number>();
   
   isUnSave: boolean = false;
   allMoves: Array<Card> = [];
@@ -28,6 +29,7 @@ export class PhaseComponent {
   showInput: boolean = false;
   editCardTitle: boolean = false;
   editPhaseTitle: boolean = false;
+  isThreeDotsVisible: boolean = false;
 
   constructor(private phaseService: PhaseService,private cardService: CardService){};
   
@@ -38,10 +40,20 @@ export class PhaseComponent {
     );
 
     }
-    
+  
+
+    toggleThreeDots(){
+      this.isThreeDotsVisible = !this.isThreeDotsVisible;
+    }
+
+    /* phase functions*/
+    deletePhase(id:number){
+    this.isThreeDotsVisible = false;
+     this.delPhase.emit(id);
+    }
 
 
-   
+
     isCardOpen:boolean=true;
     card!:Card;
 

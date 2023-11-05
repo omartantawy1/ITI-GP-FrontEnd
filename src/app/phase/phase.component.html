@@ -14,7 +14,15 @@
     <ng-template #titleEdit>
       <input class="form-control title-input" [(ngModel)]="phase.title" (keyup.enter)="disableTitleEdit()">
     </ng-template>
-    <i class="bi bi-three-dots" style="cursor: pointer;"></i>
+    <div class="three-dots">
+      <button class="btn btn-outlin" (click)="toggleThreeDots()">
+        <i class="bi bi-three-dots" style="cursor: pointer;"></i>
+      </button>
+      <ul *ngIf="isThreeDotsVisible" >
+        <li class="mb-2 py-1" style="text-align: right;border-bottom: 1px solid rgba(105, 105, 105, 0.052);"><a class="close me-2" (click)="toggleThreeDots()" style="width: min-content; display: inline-block; padding: 1px 5px;"><i class="bi bi-x-lg"></i></a></li>
+        <li><a (click)="deletePhase(phase.id)">delete this card</a></li>
+      </ul>
+    </div>
   </div>
 
 
