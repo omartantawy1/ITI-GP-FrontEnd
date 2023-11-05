@@ -9,7 +9,6 @@
         position: absolute;
         background-color: var(--sidebar-bg-color);
         height: 93.70vh;
-        z-index: 1000;
     }
     #profile-title{
         border-bottom: 4px white;
