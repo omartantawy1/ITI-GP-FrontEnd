@@ -2,7 +2,7 @@
 <div class="side-nav">
   <div class="workspace-title d-flex flex-row">
     <a href="#" class="workspace-image">
-      <span>{{ workspace.name[0]??""}}</span>
+      <span>{{ workspace.name[0]?workspace.name[0]:""}}</span>
     </a>
     <span class="ms-3 fs-5">{{workspace.name}}</span>
   </div>
