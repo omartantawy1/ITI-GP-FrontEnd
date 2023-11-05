@@ -1,37 +1,73 @@
 <div class="container container-styling">
   <div class="row">
     <div class="col-md-6">
-      <img src="../../assets/images/signin.png" alt="" class="sign-in-img">
+      <img src="../../assets/images/signin.png" alt="" class="sign-in-img" />
     </div>
     <div class="col-md-6">
       <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-        <br><br><br><br><br>
+        <br /><br /><br /><br /><br />
+
         <div class="form-group">
           <h3 class="text-center">Log In To Your Account</h3>
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email">
-          <div *ngIf="submitted && signInForm.controls['email'].invalid" class="form-text text-danger">
-            <strong *ngIf="signInForm.controls['email'].hasError('required')">Email is required.</strong>
-            <strong *ngIf="signInForm.controls['email'].hasError('email')">Invalid email format.</strong>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+            placeholder="Enter email"
+          />
+          <div
+            *ngIf="submitted && signInForm.controls['email'].invalid"
+            class="form-text text-danger"
+          >
+            <strong *ngIf="signInForm.controls['email'].hasError('required')"
+              >Email is required.</strong
+            >
+            <strong *ngIf="signInForm.controls['email'].hasError('email')"
+              >Invalid email format.</strong
+            >
           </div>
         </div>
-        <br>
+        <br />
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
-          <div *ngIf="submitted && signInForm.controls['password'].invalid" class="form-text text-danger">
-            <strong *ngIf="signInForm.controls['password'].hasError('required')">Password is required.</strong>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <div
+            *ngIf="submitted && signInForm.controls['password'].invalid"
+            class="form-text text-danger"
+          >
+            <strong *ngIf="signInForm.controls['password'].hasError('required')"
+              >Password is required.</strong
+            >
           </div>
         </div>
-        <br>
+        <br />
+        <div
+          *ngIf="submitted && signInForm.controls['email'].valid"
+          class="form-text text-danger text-center"
+        >
+          <strong *ngIf="errormsg">{{ errormsg }}</strong
+          ><br /><br />
+        </div>
         <div class="text-center">
-          <button type="submit" class="btn btn-primary col-md-8">Sign In</button>
+          <button type="submit" class="btn btn-primary col-md-8">
+            Sign In
+          </button>
         </div>
       </form>
-      <br>
+      <br />
       <div class="d-flex flex-column align-items-center">
         <h5 class="my-auto">-OR-</h5>
-        <p class="mt-3">If you don't have an account, <a routerLink="/sign-up">Sign Up</a></p>
+        <p class="mt-3">
+          If you don't have an account, <a routerLink="/sign-up">Sign Up</a>
+        </p>
       </div>
     </div>
   </div>

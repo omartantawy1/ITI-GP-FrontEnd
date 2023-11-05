@@ -7,7 +7,16 @@ import { Component } from '@angular/core';
 })
 export class MainNavbarComponent {
 
-  workspaces:Array<any> = [];
+workspaces:Array<any> = [
+  {
+    name:'Workpsace',
+    description:"new workspace",
+  },
+  {
+    name:'rewas',
+    description:"new workspace",
+  },
+];
 create:boolean=false;
 
 addWorkspace(workspace:any){
