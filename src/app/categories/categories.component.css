@@ -1,0 +1,105 @@
+.create-categories-popup {
+    background-color: #1D212a;
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: absolute;
+    top: 50px;
+    left: 500px;
+    width: 300px;
+    max-height: 300px;
+    border-radius: 10px;
+    border-color: #1D212a;
+    z-index: 1;
+    color: white;
+    overflow-y: scroll; 
+    overflow-x: hidden; 
+    scrollbar-width: thin;
+    scrollbar-color: #31303094 #b7b7b75a;
+  }
+  
+  .create-categories-popup::-webkit-scrollbar {
+    width: 15px;
+    border-radius: 5px;
+  }
+  
+  .create-categories-popup::-webkit-scrollbar-thumb {
+    background-color: #54515194;
+    border-radius: 5px;
+  }
+  
+
+
+.close-icon{
+    font-size: 50px;
+}
+.categories-popup {
+    background-color: #1D212a;
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: absolute;
+    top: 50px;
+    left: 500px;
+    width: 300px;
+    height: 600px;
+    border-radius: 10px;
+    border-color: #1D212a;
+    z-index: 2; /* Set the z-index to 2 for .categories-popup (higher value) */
+    color: white;
+  }
+
+
+  .color-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 7px;
+  }
+  
+  .color-item {
+    margin: 5px; /* Adjust margin as needed */
+  }
+  .color-item:focus{
+    border-radius: 1px solid;
+    border-color: #85B8FF;  
+  }
+  
+  .circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 25%;
+    /* Add border style as needed */
+  }
+  .circle:focus{
+  border-color: #85B8FF;
+  border-radius: 1px solid;
+ 
+  }
+
+  .checked-icon {
+  
+    margin-left: 8px;
+  }
+  .category-box {
+    display: flex;
+   
+}
+
+
+.category-color {
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.checkbox-color{
+   margin-left: 5px;
+    height: 25px;
+    margin-bottom: 5px;
+}
+
+.category-color-moved {
+    width: 70px;
+    height: 30px;
+    border-radius: 10px;
+    margin-left: 10px;
+}

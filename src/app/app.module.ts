@@ -38,6 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { CategoriesComponent } from './categories/categories.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     SidebarComponent,
     PopupCreateWorkspaceComponent,
     CardComponent,
+    CategoriesComponent,
    
     
   
