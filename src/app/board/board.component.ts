@@ -5,6 +5,7 @@ import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 import { CardInterface as Card } from '../interfaces/card-interface';
 import { CardService } from '../services/card.service';
 import { count } from 'rxjs';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-board',
@@ -56,7 +57,19 @@ export class BoardComponent {
     this.allMoves = [];
   }
 
+getPhases(){
+  this.phaseService.getAllPhases().subscribe(
+    (data:any) => (this.phases = data.data),
+    (error)=>  console.log(error),
+    ()=>{
+      this.buttonText = this.phases.length > 0 ? 'Add Another phase' : 'Add phase'; 
+    }
+  );
+}
 
+ngOnChanges(){
+  this.getPhases();
+}
 
   ngOnInit(){
     this.phaseService.getAllPhases().subscribe(
@@ -79,7 +92,7 @@ export class BoardComponent {
       let phase = {
         'title':this.newPhase,
         'position': this.phases.length,
-        'board_id': 5
+        'board_id': 1
 
       };
       this.phaseService.createPhase(phase).subscribe(
@@ -154,7 +167,20 @@ export class BoardComponent {
     }
   }
 
-
+  deletePhase(id:number){
+    this.phaseService.deletePhase(id).subscribe(
+      (res:any)=>{
+        console.log(res);
+        let index = this.phases.findIndex(p=>p.id==id);
+        if(index)
+        this.phases.splice(index,1);
+      this.getPhases();
+      },
+      (error)=>{
+        console.log(error);
+      }
+    );
+  }
 
   changebackground(color:any){
  this.backgroundcolor=color;

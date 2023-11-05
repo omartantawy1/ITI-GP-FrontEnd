@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , Input } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,11 +17,11 @@ export class SidebarComponent {
   //     (error)=>console.log(error.message)
   //   );
   // }
+  @Input() workspace!: {  name: string,description:string };
   
   sidebar(){
   let sidebar= document.getElementById("side-bar");
   sidebar!.classList.toggle("hidden");
-  
   }
-
+  
 }

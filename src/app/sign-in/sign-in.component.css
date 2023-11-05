@@ -1,4 +1,10 @@
 .sign-in-img{
     width: 80%;
     height: 90%;
+    margin-top: 10px;
+}
+
+.google-btn{
+    background-color: #EA4335;
+    border-color: #EA4335;
 }
