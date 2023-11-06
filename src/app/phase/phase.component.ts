@@ -22,6 +22,7 @@ export class PhaseComponent {
 
 /* send data to paprent to delete phase from board */
   @Output() delPhase = new EventEmitter<number>();
+  @Output() deleteCategoryById = new EventEmitter<number>();
   
   isUnSave: boolean = false;
   allMoves: Array<Card> = [];
@@ -68,7 +69,7 @@ toggleThreeDots(){
       let phase = {
         'title':this.phase.title,
         'position': this.phase.position,
-        'board_id': this.phase.board.id
+        'board_id': this.phase.board_id
       };
       this.phaseService.updatePhase(phase,this.phase.id).subscribe(
         (res:any) => (this.phase = res.data),
@@ -189,5 +190,11 @@ rankingCardCurrent(cards: Array<Card>, phase_id: number|null, event: CdkDragDrop
 }
 /*------------------------- end all crud functions on cards -------------------------- */
 
+
+/* delete category from all phases */
+deleteCategory(id:number){
+this.deleteCategoryById.emit(id);
+
+}
   
 }

@@ -22,8 +22,8 @@
 
           <div class="selected-category">
             <div class="row flex-d">
-              <div class="category-color-moved" *ngFor="let selectedCategory of selectedCategories" [style.background-color]="selectedCategory.color">
-                <div class="category-title">{{ selectedCategory.title }}</div>
+              <div class="category-color-moved" *ngFor="let selectedCategory of card.categories" [style.background-color]="selectedCategory.color">
+                <div class="category-title">{{ selectedCategory.name }}</div>
               </div>
             </div>
           </div>
@@ -78,7 +78,7 @@
                     placeholder="Description"
                     [(ngModel)]="description">
                 </textarea>
-                <p *ngIf="!editing" class="p-0 m-1">{{ description }}</p>
+                <p *ngIf="!editing" class="p-0 m-1">{{ card.description }}</p>
                 <div class="button-container">
                     <button *ngIf="editing" (click)="saveDescription()">Save</button>
                     <button *ngIf="editing" (click)="cancelDescription()">Cancel</button>
@@ -126,7 +126,7 @@
             
             <div class="d-flex comment-container">
               <div class="circular-div">
-                <div class="initials">User</div>
+                <div class="initials">RS</div>
               </div>
               <input [(ngModel)]="commentText" class="form-control comment-input" placeholder="Write a comment" />
             </div>
@@ -135,13 +135,13 @@
             <button class="btn cancel-btn" (click)="clearComment()">Cancel</button>
             
             <div class="comment-history">
-              <div *ngFor="let comment of comments; let i = index" class="comment-item d-flex">
+              <div *ngFor="let comment of card.comments ; let i = index " class="comment-item d-flex">
                 <div class="circular-div">
-                  <div class="initials">{{card.title.slice(0, 2)}}</div>
+                  <div class="initials">{{comment.user.name.slice(0, 2)}}</div>
                 </div>
                 <br>
                 <ng-container *ngIf="editingCommentIndex !== i; else editMode">
-                  <input [value]="comment" readonly class="form-control comment-input" [disabled]="isInputDisabled" />
+                  <input [value]="comment.content" readonly class="form-control comment-input" [disabled]="isInputDisabled" />
                   <button class="btn edit-btn" (click)="enableEdit(i)">Edit</button>
                   <button class="btn delete-btn" (click)="deleteComment(i)">Delete</button>
                 </ng-container>
@@ -211,12 +211,12 @@
       
             <br>
             <div class="container">
-              <div class="category-item row" *ngFor="let category of categories; let i = index">
+              <div class="category-item row" *ngFor="let category of categories let i = index">
                 <div class="row flex-d">
-                      <input class="form-check-input checkbox-color" type="checkbox" [value]="category" (change)="toggleCategorySelection(category)" [checked]="isSelectedCategory(category)">
+                      <input class="form-check-input checkbox-color" type="checkbox" [value]="category" (change)="toggleCategorySelection(i)" [checked]="isSelectedCategory(category)">
                       <div class="category-color" [style.background-color]="category.color">
                       <div class="category-title">
-                        {{ category.title }}
+                        {{ category.name }}
                       </div>
                 </div>
                 <button class="btn btn-sm" style="color: aliceblue;" >
@@ -250,8 +250,8 @@
 
             <p class="p-0 m-0">Select A Color</p>
             <div class="color-list">
-                <div class="color-item" *ngFor="let color of colors">
-                    <div class="circle" [style.background-color]="color.color" (click)="selectColor(color.id)">
+                <div class="color-item" *ngFor="let color of colors; let i = index">
+                    <div class="circle" [style.background-color]="color.color" (click)="selectColor(i)">
                         <i class="bi bi-check checked-icon" [hidden]="selectedColor !== color.id"></i>
                     </div>
                 </div>

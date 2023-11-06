@@ -12,7 +12,7 @@ import { CardService } from '../services/card.service';
 
 })
 export class BoardComponent {
-
+  
   backgroundcolor!: any;
   phases:Array<Phase>=[];
   showAddphaseButton: boolean = true;
@@ -113,7 +113,7 @@ export class BoardComponent {
               let phase = {
                 'title':element.title,
                 'position': ++element.position,
-                'board_id': element.board.id
+                'board_id': element.board_id
               };
               let index = this.phases.indexOf(element);
               this.phaseService.updatePhase(phase,element.id).subscribe(
@@ -128,7 +128,7 @@ export class BoardComponent {
               let phase = {
                 'title':element.title,
                 'position': --element.position,
-                'board_id': element.board.id
+                'board_id': element.board_id
               };
               let index = this.phases.indexOf(element);
               this.phaseService.updatePhase(phase,element.id).subscribe(
@@ -140,7 +140,7 @@ export class BoardComponent {
           let phase = {
             'title':phasePosition.title,
             'position': event.currentIndex,
-            'board_id': phasePosition.board.id
+            'board_id': phasePosition.board_id
           };
   
           let index = this.phases.indexOf(phasePosition);
@@ -170,5 +170,14 @@ export class BoardComponent {
  this.backgroundcolor=color;
   }
 
+
+  deleteCategory(id:number){
+   this.phaseService.getAllPhases().subscribe(
+    (res:any)=>{
+      this.phases = res.data;
+    }
+   );
+
+  }
 
 }
