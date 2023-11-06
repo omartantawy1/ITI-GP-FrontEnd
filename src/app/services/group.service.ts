@@ -22,11 +22,10 @@ export class GroupService {
   }
 
   updateGroup(group: any){
-    console.log(group,group.id);
     return this.http.put(`${this.api_groups}/${group.id}`,group,{headers:this.headers});
   }
 
-  deleteGroup(group: any, groupID: number) {
-    return this.http.delete(`${this.api_groups}/${groupID}`,{headers:this.headers});
+  deleteGroup(group: any) {
+    return this.http.delete(`${this.api_groups}/${group.id}`,{headers:this.headers});
   }
 }

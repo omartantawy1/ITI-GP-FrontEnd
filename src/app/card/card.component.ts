@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { CardInterface } from '../interfaces/card-interface';
-import { CardService } from '../services/card.service';
 import { GroupService } from '../services/group.service';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-card',
@@ -24,18 +24,12 @@ export class CardComponent {
 
   checklistTitles: { id: number; name: string; items: { id: number, name: string; checked: boolean }[] }[] = [];
   DataCast: any = {};
+  
 
-  constructor(private CardService: CardService, private GroupService: GroupService) {
-    console.log(this.card);
-    CardService.getCard(this.card.id).subscribe(
-      (response: any) => {
+  constructor(private groupService: GroupService, private taskService: TaskService) {}
 
-        this.checklistTitles = response.data.groups;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  ngOnInit(){
+    this.checklistTitles = this.card.groups? this.card.groups:[];
   }
 
   isChecklistEmpty(): boolean {
@@ -48,12 +42,22 @@ export class CardComponent {
 
   showChecklistTitles() {
     if (this.checklistName.trim() !== '') {
-      const newItem = { id: this.checklistTitles.length, name: this.checklistName, items: [] };
-      this.checklistTitles.push(newItem);
+      
       this.DataCast.name = this.checklistName;
       this.DataCast.card_id = this.card.id;
-      this.GroupService.createGroup(this.DataCast);
-      this.checklistName = '';
+      this.groupService.createGroup(this.DataCast).subscribe(
+        (response: any) => {
+          this.checklistid = response.data.id;
+          const newItem = { id: this.checklistid, name: this.checklistName, items: [] };
+          this.checklistTitles.push(newItem);
+          this.checklistName = '';
+          console.log("success");
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+      this.DataCast = {}
     }
     this.toggleChecklist();
   }
@@ -65,10 +69,7 @@ export class CardComponent {
   }
 
   saveChecklistTitle() {
-    // this.groupDataCast.id = this.editingChecklist.id;
-    // this.groupDataCast.name = this.editingChecklist.name;
-    // this.groupDataCast.card_id = this.editingChecklist.card.id;
-    this.GroupService.updateGroup(this.editingChecklist).subscribe(
+    this.groupService.updateGroup(this.editingChecklist).subscribe(
       (response: any) => {
 
         console.log("success");
@@ -86,6 +87,16 @@ export class CardComponent {
 
   deleteChecklist(checklist: { id: number, name: string, items: { id: number, name: string, checked: boolean }[] }) {
 
+    this.groupService.deleteGroup(checklist).subscribe(
+      (response: any) => {
+
+        console.log("deleted");
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
     const index = this.checklistTitles.findIndex(item => item.id === checklist.id);
     if (index !== -1) {
       this.checklistTitles.splice(index, 1);
@@ -102,21 +113,63 @@ export class CardComponent {
 
 
   addItemToChecklist(checklistId: number) {
-    const checklist = this.checklistTitles.find(item => item.id === checklistId);
-    if (checklist && this.checklistItem.trim() !== '') {
-      checklist.items.push({ id: checklist.items.length, name: this.checklistItem, checked: false });
-      this.checklistItem = '';
-      this.editingItemId = null;
 
-      // Initialize the checklist progress to 0%
-      this.checklistProgress[checklist.id] = 0;
+    this.DataCast.name = this.checklistItem;
+    this.DataCast.is_done = 0;
+    this.DataCast.group_id = checklistId;
+    this.taskService.createTask(this.DataCast).subscribe(
+      (response: any) => {
+        console.log("success");
+        const checklist = this.checklistTitles.find(item => item.id === checklistId);
+        if (checklist && this.checklistItem.trim() !== '') {
+         checklist.items.push({ id: response.data.id, name: this.checklistItem, checked: false });
+         this.checklistItem = '';
+         this.editingItemId = null;
 
-      // Log the checklist and its items here
-      console.log('Checklist:', checklist);
-    }
+         // Initialize the checklist progress to 0%
+         this.checklistProgress[checklist.id] = 0;
+
+         // Log the checklist and its items here
+         console.log('Checklist:', checklist);
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
+  
 
-  updateChecklistProgress(checklistId: number) {
+  //   const checklist = this.checklistTitles.find(item => item.id === checklistId);
+  //   if (checklist && this.checklistItem.trim() !== '') {
+  //     checklist.items.push({ id: checklist.items.length, name: this.checklistItem, checked: false });
+  //     this.checklistItem = '';
+  //     this.editingItemId = null;
+
+  //     // Initialize the checklist progress to 0%
+  //     this.checklistProgress[checklist.id] = 0;
+
+  //     // Log the checklist and its items here
+  //     console.log('Checklist:', checklist);
+  //   }
+  // }
+
+  updateChecklistProgress(checklistId: number, item: { id: number, name: string, checked: boolean }) {
+
+    this.DataCast.id = item.id;
+      this.DataCast.name = item.name;
+      this.DataCast.is_done = item.checked;
+      this.DataCast.group_id = checklistId;
+      this.taskService.updateTask(this.DataCast).subscribe(
+        (response: any) => {
+
+          console.log("success");
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+
     const checklist = this.checklistTitles.find(item => item.id === checklistId);
     if (checklist) {
       const totalItems = checklist.items.length;
@@ -128,6 +181,17 @@ export class CardComponent {
 
 
   deleteItem(checklist: { id: number; name: string; items: { id: number, name: string, checked: boolean }[] }, item: { id: number, name: string, checked: boolean }) {
+    
+    this.taskService.deleteTask(item).subscribe(
+      (response: any) => {
+
+        console.log("deleted");
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
     const checklistIndex = this.checklistTitles.findIndex(list => list.id === checklist.id);
     if (checklistIndex !== -1) {
       const itemIndex = checklist.items.findIndex(i => i === item);
@@ -159,7 +223,19 @@ export class CardComponent {
     if (item.name === '') {
 
     } else {
-
+      this.DataCast.id = item.id;
+      this.DataCast.name = item.name;
+      this.DataCast.is_done = item.checked;
+      this.DataCast.group_id = checklist.id;
+      this.taskService.updateTask(this.DataCast).subscribe(
+        (response: any) => {
+          this.editingItemIds[checklist.id] = null;
+          console.log("success");
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
       this.editingItemIds[checklist.id] = null;
     }
   }
