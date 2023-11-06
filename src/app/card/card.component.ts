@@ -26,7 +26,8 @@ export class CardComponent {
   DataCast: any = {};
 
   constructor(private CardService: CardService, private GroupService: GroupService) {
-    CardService.getCard(2).subscribe(
+    console.log(this.card);
+    CardService.getCard(this.card.id).subscribe(
       (response: any) => {
 
         this.checklistTitles = response.data.groups;

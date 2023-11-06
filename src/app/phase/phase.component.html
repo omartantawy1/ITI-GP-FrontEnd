@@ -1,5 +1,5 @@
 
-<div class="card m-2" style="width: 16rem;cursor: pointer;" >
+<div *ngIf="phase"  class="card m-2" style="width: 16rem;cursor: pointer;" >
   <div class="card-header d-flex justify-content-between">
     <ng-container *ngIf="!editPhaseTitle; else titleEdit">
       <div class="d-flex align-items-center">

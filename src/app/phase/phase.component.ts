@@ -68,7 +68,7 @@ export class PhaseComponent {
       let phase = {
         'title': this.phase.title,
         'position': this.phase.position,
-        'board_id': this.phase.board.id
+        'board_id': this.phase.board
       };
       this.phaseService.updatePhase(phase, this.phase.id).subscribe(
         (res: any) => (this.phase = res.data),
