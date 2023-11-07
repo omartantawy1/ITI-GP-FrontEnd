@@ -1,5 +1,13 @@
-import { Component, Input , ViewChild, ElementRef} from '@angular/core';
+import { Component, Input,Output ,EventEmitter} from '@angular/core';
 import { CardInterface } from '../interfaces/card-interface';
+import { CommentService } from '../services/comment.service';
+import { CommentInterface as Comment } from '../interfaces/comment-interface';
+import { UserService } from '../services/user.service';
+import { UserInterface as User } from '../interfaces/user-interface';
+import { CardService } from '../services/card.service';
+import { CategoryService } from '../services/category.service';
+import { CategoryInterface as Category } from '../interfaces/category-interface';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-card',
@@ -9,6 +17,8 @@ import { CardInterface } from '../interfaces/card-interface';
 export class CardComponent {
 
   @Input() card!: CardInterface;
+  @Output() idDeleteCategory = new EventEmitter<number>();
+  currentUser!:User;
   showChecklist = false;
   checklistName: string = '';
   checklistid: number = 0;
@@ -19,8 +29,38 @@ export class CardComponent {
   additem:boolean = false;
   checklistProgress: { [checklistId: number]: number } = {};
   
-
+  categories: Array<Category> = [];
+  
+/*   comments: Array<Comment> = []; */
+  
   checklistTitles: { id: number; title: string; items: { id:number, name: string; checked: boolean }[] }[] = [];
+
+  constructor(private commentService:CommentService,
+    private userService:UserService,
+    private cardService:CardService,
+    private categoryService:CategoryService){}
+
+
+  /* initalize all thing on card */
+  ngOnInit(){
+    console.log(this.card);
+  
+    this.userService.getCurrentUser().subscribe(
+      (res:any) => {
+        this.currentUser = res;
+      }
+    );
+    if(this.card.description!=""&&this.card.description){
+      this.editing = false;
+    }
+    this.categoryService.getAllCategories().subscribe(
+      (res:any)=>{
+        this.categories = res.data;
+      },
+      (error)=>(console.log(error))
+    );
+  
+  }
 
   isChecklistEmpty(): boolean {
     return this.checklistName.trim() === '';
@@ -101,14 +141,20 @@ export class CardComponent {
   }
 
   /*****    Categories   *** */
+  /* 
+  this.categories
+  
+  selected = this.card.categories
+  
+  
+  */
 
   showcreateCategories = false;
   showCategories = false;
   selectedColor: number | null = null;
   newCategoryTitle: string = '';
-  selectedCategoryColor: string = '';
-  categories: { title: string, color: string }[] = [];
-  selectedCategories: { title: string, color: string }[] = []
+  selectedCategoryColor:string = '';
+  selectedCategories: Array<Category>=[];
   editCategoryIndex: number | null = null;
   
 
@@ -120,24 +166,31 @@ export class CardComponent {
         this.showCategories = !this.showCategories;
     }
 
-    selectColor(colorId: number) {
-        this.selectedColor = colorId;
-        this.selectedCategoryColor = this.colors.find(color => color.id === colorId)?.color || '';
+    selectColor(indexColor: number) {
+      this.selectedColor = this.colors[indexColor].id;
+      this.selectedCategoryColor = this.colors[indexColor].color
     }
 
     createCategory() {
-      if (this.newCategoryTitle && this.selectedCategoryColor || this.selectedCategoryColor) {
-          this.categories.push({
-              title: this.newCategoryTitle,
-              color: this.selectedCategoryColor
-          });
-  
-          // Clear the inputs
-          this.newCategoryTitle = '';
-          this.selectedCategoryColor = '';
-          this.selectedColor = null;
-          this.toggleCategories();
-      } 
+     if ((this.newCategoryTitle && this.selectedCategoryColor) || this.newCategoryTitle) {
+        let category = {
+          'name': this.newCategoryTitle,
+          'color': this.selectedCategoryColor!=''?this.selectedCategoryColor:'blue',
+          'card_id': this.card.id
+        }
+        console.log(category);
+        this.categoryService.createCategory(category).subscribe(
+          (res:any)=>{
+            this.categories.push(res.data);
+            this.card.categories.push(res.data);
+            this.newCategoryTitle = '';
+            this.selectedCategoryColor = '';
+            this.selectedColor = null;
+            this.togglecreateCategories();
+          },
+          (error)=>{console.log(error);}
+        );
+      }  
   }
 
   // editCategory(index: number) {
@@ -151,32 +204,49 @@ export class CardComponent {
       // If the category being edited is deleted, reset the edit mode
       this.editCategoryIndex = null;
     }
-  
-    const deletedCategory = this.categories[index];
-    this.categories.splice(index, 1);
-  
+    this.categoryService.deleteCategory(this.categories[index].id).subscribe(
+      (res:any)=>{
+       let indexCardCategory = this.card.categories.findIndex(c=>c.id == this.categories[index].id);
+       if(index){
+        this.card.categories.splice(indexCardCategory,1);
+       }
+        this.idDeleteCategory.emit(this.categories[index].id);
+        this.categories.splice(index, 1); 
+      }
+      );
+      
+/*       const deletedCategory = this.categories[index];
     // Remove the deleted category from selectedCategories if it exists there
     const selectedCategoryIndex = this.selectedCategories.findIndex((c) => c === deletedCategory);
     if (selectedCategoryIndex !== -1) {
       this.selectedCategories.splice(selectedCategoryIndex, 1);
-    }
+    } */
   }
 
 
 
 
-  toggleCategorySelection(category: { title: string, color: string }) {
-    const index = this.selectedCategories.findIndex((c) => c === category);
-
-    if (index === -1) {
-      this.selectedCategories.push(category);
+  toggleCategorySelection(index:number) {
+    let isHasIndex =  this.card.categories.findIndex(c=>c.id == this.categories[index].id);
+    if (!isHasIndex) {
+      this.card.categories.push(this.categories[index]);
+     /*  this.cardService.updateCard(this.card,this.card.id).subscribe(
+        (res:any)=>{
+          this.selectedCategories = res.data.categories; 
+        }
+      ); */
     } else {
-     
-      this.selectedCategories.splice(index, 1);
-    }
+      this.card.categories.splice(isHasIndex, 1);
+      /* this.cardService.updateCard(this.card,this.card.id).subscribe(
+        (res:any)=>{
+          this.selectedCategories.splice(index, 1); 
+        }
+      ); */
+    } 
   }
-  isSelectedCategory(category: { title: string, color: string }): boolean {
-    return this.selectedCategories.some((c) => c === category);
+  
+  isSelectedCategory(category:Category): boolean {
+    return this.card.categories.includes(category);
   }
 
 
@@ -206,21 +276,6 @@ colors = [
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
 /**********     Dates *** */
 
 
@@ -234,14 +289,23 @@ colors = [
   editing: boolean = true; 
 
   editDescription() {
-      this.editing = true;
+    this.description = this.card.description??""
+    this.editing = true;
   }
 
   saveDescription() {
-      this.editing = false;
+    this.card.description = this.description;
+    this.cardService.updateCard(this.card,this.card.id).subscribe(
+      (res:any)=>{
+        this.card.description = res.data.description;
+        this.editing = false;
+      },
+      (error)=>{console.log(error)}
+    );
   }
 
   cancelDescription() {
+      this.description = this.card.description??"";
       this.editing = false;
   }
   
@@ -295,7 +359,6 @@ colors = [
   /******   Comments Part     ******/
 
   commentText: string = '';
-  comments: string[] = [];
   isInputDisabled: boolean = false;
   editingCommentIndex: number | null = null;
   originalCommentText: string = '';
@@ -303,9 +366,20 @@ colors = [
 
   saveComment() {
     if (this.commentText.trim() !== '') {
-      this.comments.push(this.commentText);
-      this.commentText = '';
-      this.isInputDisabled = false;
+      let comment = {
+        'content': this.commentText,
+        'user_id': this.currentUser.id,
+        'card_id':this.card.id,
+
+      }
+      this.commentService.createComment(comment).subscribe(
+        (res:any)=>{
+          this.card.comments.unshift(res.data);
+          this.commentText = '';
+          this.isInputDisabled = false;
+        },
+        (error)=>{console.log(error);}
+      );
     }
   }
 
@@ -314,25 +388,45 @@ colors = [
   }
 
   deleteComment(index: number) {
-    this.comments.splice(index, 1);
+    this.commentService.deleteComment(this.card.comments[index].id).subscribe(
+      (res:any)=>{
+        this.card.comments.splice(index, 1);
+      },
+      (error)=>{
+        console.log(error);
+      }
+    );
+    
+    
   }
 
   saveEdit(index: number) {
     if (this.editingCommentText.trim() !== '') {
-      this.comments[index] = this.editingCommentText;
-      this.editingCommentIndex = null;
-      this.editingCommentText = ''; 
+      this.card.comments[index].content = this.editingCommentText;
+      this.commentService.updateComment(this.card.comments[index],this.card.comments[index].id).subscribe(
+        (res:any)=>{
+          this.card.comments[index].content = res.data.content;
+          this.editingCommentIndex = null;
+          this.editingCommentText = ''; 
+        },
+        (error)=>{
+          console.log(error);
+        }
+        
+      );
     }
+      
   }
 
   cancelEdit(index: number) {
+    this.card.comments[index].content = this.card.comments[index].content; 
     this.editingCommentIndex = null;
     this.editingCommentText = ''; 
   }
 
   enableEdit(index: number) {
     this.editingCommentIndex = index;
-    this.editingCommentText = this.comments[index];
+    this.editingCommentText = this.card.comments[index].content;
   }
 
 }

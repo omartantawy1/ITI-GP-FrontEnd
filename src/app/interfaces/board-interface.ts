@@ -1,11 +1,14 @@
+import { PhaseInterface as Phase } from "./phase-interface";
+
 export interface BoardInterface {
 
-    title: string;
-    description: string;
-    view: string;
-    workspace_id:number;
-    updated_at: string |null;
-    created_at: string |null;
-    id: number|any |null;
+    id: number,
+    title: string,
+    description: string,
+    view: string,
+    created_at: string ,
+    updated_at: string ,
+    phases: Array<Phase>,
+    workspace_id: number
 
 }
