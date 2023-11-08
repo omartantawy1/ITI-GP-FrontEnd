@@ -4,7 +4,6 @@ import { PhaseService } from '../services/phase.service';
 import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 import { CardInterface as Card } from '../interfaces/card-interface';
 import { CardService } from '../services/card.service';
-import { count } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -13,7 +12,7 @@ import { count } from 'rxjs';
 
 })
 export class BoardComponent {
-
+  
   backgroundcolor!: any;
   phases:Array<Phase>=[];
   showAddphaseButton: boolean = true;
@@ -57,7 +56,6 @@ export class BoardComponent {
   }
 
 
-
   ngOnInit(){
     this.phaseService.getAllPhases().subscribe(
       (data:any) => (this.phases = data.data),
@@ -79,7 +77,7 @@ export class BoardComponent {
       let phase = {
         'title':this.newPhase,
         'position': this.phases.length,
-        'board_id': 5
+        'board_id': 1
 
       };
       this.phaseService.createPhase(phase).subscribe(
@@ -115,7 +113,7 @@ export class BoardComponent {
               let phase = {
                 'title':element.title,
                 'position': ++element.position,
-                'board_id': element.board.id
+                'board_id': element.board_id
               };
               let index = this.phases.indexOf(element);
               this.phaseService.updatePhase(phase,element.id).subscribe(
@@ -130,7 +128,7 @@ export class BoardComponent {
               let phase = {
                 'title':element.title,
                 'position': --element.position,
-                'board_id': element.board.id
+                'board_id': element.board_id
               };
               let index = this.phases.indexOf(element);
               this.phaseService.updatePhase(phase,element.id).subscribe(
@@ -142,7 +140,7 @@ export class BoardComponent {
           let phase = {
             'title':phasePosition.title,
             'position': event.currentIndex,
-            'board_id': phasePosition.board.id
+            'board_id': phasePosition.board_id
           };
   
           let index = this.phases.indexOf(phasePosition);
@@ -154,11 +152,32 @@ export class BoardComponent {
     }
   }
 
-
+  deletePhase(id:number){
+    this.phaseService.deletePhase(id).subscribe(
+      (res:any)=>{
+        console.log(res);
+        let index = this.phases.findIndex(p=>p.id==id);
+        if(index)
+        this.phases.splice(index,1);
+      },
+      (error)=>{
+        console.log(error);
+      }
+    );
+  }
 
   changebackground(color:any){
  this.backgroundcolor=color;
   }
 
+
+  deleteCategory(id:number){
+   this.phaseService.getAllPhases().subscribe(
+    (res:any)=>{
+      this.phases = res.data;
+    }
+   );
+
+  }
 
 }

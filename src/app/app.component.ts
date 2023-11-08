@@ -14,4 +14,5 @@ export class AppComponent {
    setWorkSpace(workspace:any){
     this.workspace=workspace;
    }
-}
+
+  }

@@ -1,5 +1,5 @@
 
-<div class="card m-2" style="width: 16rem;cursor: pointer;" >
+<div *ngIf="phase"  class="card m-2" style="width: 16rem;cursor: pointer;" >
   <div class="card-header d-flex justify-content-between">
     <ng-container *ngIf="!editPhaseTitle; else titleEdit">
       <div class="d-flex align-items-center">
@@ -14,7 +14,15 @@
     <ng-template #titleEdit>
       <input class="form-control title-input" [(ngModel)]="phase.title" (keyup.enter)="disableTitleEdit()">
     </ng-template>
-    <i class="bi bi-three-dots" style="cursor: pointer;"></i>
+    <div class="three-dots">
+      <button class="btn btn-outlin" (click)="toggleThreeDots()">
+        <i class="bi bi-three-dots" style="cursor: pointer;"></i>
+      </button>
+      <ul *ngIf="isThreeDotsVisible" >
+        <li class="mb-2 py-1" style="text-align: right;border-bottom: 1px solid rgba(105, 105, 105, 0.052);"><a class="close me-2" (click)="toggleThreeDots()" style="width: min-content; display: inline-block; padding: 1px 5px;"><i class="bi bi-x-lg"></i></a></li>
+        <li><a (click)="deletePhase(phase.id)">delete this card</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -27,6 +35,9 @@
       <ng-container *ngIf="editIndex !== i;else editCardField" style="cursor: pointer;">
         {{card.title}}
         <i class="bi bi-pen-fill"  (click)="enableCardTitleEdit(i); editCardField" style="cursor: text;"></i>
+        <div *ngIf="card.categories.length>0" class="row flex-wrap mt-2 mb-1">
+          <div *ngFor="let category of card.categories" class="col-3 mx-1 rounded" style="height: 8px !important;" [style.background-color]="category.color"></div>
+        </div>
       </ng-container>
       <ng-template #editCardField>
         <input [(ngModel)]="newcard" class="form-control mb-2" placeholder="Edit card">
@@ -68,7 +79,7 @@
 
 <ng-template #openThisCard   >
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-    <app-card [card]="card" ></app-card>
+    <app-card [card]="card" (idDeleteCategory)="deleteCategory($event)" ></app-card>
     </div>
 
 

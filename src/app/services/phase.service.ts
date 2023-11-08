@@ -1,32 +1,37 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable  } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class PhaseService {
 
   private api_phases = 'http://127.0.0.1:8000/api/phases';
+  private token = "5|JEBW5tuGQZ3M274gX975fHMlaoi9tm30YxOsjCFP2f5f4c24";
+  headers: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${this.token}`
+  })
 
   constructor(private http: HttpClient) { }
 
   getAllPhases() {
-    return this.http.get(this.api_phases);
+    return this.http.get(this.api_phases,{headers:this.headers});
   }
 
   getPhase(phaseId: number) {
-    return this.http.get(`${this.api_phases}/${phaseId}`);
+    return this.http.get(`${this.api_phases}/${phaseId}`,{headers: this.headers});
   }
 
   createPhase(phase: any) {
-    return this.http.post(this.api_phases,phase);
+    return this.http.post(this.api_phases,phase,{headers: this.headers});
   }
 
   updatePhase( phase: any,phaseId: number) {
-    return this.http.put(`${this.api_phases}/${phaseId}`, phase);
+    return this.http.put(`${this.api_phases}/${phaseId}`, phase,{headers: this.headers});
   }
 
   deletePhase(phaseId: number) {
-    return this.http.delete(`${this.api_phases}/${phaseId}`);
+    console.log('delete');
+    return this.http.delete(`${this.api_phases}/${phaseId}`,{headers: this.headers});
   }
 }

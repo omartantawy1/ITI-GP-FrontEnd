@@ -1,5 +1,6 @@
 import { Component,ViewChild,ElementRef,AfterViewInit,OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PopupCreateWorkspaceComponent } from '../popup-create-workspace/popup-create-workspace.component';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
@@ -20,7 +21,7 @@ export class WorkspaceComponent  {
   isCreateBoardSectionVisible = false;
 
 
-
+constructor(private activatedRoute:ActivatedRoute){}
   isCreateBoardVisible = false;
   @Output() newBoardInWorkspace = new EventEmitter<any>();
   updateboards(board:any){
@@ -29,6 +30,8 @@ export class WorkspaceComponent  {
     this.workspace.boards.push(board);
     this.newBoardInWorkspace.emit(this.workspace);
   }
+
+
 //   toggleCreateBoardSection() {
 //     this.isCreateBoardVisible = !this.isCreateBoardVisible;
 //   }

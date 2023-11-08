@@ -9,7 +9,7 @@
       <button *ngIf="showButton" (click)="saveBtn()" [disabled]="buttonSaveText!='Save'" class="btn btn-success">{{buttonSaveText}}</button>
       <div class="d-flex">
         <div class="board d-flex" cdkDropListGroup cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="onlistDrop($event)">
-        <app-phase *ngFor="let phase of phases" [phase]="phase" (unSave)="toggleBtnSave($event)" (cards)="setAllMoves($event)" cdkDrag>{{ phase}}</app-phase>
+        <app-phase *ngFor="let phase of phases" [phase]="phase" (delPhase)="deletePhase($event)" (deleteCategoryById)="deleteCategory($event)" (unSave)="toggleBtnSave($event)" (cards)="setAllMoves($event)" cdkDrag>{{ phase}}</app-phase>
         </div>
         <div class="">
           <div *ngIf="showInput">

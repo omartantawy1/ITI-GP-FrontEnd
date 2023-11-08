@@ -31,6 +31,16 @@ import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-cr
 import { CardComponent } from './card/card.component';
 import { UserWorkspacesComponent } from './user-workspaces/user-workspaces.component';
 
+import {MatToolbarModule} from '@angular/material/toolbar';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { CategoriesComponent } from './categories/categories.component';
+import { UserInviteComponent } from './user-invite/user-invite.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
 
 @NgModule({
   declarations: [
@@ -50,12 +60,12 @@ import { UserWorkspacesComponent } from './user-workspaces/user-workspaces.compo
     SidebarComponent,
     PopupCreateWorkspaceComponent,
     CardComponent,
-    UserWorkspacesComponent
-  
-        
- 
-
-
+    UserWorkspacesComponent,
+    CategoriesComponent,
+    UserInviteComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent,
+    SignUpComponent
 
   ],
   imports: [
@@ -75,7 +85,19 @@ import { UserWorkspacesComponent } from './user-workspaces/user-workspaces.compo
      HttpClientModule,
      MatButtonModule,
      MatFormFieldModule,
-     MatInputModule
+     MatInputModule,
+     MatInputModule,
+     FormsModule,
+     ReactiveFormsModule,
+     MatButtonModule,
+     BrowserAnimationsModule,
+     MatNativeDateModule, // Required for the date picker
+     MatFormFieldModule, 
+     MatDatepickerModule,
+    
+   
+
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
