@@ -61,7 +61,7 @@ export class SignUpComponent implements OnInit {
       (response: any) => {
           console.log('User registered successfully', response);
           this.tokenservice.setToken(response.token);
-          this.router.navigate(['sign-in']);
+          this.router.navigate(['workspace']);
       },
       (error) => {
         // Registration failed, handle the error here

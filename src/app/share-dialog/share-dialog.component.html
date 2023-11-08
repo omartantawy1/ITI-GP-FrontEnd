@@ -15,10 +15,10 @@
       <div class="modal-body">
         <div class="row">
           <div class="form-group col-9">
-            <input type="text" class="form-control" id="exampleInput" placeholder="Please Enter an Email Address">
+            <input type="text" class="form-control" id="exampleInput" placeholder="Please Enter an Email Address" [(ngModel)]="emailModel">
           </div>
           <div class="col-3">
-            <button class="btn btn-primary">Share</button>
+            <button (click)="inviteUserToBoard()" class="btn btn-primary">Invite</button>
           </div>
         </div>
 
