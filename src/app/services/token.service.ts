@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ export class TokenService {
 
   // protected token: string | null = null;
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   getToken(){
     return localStorage.getItem('token');
@@ -15,6 +16,8 @@ export class TokenService {
 
   setToken(temp: string){
     localStorage.setItem('token', temp);
+    this.router.navigate(['workspace']);
+    
   }
 
   clearToken(){

@@ -62,13 +62,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     UserInviteComponent,
     ForgetPasswordComponent,
     ResetPasswordComponent,
-   
-    
-  
-        
- 
-
-
+    SignUpComponent
 
   ],
   imports: [

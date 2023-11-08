@@ -12,7 +12,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 
   const routes: Routes = [
     { path: '', component: SignUpComponent }, 
-    { path: 'sign-in', component: SignInComponent },
+    { path:'sign-in', component: SignInComponent },
+    { path:'sign-up', component: SignUpComponent },
     {path:'board',component:BoardComponent},
     {path:'edit-profile',component:EditMyProfileComponent},
     {path:'workspace',component:WorkspaceComponent},
