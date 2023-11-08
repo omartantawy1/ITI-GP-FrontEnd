@@ -10,7 +10,7 @@
 width: 350px;
 height: 100%;
 background: var(--navsidebar-bg-color);
-position: fixed;
+position: absolute;
 top: 50px;
 left: 0;
 padding: 20px 30px;
@@ -92,16 +92,10 @@ padding: 20px 30px;
     display: none;
     transition: top .5s;
   }
-  .nav-items li:hover a,
-  #workspace-views li.nav-item:hover a
+  .nav-items li:hover a
   {
     color: var(--navsidebar-font-title-color);
     transition: 0.3s;
-  }
-  #workspace-views li.nav-item:hover a,
-  #user-Boards li.nav-item:hover a{
-    color: var(--navsidebar-font-title-color) !important;
-    transition: 0.3s !important;
   }
 .nav-items li:hover ~ .active{
   display: block;
@@ -117,11 +111,14 @@ padding: 20px 30px;
 .nav-items li:nth-child(3):hover ~ .active{
   top: 66%;
 }
-#workspace-views li:hover ~ .active{
-  display: block;
-}
-#workspace-views li:nth-child(1):hover ~ .active{
-  top: 12%;
+#workspace-views .nav-item .nav-link{
+  box-shadow: inset 0 0 0 0 #54b3d6;
+  color: #54b3d6;
+  transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+} 
+#workspace-views .nav-item:hover ~ .nav-link{
+  box-shadow: inset 100px 0 0 0 #54b3d6;
+  color: white;
 }
 @media only screen and (max-width:600px) {
   .side-nav{

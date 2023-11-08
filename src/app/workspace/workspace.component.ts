@@ -25,10 +25,9 @@ export class WorkspaceComponent  {
   @Output() newBoardInWorkspace = new EventEmitter<any>();
   updateboards(board:any){
     board.id = this.workspace.boards.length+1;
-    board.color = 'black '
+    board.color = 'black';
     this.workspace.boards.push(board);
     this.newBoardInWorkspace.emit(this.workspace);
-
   }
 //   toggleCreateBoardSection() {
 //     this.isCreateBoardVisible = !this.isCreateBoardVisible;
@@ -115,9 +114,9 @@ export class WorkspaceComponent  {
 //   }
 // workspaceName: string = this.workspace.name;
 
-// getInitials(): string {
-//   return this.workspaceName.charAt(0).toUpperCase();
-// }
+getInitials(workspaceName:string): string {
+  return workspaceName.charAt(0).toUpperCase();
+ }
 updateUserImage(): void {}
 
 }

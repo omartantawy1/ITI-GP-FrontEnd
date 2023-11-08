@@ -23,5 +23,8 @@ export class SidebarComponent {
   let sidebar= document.getElementById("side-bar");
   sidebar!.classList.toggle("hidden");
   }
-  
+
+ getInitials(workspaceName:string): string {
+  return workspaceName.charAt(0).toUpperCase();
+ }
 }

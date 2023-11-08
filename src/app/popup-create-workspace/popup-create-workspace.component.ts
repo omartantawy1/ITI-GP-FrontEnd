@@ -27,7 +27,4 @@ export class PopupCreateWorkspaceComponent {
       this.newWorkspace.emit(newWorkspace); // Emit the new workspace data
     }
   }
-
-
-
 }

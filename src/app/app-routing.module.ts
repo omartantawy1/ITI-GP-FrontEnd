@@ -5,6 +5,7 @@
 import { BoardComponent } from './board/board.component';
 import { EditMyProfileComponent } from './edit-my-profile/edit-my-profile.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
+import { UserWorkspacesComponent } from './user-workspaces/user-workspaces.component'; 
 
 
   const routes: Routes = [
@@ -12,8 +13,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
     { path: 'sign-in', component: SignInComponent },
     {path:'board',component:BoardComponent},
     {path:'edit-profile',component:EditMyProfileComponent},
-    {path:'workspace',component:WorkspaceComponent},
-    
+    {path:'workspace',component:UserWorkspacesComponent},    
   ];
 
   @NgModule({

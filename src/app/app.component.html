@@ -1,13 +1,15 @@
-<div>
-    <app-main-navbar [updateWorkSpace]="workspace" (selectedworkspace)="getworkspace($event)" ></app-main-navbar>
-    <app-sidebar [workspace]="workspace" ></app-sidebar>
-    <app-workspace [workspace]="workspace" (newBoardInWorkspace)="setWorkSpace($event)" ></app-workspace>
-    <!-- <app-workspace></app-workspace> 
-     <router-outlet></router-outlet> -->
-
+<app-main-navbar [updateWorkSpace]="workspace" (selectedworkspace)="getworkspace($event)"></app-main-navbar>
+<div class="d-flex ms-0 p-0 ">
+    <div class="me-5">
+        <app-sidebar class="col-2" [workspace]="workspace" ></app-sidebar>
+    </div>
+    <div class="col-9">
+        <!-- <app-workspace [workspace]="workspace" (newBoardInWorkspace)="setWorkSpace($event)" ></app-workspace> -->
+    <workspace [workspace]="workspace"></workspace>
 </div>
-
-
+</div>
+   <!-- <app-workspace></app-workspace> 
+     <router-outlet></router-outlet> -->
 <!-- 
 
 <app-main-navbar></app-main-navbar>

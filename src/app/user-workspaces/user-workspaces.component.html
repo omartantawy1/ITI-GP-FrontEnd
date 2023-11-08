@@ -1,0 +1,66 @@
+<div class="workspace-main-head"><h1>work spaces :</h1></div>
+<div class="workspaces-list">
+  <div class="workspace-manager-container">
+    <div class="workspace-sidebar">
+      <h1 class="title has-text-primary">
+       workspace
+      </h1>
+      <div class="list-menu">
+        <a class="list-menu-item">
+          <p>workspacetitle</p>
+        </a>  
+      </div>
+      <button class="button bg-primary text-white" routerLink="/new-list">+ New Workspace</button> 
+    </div>
+    <div class="workspace-container-board bg-light">
+      <section class="heading-section">
+        <h1 class="title is-1 has-text-centered">Your Boards </h1>
+      </section>
+      <div class="container add-board-box-container mb-1">
+        <div class="add-board-box">
+      
+          <form #form="ngForm">
+            <h2 class="title is-5">New Board</h2>
+      
+            <div class="field is-grouped" style="margin: 0">
+              <p class="control is-expanded">
+                <input ngModel #todoTextField="ngModel" required minlength="2" name="text" class="input" type="text" placeholder="Type Board name here ...">
+              </p>
+              <p class="control">
+                <button type="submit" class="button alt-gradient-button">
+                  <i class="material-icons">add</i>
+                  Add
+                </button>
+              </p>
+            </div>
+      
+            <!-- <div *ngIf="todoTextField.invalid && showValidationErrors">
+              <p class="help is-danger" *ngIf="todoTextField.errors.required">Please enter the text of your todo</p>
+              <p class="help is-danger" *ngIf="todoTextField.errors.minlength">Todo text must be at least 2 characters</p>
+            </div> -->
+          </form>
+      
+        </div>
+      </div>
+      <div id="boards">
+        <div class="card">
+          <div class="card-content">
+          <h6>workspace's boards</h6>
+          </div>
+        </div>
+      </div>   
+    </div>
+  </div>
+  <!-- <div class="workspace-wrapper">
+    <div class="workspace-card-details">
+      <div class="front-workspace">
+        <div class="face-content"></div>
+      </div>
+      <div class="back-workspace">
+        <div class="content">
+          <h2>workspace's boards</h2>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>

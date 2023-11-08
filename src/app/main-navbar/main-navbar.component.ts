@@ -20,12 +20,12 @@ workspaces:Array<any> = [
     {
       id:2,
       title:'workboard',
-      color:'purble',
+      color:'#714ae9',
     },
     {
       id:3,
       title:'workbench',
-      color:'fuschia',
+      color:'#722245',
     }
   ]
   },
@@ -36,12 +36,12 @@ workspaces:Array<any> = [
     boards:[{
       id:1,
       title:'gp task',
-      color:'red',
+      color:'#065fd4',
     },
     {
       id:2,
       title:'Ai task',
-      color:'purble',
+      color:'#06effa',
     },
   ]
   },
