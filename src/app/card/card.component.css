@@ -100,6 +100,16 @@ border-radius: 50%;
         width: 100%;
         
       }
+      .strikethrough {
+        text-decoration: line-through;
+      }
+      .delete-checklist-btn{
+        width: 60px; 
+       font-size: 14px;
+      background-color: #454F59;
+      border-color: #454F59;
+      color:white;
+      }
 
       .progress-bar-style{
 
@@ -136,6 +146,15 @@ margin-top:6px;
         color: red; 
       }
 
+      .card{
+    
+        border: none;
+        background: transparent !important;
+      }
+
+      .card:hover{
+        background-color:#A6C5E229 !important;
+      }
    
      
      /****Categories****/
@@ -172,6 +191,8 @@ margin-top:6px;
     
 
   
+
+
   
   .close-icon{
       font-size: 50px;

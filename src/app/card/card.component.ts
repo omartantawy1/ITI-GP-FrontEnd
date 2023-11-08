@@ -1,5 +1,6 @@
-import { Component, Input , ViewChild, ElementRef} from '@angular/core';
+import { Component, Input , ViewChild, ElementRef,} from '@angular/core';
 import { CardInterface } from '../interfaces/card-interface';
+import { HttpClient } from '@angular/common/http'; 
 
 @Component({
   selector: 'app-card',
@@ -18,8 +19,6 @@ export class CardComponent {
   editingItemIds: { [checklistId: number]: number | null } = {};
   additem:boolean = false;
   checklistProgress: { [checklistId: number]: number } = {};
-  
-
   checklistTitles: { id: number; title: string; items: { id:number, name: string; checked: boolean }[] }[] = [];
 
   isChecklistEmpty(): boolean {
@@ -35,20 +34,48 @@ export class CardComponent {
       const newItem = { id: this.checklistTitles.length, title: this.checklistName, items: [] };
       this.checklistTitles.push(newItem);
       this.checklistName = '';
+      
     }
     this.toggleChecklist();
   }
 
-  deleteChecklist(checklistId: number) {
-    const index = this.checklistTitles.findIndex(item => item.id === checklistId);
+  deleteChecklist(checklist: { id: number, title: string, items: { id: number, name: string, checked: boolean }[] }) {
+ 
+    const index = this.checklistTitles.findIndex(item => item.id === checklist.id);
     if (index !== -1) {
       this.checklistTitles.splice(index, 1);
+      if (this.editingItemId === checklist.id) {
+        this.editingItemId = null;
+      }
     }
+  }
+
+  editingChecklist: any; 
+  originalTitle: string = '';
+
+editChecklistTitle(checklist: any) {
+  this.editingChecklist = checklist;
+  this.originalTitle = checklist.title; // Save the original title
+}
+
+saveChecklistEditTitle() {
+  if (this.editingChecklist.title.trim() !== '') {
+    console.log('Edited checklist title:', this.editingChecklist.title);
+  }
+  this.editingChecklist = null;
+}
+
+  cancelEditChecklistTitle() {
+    if (this.editingChecklist.title.trim() === '') {
+      this.editingChecklist.title = this.originalTitle; 
+    }
+    this.editingChecklist = null;
   }
 
 
   addItem(checklistid: number) {
     this.editingItemId = checklistid;
+   
   }
   
 
@@ -59,13 +86,13 @@ export class CardComponent {
       this.checklistItem = '';
       this.editingItemId = null;
   
-      // Initialize the checklist progress to 0%
       this.checklistProgress[checklist.id] = 0;
   
-      // Log the checklist and its items here
+      
       console.log('Checklist:', checklist);
     }
   }
+  
 
   updateChecklistProgress(checklistId: number) {
     const checklist = this.checklistTitles.find(item => item.id === checklistId);
@@ -94,10 +121,44 @@ export class CardComponent {
     }
   }
   
-
   cancelAddItem() {
     this.checklistItem = '';
     this.editingItemId = null;
+  }
+  
+
+
+  editItemName(checklistId: number, item: { id: number, name: string, checked: boolean }) {
+    this.editingItemIds[checklistId] = item.id;
+  }
+  
+  saveItemName(checklist: { id: number, title: string, items: { id: number, name: string, checked: boolean }[] }, item: { id: number, name: string, checked: boolean }) {
+    
+    item.name = item.name.trim();
+    if (item.name === '') {
+     
+    } else {
+  
+      this.editingItemIds[checklist.id] = null;
+    }
+  }
+  
+  cancelEditItemName(checklistId: number) {
+    const checklist = this.checklistTitles.find(item => item.id === checklistId);
+
+    if (checklist) {
+      const item = checklist.items.find(i => i.id === this.editingItemIds[checklistId]);
+
+      if (item) {
+        const trimmedName = item.name.trim();
+        if (trimmedName === '') {
+          console.log("Item name cannot be empty.");
+          return;
+        }
+      }
+    }
+  
+    this.editingItemIds[checklistId] = null;
   }
 
   /*****    Categories   *** */
@@ -247,8 +308,9 @@ colors = [
   
   /***   Attachments Part */
 
-  showDeleteIcon = false;
   uploadedFiles: Array<any> = [];
+
+  constructor(private http: HttpClient) {}
 
   onFileSelected(event: any) {
     const files = event.target.files;
@@ -262,6 +324,7 @@ colors = [
             name: file.name,
             type: this.getFileType(file.type),
             url: reader.result,
+            editMode: false // Add an editMode property to track editing
           });
         };
 
@@ -270,14 +333,9 @@ colors = [
     }
   }
 
-  removeFile(file: any) {
-    const index = this.uploadedFiles.indexOf(file);
-    if (index !== -1) {
-      this.uploadedFiles.splice(index, 1);
-    }
+  removeFile(index: number) {
+    this.uploadedFiles.splice(index, 1);
   }
-
-  
 
   getFileType(type: string) {
     if (type.includes('image')) {
@@ -290,6 +348,47 @@ colors = [
       return 'other';
     }
   }
+
+
+  downloadFile(url: string, name: string) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = name;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+ 
+  toggleEditMode(file: any) {
+    file.editMode = !file.editMode;
+  
+  }
+
+
+  saveEditedName(file: any) {
+    file.name = file.newName; // Update the name with the new name
+    file.editMode = false; // Exit edit mode
+  }
+  cancelEditFile(file: any) {
+  
+    if (!file.newName || file.newName.trim() === '') {
+      file.newName = file.name;
+    }
+    file.editMode = false;
+  }
+
+
+  uploadFiles() {
+    // Here, you can send the uploaded files to the backend using HTTP requests.
+    // You can use this.http.post or any other suitable method to send the files.
+    // Replace the URL with the actual endpoint where you want to handle file uploads.
+    this.http.post('your-backend-upload-url', this.uploadedFiles).subscribe((response) => {
+      // Handle the response from the backend, if needed.
+    });
+  }
+
 
 
   /******   Comments Part     ******/
