@@ -1,4 +1,4 @@
-<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,52 +53,38 @@
             Workspaces
           </a>
         </li>
+       
+        <!-- Add more navigation links as needed -->
       </ul>
     </div>
-  </nav> -->
+  </nav>
 
 
   
       <!-- Main Content Area -->
-      <!-- <main class="col-md-10 ms-sm-auto">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-          Content Goes Here 
-          <div>
-            <input [(ngModel)]="newWorkspaceName" placeholder="Enter workspace name" />
-            <button (click)="createWorkspace()">Create Workspace</button>
-          </div> 
-      
-      
-        <div *ngIf="selectedWorkspaceId !== 0">
-            <div>
-                <button (click)="createBoard()">Create Board</button>
-              <input [(ngModel)]="newBoardName" placeholder="Enter board name" />
-              
-            </div>
-      
-            <h2>{{ getSelectedWorkspaceName() }} Boards  </h2>
-            <ul>
-              <li *ngFor="let board of getBoardsInSelectedWorkspace()">
-                {{board }}
-              </li>
-            </ul>
+      <main class="col-md-10 ms-sm-auto">
+     
+        <div>
+
+          <div >
+
           </div>
+           <!-- <h6> current Worksspace</h6> -->
+
         </div>
 
-
-       
-        <div class="create-board" (click)="isCreateBoardVisible = !isCreateBoardVisible" *ngIf="selectedWorkspaceId">
-          <p class="text-center">Create new board</p>
-        </div>
+        <div class="boards">
+  
+          <div class="create-board" (click)="isCreateBoardVisible = !isCreateBoardVisible" *ngIf="selectedWorkspaceId">
+            <p  >Create new board</p>
+          </div>
+        
       
-        <div class="created-boards">
-          <div *ngFor="let board of boards" [style.background]="board.background">
+          <div class="created-boards" *ngFor="let board of getBoardsInSelectedWorkspace()" [style.background]="board.background">
             <p>{{ board.title }}</p>
           </div>
-        </div>
 
-       Board Option Selectors  
-
+                  <!--  Board Option Selectors  --->
 
       <div class="container main-board-selectors bg-dark" *ngIf="isCreateBoardVisible" >
 
@@ -113,8 +99,6 @@
             </div>
         </div>
  
-       
-
         <div class="form-group">
           <label for="boardTitle">Board Title</label>
           <input type="text" class="form-control form-control-sm" id="boardTitle" placeholder="Enter Board Title" [(ngModel)]="newBoardName">
@@ -157,72 +141,76 @@
     
            </div>
 
-
-
-
            <div class="fluid-container">
             <p>WorkSpace</p>
 
-            <select class="form-select form-select-sm" aria-label="Small select example"  #ayhaga (change)="selectWorkspace(+ayhaga.value)">
+            <!-- <select class="form-select form-select-sm" aria-label="Small select example"  #ayhaga (change)="selectWorkspace(+ayhaga.value)">
               <option default>my workspace</option>
               <option *ngFor="let workspace of workspaces" (value)="workspace.id"  >{{workspace.name}}</option>
-            </select>
+            </select> -->
             <p>{{workspaces[selectedWorkspaceId-1].name}}</p>
 
            </div>
-           <br>
-           <br>
-                     
+           <br>                     
            <div class="container justify-content-center d-flex " style="margin-right: 10px;">
             <button class="btn btn-primary text-center col-10" (click)="createBoard()">
               create
             </button>  
             </div>
-
            <br>  
       </div>
 
+          </div>
+        
+      
+ 
 
-    </main> -->
 
 
 
-    <div class="container bg-light" style="width:100%;" >
-        <div class="row mt-4" style="height: 600px;">
-            <div class="col"></div>
-            <div class="col-md-6 bg-white shadow">
 
-                <div class="card bg-light mt-4">
-                    <h4 class="p-3 pt-2 pb-2" style="color: #137AC4;">workspaces</h4>
-                </div>
-                <div *ngIf="workspace.boards.length>0" class="d-flex flex-row row mt-4">
-                  <div class="card col-md-3 mx-1 ms-5 shadow"*ngFor="let board of workspace.boards" style="box-shadow: 0 2px 5px 1px rgba(64,60,67,.16);">
-                    <div class="card-body">
-                      <div class="card-title text-light text-center px-2 rounded-3" 
-                      style="background-color: rgba(0, 0, 0, 0.5); width: fit-content;">
-                        <p class="" [ngStyle]="{'background-color': board.color??'blue' }" style="color: rgba(255, 255, 255, 0.5); font-size: 16px;">{{board.title}}</p></div>      
-                    </div> 
-                  </div>
-                  <button class="btn btn-primary" (click)="updateboards({title:'newboard'})" >Add new board</button>
-                </div>
-                <h4 class="text-primary mt-4">Boards : </h4>
+    
 
-                <div style="overflow-y: auto; height: 350px;">
-                    <div class="m-3" >
-                        <div class="p-2 shadow border" id="tasks" >
-                            <div class="input-group row ps-3" >
-                                <div class="card col-md-10 border-0">
-                                   <!-- {{workspace.workspace_name}}  -->
-                                  </div>
-                                <button class="btn btn-outline-primary col me-2" data-bs-toggle="modal" type="button" data-bs-target="#exampleModal"  >e</button>
-                                <div class="btn btn-outline-danger col" >X</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+      </main>
 
+      <!---- Modal Content   ---->
+      
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Launch static backdrop modal
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Your WorkSpace</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="col"></div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- Left Side with Inputs and Centered Button -->
+                  <div class="text-center">
+                    <div class="form-group">
+                      <label for="input1">WorkSpace Name</label>
+                      <input type="text" class="form-control" id="input1" [(ngModel)]="newWorkspaceNameInModal">
+                    </div>
+                    <div class="form-group">
+                      <label for="input2">Workspace Description</label>
+                      <input type="text" class="form-control" id="input2" [(ngModel)]="newWorkspaceDescriptionInModal">
+                    </div>
+                    <br>
+                    <button class="btn btn-primary" (click)="addWorkspaceInModal()" data-bs-dismiss="modal">Submit</button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <!-- Right Side with Image -->
+                  <img src="../../assets/man-holding-clock-time-management-concept_23-2148823171.jpg" alt="Your Image" class="img-fluid">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+  

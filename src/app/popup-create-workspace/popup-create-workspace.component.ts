@@ -7,26 +7,6 @@ import { Component,EventEmitter,Output } from '@angular/core';
 })
 export class PopupCreateWorkspaceComponent {
 
-  Workspaces:any;
-  newWorkspaceName = '';
-  newWorkspaceNameInModal: string = '';
-  newWorkspaceDescriptionInModal: string = '';
-
-
-  @Output() newWorkspace=new EventEmitter<any>();
-
-  addWorkspaceInModal() {
-    if (this.newWorkspaceNameInModal) {
-      const newWorkspace = {
-        name: this.newWorkspaceNameInModal,
-        description: this.newWorkspaceDescriptionInModal,
-      };
-
-      this.newWorkspaceNameInModal = '';
-      this.newWorkspaceDescriptionInModal = '';
-      this.newWorkspace.emit(newWorkspace); // Emit the new workspace data
-    }
-  }
 
 
 
