@@ -9,7 +9,7 @@ import { TokenService } from './token.service';
 export class CategoryService {
   private api_categories = 'http://127.0.0.1:8000/api/categories';
   private token = "5|JEBW5tuGQZ3M274gX975fHMlaoi9tm30YxOsjCFP2f5f4c24";
-  private headers: HttpHeaders = new HttpHeaders
+  private headers: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient,private tokenService:TokenService) { 
     this.headers = new HttpHeaders({
