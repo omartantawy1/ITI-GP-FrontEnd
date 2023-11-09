@@ -1,5 +1,6 @@
 import { Component,Input,Output } from '@angular/core';
 import {EventEmitter } from '@angular/core';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-main-navbar',
   templateUrl: './main-navbar.component.html',
@@ -62,5 +63,18 @@ selectWorkspace(workspace:any){
   let index= this.workspaces.indexOf(this.workspaces.find(w => w.id === workspace.id));
   this.workspaces[index] = workspace;
 }
+createWorkspace(){
+this.create=!this.create;
+}
+
+faUser = faUser;
+  @Input() openedFlag:boolean = true;
+
+  @Output() opened = new EventEmitter<boolean>();
+
+  toggleDrawer(){
+    this.openedFlag = !this.openedFlag;
+    this.opened.emit(this.openedFlag);
+  }
 
 }

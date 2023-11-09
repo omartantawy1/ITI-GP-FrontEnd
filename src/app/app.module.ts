@@ -24,15 +24,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import{MatFormFieldModule} from '@angular/material/form-field';
 import{MatInputModule} from '@angular/material/input';
-import { WorkspaceComponent } from './workspace/workspace.component';
 import { MainNavbarComponent } from './main-navbar/main-navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-create-workspace.component';
 import { CardComponent } from './card/card.component';
-import { UserWorkspacesComponent } from './user-workspaces/user-workspaces.component';
-
-import {MatToolbarModule} from '@angular/material/toolbar';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -40,6 +35,13 @@ import { CategoriesComponent } from './categories/categories.component';
 import { UserInviteComponent } from './user-invite/user-invite.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDividerModule} from '@angular/material/divider';
+import { WorkspaceComponent } from './workspace/workspace.component';
+import { MainWorkspaceComponent } from './main-workspace/main-workspace.component';
 
 
 @NgModule({
@@ -55,17 +57,17 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AccountButtonComponent,
     PhaseComponent,
     ShareDialogComponent,
-    WorkspaceComponent,
     MainNavbarComponent,
     SidebarComponent,
     PopupCreateWorkspaceComponent,
     CardComponent,
-    UserWorkspacesComponent,
     CategoriesComponent,
     UserInviteComponent,
     ForgetPasswordComponent,
     ResetPasswordComponent,
-    SignUpComponent
+    SignUpComponent,
+    WorkspaceComponent,
+    MainWorkspaceComponent
 
   ],
   imports: [
@@ -94,6 +96,11 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
      MatNativeDateModule, // Required for the date picker
      MatFormFieldModule, 
      MatDatepickerModule,
+      FontAwesomeModule,
+      MatCheckboxModule,
+      MatSidenavModule,
+      MatToolbarModule,
+      MatDividerModule
     
    
 

@@ -1,25 +1,22 @@
-<div>
-    <app-main-navbar [updateWorkSpace]="workspace" (selectedworkspace)="getworkspace($event)" ></app-main-navbar>
-    <app-sidebar [workspace]="workspace" ></app-sidebar>
-    <app-workspace [workspace]="workspace" (newBoardInWorkspace)="setWorkSpace($event)" ></app-workspace>
-    <!-- <app-workspace></app-workspace> 
-     <router-outlet></router-outlet> -->
 
-</div>
+   
 
-
-<!-- 
-
-<app-main-navbar></app-main-navbar>
-<div class="d-flex ms-0 p-0">
-<div class="me-5 sidebar">
-    <app-sidebar class="col-2" ></app-sidebar>
-</div>
-<div class="workspace col-9">
-<router-outlet></router-outlet>
+   
+    <section>
+        <app-main-navbar [openedFlag]="opened" (opened)="toggleDrawer($event)"></app-main-navbar> 
+        <mat-drawer-container class="example-container" autosize >
+            <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="opened">
+                <app-sidebar class="sidebar"></app-sidebar>
+            </mat-drawer>
+            <div class="example-sidenav-content">
+                <router-outlet class="content"></router-outlet>
+            </div>
+        </mat-drawer-container>
+    </section>
 
 
-<!-- <app-workspace></app-workspace> -->
-<!-- <app-categories></app-categories> -->
+
+
+
 
 
