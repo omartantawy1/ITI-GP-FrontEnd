@@ -4,3 +4,11 @@
 @import 'material-icons/iconfont/material-icons.css';
 
 @import 'material-icons/iconfont/material-icons.css';
+
+
+@media (max-width:1000px) {
+    
+    mat-drawer-content{
+        margin-left: 0 !important;
+    }
+}

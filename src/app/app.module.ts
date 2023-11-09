@@ -43,6 +43,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { MainWorkspaceComponent } from './main-workspace/main-workspace.component';
 
+import {MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
@@ -81,26 +83,28 @@ import { MainWorkspaceComponent } from './main-workspace/main-workspace.componen
     CdkDropList,
     CdkDrag,
     CdkMenuTrigger,
-     CdkMenu, 
-     CdkMenuItem,
-     MatDialogModule, 
-     HttpClientModule,
-     MatButtonModule,
-     MatFormFieldModule,
-     MatInputModule,
-     MatInputModule,
-     FormsModule,
-     ReactiveFormsModule,
-     MatButtonModule,
-     BrowserAnimationsModule,
-     MatNativeDateModule, // Required for the date picker
-     MatFormFieldModule, 
-     MatDatepickerModule,
-      FontAwesomeModule,
-      MatCheckboxModule,
-      MatSidenavModule,
-      MatToolbarModule,
-      MatDividerModule
+    CdkMenu, 
+    CdkMenuItem,
+    MatDialogModule, 
+    HttpClientModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule, // Required for the date picker
+    MatFormFieldModule, 
+    MatDatepickerModule,
+    FontAwesomeModule,
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatMenuModule
+    
     
    
 

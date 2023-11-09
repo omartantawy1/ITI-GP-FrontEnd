@@ -1,3 +1,46 @@
-.sidebar{
-    height:100vh;
+
+
+.example-container {
+    width: 100%;
+    min-height: 100vh;
 }
+
+.mat-drawer{
+    min-width: 250px;
+    padding: 30px 0;
+}
+
+.example-sidenav {
+    padding: 20px 0 ;
+    
+}
+.example-sidenav-content {
+    display: block;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@media (max-width:1000px) {
+    .example-container{
+        display: block !important;
+    }
+    .example-sidenav-content{
+        display: block !important;
+        position: absolute;
+        left: 0;
+        width: 100% !important;
+        height: auto !important;
+    }
+    .ng-star-inserted{
+        margin-left: 0 !important;
+    }
+    .example-sidenav{
+        position: absolute !important;
+        left: 0;
+
+        z-index: 100;
+    }
+}
+
