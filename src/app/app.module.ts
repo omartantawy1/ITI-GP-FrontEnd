@@ -40,6 +40,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { UserfoundPopupComponent } from './userfound-popup/userfound-popup.component';
 import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-popup.component';
 
+import { WorkspaceComponent } from './workspace/workspace.component';
+
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-po
     ResetPasswordComponent,
     SignUpComponent,
     UserfoundPopupComponent,
-    UsernotfoundPopupComponent
+    UsernotfoundPopupComponent,
+    WorkspaceComponent
 
   ],
   imports: [
@@ -79,21 +82,20 @@ import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-po
     CdkDropList,
     CdkDrag,
     CdkMenuTrigger,
-     CdkMenu, 
-     CdkMenuItem,
-     MatDialogModule, 
-     HttpClientModule,
-     MatButtonModule,
-     MatFormFieldModule,
-     MatInputModule,
-     MatInputModule,
-     FormsModule,
-     ReactiveFormsModule,
-     MatButtonModule,
-     BrowserAnimationsModule,
-     MatNativeDateModule, // Required for the date picker
-     MatFormFieldModule, 
-     MatDatepickerModule,
+   CdkMenu, 
+   CdkMenuItem,
+   MatDialogModule, 
+   HttpClientModule,
+   MatButtonModule,
+   MatFormFieldModule,
+   MatInputModule,
+   MatInputModule,
+   ReactiveFormsModule,
+   MatButtonModule,
+   BrowserAnimationsModule,
+   MatNativeDateModule, // Required for the date picker
+   MatFormFieldModule, 
+   MatDatepickerModule,
     
     
   ],
