@@ -3,6 +3,7 @@ import { SignOutService } from '../services/sign-out.service';
 import { Router } from '@angular/router';
 import { TokenService } from '../services/token.service';
 import { Location } from '@angular/common';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-account-button',
@@ -12,8 +13,16 @@ import { Location } from '@angular/common';
 export class AccountButtonComponent {
 
   isAccountListVisible = true; 
+  currentUser: any = {};
 
-  constructor(private SignOutService: SignOutService, private router: Router, private token: TokenService, private location: Location) {}
+  constructor(private SignOutService: SignOutService, private router: Router, private token: TokenService, private location: Location, private userService: UserService) {}
+
+  ngOnInit(){
+    this.userService.getCurrentUser().subscribe(
+      res => this.currentUser = res,
+      err => console.log(err)
+    );
+  }
 
   toggleAccountList() {
     this.isAccountListVisible = !this.isAccountListVisible;

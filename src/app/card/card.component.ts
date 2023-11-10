@@ -2,6 +2,9 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { CardInterface } from '../interfaces/card-interface';
 import { GroupService } from '../services/group.service';
 import { TaskService } from '../services/task.service';
+import { AttaachmentService } from '../services/attachment.service';
+import { UserService } from '../services/user.service';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-card',
@@ -24,12 +27,19 @@ export class CardComponent {
 
   checklistTitles: { id: number; name: string; items: { id: number, name: string; checked: boolean }[] }[] = [];
   DataCast: any = {};
+  currentUser: any = {};
   
 
-  constructor(private groupService: GroupService, private taskService: TaskService) {}
+  constructor(private groupService: GroupService, private taskService: TaskService, private attachmentService: AttaachmentService, private userService: UserService) {}
 
   ngOnInit(){
+    this.userService.getCurrentUser().subscribe(
+      res => this.currentUser = res,
+      err => console.log(err)
+    );
+
     this.checklistTitles = this.card.groups? this.card.groups:[];
+    this.uploadedFiles = this.card.attachments? this.card.attachments:[];
   }
 
   isChecklistEmpty(): boolean {
@@ -137,6 +147,7 @@ export class CardComponent {
         console.error(error);
       }
     );
+    this.DataCast = {};
   }
   
 
@@ -169,6 +180,7 @@ export class CardComponent {
           console.error(error);
         }
       );
+      this.DataCast = {};
 
     const checklist = this.checklistTitles.find(item => item.id === checklistId);
     if (checklist) {
@@ -236,6 +248,7 @@ export class CardComponent {
           console.error(error);
         }
       );
+      this.DataCast = {};
       this.editingItemIds[checklist.id] = null;
     }
   }
@@ -407,35 +420,56 @@ export class CardComponent {
 
   showDeleteIcon = false;
   uploadedFiles: Array<any> = [];
+  
 
   onFileSelected(event: any) {
-    const files = event.target.files;
-    if (files.length > 0) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
+
+    // let inputEl: HTMLInputElement = this.inputEl.nativeElement;
+    // const file: any = inputEl.files ? inputEl.files.item(0) : 0;
+
+
+    let file = event.target.files[0]
+    const formData = new FormData();
+
+    formData.append('attachment', file);
+    formData.append('user_id', this.currentUser.id);
+    formData.append('card_id', this.card.id.toString());
+    
+
+    this.attachmentService.createAttachment(formData).subscribe(
+      (res) => {
+        console.log("uploaded");
+
         const reader = new FileReader();
+      reader.onload = () => {
+        this.uploadedFiles.push({
+          name: file.name,
+          type: this.getFileType(file.type),
+          url: reader.result as string,
+        });
 
-        reader.onload = () => {
-          this.uploadedFiles.push({
-            name: file.name,
-            type: this.getFileType(file.type),
-            url: reader.result,
-          });
-        };
-
-        reader.readAsDataURL(file);
-      }
-    }
+        console.log(this.uploadedFiles); // Move the log statement here
+      };
+      reader.readAsDataURL(file);
+    },
+      (err) => console.log(err)
+      
+      
+    )
   }
 
-  removeFile(file: any) {
-    const index = this.uploadedFiles.indexOf(file);
-    if (index !== -1) {
-      this.uploadedFiles.splice(index, 1);
+  removeFile(index: number) {
+    this.attachmentService.deleteAttachment(this.uploadedFiles[index]).subscribe(
+      (response: any) => {
+        console.log('deleted');
+        this.uploadedFiles.splice(index, 1);
+    },
+    (error) => {
+      // Registration failed, handle the error here
+      console.error(error);
     }
+    );
   }
-
-
 
   getFileType(type: string) {
     if (type.includes('image')) {
@@ -448,6 +482,63 @@ export class CardComponent {
       return 'other';
     }
   }
+
+
+  downloadFile(file: any) {
+
+
+    this.attachmentService.downloadAttachment(file).subscribe(
+      (data) => {
+        const newblob = new Blob([data], {type: file.type});
+
+         var downloadURL = window.URL.createObjectURL(newblob);
+         var link = document.createElement('a');
+         link.href = downloadURL;
+         link.target = '_blank';
+         link.download = file.name;
+         link.click();
+         console.log('downloaded');
+         
+      }
+    );
+ 
+  }
+
+ 
+  toggleEditMode(file: any) {
+    file.editMode = !file.editMode;
+  
+  }
+
+
+  saveEditedName(file: any) {
+    file.name = file.newName; // Update the name with the new name
+    file.editMode = false; // Exit edit mode
+
+    this.DataCast.name = file.name;
+    this.DataCast.id = file.id;
+    this.attachmentService.updateAttachment(this.DataCast).subscribe(
+      (response: any) => {
+        console.log('edited', response);
+
+    },
+    (error) => {
+      // Registration failed, handle the error here
+      console.error(error);
+    }
+    );
+
+    this.DataCast = {};
+  }
+  cancelEditFile(file: any) {
+  
+    if (!file.newName || file.newName.trim() === '') {
+      file.newName = file.name;
+    }
+    file.editMode = false;
+  }
+
+
 
 
   /******   Comments Part     ******/
