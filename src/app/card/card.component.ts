@@ -328,6 +328,9 @@ colors = [
             url: reader.result,
           });
         };
+        console.log('Uploaded File:', this.uploadedFiles);
+
+      
 
         reader.readAsDataURL(file);
       }

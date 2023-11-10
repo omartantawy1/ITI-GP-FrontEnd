@@ -8,8 +8,6 @@
     backdrop-filter: blur(30px);
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
     font-size: 13px;
-
-    
     z-index: 100;
 
 }
@@ -182,17 +180,24 @@ color: #2abb7f
 }
 
 /************ account-button *********/
-.btn-circle {
-    width: 30px;
-    height: 30px;
+
+
+.user-two{
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    font-weight:bold;
+    color: white !;
+}
+
+.user-div{
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: none;
+    background-color: #1c3352 ;
 }
-
-.acc-ico {
-    margin-left: -5px;
-}
-
 
 /**************** media query **************/
 

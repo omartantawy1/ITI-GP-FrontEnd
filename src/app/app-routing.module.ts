@@ -8,6 +8,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 import { UserInviteComponent } from './user-invite/user-invite.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { PricingComponent } from './pricing/pricing.component';
 
 
   const routes: Routes = [
@@ -19,8 +20,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     {path:'workspace',component:WorkspaceComponent},
     {path:'user-invitation',component:UserInviteComponent},
     {path:'forget-password',component:ForgetPasswordComponent},
-    {path:'reset-password',component:ResetPasswordComponent}
-    
+    {path:'reset-password',component:ResetPasswordComponent},
+    {path:'pricing-plan',component:PricingComponent}
   ];
 
   @NgModule({

@@ -39,6 +39,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UserfoundPopupComponent } from './userfound-popup/userfound-popup.component';
 import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-popup.component';
+import { PricingComponent } from './pricing/pricing.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-po
     ResetPasswordComponent,
     SignUpComponent,
     UserfoundPopupComponent,
-    UsernotfoundPopupComponent
+    UsernotfoundPopupComponent,
+    PricingComponent
 
   ],
   imports: [
