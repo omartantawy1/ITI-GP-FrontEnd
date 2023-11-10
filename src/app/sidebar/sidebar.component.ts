@@ -7,7 +7,7 @@ import { Component , Input } from '@angular/core';
 })
 export class SidebarComponent {
 
-
+ @Input() opened:boolean = true;
 
   
 }

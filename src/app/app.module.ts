@@ -67,6 +67,7 @@ import { PricingComponent } from './pricing/pricing.component';
     SignUpComponent,
     UserfoundPopupComponent,
     UsernotfoundPopupComponent,
+    WorkspaceComponent,
     PricingComponent
 
   ],
@@ -81,21 +82,20 @@ import { PricingComponent } from './pricing/pricing.component';
     CdkDropList,
     CdkDrag,
     CdkMenuTrigger,
-     CdkMenu, 
-     CdkMenuItem,
-     MatDialogModule, 
-     HttpClientModule,
-     MatButtonModule,
-     MatFormFieldModule,
-     MatInputModule,
-     MatInputModule,
-     FormsModule,
-     ReactiveFormsModule,
-     MatButtonModule,
-     BrowserAnimationsModule,
-     MatNativeDateModule, // Required for the date picker
-     MatFormFieldModule, 
-     MatDatepickerModule,
+   CdkMenu, 
+   CdkMenuItem,
+   MatDialogModule, 
+   HttpClientModule,
+   MatButtonModule,
+   MatFormFieldModule,
+   MatInputModule,
+   MatInputModule,
+   ReactiveFormsModule,
+   MatButtonModule,
+   BrowserAnimationsModule,
+   MatNativeDateModule, // Required for the date picker
+   MatFormFieldModule, 
+   MatDatepickerModule,
     
     
   ],
