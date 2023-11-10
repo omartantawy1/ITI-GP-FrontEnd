@@ -40,8 +40,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { UserfoundPopupComponent } from './userfound-popup/userfound-popup.component';
 import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-popup.component';
 
-import { WorkspaceComponent } from './workspace/workspace.component';
-
 
 @NgModule({
   declarations: [

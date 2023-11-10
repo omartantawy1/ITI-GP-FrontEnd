@@ -1,0 +1,36 @@
+.active,.workspace:hover  {
+    background-color: rgba(72, 98, 100, 0.474) !important;
+    color: white !important;
+}
+
+nav:hover .logo{
+    animation-name: logo-icon;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    transition: 0.3s;
+}
+
+.logo-brand {
+    background-color: rgba(255, 255, 255, 0.564);
+    padding: 10px;
+}
+
+.link-create {
+    transition: 0.2s !important;
+}
+
+.link-create:hover {
+    background-color: rgba(0, 0, 0, 0.164) !important;
+}
+
+@keyframes logo-icon {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate( 360deg);
+
+    }
+    
+}

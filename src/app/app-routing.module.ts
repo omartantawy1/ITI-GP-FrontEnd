@@ -15,6 +15,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     { path:'sign-in', component: SignInComponent },
     { path:'sign-up', component: SignUpComponent },
     {path:'board',component:BoardComponent},
+    {path:'workspace',component:WorkspaceComponent},
     {path:'edit-profile',component:EditMyProfileComponent},
     {path:'workspace',component:WorkspaceComponent},
     {path:'user-invitation',component:UserInviteComponent},
