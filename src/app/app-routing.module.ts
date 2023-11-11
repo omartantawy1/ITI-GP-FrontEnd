@@ -22,7 +22,8 @@ import { PricingComponent } from './pricing/pricing.component';
     {path:'user-invitation',component:UserInviteComponent},
     {path:'forget-password',component:ForgetPasswordComponent},
     {path:'reset-password',component:ResetPasswordComponent},
-    {path:'pricing-plan',component:PricingComponent}
+    {path:'pricing-plan',component:PricingComponent},
+    { path: 'board/:workspaceId/:boardTitle', component: BoardComponent },
   ];
 
   @NgModule({

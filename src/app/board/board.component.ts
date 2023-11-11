@@ -24,6 +24,7 @@ export class BoardComponent {
   showButton:boolean = false;
   allMoves:Array<Card> = [];
 
+  
   constructor(private phaseService: PhaseService,private cardService: CardService){}; 
 
   toggleBtnSave(flag:boolean){

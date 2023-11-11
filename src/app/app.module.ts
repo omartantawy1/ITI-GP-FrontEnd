@@ -40,6 +40,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { UserfoundPopupComponent } from './userfound-popup/userfound-popup.component';
 import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-popup.component';
 import { PricingComponent } from './pricing/pricing.component';
+import { InvitationWorkspaceComponent } from './invitation-workspace/invitation-workspace.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -68,7 +70,8 @@ import { PricingComponent } from './pricing/pricing.component';
     UserfoundPopupComponent,
     UsernotfoundPopupComponent,
     WorkspaceComponent,
-    PricingComponent
+    PricingComponent,
+    InvitationWorkspaceComponent
 
   ],
   imports: [
@@ -96,6 +99,7 @@ import { PricingComponent } from './pricing/pricing.component';
    MatNativeDateModule, // Required for the date picker
    MatFormFieldModule, 
    MatDatepickerModule,
+   MatMenuModule,
     
     
   ],

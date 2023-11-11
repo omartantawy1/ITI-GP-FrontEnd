@@ -1,11 +1,12 @@
 .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: rgba(201, 202, 202, 0.382) !important;
+    background-color: hsla(206,13.7%,10%,0.9) !important;
     border-right: 1px solid rgba(98, 98, 98, 0.19);
     position: absolute;
     transition: 0.5s ;
     z-index: 100;
+
 }
 
 .resize {
