@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BoardInterface as Board }  from '../interfaces/board-interface';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,14 @@ export class BoardService {
   
   private api_boards = 'http://127.0.0.1:8000/api/boards';
 
-  constructor(private http: HttpClient) { }
-  private token = "5|JEBW5tuGQZ3M274gX975fHMlaoi9tm30YxOsjCFP2f5f4c24";
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${this.token}`
-  })
+  private headers: HttpHeaders = new HttpHeaders();
+
+  constructor(private http: HttpClient,private tokenService:TokenService) { 
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tokenService.getToken()}`
+    })
+  }
 
   getAllBoards() {
     return this.http.get(this.api_boards,{headers:this.headers});
