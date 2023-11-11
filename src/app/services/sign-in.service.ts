@@ -8,6 +8,8 @@ import { TokenService } from './token.service';
 export class SignInService {
 
   protected login_api = 'http://127.0.0.1:8000/api/auth/login';
+  protected google_api = 'http://127.0.0.1:8000/api/auth/login/google';
+  protected github_api = 'http://127.0.0.1:8000/api/auth/login/github';
 
   constructor(private http: HttpClient, private tokenservice: TokenService) { }
 
@@ -17,5 +19,13 @@ export class SignInService {
     //   this.tokenservice.setToken(res.token);
     // }
     return this.http.post(this.login_api,user);
+  }
+
+  signWithGoogle(){
+    window.open(this.google_api,'_self');
+  }
+
+  signWithGithub(){
+    window.open(this.github_api,'_self');
   }
 }

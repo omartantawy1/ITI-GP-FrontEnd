@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignInService } from '../services/sign-in.service';
 import { TokenService } from '../services/token.service';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,9 +17,22 @@ export class SignInComponent implements OnInit {
   errormsg: any = '';
   res: any = '';
 
-  constructor(private fb: FormBuilder, private router: Router, private SignInService: SignInService, private tokenservice: TokenService) {}
+  constructor(private activatedRoute:ActivatedRoute ,private fb: FormBuilder, private router: Router, private SignInService: SignInService, private tokenservice: TokenService,private userService:UserService) {
+    this.userService.getCurrentUser().subscribe(
+      (res:any)=>{res.email?this.router.navigate(['workspace']):this.router.navigate(['sign-in']);},
+      (error)=>{console.log(error)}
+    ); 
+  }
 
   ngOnInit() {
+      this.activatedRoute.queryParams.subscribe(params => {
+        let data = params['token']  ;
+        if(data){
+          this.tokenservice.setToken(data);
+        }
+    });
+
+    
     this.signInForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -47,5 +62,13 @@ export class SignInComponent implements OnInit {
     } else {
       console.log('Form is invalid. Not navigating...');
     }
+  }
+
+
+  Google(){
+      this.SignInService.signWithGoogle();
+  }
+  Github(){
+    this.SignInService.signWithGithub();
   }
 }

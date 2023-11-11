@@ -35,6 +35,9 @@
       <ng-container *ngIf="editIndex !== i;else editCardField" style="cursor: pointer;">
         {{card.title}}
         <i class="bi bi-pen-fill"  (click)="enableCardTitleEdit(i); editCardField" style="cursor: text;"></i>
+        <div *ngIf="card.categories.length>0" class="row flex-wrap mt-2 mb-1">
+          <div *ngFor="let category of card.categories" class="col-3 mx-1 rounded" style="height: 8px !important;" [style.background-color]="category.color"></div>
+        </div>
       </ng-container>
       <ng-template #editCardField>
         <input [(ngModel)]="newcard" class="form-control mb-2" placeholder="Edit card">
@@ -76,7 +79,7 @@
 
 <ng-template #openThisCard   >
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-    <app-card [card]="card" ></app-card>
+    <app-card [card]="card" (idDeleteCategory)="deleteCategory($event)" ></app-card>
     </div>
 
 

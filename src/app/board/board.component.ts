@@ -12,7 +12,7 @@ import { CardService } from '../services/card.service';
 
 })
 export class BoardComponent {
-
+  
   backgroundcolor!: any;
   phases: Array<Phase> = [];
   showAddphaseButton: boolean = true;
@@ -102,38 +102,53 @@ export class BoardComponent {
     console.log(event.previousContainer.id);
     console.log(event.container);
     console.log(event.previousContainer);
-    if (event.currentIndex != event.previousIndex) {
-      let phasePosition = this.phases.find(p => p.position === event.previousIndex);
-      if (phasePosition) {
-        if (event.currentIndex < event.previousIndex) {
 
-          let temp = this.phases.filter(p => p.position >= event.currentIndex && p.position < event.previousIndex);
+    if(event.currentIndex!=event.previousIndex){
+      let phasePosition = this.phases.find(p=>p.position === event.previousIndex);
+      if(phasePosition){
+        if(event.currentIndex<event.previousIndex){
 
-          temp.forEach(element => {
-            let phase = {
-              'title': element.title,
-              'position': ++element.position,
-              'board_id': element.board.id
-            };
-            let index = this.phases.indexOf(element);
-            this.phaseService.updatePhase(phase, element.id).subscribe(
-              (res: any) => (this.phases[index] = res.data),
-              (error) => console.log(error.error),
-            );
-          });
-        } else {
-          let temp = this.phases.filter(p => p.position <= event.currentIndex && p.position > event.previousIndex);
+          let temp = this.phases.filter(p=>p.position>=event.currentIndex&& p.position<event.previousIndex);
+     
+            temp.forEach(element => {
+              let phase = {
+                'title':element.title,
+                'position': ++element.position,
+                'board_id': element.board_id
+              };
+              let index = this.phases.indexOf(element);
+              this.phaseService.updatePhase(phase,element.id).subscribe(
+                (res:any) => (this.phases[index] = res.data),
+                (error)=>  console.log(error.error),
+                );
+            });
+        }else{
+          let temp = this.phases.filter(p=>p.position<=event.currentIndex&& p.position>event.previousIndex);
+     
+            temp.forEach(element => {
+              let phase = {
+                'title':element.title,
+                'position': --element.position,
+                'board_id': element.board_id
+              };
+              let index = this.phases.indexOf(element);
+              this.phaseService.updatePhase(phase,element.id).subscribe(
+                (res:any) => (this.phases[index] = res.data),
+                (error)=>  console.log(error.error),
+                );
+            });
+          }
+          let phase = {
+            'title':phasePosition.title,
+            'position': event.currentIndex,
+            'board_id': phasePosition.board_id
+          };
+  
+          let index = this.phases.indexOf(phasePosition);
+          this.phaseService.updatePhase(phase,phasePosition.id).subscribe(
+            (res:any) => (this.phases[index] = res.data),
+            (error)=>  console.log(error.error),
 
-          temp.forEach(element => {
-            let phase = {
-              'title': element.title,
-              'position': --element.position,
-              'board_id': element.board.id
-            };
-            let index = this.phases.indexOf(element);
-            this.phaseService.updatePhase(phase, element.id).subscribe(
-              (res: any) => (this.phases[index] = res.data),
-              (error) => console.log(error.error),
             );
           });
         }
@@ -170,5 +185,14 @@ export class BoardComponent {
     this.backgroundcolor = color;
   }
 
+
+  deleteCategory(id:number){
+   this.phaseService.getAllPhases().subscribe(
+    (res:any)=>{
+      this.phases = res.data;
+    }
+   );
+
+  }
 
 }
