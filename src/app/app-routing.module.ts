@@ -14,13 +14,14 @@ import { HomeComponent } from './home/home.component';
   const routes: Routes = [
     { path: '', component: SignUpComponent }, 
     {path:'home', component: HomeComponent},
-    { path: 'sign-in', component: SignInComponent },
+    { path:'sign-in', component: SignInComponent },
+    { path:'sign-up', component: SignUpComponent },
     {path:'board',component:BoardComponent},
     {path:'edit-profile',component:EditMyProfileComponent},
     {path:'workspace',component:WorkspaceComponent},
-    {path:'user-invitation',component:UserInviteComponent},
-    {path:'forget-password',component:ForgetPasswordComponent},
-    {path:'reset-password',component:ResetPasswordComponent}
+    {path:'user-invitation',component:UserInviteComponent}
+ 
+    
     
     
   ];

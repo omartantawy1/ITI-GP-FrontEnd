@@ -18,7 +18,7 @@ border-radius: 50%;
 
   .custom-modal-dialog {
    
-    min-width: 60% !important;
+    min-width: 70% !important;
   }
   .comment-input::placeholder {
     color: #ccc;
@@ -46,11 +46,12 @@ border-radius: 50%;
 
  .custom-modal-content {
 
-    background-color: #585757;
-    color: #B6C2CF;
+    background-color:#f1f2f4;
+    color: #172B4D;
   }
   .circular-div {
-    width: 40px;
+    width: 40px !important;
+    height: 40px !important;
     border-radius: 50%; 
     background-color: #454F59; 
     display: flex;
@@ -59,6 +60,7 @@ border-radius: 50%;
     color: white; 
     font-size: 15px; 
     margin-right: 5px;
+    margin-left: 5px;
   
   }
 
@@ -173,7 +175,7 @@ margin-top:6px;
       z-index: 1000;
       color: white;
       overflow-y: scroll; 
-      overflow-x: hidden; 
+      overflow-x: visible; 
       scrollbar-width: thin;
       scrollbar-color: #31303094 #b7b7b75a;
       
