@@ -7,6 +7,8 @@ import { faBars,faX } from '@fortawesome/free-solid-svg-icons';
 })
 export class SidebarComponent {
 
+ @Input() opened:boolean = true;
+
 
   // listuser?:any;
   // constructor(private workspace:WorkspaceService){}
