@@ -8,6 +8,7 @@ import { TokenService } from './token.service';
 export class CardService {
 
   private api_cards = 'http://127.0.0.1:8000/api/cards';
+
   private headers: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient,private tokenService:TokenService) { 

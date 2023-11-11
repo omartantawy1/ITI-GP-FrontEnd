@@ -92,7 +92,13 @@
             <ul style="list-style-type: none; padding-left: 0;">
               <li *ngFor="let list of checklistTitles">
                 <i class="bi bi-card-checklist" style="padding: 5px 5px;"></i>
-                <span style="font-size: 20px;">{{ list.title }} Checklist</span>
+                <span style="font-size: 20px;">
+                  <span *ngIf="list !== editingChecklist" (click)="editChecklistTitle(list)">{{ list.name }}</span>
+                  <input *ngIf="list === editingChecklist" type="text" [(ngModel)]="list.name" [ngModelOptions]="{ standalone: true }" />
+                  <button *ngIf="list === editingChecklist" (click)="saveChecklistTitle()" class="btn btn-success">Save</button>
+                  <button *ngIf="list === editingChecklist" (click)="cancelEditChecklistTitle()" class="btn btn-primary" style="background-color: transparent; border-color: transparent">Cancel</button>
+                  <button *ngIf="list !== editingChecklist" class="delete-checklist-btn btn btn-primary" (click)="deleteChecklist(list)">Delete</button>
+                </span>
 
                 <div class="progress progress-bar-style" role="progressbar" aria-label="Basic example" aria-valuenow="{{checklistProgress[list.id]}" aria-valuemin="0" aria-valuemax="100">
                   <div class="progress-bar" [style.width.%]="checklistProgress[list.id]"></div>
@@ -100,13 +106,21 @@
 
                 <ul style="list-style-type: none; padding-left: 0;">
                   <li *ngFor="let item of list.items">
-                    <input type="checkbox" [(ngModel)]="item.checked" (change)="updateChecklistProgress(list.id)" />
-                    {{ item.name }}
-                    <span (click)="deleteItem(list, item)" class="delete-icon" title="Delete Item">🗑️</span>
+                    <input type="checkbox" [(ngModel)]="item.checked" (change)="updateChecklistProgress(list.id, item)" />
+                    <span *ngIf="item.id !== editingItemIds[list.id]">{{ item.name }}</span>
+                    <input *ngIf="item.id === editingItemIds[list.id]" [(ngModel)]="item.name" [ngModelOptions]="{ standalone: true }" />
+                    <ng-container *ngIf="item.id !== editingItemIds[list.id]; else editButtons">
+                      <button (click)="editItemName(list.id, item)" class="edit-item-btn btn btn-primary" style="background-color: transparent; border-color: transparent">Edit</button>
+                      <button (click)="deleteItem(list, item)" class="delete-icon btn btn-primary" title="Delete Item" style="background-color: transparent; border-color: transparent">🗑️</button>
+                    </ng-container>
+                    <ng-template #editButtons>
+                      <button (click)="saveItemName(list, item)" class="btn btn-success">Save</button>
+                      <button (click)="cancelEditItemName(list.id)" class="btn btn-primary" style="background-color: transparent; border-color: transparent">Cancel</button>
+                    </ng-template>
                   </li>
                   <li *ngIf="list.id === editingItemId" style="margin-bottom: 5px">
                     <input class="form-control add-item-input" type="text" [(ngModel)]="checklistItem" [ngModelOptions]="{ standalone: true }" />
-                    <button (click)="addItemToChecklist(list.id)" class="btn btn-success save-btn">Save</button>
+                    <button  (click)="addItemToChecklist(list.id)" class="btn btn-success save-btn">Save</button>
                     <button (click)="cancelAddItem()" class="btn btn-primary" style="background-color: transparent; border-color: transparent">Cancel</button>
                   </li>
                 </ul>
