@@ -24,12 +24,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import{MatFormFieldModule} from '@angular/material/form-field';
 import{MatInputModule} from '@angular/material/input';
-import { WorkspaceComponent } from './workspace/workspace.component';
 import { MainNavbarComponent } from './main-navbar/main-navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-create-workspace.component';
 import { CardComponent } from './card/card.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -39,6 +38,16 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UserfoundPopupComponent } from './userfound-popup/userfound-popup.component';
 import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-popup.component';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDividerModule} from '@angular/material/divider';
+import { WorkspaceComponent } from './workspace/workspace.component';
+
+
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -54,7 +63,6 @@ import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-po
     AccountButtonComponent,
     PhaseComponent,
     ShareDialogComponent,
-    WorkspaceComponent,
     MainNavbarComponent,
     SidebarComponent,
     PopupCreateWorkspaceComponent,
@@ -67,6 +75,7 @@ import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-po
     UserfoundPopupComponent,
     UsernotfoundPopupComponent,
     WorkspaceComponent
+
 
   ],
   imports: [
@@ -87,13 +96,13 @@ import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-po
    MatButtonModule,
    MatFormFieldModule,
    MatInputModule,
-   MatInputModule,
    ReactiveFormsModule,
    MatButtonModule,
    BrowserAnimationsModule,
    MatNativeDateModule, // Required for the date picker
    MatFormFieldModule, 
    MatDatepickerModule,
+
     
     
   ],

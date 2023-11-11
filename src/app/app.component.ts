@@ -1,3 +1,4 @@
+
 import { Component , Input ,HostListener} from '@angular/core';
 
 @Component({
@@ -10,6 +11,7 @@ export class AppComponent {
   opened:boolean=false;
 
   ngOnInit(){
+
     this.opened=true;
   }
 
@@ -27,6 +29,7 @@ export class AppComponent {
           
       }
   }
+
   
    workspace:any;
    getworkspace(workspace:any){
@@ -35,6 +38,7 @@ export class AppComponent {
    setWorkSpace(workspace:any){
     this.workspace=workspace;
    }
+
 
 
 

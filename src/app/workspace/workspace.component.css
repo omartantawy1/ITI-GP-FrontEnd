@@ -1,3 +1,4 @@
+
 .create-board{
 background-color: #1D2125;
   width: 250px;
@@ -7,6 +8,7 @@ background-color: #1D2125;
   text-align: center;
   cursor: pointer;
   margin: 5px;
+
 
 }
 
@@ -111,12 +113,12 @@ background-color: #1D2125;
     border-radius: 10px;
     display: flex;
     cursor: pointer;
-    margin: 5px;
+   /* margin: 5px;
     align-items: center;
     justify-content: center; 
     background:#A6C5E229;
     opacity: 0.8;
-    font-size: 17px;
+    font-size: 17px;*/
 }
 
 .boards{
@@ -125,3 +127,4 @@ background-color: #1D2125;
    position: absolute;
    margin: 5px;
 }
+

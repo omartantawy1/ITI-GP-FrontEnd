@@ -1,12 +1,11 @@
-import { Component,ViewChild,ElementRef,AfterViewInit,OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PopupCreateWorkspaceComponent } from '../popup-create-workspace/popup-create-workspace.component';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
   styleUrls: ['./workspace.component.css']
 })
-export class WorkspaceComponent  {
+export class WorkspaceComponent {
   myWorkspaces: { id: number, name: string, description: string }[] = []; // Update to include description
   workspaces: { id: number, name: string }[] = [];
   newWorkspaceName = '';
@@ -37,8 +36,6 @@ export class WorkspaceComponent  {
 // Board selectors options
 
 
-  
-
 addWorkspaceInModal() {
   if (this.newWorkspaceNameInModal) {
     const id = this.workspaces.length + 1;
@@ -55,6 +52,7 @@ addWorkspaceInModal() {
     console.log('Boards:', this.boards); // Log the boards when a workspace is added
   }
 }
+
   backgroundColors: string[] = [
     'linear-gradient(to right, #ff9966, #ff5e62)',
     'linear-gradient(to right, #AA076B, #61045F)',
@@ -67,8 +65,10 @@ addWorkspaceInModal() {
 
 
 
+
   createBoard() {
     if (this.newBoardName && this.selectedColorIndex >= 0) {
+
       const newBoard = {
         workspaceId: this.selectedWorkspaceId,
         title: this.newBoardName,
@@ -87,6 +87,7 @@ addWorkspaceInModal() {
     this.selectedWorkspaceId = workspaceId;
   }
 
+
   getSelectedWorkspaceName(): string {
     const selectedWorkspace = this.workspaces.find(workspace => workspace.id === this.selectedWorkspaceId);
     return selectedWorkspace ? selectedWorkspace.name : '';
@@ -95,4 +96,5 @@ addWorkspaceInModal() {
   getBoardsInSelectedWorkspace() {
     return this.boards.filter(board => board.workspaceId === this.selectedWorkspaceId);
   }
+
 }

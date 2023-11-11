@@ -1,3 +1,4 @@
+
 .sidebar {
     width: 250px;
     height: 100vh;
@@ -38,5 +39,8 @@
         
         background-color: white !important;
     }
+
+.active{
+  background-color: #5e72e34a;
 
 }

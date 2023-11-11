@@ -1,3 +1,4 @@
+
 .active,.workspace:hover  {
     background-color: rgba(72, 98, 100, 0.474) !important;
     color: white !important;
@@ -20,6 +21,7 @@ nav:hover .logo{
     transition: 0.2s !important;
 }
 
+
 .link-create:hover {
     background-color: rgba(0, 0, 0, 0.164) !important;
 }
@@ -28,9 +30,11 @@ nav:hover .logo{
     0%{
         transform: rotate(0deg);
     }
+
     100%{
         transform: rotate( 360deg);
 
     }
     
 }
+
