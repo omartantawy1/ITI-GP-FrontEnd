@@ -1,130 +1,40 @@
-::ng-deep :root{
-    --navbar_bg_color : #105FA5;
-    --nav-searchbox-bg-color:#137AC4;
-    }
-    #main_nav{
-        background-color: VAR(--navbar_bg_color);
-        height: 50px;
-    }
-    #nav-link{
-        margin-right: 130px;
-        margin-left: 50px;
-    }
-    .navbar-nav .nav-link{
-        font-size: 15px;
-        margin-right: 22px;
-        color: VAR(--nav-font-color);
-    }
-    #btn-submit{
-        width: 90;
-        height: 42;
-        border-radius: 8px;
-    }
-    #btn-submit:hover{
-        background-color: transparent !important;
-        border-color: transparent;
-        transition: 0.3s;
-    }
-    .input-box{
-      position: relative;
-      height: 41px;
-      width: 240px;
-      border-radius:9px;
-      margin-left: 12rem;
-      background-color: VAR(--nav-searchbox-bg-color);
-      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-    input{
-      position: relative;
-      outline: none;
-      border: none;
-      height: 100%;
-      width: 100%;
-      border-radius: 9px;
-      font-weight: 400;
-      padding-left: 56px;
-      color: VAR(--nav-font-color);
-      background-color: transparent;
-      font-size: 13px;
-    }
-    input::placeholder{
-        color:var(--nav-font-color);
-    }
-    .icon{
-        position: absolute;
-        height: 100%;
-        top: 0;
-        left: 0;
-        width: 60px;
-        border-radius: 9px;
-        display: flex;
-        justify-content: center;
-      }
-      #search-icon{
-        position: absolute;
-        top: 17%;
-        border: none !important;
-        font-size: 16px;
-        transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      }
-     #question-circle{
-        font-size:16px;
-     }
 
-     #navbar-elem{
-        font-size: 16px;
-     }
-     .workspace-drop{
-      color: white;
-      background-color: #105FA5;
-     }
-     
+.active,.workspace:hover  {
+    background-color: rgba(72, 98, 100, 0.474) !important;
+    color: white !important;
+}
 
-     /* --------------- workspaces ---------------------- */
-     .btn-workspace:hover {
-      background-color: rgba(0, 0, 0, 0.21) !important;
-      
-     }
-     .btn-dropdown-workspacee:hover,.btn-dropdown-workspace:active{
-      background-color: rgba(0, 0, 0, 0.275) !important;
-     }
-     /***** creat options *****/
+nav:hover .logo{
+    animation-name: logo-icon;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    transition: 0.3s;
+}
 
-     .example-menu {
-      display: inline-flex;
-      flex-direction: column;
-      min-width: 180px;
-      max-width: 280px;
-      background-color: white;
-      padding: 6px 0;
-      margin-left: 600px;
+.logo-brand {
+    background-color: rgba(255, 255, 255, 0.564);
+    padding: 10px;
+}
+
+.link-create {
+    transition: 0.2s !important;
+}
+
+
+.link-create:hover {
+    background-color: rgba(0, 0, 0, 0.164) !important;
+}
+
+@keyframes logo-icon {
+    0%{
+        transform: rotate(0deg);
     }
-    
-    .example-standalone-trigger {
-      cursor: pointer;
-    }
-    .example-menu-item{
-      background-color: white;
-      border: none;
+
+    100%{
+        transform: rotate( 360deg);
 
     }
     
-    .example-menu-item:hover {
-      background-color: rgb(208, 208, 208);
-      border: none !important;
-    }
-    
-    .example-menu-item:active {
-      background-color: rgb(170, 170, 170);
-    }
-    
-    .example-standalone-item {
-      background-color: rgb(239, 239, 239);
-    }
-    .example-standalone-item:hover {
-      background-color: rgb(208, 208, 208);
-    }
-    .example-standalone-item[aria-expanded='true'] {
-      background-color: rgb(208, 208, 208);
-    }
-    
+}
+

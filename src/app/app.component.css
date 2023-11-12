@@ -1,20 +1,78 @@
-/* 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-   ::ng-deep :root{
-    --myFont:'Poppins', sans-serif;
-   }
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: var(--myFont);
+.sidebar{
+   margin-left: 100px;
 }
+
+.content {
+   margin-left: 250px;
+}
+.animate{
+   transition: 0.5s;
+}
+.animate2{
+   transition: 1s;
+}
+
+.toggle {
+   width: 250px;
+}
+
+
 @media (max-width:768px) {
- .workspace{
-    justify-self: center !important;
- }
- .sidebar{
-    margin-left:0 !important;
- }
-} */
+/*    .workspace{
+      justify-self: center !important;
+   } */
+   .sidebar,.content{
+      margin-left:0 !important;
+   }
+   
+
+
+}
+
+
+/* 
+
+.example-container {
+    width: 100%;
+   
+}
+
+.mat-drawer{
+    min-width: 250px;
+    padding: 30px 0;
+}
+
+.example-sidenav {
+    padding: 20px 0 ;
+    
+}
+.example-sidenav-content {
+    display: block;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@media (max-width:1000px) {
+    .example-container{
+        display: block !important;
+    }
+    .example-sidenav-content{
+        display: block !important;
+        position: absolute;
+        left: 0;
+        width: 100% !important;
+        height: auto !important;
+    }
+    .ng-star-inserted{
+        margin-left: 0 !important;
+    }
+    .example-sidenav{
+        position: absolute !important;
+        left: 0;
+
+        z-index: 100;
+    }
+}
+ */

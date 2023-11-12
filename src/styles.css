@@ -1,2 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "../node_modules/bulma/css/bulma.min.css";
+@import 'material-icons/iconfont/material-icons.css';
+
+@import 'material-icons/iconfont/material-icons.css';
+
+
+@media (max-width:1000px) {
+    
+    mat-drawer-content{
+        margin-left: 0 !important;
+    }
+}
