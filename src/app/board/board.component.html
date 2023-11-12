@@ -1,12 +1,9 @@
-<div [style.background]="backgroundcolor">
-  <app-second-nav (newItemEvent)="changebackground($event)"></app-second-nav>
-
-</div>
 <body class="background" [style.background]="backgroundcolor">
   
-  
+
   <div class="my-board">
     <div class="second-nav" style="width: 100%;min-height: 150px;">
+      <app-second-nav (newItemEvent)="changebackground($event)"></app-second-nav>
     </div>
     <div class="container">
       <button *ngIf="showButton" (click)="saveBtn()" [disabled]="buttonSaveText!='Save'" class="btn btn-success">{{buttonSaveText}}</button>

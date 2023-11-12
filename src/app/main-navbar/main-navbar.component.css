@@ -1,40 +1,51 @@
-
-.active,.workspace:hover  {
-    background-color: rgba(72, 98, 100, 0.474) !important;
-    color: white !important;
+.example-spacer {
+  flex: 1 1 auto;
 }
 
-nav:hover .logo{
-    animation-name: logo-icon;
-    animation-iteration-count: infinite;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    transition: 0.3s;
-}
-
-.logo-brand {
-    background-color: rgba(255, 255, 255, 0.564);
-    padding: 10px;
-}
-
-.link-create {
-    transition: 0.2s !important;
-}
+ 
 
 
-.link-create:hover {
-    background-color: rgba(0, 0, 0, 0.164) !important;
-}
+  
 
-@keyframes logo-icon {
-    0%{
-        transform: rotate(0deg);
-    }
 
-    100%{
-        transform: rotate( 360deg);
+     #navbar-elem{
+        font-size: 16px;
+     }
+    
+     
+
+  
+     .btn-workspace:hover {
+      background-color: rgba(0, 0, 0, 0.21) !important;
+      
+     }
+     .btn-dropdown-workspacee:hover,.btn-dropdown-workspace:active{
+      background-color: rgba(0, 0, 0, 0.275) !important;
+     }
+  
+
+     .example-menu {
+      display: block;
+      flex-direction: column;
+      min-width: 180px;
+      max-width: 280px;
+      background-color: white;
+      padding: 6px 0;
+      position: absolute;
+      top: 50px;
+      left:300px;
+     
 
     }
     
-}
+    .example-standalone-trigger {
+      cursor: pointer;
+    }
+    .example-menu-item{
+      background-color: white;
+      border: none;
 
+    }
+    
+ 
+    
