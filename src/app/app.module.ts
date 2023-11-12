@@ -41,7 +41,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider';
 import { WorkspaceComponent } from './workspace/workspace.component';
-
+import { MainWorkspaceComponent } from './main-workspace/main-workspace.component';
 
 import {MatMenuModule} from '@angular/material/menu';
 
@@ -69,7 +69,7 @@ import {MatMenuModule} from '@angular/material/menu';
     ResetPasswordComponent,
     SignUpComponent,
     WorkspaceComponent,
-  
+    MainWorkspaceComponent
 
   ],
   imports: [
