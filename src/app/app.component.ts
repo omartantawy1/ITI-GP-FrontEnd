@@ -1,4 +1,5 @@
-import { Component , Input,HostListener } from '@angular/core';
+
+import { Component , Input ,HostListener} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,10 @@ import { Component , Input,HostListener } from '@angular/core';
 })
 export class AppComponent {
   title = 'graduation_project';
-   
   opened:boolean=false;
 
-
   ngOnInit(){
-   
+
     this.opened=true;
   }
 
@@ -30,6 +29,17 @@ export class AppComponent {
           
       }
   }
+
+  
+   workspace:any;
+   getworkspace(workspace:any){
+    this.workspace=workspace;
+   }
+   setWorkSpace(workspace:any){
+    this.workspace=workspace;
+   }
+
+
 
 
   }
