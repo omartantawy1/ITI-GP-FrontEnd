@@ -1,19 +1,18 @@
+<app-main-navbar [openedFlag]="opened" (opened)="toggleDrawer($event)"></app-main-navbar>
 
-   
-<router-outlet></router-outlet>
 
-<!--    
-    <section>
-        <app-main-navbar [openedFlag]="opened" (opened)="toggleDrawer($event)"></app-main-navbar> 
-        <mat-drawer-container class="example-container" autosize >
-            <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="opened">
-                <app-sidebar class="sidebar"></app-sidebar>
-            </mat-drawer>
-            <div class="example-sidenav-content">
-                <router-outlet class="content"></router-outlet>
-            </div>
-        </mat-drawer-container>
-    </section> -->
+<div [ngClass]="{'toggle':opened}" class="toggle">
+    <app-sidebar  [opened]="opened"></app-sidebar>
+</div>
+<div [ngClass]="{'sidebar': !opened,'content':opened}" class="animate">
+
+    <router-outlet></router-outlet>
+</div>
+<!-- 
+<app-userfound-popup></app-userfound-popup> -->
+
+
+
 
 
 
