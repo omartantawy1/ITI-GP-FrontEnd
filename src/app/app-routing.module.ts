@@ -17,7 +17,6 @@ import { HomeComponent } from './home/home.component';
     { path:'sign-in', component: SignInComponent },
     { path:'sign-up', component: SignUpComponent },
     {path:'board',component:BoardComponent},
-    {path:'workspace',component:WorkspaceComponent},
     {path:'edit-profile',component:EditMyProfileComponent},
     {path:'workspace',component:WorkspaceComponent},
     {path:'user-invitation',component:UserInviteComponent}
