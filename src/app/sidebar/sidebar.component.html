@@ -1,26 +1,42 @@
+<div class="container sidebar">
+  <h3 class="fw-bolder fs-5 px-3 text-start">TaskFlow</h3>
+  <mat-divider class="my-3"></mat-divider>
+  <div class="d-flex flex-column justify-content-center w-100">
 
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar"  [ngClass]="{'resize':!opened}">
-    <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto fs-4 link-dark text-decoration-none animate" [ngClass]="{'centerd':!opened}" previewlistener="true">
       
-        <i class="bi bi-kanban me-1"></i> <span class="animate" *ngIf="opened">Work</span>
-    </div>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item mb-2">
-        <a class="nav-link dropdown fs-4 centerd  animate"  [ngClass]="{'centerd':!opened}"  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" routerLink="workspace" aria-current="page">
-            <i class="bi bi-person-workspace"></i>
-          <span [ngClass]="{'close-nav':!opened}"> Workspaces</span>
-        </a>
-      <li class="nav-item">
-        <a  class="nav-link dropdown fs-4 centerd animate"  [ngClass]="{'centerd':!opened}" [routerLinkActive]="'active'" routerLink="boards" aria-current="page">
-            <i class="bi bi-clipboard-data"></i>
-            <span [ngClass]="{'close-nav':!opened}">
+      <button [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" routerLink="workspace" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              current Workspace
+          </p>
+      </button>
+      <button [routerLinkActive]="'active'" routerLink="wallet" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              Walt History
+          </p>
+      </button>
+      <button [routerLinkActive]="'active'" routerLink="my-investment" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              Investament
+          </p>
+      </button>
+      <button [routerLinkActive]="'active'" routerLink="projects" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              projects
+          </p>
+      </button>
+      <button [routerLinkActive]="'active'" routerLink="my-projects" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              My Projects
+          </p>
+      </button>
+      <mat-divider class="my-3"></mat-divider>
+      <h3>Account Setting</h3>
+      <button [routerLinkActive]="'active'" routerLink="my-profile" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              Profile
+          </p>
+      </button>
 
-                Boards
-            </span>
-        </a>
-      </li>
-    </ul>
-    <hr>
-   
+      
   </div>
+</div>

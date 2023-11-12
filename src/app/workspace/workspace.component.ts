@@ -36,22 +36,35 @@ export class WorkspaceComponent {
 // Board selectors options
 
 
-addWorkspaceInModal() {
-  if (this.newWorkspaceNameInModal) {
-    const id = this.workspaces.length + 1;
-    const newWorkspace = {
-      id,
-      name: this.newWorkspaceNameInModal,
-      description: this.newWorkspaceDescriptionInModal,
-    };
-    this.workspaces.push(newWorkspace);
-    this.myWorkspaces.push(newWorkspace);
-    this.newWorkspaceNameInModal = '';
-    this.newWorkspaceDescriptionInModal = '';
-    console.log('Updated Workspaces:', this.workspaces);
-    console.log('Boards:', this.boards); // Log the boards when a workspace is added
+  
+
+  addWorkspaceInModal() {
+    if (this.newWorkspaceNameInModal) {
+      const id = this.workspaces.length + 1;
+      const newWorkspace = {
+        id,
+        name: this.newWorkspaceNameInModal,
+        description: this.newWorkspaceDescriptionInModal, // Include description
+      };
+      this.workspaces.push(newWorkspace);
+      this.myWorkspaces.push(newWorkspace);
+      this.newWorkspaceNameInModal = '';
+      this.newWorkspaceDescriptionInModal = ''; // Clear description field
+    }
   }
-}
+
+  
+
+
+  // createWorkspace() {
+  //   if (this.newWorkspaceName) {
+  //     const id = this.workspaces.length + 1; // Generate a unique ID
+  //     this.workspaces.push({ id, name: this.newWorkspaceName });
+  //     this.myWorkspaces.push({ id, name: this.newWorkspaceName,description:this.newWorkspaceName }); // Add to "My Workspaces"
+  //     this.newWorkspaceName = ''; // Clear the input field
+  //   }
+  // }
+ 
 
   backgroundColors: string[] = [
     'linear-gradient(to right, #ff9966, #ff5e62)',
@@ -63,12 +76,10 @@ addWorkspaceInModal() {
     'linear-gradient(to right, #0F2027, #2C5364)',
   ];
 
-
-
+  // ... (other methods)
 
   createBoard() {
-    if (this.newBoardName && this.selectedColorIndex >= 0) {
-
+    if (this.newBoardName &&   this.selectedColorIndex >= 0) {
       const newBoard = {
         workspaceId: this.selectedWorkspaceId,
         title: this.newBoardName,
@@ -77,9 +88,9 @@ addWorkspaceInModal() {
       this.boards.push(newBoard);
       this.newBoardName = '';
       this.isCreateBoardVisible = false;
-      console.log('Updated Boards:', this.boards); // Log the boards when a new board is created
     }
   }
+
 
 
   
@@ -87,14 +98,12 @@ addWorkspaceInModal() {
     this.selectedWorkspaceId = workspaceId;
   }
 
-
-  getSelectedWorkspaceName(): string {
-    const selectedWorkspace = this.workspaces.find(workspace => workspace.id === this.selectedWorkspaceId);
-    return selectedWorkspace ? selectedWorkspace.name : '';
-  }
+  // getSelectedWorkspaceName(): string {
+  //   const selectedWorkspace = this.workspaces.find(workspace => workspace.id === this.selectedWorkspaceId);
+  //   return selectedWorkspace ? selectedWorkspace.name : '';
+  // }
   
-  getBoardsInSelectedWorkspace() {
-    return this.boards.filter(board => board.workspaceId === this.selectedWorkspaceId);
-  }
-
+  // getBoardsInSelectedWorkspace() {
+  //   return this.boards.filter(board => board.workspaceId === this.selectedWorkspaceId);
+  // }
 }
