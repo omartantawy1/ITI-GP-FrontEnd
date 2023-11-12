@@ -24,10 +24,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import{MatFormFieldModule} from '@angular/material/form-field';
 import{MatInputModule} from '@angular/material/input';
+import { WorkspaceComponent } from './workspace/workspace.component';
 import { MainNavbarComponent } from './main-navbar/main-navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-create-workspace.component';
 import { CardComponent } from './card/card.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -35,15 +38,6 @@ import { CategoriesComponent } from './categories/categories.component';
 import { UserInviteComponent } from './user-invite/user-invite.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatDividerModule} from '@angular/material/divider';
-import { WorkspaceComponent } from './workspace/workspace.component';
-import { MainWorkspaceComponent } from './main-workspace/main-workspace.component';
-
-import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -59,6 +53,7 @@ import {MatMenuModule} from '@angular/material/menu';
     AccountButtonComponent,
     PhaseComponent,
     ShareDialogComponent,
+    WorkspaceComponent,
     MainNavbarComponent,
     SidebarComponent,
     PopupCreateWorkspaceComponent,
@@ -67,9 +62,7 @@ import {MatMenuModule} from '@angular/material/menu';
     UserInviteComponent,
     ForgetPasswordComponent,
     ResetPasswordComponent,
-    SignUpComponent,
-    WorkspaceComponent,
-    MainWorkspaceComponent
+    SignUpComponent
 
   ],
   imports: [
@@ -83,28 +76,21 @@ import {MatMenuModule} from '@angular/material/menu';
     CdkDropList,
     CdkDrag,
     CdkMenuTrigger,
-    CdkMenu, 
-    CdkMenuItem,
-    MatDialogModule, 
-    HttpClientModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    MatNativeDateModule, // Required for the date picker
-    MatFormFieldModule, 
-    MatDatepickerModule,
-    FontAwesomeModule,
-    MatCheckboxModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatMenuModule
-    
+     CdkMenu, 
+     CdkMenuItem,
+     MatDialogModule, 
+     HttpClientModule,
+     MatButtonModule,
+     MatFormFieldModule,
+     MatInputModule,
+     MatInputModule,
+     FormsModule,
+     ReactiveFormsModule,
+     MatButtonModule,
+     BrowserAnimationsModule,
+     MatNativeDateModule, // Required for the date picker
+     MatFormFieldModule, 
+     MatDatepickerModule,
     
    
 
