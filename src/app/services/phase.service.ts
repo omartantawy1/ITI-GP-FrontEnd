@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { TokenService } from './token.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class PhaseService {
 
   private api_phases = 'http://127.0.0.1:8000/api/phases';
+
 
 
   private  headers: HttpHeaders = new HttpHeaders();
@@ -17,6 +19,7 @@ export class PhaseService {
       'Authorization': `Bearer ${this.tokenService.getToken()}`
     })
   }
+
 
 
   getAllPhases() {
