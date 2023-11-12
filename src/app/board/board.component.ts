@@ -13,10 +13,8 @@ import { CardService } from '../services/card.service';
 })
 export class BoardComponent {
   
-
-  backgroundcolor: string = "linear-gradient(to right, #1A2980, #26D0CE)";
-  phases:Array<Phase>=[];
-
+  backgroundcolor!: any;
+  phases: Array<Phase> = [];
   showAddphaseButton: boolean = true;
   buttonText: string = 'Add phase';
   showInput: boolean = false;

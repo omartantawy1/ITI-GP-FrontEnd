@@ -28,7 +28,6 @@ import { MainNavbarComponent } from './main-navbar/main-navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-create-workspace.component';
 import { CardComponent } from './card/card.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -36,9 +35,6 @@ import { CategoriesComponent } from './categories/categories.component';
 import { UserInviteComponent } from './user-invite/user-invite.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { UserfoundPopupComponent } from './userfound-popup/userfound-popup.component';
-import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-popup.component';
-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -72,10 +68,8 @@ import {MatMenuModule} from '@angular/material/menu';
     ForgetPasswordComponent,
     ResetPasswordComponent,
     SignUpComponent,
-    UserfoundPopupComponent,
-    UsernotfoundPopupComponent,
-    WorkspaceComponent
-
+    WorkspaceComponent,
+  
 
   ],
   imports: [
@@ -89,21 +83,31 @@ import {MatMenuModule} from '@angular/material/menu';
     CdkDropList,
     CdkDrag,
     CdkMenuTrigger,
-   CdkMenu, 
-   CdkMenuItem,
-   MatDialogModule, 
-   HttpClientModule,
-   MatButtonModule,
-   MatFormFieldModule,
-   MatInputModule,
-   ReactiveFormsModule,
-   MatButtonModule,
-   BrowserAnimationsModule,
-   MatNativeDateModule, // Required for the date picker
-   MatFormFieldModule, 
-   MatDatepickerModule,
-
+    CdkMenu, 
+    CdkMenuItem,
+    MatDialogModule, 
+    HttpClientModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule, // Required for the date picker
+    MatFormFieldModule, 
+    MatDatepickerModule,
+    FontAwesomeModule,
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatMenuModule
     
+    
+   
+
     
   ],
   providers: [],
