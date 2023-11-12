@@ -3,7 +3,6 @@ import { CommentInterface as Comment } from "./comment-interface";
 import { PhaseInterface as Phase } from "./phase-interface";
 
 export interface CardInterface {
-
     id : number,
     title : string,
     description :string,
@@ -15,5 +14,4 @@ export interface CardInterface {
     categories : Array<Category>,
     comments : Array<Comment>,
     attachments : Array<any>
-
 }
