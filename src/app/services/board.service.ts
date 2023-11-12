@@ -11,7 +11,6 @@ export class BoardService {
   
   private api_boards = 'http://127.0.0.1:8000/api/boards';
 
-
   private headers: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient,private tokenService:TokenService) { 
@@ -20,7 +19,6 @@ export class BoardService {
       'Authorization': `Bearer ${tokenService.getToken()}`
     })
   }
-
 
   getAllBoards() {
     return this.http.get(this.api_boards,{headers:this.headers});
