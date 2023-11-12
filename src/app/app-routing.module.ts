@@ -6,14 +6,10 @@ import { BoardComponent } from './board/board.component';
 import { EditMyProfileComponent } from './edit-my-profile/edit-my-profile.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { UserInviteComponent } from './user-invite/user-invite.component';
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { HomeComponent } from './home/home.component';
 
 
   const routes: Routes = [
     { path: '', component: SignUpComponent }, 
-    {path:'home', component: HomeComponent},
     { path:'sign-in', component: SignInComponent },
     { path:'sign-up', component: SignUpComponent },
     {path:'board',component:BoardComponent},
@@ -21,7 +17,6 @@ import { HomeComponent } from './home/home.component';
     {path:'workspace',component:WorkspaceComponent},
     {path:'user-invitation',component:UserInviteComponent}
  
-    
     
     
   ];
