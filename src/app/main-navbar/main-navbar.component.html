@@ -1,66 +1,87 @@
-<mat-toolbar color="primary">
-  <button routerLink="" mat-icon-button class="example-icon" aria-label="Example icon-button with home icon">
-    <mat-icon >home</mat-icon>
-  </button>
-  <button  *ngIf="!openedFlag" (click)="toggleDrawer()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <button  *ngIf="openedFlag" (click)="toggleDrawer()" mat-icon-button class="example-icon" aria-label="Example icon-button with notes icon">
-    <mat-icon>notes</mat-icon>
-  </button>
-  <span routerLink="">Exotic Markets</span>
-  
-  <div class="dropdown workspace-drop">
-    <button class="nav-link dropdown-toggle rounded btn-dropdown-workspace" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      My Workspaces
-    </button>
-    <ul class="dropdown-menu ml-5 border border-1 rounded p-3 shadow-sm" *ngIf="workspaces.length>0">
-      <li *ngFor="let workspace of workspaces">
-      <button class="d-flex align-items-center px-2 rounded border-0 bg-white btn-workspace"(click)="selectWorkspace(workspace)">
-        <div class="bg-info rounded me-2 my-2 py-3 fw-bold" style="width: 50px;">{{workspace.name[0]}}</div> 
-        <p class=" p-0 m-0">{{ workspace.name }}</p>
+<!-- navbar design  -->
+<nav class="navbar navbar-expand-lg py-0 text-white" id="main_nav">
+    <a class="navbar-brand text-white fs-2 " style="visibility: hidden;" id="nav-link"   >
+      <i class="bi bi-grid-3x3-gap-fill"></i>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" 
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-        <a class="nav-link" (click)="selectWorkspace(workspace.id)">{{ workspace.name }}</a> 
-      </li>
-      
-    </ul>
-  </div>
+      <div class="collapse navbar-collapse" id="navbar-elem">
+        <ul class="navbar-nav mr-auto fs-5">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home 
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <div class="dropdown workspace-drop">
+              <button class="nav-link dropdown-toggle rounded btn-dropdown-workspace" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                My Workspaces
+              </button>
+              <ul class="dropdown-menu ml-5 border border-1 rounded p-3 shadow-sm" *ngIf="workspaces.length>0">
+                <li *ngFor="let workspace of workspaces">
+                 <button class="d-flex align-items-center px-2 rounded border-0 bg-white btn-workspace"(click)="selectWorkspace(workspace)">
+                  <div class="bg-info rounded me-2 my-2 py-3 fw-bold" style="width: 50px;">{{workspace.name[0]}}</div> 
+                  <p class=" p-0 m-0">{{ workspace.name }}</p>
+                 </button>
+                  <!-- <a class="nav-link" (click)="selectWorkspace(workspace.id)">{{ workspace.name }}</a> -->
+                </li>
+                
+              </ul>
+            </div>
+  
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Recent <i class="bi bi-chevron-down"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Starred <i class="bi bi-chevron-down"></i></a>
+          </li>
+          
+          <li class="nav-item">
+            <button id="btn-submit" type="submit" [cdkMenuTriggerFor]="menu" class="btn bg-white py-1 example-standalone-trigger">Create</button>
+            <ng-template #menu>
+                <div class="example-menu border border-1 rounded py-2 shadow-sm" cdkMenu>
+                  <button class="example-menu-item d-flex flex-column justify-content-start text-start px-2 mb-1 " cdkMenuItem data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <span><i class="bi bi-person-workspace me-2"></i>Create Workspace</span>
+                    <p class="fw-light m-0 p-0 text-secondary">A Workspace is a group of boards and people.</p>
+                </button>
+                <button class="example-menu-item d-flex flex-column justify-content-start text-start px-2" >
+                  <span><i class="bi bi-box-seam me-2"></i>Create Board</span>
+                  <p class="fw-light m-0 p-0 text-secondary">A board is a made up of cards ordered on phases.</p>
+              </button>
+                </div>
+            </ng-template>
+          </li>
+        </ul>
+        
+        
+        <form class="form" action="" method="get">
+            <div class="input-box border border-white">
+                <input type="text" placeholder="Search">
+                <span class="icon">
+                    <i class="bi bi-search" id="search-icon"></i>
+                </span>
+            </div>
+          </form>
+         
+    </div>
+    
+  </nav>
 
 
-  <div style="width: 200px; position:relative">
-  <button id="btn-submit" type="submit" [cdkMenuTriggerFor]="menu" class="btn bg-white py-1 example-standalone-trigger">Create</button>
-  <ng-template #menu style="position: absolute;">
-      <div class="example-menu border border-1 rounded py-2 shadow-sm" cdkMenu>
-        <button class="example-menu-item d-flex flex-column justify-content-start text-start px-2 mb-1 " cdkMenuItem data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-          <span><i class="bi bi-person-workspace me-2"></i>Create Workspace</span>
-          <p class="fw-light m-0 p-0 text-secondary">A Workspace is a group of boards and people.</p>
-      </button>
-      <button class="example-menu-item d-flex flex-column justify-content-start text-start px-2" >
-        <span><i class="bi bi-box-seam me-2"></i>Create Board</span>
-        <p class="fw-light m-0 p-0 text-secondary">A board is a made up of cards ordered on phases.</p>
-    </button>
-      </div>
-  
+  <ng-container *ngIf="create ; else createworkspace">
+
+  </ng-container>
+
+  <ng-template  #createworkspace >
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <app-popup-create-workspace (newWorkspace)="addWorkspace($event)"></app-popup-create-workspace>
+    </div>
+    
+
   </ng-template>
-  </div>
-
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with settings icon">
-    <mat-icon>settings</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with notifications icon">
-    <mat-icon>notifications</mat-icon>
-  </button>
-
-</mat-toolbar>
-<ng-container *ngIf="create ; else createworkspace">
-
-</ng-container>
-
-<ng-template  #createworkspace >
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <app-popup-create-workspace (newWorkspace)="addWorkspace($event)"></app-popup-create-workspace>
-  </div>    
-</ng-template>
-
+ 
 
