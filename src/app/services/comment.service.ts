@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +8,14 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 export class CommentService {
 
   private api_comments = 'http://127.0.0.1:8000/api/comments';
-  private token = "5|JEBW5tuGQZ3M274gX975fHMlaoi9tm30YxOsjCFP2f5f4c24";
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${this.token}`
-  })
+  private headers: HttpHeaders = new HttpHeaders();
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient,private tokenService:TokenService) { 
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${tokenService.getToken()}`
+    })
+  }
   getAllComments() {
     return this.http.get(this.api_comments,{headers:this.headers});
   }
