@@ -1,43 +1,42 @@
+<div class="container sidebar">
+  <h3 class="fw-bolder fs-5 px-3 text-start">TaskFlow</h3>
+  <mat-divider class="my-3"></mat-divider>
+  <div class="d-flex flex-column justify-content-center w-100">
 
-<div class="side-nav">
-  <div class="workspace-title d-flex flex-row">
-    <a href="#" class="workspace-image">
-      <span>{{ workspace.name[0]?workspace.name[0]:""}}</span>
-    </a>
-    <span class="ms-3 fs-5">{{workspace.name}}</span>
+      
+      <button [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" routerLink="workspace" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              current Workspace
+          </p>
+      </button>
+      <button [routerLinkActive]="'active'" routerLink="wallet" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              Walt History
+          </p>
+      </button>
+      <button [routerLinkActive]="'active'" routerLink="my-investment" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              Investament
+          </p>
+      </button>
+      <button [routerLinkActive]="'active'" routerLink="projects" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              projects
+          </p>
+      </button>
+      <button [routerLinkActive]="'active'" routerLink="my-projects" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              My Projects
+          </p>
+      </button>
+      <mat-divider class="my-3"></mat-divider>
+      <h3>Account Setting</h3>
+      <button [routerLinkActive]="'active'" routerLink="my-profile" class="w-100 d-flex justify-content-start mb-3" mat-button style="height: 50px;">
+          <p class="p-0 m-0 px-3 fs-6 fw-medium">
+              Profile
+          </p>
+      </button>
+
+      
   </div>
-
-  <hr class="hr" style="width: 100%; border:2px solid #fff;" />
-  <ul class="nav-items">
-    <li><a href="#"><i class="fa-brands fa-trello"></i><p>Boards</p></a></li>
-    <li><a href="#"><i class="fa-regular fa-user"></i><p>members</p><span class="sidebar-icon"><i class="fa-solid fa-plus"></i></span></a></li>
-    <li><a href="#"><i class="fa-solid fa-gears"></i><p>workspace Settings</p><span class="sidebar-icon"><i class="fa-solid fa-chevron-down" ></i></span></a></li>
-  <div class="active"></div>
-</ul>
-<ul class="nav nav-pills flex-row mb-3 text-capitalize fs-5 fw-lighter" id="workspace-views">
-  <span class="fs-4 mb-2 text-white fw-light" >Work spaces views :</span>
-  <li class="nav-item">
-    <a href="#" class="nav-link link-light" aria-current="page">
-      <i class="bi bi-layout-text-sidebar"></i>
-       <span class="mx-4">Tables</span> 
-    </a>
-  </li>
-  <li class="nav-item">
-    <a href="#" class="nav-link link-light">
-      <i class="bi bi-calendar4-week fs-4 pt-2"></i> 
-      <span class="mx-4">Calender</span> 
-    </a>
-  </li>
-  <div class="active"></div>
-</ul> 
-<ul class="nav nav-pills flex-column mb-3 text-capitalize fs-5 fw-lighter" id="user-Boards">
-  <span class="fs-4 mb-2  text-white fw-light">Your Bords</span>
-  <li class="nav-item ">
-    <a href="#" class="nav-link link-light">
-      <i class="bi bi-clipboard-plus fs-4"></i>
-      <span class="mx-4">New Board</span> 
-    <i class="bi bi-plus fs-2 " style="float: right;"></i>
-    </a>
-  </li>
-</ul>
 </div>
