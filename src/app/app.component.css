@@ -1,8 +1,8 @@
-/* 
+
 
 .example-container {
     width: 100%;
-   
+    min-height: 100vh;
 }
 
 .mat-drawer{
@@ -43,4 +43,4 @@
         z-index: 100;
     }
 }
- */
+
