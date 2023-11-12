@@ -5,9 +5,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { BoardComponent } from './board/board.component';
 import { EditMyProfileComponent } from './edit-my-profile/edit-my-profile.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
-import { UserInviteComponent } from './user-invite/user-invite.component';
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { MainWorkspaceComponent } from './main-workspace/main-workspace.component';
 
 
   const routes: Routes = [
@@ -17,9 +15,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     {path:'board',component:BoardComponent},
     {path:'edit-profile',component:EditMyProfileComponent},
     {path:'workspace',component:WorkspaceComponent},
-    {path:'user-invitation',component:UserInviteComponent},
-    {path:'forget-password',component:ForgetPasswordComponent},
-    {path:'reset-password',component:ResetPasswordComponent}
+ 
+    
     
   ];
 
