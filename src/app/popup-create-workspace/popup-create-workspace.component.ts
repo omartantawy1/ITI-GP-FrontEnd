@@ -1,4 +1,5 @@
 import { Component,EventEmitter,Output } from '@angular/core';
+import { WorkspaceComponent } from '../workspace/workspace.component';
 
 @Component({
   selector: 'app-popup-create-workspace',
@@ -7,7 +8,6 @@ import { Component,EventEmitter,Output } from '@angular/core';
 })
 export class PopupCreateWorkspaceComponent {
 
-  Workspaces:any;
   newWorkspaceName = '';
   newWorkspaceNameInModal: string = '';
   newWorkspaceDescriptionInModal: string = '';
@@ -27,7 +27,5 @@ export class PopupCreateWorkspaceComponent {
       this.newWorkspace.emit(newWorkspace); // Emit the new workspace data
     }
   }
-
-
 
 }

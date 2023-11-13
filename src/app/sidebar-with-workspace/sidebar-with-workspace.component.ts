@@ -11,6 +11,9 @@ export class SidebarWithWorkspaceComponent {
 
   ngOnInit(){
     this.opened=false;
+    if(window.innerWidth<1000){
+      this.showIconSide = true;
+    }
   }
 
   toggleDrawer(flag:boolean){
