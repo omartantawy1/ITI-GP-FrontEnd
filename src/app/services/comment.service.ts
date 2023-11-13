@@ -9,13 +9,13 @@ export class CommentService {
 
   private api_comments = 'http://127.0.0.1:8000/api/comments';
   private headers: HttpHeaders = new HttpHeaders();
-
   constructor(private http: HttpClient,private tokenService:TokenService) { 
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${tokenService.getToken()}`
+      'Authorization': `Bearer ${this.tokenService.getToken()}`
     })
   }
+
   getAllComments() {
     return this.http.get(this.api_comments,{headers:this.headers});
   }

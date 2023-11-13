@@ -16,7 +16,7 @@ export class BoardService {
   constructor(private http: HttpClient,private tokenService:TokenService) { 
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${tokenService.getToken()}`
+      'Authorization': `Bearer ${this.tokenService.getToken()}`
     })
   }
 

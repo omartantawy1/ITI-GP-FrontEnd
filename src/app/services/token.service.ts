@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 })
 export class TokenService {
 
-  // protected token: string | null = null;
 
   constructor(private router:Router) { }
 
