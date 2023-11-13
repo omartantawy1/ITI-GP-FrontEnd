@@ -43,7 +43,6 @@ import { PricingComponent } from './pricing/pricing.component';
 import { InvitationWorkspaceComponent } from './invitation-workspace/invitation-workspace.component';
 import {MatMenuModule} from '@angular/material/menu';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -100,7 +99,7 @@ import {MatMenuModule} from '@angular/material/menu';
    MatFormFieldModule, 
    MatDatepickerModule,
    MatMenuModule,
-    
+   
     
   ],
   providers: [],

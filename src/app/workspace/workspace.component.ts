@@ -251,4 +251,5 @@ navigateToBoard(board: { workspaceId: number, title: string, background: string 
     queryParams: { background: board.background },
   });
 }
+
 }
