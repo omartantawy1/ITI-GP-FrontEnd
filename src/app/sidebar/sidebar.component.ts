@@ -7,21 +7,6 @@ import { Component , Input } from '@angular/core';
 })
 export class SidebarComponent {
 
-
-  // listuser?:any;
-  // constructor(private workspace:WorkspaceService){}
-  // ngOnInit(){
-  
-  //   this.workspace.getAllUsers().subscribe(
-  //     (users:any)=>(this.listuser=users),
-  //     (error)=>console.log(error.message)
-  //   );
-  // }
-  @Input() workspace!: {  name: string,description:string };
-  
-  sidebar(){
-  let sidebar= document.getElementById("side-bar");
-  sidebar!.classList.toggle("hidden");
-  }
+  @Input() opened:boolean = true;
   
 }

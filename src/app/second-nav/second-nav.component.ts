@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./second-nav.component.css']
 })
 export class SecondNavComponent {
-swatches = [
+  swatches = [
     "linear-gradient(to right, #ff9966, #ff5e62)",
     "linear-gradient(to right, #AA076B, #61045F)",
     "linear-gradient(to right, #348F50, #56B4D3)",
@@ -71,6 +71,5 @@ swatches = [
   showAccountMenu(){
     this.toggle = !this.toggle;
   }
-
 
 }
