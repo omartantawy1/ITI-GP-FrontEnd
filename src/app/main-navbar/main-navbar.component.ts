@@ -7,14 +7,6 @@ import {EventEmitter } from '@angular/core';
 })
 export class MainNavbarComponent {
 
-  @Input() openedFlag:boolean = false;
-
-  @Output() opened = new EventEmitter<boolean>();
-
-  toggleDrawer(){
-    this.openedFlag = !this.openedFlag;
-    this.opened.emit(this.openedFlag);
-  }
 
 
   workspaces:Array<any> = [

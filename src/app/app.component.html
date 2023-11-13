@@ -1,9 +1,4 @@
-<app-main-navbar [openedFlag]="opened" (opened)="toggleDrawer($event)"></app-main-navbar>
+<app-main-navbar></app-main-navbar>
 
-<div [ngClass]="{'toggle':opened}" class="toggle">
-    <app-sidebar  [opened]="opened"></app-sidebar>
-</div>
-<div [ngClass]="{'sidebar': !opened,'content':opened}" class="animate">
+<router-outlet></router-outlet>
 
-    <router-outlet></router-outlet>
-</div>

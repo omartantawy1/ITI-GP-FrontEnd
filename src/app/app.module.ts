@@ -38,6 +38,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { UserInviteComponent } from './user-invite/user-invite.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { SidebarWithWorkspaceComponent } from './sidebar-with-workspace/sidebar-with-workspace.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     UserInviteComponent,
     ForgetPasswordComponent,
     ResetPasswordComponent,
-    SignUpComponent
+    SignUpComponent,
+    SidebarWithWorkspaceComponent
 
   ],
   imports: [
