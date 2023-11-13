@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Workspace } from '../interfaces/workspace';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -18,29 +19,11 @@ export class WorkspaceService {
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.tokenService.getToken()}`
-    });
-    this.getAllWorkspaces().subscribe(
-      (res:any)=>{
-        this.workspaces = res.data;
-      },
-      (error)=>{console.log(error)}
-    );
-
-    
+    }); 
   }
 
-  ngOnInit(){
-
-
-  }
-
-  getArrayOfWorkspace(){
-   return this.workspaces;
-  }
-
-
-  getAllWorkspaces() {
-    return this.http.get(this.api_workspace,{headers:this.headers});
+  getAllWorkspaces(): Observable<Workspace[]> {
+    return this.http.get<Workspace[]>(this.api_workspace,{headers:this.headers});
   }
 
   getWorkspace(workspaceId: number) {

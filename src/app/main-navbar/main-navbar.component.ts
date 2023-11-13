@@ -14,6 +14,9 @@ export class MainNavbarComponent {
   workspaces:Array<Workspace> = [];
 
   constructor(private workspaceService:WorkspaceService){
+  }
+
+  ngOnInit(){
     this.workspaceService.getAllWorkspaces().subscribe(
       (res:any)=>{
         this.workspaces = res.data;
