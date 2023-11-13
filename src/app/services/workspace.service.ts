@@ -18,17 +18,24 @@ export class WorkspaceService {
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.tokenService.getToken()}`
-    })
+    });
     this.getAllWorkspaces().subscribe(
       (res:any)=>{
         this.workspaces = res.data;
       },
       (error)=>{console.log(error)}
     );
+
+    
+  }
+
+  ngOnInit(){
+
+
   }
 
   getArrayOfWorkspace(){
-    return this.workspaces;
+   return this.workspaces;
   }
 
 
@@ -40,11 +47,11 @@ export class WorkspaceService {
     return this.http.get(`${this.api_workspace}/${workspaceId}`,{headers:this.headers});
   }
 
-  createWorkspace(workspace: Workspace) {
+  createWorkspace(workspace: any) {
     return this.http.post(this.api_workspace, workspace,{headers:this.headers});
   }
 
-  updateWorkspace(workspaceId: number, workspace: Workspace) {
+  updateWorkspace(workspaceId: number, workspace: any) {
     return this.http.put(`${this.api_workspace}/${workspaceId}`, workspace,{headers:this.headers});
   }
 

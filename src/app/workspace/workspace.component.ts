@@ -2,6 +2,8 @@ import { Component,ViewChild,ElementRef,AfterViewInit,OnInit, Input, Output, Eve
 import { PopupCreateWorkspaceComponent } from '../popup-create-workspace/popup-create-workspace.component';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { Workspace } from '../interfaces/workspace';
+import { WorkspaceService } from '../services/workspace.service';
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
@@ -9,9 +11,10 @@ import { Router } from '@angular/router';
 })
 export class WorkspaceComponent  {
   
-  constructor(private router: Router) { }
+  constructor(private router: Router,private workspaceService:WorkspaceService) { }
   myWorkspaces: { id: number, name: string, description: string }[] = []; 
-  workspaces: { id: number, name: string ,description: string}[] = [];
+ /*  workspaces: { id: number, name: string ,description: string}[] = []; */
+  workspaces:Array<Workspace> = [] ;
   newWorkspaceName = '';
   selectedWorkspaceId: number = 0;
   newWorkspaceNameInModal: string = '';
@@ -26,6 +29,16 @@ export class WorkspaceComponent  {
 
 
   isCreateBoardVisible = false;
+
+
+  ngOnInit(){
+    this.workspaceService.getAllWorkspaces().subscribe(
+      (res:any)=>{
+        this.workspaces = res.data;
+      },
+      (error)=>{console.log(error)}
+    );
+  }
 
   toggleCreateBoardSection() {
     this.isCreateBoardVisible = !this.isCreateBoardVisible;
@@ -43,16 +56,19 @@ export class WorkspaceComponent  {
 
 addWorkspaceInModal() {
   if (this.newWorkspaceNameInModal) {
-    const id = this.workspaces.length + 1;
-    const newWorkspace = {
-      id,
-      name: this.newWorkspaceNameInModal,
-      description: this.newWorkspaceDescriptionInModal,
+    let newWorkspace = {
+      'title': this.newWorkspaceNameInModal,
+      'description': this.newWorkspaceDescriptionInModal,
     };
-    this.workspaces.push(newWorkspace);
-    this.myWorkspaces.push(newWorkspace);
-    this.newWorkspaceNameInModal = '';
-    this.newWorkspaceDescriptionInModal = '';
+    this.workspaceService.createWorkspace(newWorkspace).subscribe(
+      (res:any)=>{
+        this.workspaces.push(res.workspace);
+        this.newWorkspaceNameInModal = '';
+        this.newWorkspaceDescriptionInModal = '';
+      },
+      (error)=>{console.log(error)}
+    );
+
     console.log('Updated Workspaces:', this.workspaces);
     console.log('Boards:', this.boards); // Log the boards when a workspace is added
   }
@@ -118,8 +134,8 @@ addWorkspaceInModal() {
   
 
   getSelectedWorkspaceName(): string {
-    const selectedWorkspace = this.workspaces.find(workspace => workspace.id === this.selectedWorkspaceId);
-    return selectedWorkspace ? selectedWorkspace.name : '';
+    let selectedWorkspace = this.workspaces.find(workspace => workspace.id === this.selectedWorkspaceId);
+    return selectedWorkspace ? selectedWorkspace.title : '';
   }
   
   getSelectedWorkspaceDescription(): string {
@@ -144,7 +160,7 @@ addWorkspaceInModal() {
   
     // Log the name and description of the selected workspace
     if (selectedWorkspace) {
-      console.log('Selected Workspace Name:', selectedWorkspace.name);
+      console.log('Selected Workspace Name:', selectedWorkspace.title);
       console.log('Selected Workspace Description:', selectedWorkspace.description);
     }
   }
@@ -163,7 +179,7 @@ addWorkspaceInModal() {
     if (this.newWorkspaceName && this.selectedWorkspaceId) {
       const index = this.workspaces.findIndex(workspace => workspace.id === this.selectedWorkspaceId);
       if (index !== -1) {
-        this.workspaces[index].name = this.newWorkspaceName;
+        this.workspaces[index].title = this.newWorkspaceName;
         this.workspaces[index].description = this.newWorkspaceDescriptionInModal;
         // Reset edit mode after saving
         this.isWorkspaceEditMode = false;
@@ -188,9 +204,9 @@ addWorkspaceInModal() {
 
 
   isDeleteWorkspaceConfirmationModalVisible = false;
-workspaceToDelete: { id: number, name: string, description: string } | null = null;
+workspaceToDelete: any = null;
 
-openDeleteWorkspaceConfirmationModal(workspace: { id: number, name: string, description: string } | undefined) {
+openDeleteWorkspaceConfirmationModal(workspace: Workspace) {
   if (workspace) {
     this.workspaceToDelete = workspace;
     this.isDeleteWorkspaceConfirmationModalVisible = true;
@@ -217,7 +233,7 @@ confirmDeleteWorkspace() {
       this.isWorkspaceDeleted = true;
 
       // Update myWorkspaces
-      this.myWorkspaces = this.workspaces.slice(); // Create a copy of workspaces
+      /* this.myWorkspaces = this.workspaces.slice();  */// Create a copy of workspaces
 
       // Log the updated workspaces and boards
       console.log('Updated Workspaces:', this.workspaces);
@@ -240,7 +256,7 @@ isWorkspacePresent(workspaceId: number): boolean {
   return this.workspaces.some(workspace => workspace.id === workspaceId);
 }
 
-getSelectedWorkspace(): { id: number, name: string, description: string } | undefined {
+getSelectedWorkspace(){
   return this.workspaces.find(workspace => workspace.id === this.selectedWorkspaceId);
 }
 

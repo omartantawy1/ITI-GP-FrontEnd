@@ -39,6 +39,7 @@ import { UserInviteComponent } from './user-invite/user-invite.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SidebarWithWorkspaceComponent } from './sidebar-with-workspace/sidebar-with-workspace.component';
+import { InvitationWorkspaceComponent } from './invitation-workspace/invitation-workspace.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { SidebarWithWorkspaceComponent } from './sidebar-with-workspace/sidebar-
     ForgetPasswordComponent,
     ResetPasswordComponent,
     SignUpComponent,
-    SidebarWithWorkspaceComponent
+    SidebarWithWorkspaceComponent,
+    InvitationWorkspaceComponent
 
   ],
   imports: [

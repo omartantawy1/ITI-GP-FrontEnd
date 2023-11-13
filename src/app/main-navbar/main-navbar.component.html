@@ -20,11 +20,11 @@
             <a class="nav-link dropdown-toggle btn btn-light text-dark workspace fw-medium" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Workspaces
             </a>
-            <ul *ngIf="workspaces.length>0" class="dropdown-menu mb-2">
+            <ul class="dropdown-menu mb-2">
               <li *ngFor="let workspace of workspaces" >
                 <a class="dropdown-item d-flex align-items-center" style="cursor: pointer !important;">
-                <p class="p-0 m-0 bg-primary-subtle rounded m-2 fw-bold text-center text-uppercas" style="width: 50px;height: 50px;line-height: 50px;">{{workspace.name[0]}}</p>
-                    <p class=" m-0 p-0 text-dark-emphasis">{{workspace.name}}</p>
+                <p class="p-0 m-0  rounded m-2 fw-bold fs-6 text-center text-uppercase" style="width: 50px;height: 50px;line-height: 50px;background: linear-gradient(to bottom, #4bce97, #216e4e);">{{workspace.title[0]}}</p>
+                    <p class=" m-0 p-0 text-dark-emphasis fw-medium">{{workspace.title}}</p>
                 </a>
               </li>
             </ul>

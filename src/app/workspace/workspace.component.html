@@ -19,13 +19,13 @@
             My Workspaces
           </a>
               <ul class="dropdown-menu ml-5" id="workspaceDropdown">
-      <li *ngFor="let workspace of myWorkspaces">
+      <li *ngFor="let workspace of workspaces">
         <a class="nav-link dropdown-item" (click)="selectWorkspace(workspace.id)">
           <div class="grad-div col-3 d-flex align-items-center justify-content-center">
-            <p class="letter-div">{{ workspace.name.charAt(0) }}</p>
+            <p class="letter-div">{{ workspace.title[0] }}</p>
           </div>
           <div class="col-6 d-flex align-items-center workspace-name">
-            <p style="font-size: 17px; font-weight: bold; margin-top:5px">{{ workspace.name }} Workspace</p>
+            <p style="font-size: 17px; font-weight: bold; margin-top:5px">{{ workspace.title }}</p>
           </div>
         </a>
       </li>
@@ -46,7 +46,7 @@
    
     <br>
      
-   
+    <p class="text-secondary">Workspace</p>
     <div *ngIf="isWorkspaceSelected && !isWorkspaceDeleted" class="container current-ws row">
       <!-- Display view -->
       <ng-container *ngIf="!isWorkspaceEditMode; else editModeView">
@@ -55,9 +55,9 @@
         </div>
     
         <div class="col-6 d-flex align-items-center">
-          <h5>{{ getSelectedWorkspaceName() }} Workspace</h5>
+          <h5>{{ getSelectedWorkspaceName() }}</h5>
           <i class="bi bi-pencil-fill" style="margin-left: 5px" (click)="startEditWorkspace()"></i>
-          <i class="bi bi-trash" style="margin-left: 5px" (click)="openDeleteWorkspaceConfirmationModal(getSelectedWorkspace())" data-bs-toggle="modal" data-bs-target="#deleteWorkspaceConfirmationModal"></i>
+          <i class="bi bi-trash" style="margin-left: 5px" (click)="openDeleteWorkspaceConfirmationModal(getSelectedWorkspace()!)" data-bs-toggle="modal" data-bs-target="#deleteWorkspaceConfirmationModal"></i>
         </div>
       </ng-container>
     
@@ -217,7 +217,7 @@
             <option default>my workspace</option>
             <option *ngFor="let workspace of workspaces" (value)="workspace.id"  >{{workspace.name}}</option>
           </select> -->
-          <p>{{workspaces[selectedWorkspaceId-1].name}}</p>
+          <p>{{workspaces[selectedWorkspaceId-1].title}}</p>
          </div>
 
 
@@ -279,7 +279,7 @@
               </div>
               <div class="col-md-6">
                 <!-- Right Side with Image -->
-                <img src="../../assets/man-holding-clock-time-management-concept_23-2148823171.jpg" alt="Your Image" class="img-fluid">
+                <img src="../../assets/Task.png" alt="Your Image" class="img-fluid">
               </div>
             </div>
           </div>

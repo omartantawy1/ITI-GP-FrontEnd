@@ -1,5 +1,7 @@
 import { Component,Input,Output } from '@angular/core';
 import {EventEmitter } from '@angular/core';
+import { WorkspaceService } from '../services/workspace.service';
+import { Workspace } from '../interfaces/workspace';
 @Component({
   selector: 'app-main-navbar',
   templateUrl: './main-navbar.component.html',
@@ -9,46 +11,16 @@ export class MainNavbarComponent {
 
 
 
-  workspaces:Array<any> = [
-    {
-      id:1,
-      name:'Workpsace',
-      description:"new workspace",
-      boards:[{
-        id:1,
-        title:'Workpsace1',
-        color:'red',
+  workspaces:Array<Workspace> = [];
+
+  constructor(private workspaceService:WorkspaceService){
+    this.workspaceService.getAllWorkspaces().subscribe(
+      (res:any)=>{
+        this.workspaces = res.data;
       },
-      {
-        id:2,
-        title:'workboard',
-        color:'purble',
-      },
-      {
-        id:3,
-        title:'workbench',
-        color:'fuschia',
-      }
-    ]
-    },
-    {
-      id:2,
-      name:'rewas',
-      description:"new workspace",
-      boards:[{
-        id:1,
-        title:'gp task',
-        color:'red',
-      },
-      {
-        id:2,
-        title:'Ai task',
-        color:'purble',
-      },
-    ]
-    },
-    
-  ];
+      (error)=>{console.log(error);}
+    );
+  }
 
 
 
