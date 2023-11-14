@@ -5,26 +5,29 @@
     <br>
      
     <p class="text-secondary">Workspace</p>
-    <div *ngIf="workspace" class="container current-ws row">
+    <div *ngIf="workspace" class="container current-ws row justify-content-md-between justify-content-sm-start ">
       <!-- Display view -->
-      <ng-container *ngIf="!isWorkspaceEditMode; else editModeView">
-        <div class="grad-div col-3 d-flex align-items-center justify-content-center">
-          <p class="letter-div text-uppercase">{{ workspace.title[0] }}</p>
+      <div class="row col-sm-12 col-md-8">
+        <ng-container *ngIf="!isWorkspaceEditMode; else editModeView">
+
+            <div class="grad-div col-2 d-flex align-items-center justify-content-center">
+              <p class="letter-div text-uppercase">{{ workspace.title[0] }}</p>
+            </div>
+        
+            <div class="col-10 d-flex align-items-center">
+              <h5 class="w-100" style="word-break: break-all;">{{ workspace.title }}</h5>
+              <i class="bi bi-pencil-fill" style="margin-left: 5px" (click)="startEditWorkspace()"></i>
+              <i class="bi bi-trash" style="margin-left: 5px" (click)="openDeleteWorkspaceConfirmationModal(workspace)" data-bs-toggle="modal" data-bs-target="#deleteWorkspaceConfirmationModal"></i>
+            </div>
+          </ng-container>
+          
+          <!-- Edit view -->
         </div>
-    
-        <div class="col-6 d-flex align-items-center">
-          <h5>{{ workspace.title }}</h5>
-          <i class="bi bi-pencil-fill" style="margin-left: 5px" (click)="startEditWorkspace()"></i>
-          <i class="bi bi-trash" style="margin-left: 5px" (click)="openDeleteWorkspaceConfirmationModal(workspace)" data-bs-toggle="modal" data-bs-target="#deleteWorkspaceConfirmationModal"></i>
-        </div>
-      </ng-container>
-    
-      <!-- Edit view -->
-      <ng-template #editModeView>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="newWorkspaceName">New Workspace Name</label>
-            <input id="newWorkspaceName" class="form-control edit-workspace-input" [(ngModel)]="newWorkspaceName" />
+        <ng-template #editModeView>
+          <div class="col-12">
+            <div class="form-group">
+              <label for="newWorkspaceName">New Workspace Name</label>
+              <input id="newWorkspaceName" class="form-control edit-workspace-input" [(ngModel)]="newWorkspaceName"/>
           </div>
           <div class="form-group">
             <label for="newWorkspaceDescriptionInModal">New Workspace Description</label>
@@ -37,16 +40,18 @@
           </div>
         </div>
       </ng-template>
-    
-      <div class="col-3 d-flex align-items-center justify-content-end">
+      
+      
+      <div class="col-sm-12 col-md-4 d-flex align-items-center justify-content-end">
         <button class="btn btn-primary">
           <i class="bi bi-person-fill-add"></i>  
           Invite To workspace
         </button>
       </div>
     </div>
-
-
+    <p *ngIf="this.workspace" class="my-2 text-secondary">Description:<br><span class="ps-5">{{workspace.description}}</span></p>
+    
+    
     <div class="modal fade" id="deleteWorkspaceConfirmationModal" tabindex="-1" aria-labelledby="deleteWorkspaceConfirmationModalLabel" aria-hidden="true">
       <div class=" modal-dialog modal-dialog-centered modal-sm modal-delete">
         <div class="modal-content">
@@ -82,15 +87,37 @@
 
       <div class="boards">
         <div *ngIf="workspace" class="d-flex flex-wrap">
+          <div *ngFor="let board of boards" class="created-boards bg-dark">
+            <!-- <ng-container *ngIf="!isBoardEditMode"> -->
+            <i class="bi bi-trash delete-board-icon" (click)="openDeleteConfirmationModal(board)" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i>
+            <p class="board-title">{{ board.title }}</p>
+          <!--   <i class="bi bi-pencil-fill" (click)="startEditBoard()"></i>
+            </ng-container>
+            <ng-template *ngIf="isBoardEditMode">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="newWorkspaceName">New board Name</label>
+                  <input id="newWorkspaceName" class="form-control edit-workspace-input" [(ngModel)]="newWorkspaceName"/>
+                </div>
+                <div class="form-group">
+                  <label for="newWorkspaceDescriptionInModal">New Workspace Description</label>
+                  <input id="newWorkspaceDescriptionInModal" class="form-control edit-workspace-input" [(ngModel)]="newWorkspaceDescriptionInModal" />
+                </div>
+                <br>
+                <div class="d-flex" >
+                  <button class="btn btn-primary m-2" (click)="saveEditedWorkspace()">Save</button>
+                  <button class="btn btn-secondary m-2" (click)="cancelEditWorkspace()">Cancel</button>
+                </div>
+              </div>
+            </ng-template> -->
+          </div>
+
           <div class="create-board" (click)="isCreateBoardVisible = !isCreateBoardVisible">
             <p>Create new board</p>
           </div>
         <!-- [style.background]="board.background" (click)="navigateToBoard(board)" -->
-          <div *ngFor="let board of workspace.boards" class="created-boards bg-dark">
-            {{board}}
-            <i class="bi bi-trash delete-board-icon" (click)="openDeleteConfirmationModal(board)" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i>
-            <p class="board-title">{{ board.title }}</p>
-          </div>
+         
+
         </div>
 
         <!-- Modal for delete  Board confirmation -->

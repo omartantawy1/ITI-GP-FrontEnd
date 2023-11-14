@@ -22,7 +22,7 @@ export class WorkspaceComponent  {
   selectedWorkspaceId: number = 0;
   newWorkspaceNameInModal: string = '';
   newWorkspaceDescriptionInModal: string = ''; // Add description variable
- /*  boards:Array<Board>=[]; */
+  boards:Array<Board>=[];
   newBoardName = '';
   workspace!:Workspace;
 
@@ -37,21 +37,26 @@ export class WorkspaceComponent  {
 
   ngOnInit(){
     this.navbarService.display();
-    this.workspace!;
     this.workspaceService.getAllWorkspaces().subscribe(
       (res:any)=>{
         this.workspaces = res.data;
       },
       (error)=>{console.log(error)}
-    );
-    setInterval(()=>{
-      this.workspaceService.getWorkspace$.subscribe((workspace)=>{
-        this.workspace = workspace; 
-        console.log(workspace);
+      );
+      setInterval(()=>{
+        this.workspaceService.getWorkspace$.subscribe((workspace)=>{
+          this.workspace = workspace; 
+          console.log(workspace);
+          if(this.workspace.boards){
+            this.boards = this.workspace.boards;
+          }
+          this.newWorkspaceName = this.workspace.title;
+          this.newWorkspaceDescriptionInModal = this.workspace.description;
       }
       );
     },3000)
   }
+
 
   toggleCreateBoardSection() {
     this.isCreateBoardVisible = !this.isCreateBoardVisible;
@@ -75,7 +80,7 @@ addWorkspaceInModal() {
     };
     this.workspaceService.createWorkspace(newWorkspace).subscribe(
       (res:any)=>{
-        this.workspaces.push(res.workspace);
+        this.workspaces.unshift(res.workspace);
         this.newWorkspaceNameInModal = '';
         this.newWorkspaceDescriptionInModal = '';
       },
@@ -96,7 +101,7 @@ addWorkspaceInModal() {
     'linear-gradient(to right, #0F2027, #2C5364)',
     
   ];
-
+  
 
 
   createBoard() {
@@ -109,9 +114,10 @@ addWorkspaceInModal() {
       this.boardService.createBoard(newBoard).subscribe(
         (res:any)=>{
 
-          this.workspace.boards.push(res.data);
+          this.boards.unshift(res.data);
           this.newBoardName = '';
           this.isCreateBoardVisible = false; // Log the boards when a new board is created
+          this.selectedColorIndex = -1;
         },
         (error)=>{
           console.log(error);
@@ -146,17 +152,10 @@ addWorkspaceInModal() {
   confirmDeleteBoard(boardId:number) {
     if(boardId){
      /*  let board = this.workspace.boards.find(b => b.id === boardId ) */
-      let index = this.workspace.boards.findIndex(b => b.id === boardId )
-        this.boardService.deleteBoard(boardId).subscribe(
-          (res:any)=>{
-            console.log(res);
-            this.workspace.boards.splice(index,1);
-            this.workspaceService.SelectedWorkspace(this.workspace);
-            this.closeDeleteConfirmationModal();
-           /*  this.deleteBoard(board); */
-          },
-          (error)=>{console.log(error);}
-        );
+      let index = this.boards.findIndex(b => b.id === boardId )
+        this.boardService.deleteBoard(boardId).subscribe();
+          this.boards.splice(index,1);
+          this.closeDeleteConfirmationModal();
     }
 
   }
@@ -207,14 +206,25 @@ addWorkspaceInModal() {
   }
   
   saveEditedWorkspace() {
-    if (this.newWorkspaceName && this.selectedWorkspaceId) {
-      const index = this.workspaces.findIndex(workspace => workspace.id === this.selectedWorkspaceId);
-      if (index !== -1) {
-        this.workspaces[index].title = this.newWorkspaceName;
-        this.workspaces[index].description = this.newWorkspaceDescriptionInModal;
-        // Reset edit mode after saving
-        this.isWorkspaceEditMode = false;
+    console.log(this.newWorkspaceName);
+    if (this.newWorkspaceName) {
+      let workspace = {
+        'title': this.newWorkspaceName,
+        'description': this.newWorkspaceDescriptionInModal,
       }
+
+      this.workspaceService.updateWorkspace(this.workspace.id,workspace).subscribe(
+        (res:any)=>{
+          console.log(res)
+          this.workspace = res.data;
+          this.isWorkspaceEditMode = false;
+          this.workspaceService.SelectedWorkspace(res.data);
+        },
+        (error)=>{
+          console.log(error);
+        }
+      );
+        // Reset edit mode after saving
     }
   }
 
@@ -256,15 +266,7 @@ confirmDeleteWorkspace() {
  
       // Delete the workspace and its boards
       this.workspaces.splice(index, 1);
-      console.log("workspace delted "+this.workspace);
-      console.log("hereee delete")
-      this.workspaceService.deleteWorkspace(this.workspace.id).subscribe(
-        (res:any)=>{
-          console.log("hereee delete")
-          console.log(res);
-        },
-        (error)=>{console.log(error);}
-      );
+      this.workspaceService.deleteWorkspace(this.workspace.id).subscribe();
       this.workspaceService.SelectedWorkspace(null);
 
       // Set the flag to true when the workspace is deleted

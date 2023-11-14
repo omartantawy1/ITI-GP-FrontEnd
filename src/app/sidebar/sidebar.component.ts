@@ -25,7 +25,7 @@ export class SidebarComponent {
         },
         (error) => {console.log()}
       );
-    },2000)
+    },1000)
   }
 
   close(){
