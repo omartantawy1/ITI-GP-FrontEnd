@@ -30,7 +30,7 @@
         
           <!----  Show Images Part  --->
 
-          <div *ngIf="uploadedFiles.length > 0">
+          <div *ngIf="card.attachments.length > 0">
             <h4>Attachments</h4>
             <!-- <ul>
               <li *ngFor="let file of uploadedFiles">
@@ -40,11 +40,8 @@
           </div>
           
           <div id="fileDisplay" style="display: flex; flex-wrap: wrap;">
-            <div *ngFor="let file of uploadedFiles"
+            <div *ngFor="let file of card.attachments; let i = index"
               style="width: 80px; margin: 5px; position: relative;">
-                <span class="delete-icon" (click)="removeFile(file)">
-                  <i class="bi bi-x-circle" style="margin-bottom: 3px;"></i>
-                </span>
                 <ng-container [ngSwitch]="file.type">
                   <div *ngSwitchCase="'image'">
                     <img [src]="file.url" alt="{{ file.name }}" style="width: 100%; height: auto; max-width: 100%; max-height: 100%;" />
@@ -63,8 +60,26 @@
                     Unsupported file type: {{ file.name }}
                   </div>
                 </ng-container>
+                <div class="col-md-6">
+                  <p class="card-text" style="margin-left: 10px;">
+                    <span *ngIf="file.editMode; else displayMode">
+                      <input [(ngModel)]="file.newName" class="form-control" style="width: 70%;" (focus)="file.newName = file.name">
+                      <button class="btn btn-primary" (click)="saveEditedName(file)">Save</button>
+                      <button class="btn btn-secondary" (click)="cancelEditFile(file)">Cancel</button>
+                    </span>
+                
+                    <ng-template #displayMode>
+                      {{ file.name.length > 20 ? (file.name.slice(0, 20) + '...' + file.name.split('.').pop()) : file.name }}
+                      <button class="btn btn-primary" (click)="toggleEditMode(file)">Edit</button>
+                      <button class="btn btn-danger" (click)="removeFile(i)">Delete</button>
+                      <button class="btn btn-primary" (click)="downloadFile(file)">Download</button>
+                    </ng-template>
+                  </p>
+                </div>
             </div>
           </div>
+           
+          
           
           
           <!--  Description Part --->
@@ -322,7 +337,7 @@
 
           <!---  ATTACHMENT -->
           <div>
-            <input #fileInput type="file" style="display: none" (change)="onFileSelected($event)" accept="image/*, application/pdf, .doc, .docx">
+            <input #fileInput type="file" style="display: none" (change)="onFileSelected($event)">
             <button class="btn btn-primary custom-button d-flex align-items-center mb-2" (click)="fileInput.click()">
               <i class="bi bi-paperclip"></i>
               <span style="margin-left: 10px;">Attachment</span>

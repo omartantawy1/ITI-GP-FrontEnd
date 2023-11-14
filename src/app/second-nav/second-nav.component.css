@@ -176,15 +176,22 @@ color: #2abb7f
 }
 
 /************ account-button *********/
-.btn-circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: none;
+.user-two{
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    font-weight:bold;
+    color: white !;
 }
 
-.acc-ico {
-    margin-left: -5px;
+.user-div{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: #1c3352 ;
+    cursor: pointer;
 }
 
 

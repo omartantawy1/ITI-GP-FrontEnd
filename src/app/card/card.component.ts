@@ -10,6 +10,7 @@ import { CategoryInterface as Category } from '../interfaces/category-interface'
 import { error } from 'jquery';
 import { TaskService } from '../services/task.service';
 import { GroupService } from '../services/group.service';
+import { AttachmentService } from '../services/attachment.service';
 
 @Component({
   selector: 'app-card',
@@ -44,13 +45,16 @@ export class CardComponent {
     private cardService:CardService,
     private categoryService:CategoryService,
     private groupService: GroupService,
-    private taskService: TaskService){}
+    private taskService: TaskService,
+    private attachmentService: AttachmentService){}
 
 
   /* initalize all thing on card */
   ngOnInit(){
     console.log(this.card);
     this.checklistTitles = this.card.groups? this.card.groups:[];
+    // this.uploadedFiles = this.card.attachments? this.card.attachments:[];
+    
   
     this.userService.getCurrentUser().subscribe(
       (res:any) => {
@@ -174,6 +178,7 @@ export class CardComponent {
         console.error(error);
       }
     );
+    this.DataCast = {};
   }
 
   updateChecklistProgress(checklistId: number, item: { id: number, name: string, checked: boolean }) {
@@ -191,6 +196,7 @@ export class CardComponent {
           console.error(error);
         }
       );
+      this.DataCast = {};
 
     const checklist = this.checklistTitles.find(item => item.id === checklistId);
     if (checklist) {
@@ -258,6 +264,7 @@ export class CardComponent {
           console.error(error);
         }
       );
+      this.DataCast = {};
       this.editingItemIds[checklist.id] = null;
     }
   }
@@ -452,47 +459,134 @@ colors = [
   /***   Attachments Part */
 
   showDeleteIcon = false;
-  uploadedFiles: Array<any> = [];
-
-  onFileSelected(event: any) {
-    const files = event.target.files;
-    if (files.length > 0) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-
-        reader.onload = () => {
-          this.uploadedFiles.push({
-            name: file.name,
-            type: this.getFileType(file.type),
-            url: reader.result,
-          });
-        };
-
-        reader.readAsDataURL(file);
-      }
-    }
-  }
-
-  removeFile(file: any) {
-    const index = this.uploadedFiles.indexOf(file);
-    if (index !== -1) {
-      this.uploadedFiles.splice(index, 1);
-    }
-  }
-
+  // uploadedFiles: Array<any> = [];
   
 
-  getFileType(type: string) {
-    if (type.includes('image')) {
-      return 'image';
-    } else if (type.includes('pdf')) {
-      return 'pdf';
-    } else if (type.includes('msword') || type.includes('officedocument')) {
-      return 'document';
-    } else {
-      return 'other';
+  onFileSelected(event: any) {
+
+    // let inputEl: HTMLInputElement = this.inputEl.nativeElement;
+    // const file: any = inputEl.files ? inputEl.files.item(0) : 0;
+
+
+    let file = event.target.files[0]
+    const formData = new FormData();
+
+    formData.append('attachment', file);
+    formData.append('user_id', this.currentUser.id.toString());
+    formData.append('card_id', this.card.id.toString());
+    
+
+    this.attachmentService.createAttachment(formData).subscribe(
+      (res: any) => {
+        console.log("uploaded");
+        this.card.attachments.unshift(res.data);
+
+        // const reader = new FileReader();
+      //   reader.readAsDataURL(file);
+      // reader.onload = () => {
+      //   this.uploadedFiles.push({
+      //     id: file.id,
+      //     name: file.name,
+      //     type: this.getFileType(file.type),
+      //     url: reader.result as string,
+        },
+        (err) => console.log(err)
+      );
+
+        // console.log(this.uploadedFiles); // Move the log statement here
+      // };
+      
+  }
+
+  removeFile(index: number) {
+    this.attachmentService.deleteAttachment(this.card.attachments[index]).subscribe(
+      (response: any) => {
+        console.log('deleted');
+        this.card.attachments.splice(index, 1);
+    },
+    (error) => {
+      // Registration failed, handle the error here
+      console.error(error);
     }
+    );
+  }
+
+  // getFileType(type: string) {
+  //   if (type.includes('image')) {
+  //     return 'image';
+  //   } else if (type.includes('pdf')) {
+  //     return 'pdf';
+  //   } else if (type.includes('msword') || type.includes('officedocument')) {
+  //     return 'document';
+  //   } else {
+  //     return 'other';
+  //   }
+  // }
+
+
+  downloadFile(file: any) {
+
+
+    this.attachmentService.downloadAttachment(file).subscribe(
+      (data) => {
+        const newblob = new Blob([data], {type: file.type});
+
+         var downloadURL = window.URL.createObjectURL(newblob);
+         var link = document.createElement('a');
+         link.href = downloadURL;
+         link.target = '_blank';
+         link.download = file.name;
+         link.click();
+         console.log('downloaded');
+         
+      }
+    );
+ 
+  }
+  
+  img(file: any) {
+
+
+    this.attachmentService.downloadAttachment(file).subscribe(
+      (data) => {
+        return data;
+         
+      }
+    );
+ 
+  }
+ 
+  toggleEditMode(file: any) {
+    file.editMode = !file.editMode;
+  
+  }
+
+
+  saveEditedName(file: any) {
+    file.name = file.newName; // Update the name with the new name
+    file.editMode = false; // Exit edit mode
+
+    this.DataCast.name = file.name;
+    this.DataCast.id = file.id;
+    this.attachmentService.updateAttachment(this.DataCast).subscribe(
+      (response: any) => {
+        console.log('edited', response);
+
+    },
+    (error) => {
+      // Registration failed, handle the error here
+      console.error(error);
+    }
+    );
+
+    this.DataCast = {};
+  }
+  cancelEditFile(file: any) {
+  
+    if (!file.newName || file.newName.trim() === '') {
+      file.newName = file.name;
+    }
+    file.editMode = false;
   }
 
 
