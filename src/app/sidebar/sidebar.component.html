@@ -1,25 +1,29 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar"  [ngClass]="{'resize':!opened}">
-  <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto fs-4 link-dark text-decoration-none animate" [ngClass]="{'centerd':!opened}" previewlistener="true">
-    
-      <i class="bi bi-kanban me-1"></i> <span class="animate" *ngIf="opened">Work</span>
+<div class="d-flex flex-column flex-shrink-0 py-3 px-2 bg-light sidebar"  [ngClass]="{'open':opened}">
+  <div class="d-flex justify-content-between align-items-center mb-3 fs-4 link-dark text-decoration-none animate" [ngClass]="{'centerd':!opened}" previewlistener="true">
+    <div>
+      <i class="bi bi-kanban me-1"></i> <span class="animate">Work</span>
+    </div>
+    <div class="btn fs-5 icon-close" (click)="close()">
+      <i class="bi bi-clipboard2-x"></i>
+    </div>
   </div>
-  <hr>
-  <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item mb-2">
-      <a class="nav-link dropdown fs-4 centerd  animate"  [ngClass]="{'centerd':!opened}"  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" routerLink="workspace" aria-current="page">
-          <i class="bi bi-person-workspace"></i>
-        <span [ngClass]="{'close-nav':!opened}"> Workspaces</span>
-      </a>
+  <ul class="nav nav-pills flex-column mb-auto ">
+    
     <li class="nav-item">
-      <a  class="nav-link dropdown fs-4 centerd animate"  [ngClass]="{'centerd':!opened}" [routerLinkActive]="'active'" routerLink="boards" aria-current="page">
-          <i class="bi bi-clipboard-data"></i>
-          <span [ngClass]="{'close-nav':!opened}">
-
-              Boards
-          </span>
+      <a class="nav-link dropdown fs-6 text-secondary  animate"  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" routerLink="workspace" aria-current="page">
+          <i class="bi bi-person-workspace"></i>
+        <span> Workspaces</span>
       </a>
     </li>
+    <hr>
+    <li *ngFor="let workspace of workspaces"  >
+      <a *ngIf="workspace!=undefined" (click)="selectWorkspace(workspace)" class="dropdown-item d-flex align-items-center rounded workspaces-items px-1" style="cursor: pointer !important;">
+      <p class="p-0 m-0  rounded my-2 me-2 fw-bold  text-center text-uppercase" style="width: 35px;height: 35px;line-height: 35px;background: linear-gradient(to bottom, #4bce97, #216e4e);">{{workspace.title[0]}}</p>
+          <p class=" m-0 p-0 text-dark-emphasis fw-medium" style="max-width: 180px;overflow: hidden; text-overflow: ellipsis;">{{workspace.title}}</p>
+      </a>
+    </li>
+     
+    
   </ul>
-  <hr>
  
 </div>

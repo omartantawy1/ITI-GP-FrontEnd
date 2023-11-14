@@ -28,11 +28,11 @@ export class BoardService {
     return this.http.get(`${this.api_boards}/${boardId}`,{headers:this.headers});
   }
 
-  createBoard(board: Board) {
+  createBoard(board: any) {
     return this.http.post(this.api_boards, board,{headers:this.headers});
   }
 
-  updateBoard(boardId: number, board: Board) {
+  updateBoard(boardId: number, board: any) {
     return this.http.put(`${this.api_boards}/${boardId}`, board,{headers:this.headers});
   }
 

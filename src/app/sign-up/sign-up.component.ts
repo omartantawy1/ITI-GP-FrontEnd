@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators,AbstractControl } from '@angular/for
 import { Router } from '@angular/router';
 import { SignUpService } from '../services/sign-up.service';
 import { TokenService } from '../services/token.service';
+import { NavbarWithAccountService } from '../services/navbar-with-account.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,11 +16,12 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   errorarr: any = '';
 
-  constructor(private fb: FormBuilder, private router: Router, private SignUpService: SignUpService, private tokenservice: TokenService) {}
+  constructor(private navbarService:NavbarWithAccountService,private fb: FormBuilder, private router: Router, private SignUpService: SignUpService, private tokenservice: TokenService) {}
 
   
 
   ngOnInit() {
+    this.navbarService.hide();
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required, Validators.pattern(/\w+/), Validators.minLength(8)]],
@@ -28,6 +30,10 @@ export class SignUpComponent implements OnInit {
     }, {
       validators: this.passwordMatchValidator
     });
+  }
+  
+  ngOnDestroy(){
+    this.navbarService.display();
   }
 
   // Custom password match validator

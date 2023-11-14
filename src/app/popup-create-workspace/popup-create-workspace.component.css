@@ -1,0 +1,46 @@
+/**** Modal Workspace Dialog ****/
+  
+  
+.modal-dialog {
+    border: none ;
+  
+    
+  }
+  
+
+  .modal-content { 
+    border: none;
+    background-color: #0f2027d3;
+    color: white;
+  }
+  
+
+  .modal-header {
+ color: white;
+    border: none;
+  }
+  
+
+  .modal-footer{
+    border: none;
+  }
+  
+.ws-name{
+    width: 400px;
+    opacity: 0.8;
+}
+.ws-desc{
+    opacity: 0.8;
+}
+
+
+  
+  @media (min-width: 800px) {
+    .modal-dialog {
+      max-width: 1000px; /* Adjust the max width for larger screens if needed */
+    }
+  
+    .modal-content {
+      max-height: 800px; /* Adjust the max height for larger screens if needed */
+    }
+  }

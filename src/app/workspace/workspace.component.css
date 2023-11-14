@@ -1,127 +1,270 @@
-.create-board{
-    background-color: #1D2125;
-      width: 250px;
+
+/*** navbar**/
+#workspaceDropdown .dropdown-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  #workspaceDropdown .grad-div {
+    background: linear-gradient(to bottom, #4bce97, #216e4e);
+    width: 50px;
+    height: 40px;
+    border-radius: 5px;
+  }
+  
+  #workspaceDropdown .letter-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+  
+  #workspaceDropdown .workspace-name {
+    margin-left: 10px;
+  }
+  
+  
+  .edit-workspace-input {
+    width: 40%; /* Adjust the width as needed */
+  }
+  /****************workspace part*********************/
+  
+  .current-ws {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .grad-div {
+      background: linear-gradient(to bottom, #4bce97, #216e4e);
+      width: 80px;
+      height: 70px;
+      border-radius: 5px;
+    }
+    
+    .letter-div {
+      display: flex;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 25px;
+      font-weight: bolder;
+    }
+  
+    hr { 
+      display: block;
+      margin-bottom: 0.5em;
+      margin-left: auto;
+      margin-right: auto;
+      border-style: inset;
+      border-width: 4px;
+  } 
+  /*** Boards Part ***/
+  
+  
+  .create-board{
+  background-color: #1D2125;
+    width: 250px;
+    height: 80px;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin: 5px;
+  
+  }
+  
+  
+  .main-board-selectors{
+      width: 320px;
+      border:1px solid black;
+      border-radius: 20px;
+      color: white;
+      font-size: 13px;
+     position: relative;
+     margin: 3px;
+  }
+  
+  .first-color{
+      width: 40px;
+      height: 30px;
+      background:linear-gradient(to right, #ff9966, #ff5e62) ;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .second-color{
+      width: 40px;
+      height: 30px;
+      background:linear-gradient(to right, #AA076B, #61045F) ;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .third-color{
+      width: 40px;
+      height: 30px;
+      background:linear-gradient(to right, #348F50, #56B4D3) ;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .fourth-color{
+      width: 40px;
+      height: 30px;
+      background:linear-gradient(to right, #2b5876, #4e4376) ;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .fifth-color{
+      width: 40px;
+      height: 30px;
+      background:linear-gradient(to right,#355C7D, #6C5B7B,#C06C84) ;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  
+  .sixth-color{
+      width: 40px;
+      height: 30px;
+      background:linear-gradient(to right, #ec008c, #fc6767) ;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center
+  }
+  
+  .seventh-color {
+    width: 40px;
+    height: 30px;
+    background: linear-gradient(to right, #0F2027, #2C5364); 
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .created-boards {
+    position: relative;
+    width: 200px; 
+    height: 80px; 
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    cursor: pointer;
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .delete-board-icon {
+    position: absolute;
+    top: 5px; 
+    right: 5px; 
+    cursor: pointer;
+  }
+  
+  
+  .created-boards:hover{
+      width: 200px;
       height: 80px;
       color: white;
       border-radius: 10px;
-      text-align: center;
+      display: flex;
       cursor: pointer;
       margin: 5px;
+      align-items: center;
+      justify-content: center; 
+      background:#A6C5E229;
+      opacity: 0.8;
+      font-size: 17px;
+  }
+  
+  .boards{
+      display: flex;
+      flex-wrap: wrap; 
+     position: absolute;
+     margin: 5px;
     
+  }
+  
+  
+  .board-background div {
+    margin-right: 10px; 
+  }
+  
+  .board-background div:last-child {
+    margin-right: 0; 
+  }
+  
+  .modal-delete{
+    width: 300px;
+  }
+  .modal-del-content{
+    width: 300px;
+  }
+  
+  /**** Modal Workspace Dialog ****/
+  
+  
+  .modal-dialog {
+      border: none ;
+    
+      
     }
     
-    
-    .main-board-selectors{
-        width: 320px;
-        border:1px solid black;
-        border-radius: 20px;
-        color: white;
-        font-size: 13px;
-       position: relative;
-       margin: 3px;
+  
+    .modal-content { 
+      border: none;
+      background-color: #0f2027d3;
+      color: white;
     }
     
-    .first-color{
-        width: 40px;
-        height: 30px;
-        background:linear-gradient(to right, #ff9966, #ff5e62) ;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .second-color{
-        width: 40px;
-        height: 30px;
-        background:linear-gradient(to right, #AA076B, #61045F) ;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  
+    .modal-header {
+   color: white;
+      border: none;
     }
     
-    .third-color{
-        width: 40px;
-        height: 30px;
-        background:linear-gradient(to right, #348F50, #56B4D3) ;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  
+    .modal-footer{
+      border: none;
     }
     
-    .fourth-color{
-        width: 40px;
-        height: 30px;
-        background:linear-gradient(to right, #2b5876, #4e4376) ;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  .ws-name{
+      width: 400px;
+      opacity: 0.8;
+  }
+  .ws-desc{
+      opacity: 0.8;
+  }
+  
+  
     
-    .fifth-color{
-        width: 40px;
-        height: 30px;
-        background:linear-gradient(to right,#355C7D, #6C5B7B,#C06C84) ;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+    @media (min-width: 992px) {
+      .modal-dialog {
+        max-width: 1000px; /* Adjust the max width for larger screens if needed */
+      }
     
-    
-    .sixth-color{
-        width: 40px;
-        height: 30px;
-        background:linear-gradient(to right, #ec008c, #fc6767) ;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center
+      .modal-content {
+        max-height: 800px; /* Adjust the max height for larger screens if needed */
+      }
     }
-    
-    .seventh-color{
-        width: 40px;
-        height: 30px;
-        background:linear-gradient(to right, #0F2027, #2C5364), ;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .created-boards{
-        width: 200px;
-        height: 80px;
-        color: white;
-        border-radius: 10px;
-        display: flex;
-        cursor: pointer;
-        margin: 5px;
-        align-items: center;
-        justify-content: center;
-       
-    }
-    
-    .created-boards:hover{
-        width: 200px;
-        height: 80px;
-        color: white;
-        border-radius: 10px;
-        display: flex;
-        cursor: pointer;
-        margin: 5px;
-        align-items: center;
-        justify-content: center; 
-        background:#A6C5E229;
-        opacity: 0.8;
-        font-size: 17px;
-    }
-    
-    .boards{
-        display: flex;
-        flex-wrap: wrap; 
-       position: absolute;
-       margin: 5px;
-    }
+  
+   

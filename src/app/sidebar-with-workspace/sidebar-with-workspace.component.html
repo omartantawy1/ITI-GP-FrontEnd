@@ -1,0 +1,22 @@
+<span class="mx-2 m-2" style="position: fixed;right: 0;" *ngIf="showIconSide" >
+    <button *ngIf="!opened"  (click)="toggleDrawer(true)"  class="btn p-0 m-0"><i class="bi bi-clipboard-check fs-3 "></i></button>
+    <button *ngIf="opened"  (click)="toggleDrawer(false)"  class="btn p-0 m-0"><i class="bi bi-clipboard-check-fill fs-3 "></i></button>
+  </span>
+<section>
+    <div class="container py-5">
+        <div class="row justify-content-lg-between justify-content-md-center align-items-start workspace-sm">
+    
+            <div class="col-md-3 sidebar">
+                <app-sidebar (closeSide)="toggleDrawer(false)" [opened]="opened"></app-sidebar>
+            </div>
+            <div class="animate col-sm-12 col-md-8">
+            
+                <app-workspace  ></app-workspace>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div [ngClass]="{'openSideBar':showIconSide&&opened}">
+
+</div>

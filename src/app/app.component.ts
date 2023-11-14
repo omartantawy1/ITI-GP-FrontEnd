@@ -1,4 +1,6 @@
-import { Component , Input,HostListener } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavbarWithAccountService } from './services/navbar-with-account.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,27 +9,7 @@ import { Component , Input,HostListener } from '@angular/core';
 })
 export class AppComponent {
   title = 'TaskFlow';
-  opened:boolean=false;
 
-  ngOnInit(){
-    this.opened=true;
-  }
-
-  toggleDrawer(flag:boolean){
-    this.opened = flag;
-
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event:any) {
-      if (event.target.innerWidth < 1000) {
-          this.toggleDrawer(false);
-        }else{
-          this.toggleDrawer(true);
-          
-      }
-  }
-  
    workspace:any;
    getworkspace(workspace:any){
     this.workspace=workspace;
@@ -35,5 +17,22 @@ export class AppComponent {
    setWorkSpace(workspace:any){
     this.workspace=workspace;
    }
+
+
+   showNaAllBar:boolean = false;
+  subscription:Subscription;
+  
+  constructor(private navbarService:NavbarWithAccountService){
+    this.subscription = this.navbarService.showNavBar.subscribe(
+      (value)=>{
+        this.showNaAllBar = value;
+      }
+    );
+  }
+
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
 
   }
