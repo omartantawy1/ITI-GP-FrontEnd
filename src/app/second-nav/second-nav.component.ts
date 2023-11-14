@@ -2,6 +2,7 @@ import { Component, Input, Output,EventEmitter } from '@angular/core';
 import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-second-nav',
   templateUrl: './second-nav.component.html',
@@ -28,9 +29,16 @@ export class SecondNavComponent {
   popupVisible: boolean = false;
   workspaceListVisible: boolean = false;
   isFilterVisible: boolean = false;
-  
+  currentUser: any = {};
 
+constructor(private userService: UserService) {}
 
+ngOnInit(){
+  this.userService.getCurrentUser().subscribe(
+    res => this.currentUser = res,
+    err => console.log(err)
+  );
+}
   
 
   // Function to toggle the visibility

@@ -30,7 +30,7 @@
         
           <!----  Show Images Part  --->
 
-          <div *ngIf="uploadedFiles.length > 0">
+          <div *ngIf="card.attachments.length > 0">
             <h4>Attachments</h4>
             <!-- <ul>
               <li *ngFor="let file of uploadedFiles">
@@ -40,11 +40,8 @@
           </div>
           
           <div id="fileDisplay" style="display: flex; flex-wrap: wrap;">
-            <div *ngFor="let file of uploadedFiles"
+            <div *ngFor="let file of card.attachments; let i = index"
               style="width: 80px; margin: 5px; position: relative;">
-                <span class="delete-icon" (click)="removeFile(file)">
-                  <i class="bi bi-x-circle" style="margin-bottom: 3px;"></i>
-                </span>
                 <ng-container [ngSwitch]="file.type">
                   <div *ngSwitchCase="'image'">
                     <img [src]="file.url" alt="{{ file.name }}" style="width: 100%; height: auto; max-width: 100%; max-height: 100%;" />
@@ -63,8 +60,26 @@
                     Unsupported file type: {{ file.name }}
                   </div>
                 </ng-container>
+                <div class="col-md-6">
+                  <p class="card-text" style="margin-left: 10px;">
+                    <span *ngIf="file.editMode; else displayMode">
+                      <input [(ngModel)]="file.newName" class="form-control" style="width: 70%;" (focus)="file.newName = file.name">
+                      <button class="btn btn-primary" (click)="saveEditedName(file)">Save</button>
+                      <button class="btn btn-secondary" (click)="cancelEditFile(file)">Cancel</button>
+                    </span>
+                
+                    <ng-template #displayMode>
+                      {{ file.name.length > 20 ? (file.name.slice(0, 20) + '...' + file.name.split('.').pop()) : file.name }}
+                      <button class="btn btn-primary" (click)="toggleEditMode(file)">Edit</button>
+                      <button class="btn btn-danger" (click)="removeFile(i)">Delete</button>
+                      <button class="btn btn-primary" (click)="downloadFile(file)">Download</button>
+                    </ng-template>
+                  </p>
+                </div>
             </div>
           </div>
+           
+          
           
           
           <!--  Description Part --->
@@ -92,7 +107,13 @@
             <ul style="list-style-type: none; padding-left: 0;">
               <li *ngFor="let list of checklistTitles">
                 <i class="bi bi-card-checklist" style="padding: 5px 5px;"></i>
-                <span style="font-size: 20px;">{{ list.title }} Checklist</span>
+                <span style="font-size: 20px;">
+                <span *ngIf="list !== editingChecklist" (click)="editChecklistTitle(list)">{{ list.name }}</span>
+                  <input *ngIf="list === editingChecklist" type="text" [(ngModel)]="list.name" [ngModelOptions]="{ standalone: true }" />
+                  <button *ngIf="list === editingChecklist" (click)="saveChecklistTitle()" class="btn btn-success">Save</button>
+                  <button *ngIf="list === editingChecklist" (click)="cancelEditChecklistTitle()" class="btn btn-primary" style="background-color: transparent; border-color: transparent">Cancel</button>
+                  <button *ngIf="list !== editingChecklist" class="delete-checklist-btn btn btn-primary" (click)="deleteChecklist(list)">Delete</button>
+                </span>
 
                 <div class="progress progress-bar-style" role="progressbar" aria-label="Basic example" aria-valuenow="{{checklistProgress[list.id]}" aria-valuemin="0" aria-valuemax="100">
                   <div class="progress-bar" [style.width.%]="checklistProgress[list.id]"></div>
@@ -100,9 +121,17 @@
 
                 <ul style="list-style-type: none; padding-left: 0;">
                   <li *ngFor="let item of list.items">
-                    <input type="checkbox" [(ngModel)]="item.checked" (change)="updateChecklistProgress(list.id)" />
-                    {{ item.name }}
-                    <span (click)="deleteItem(list, item)" class="delete-icon" title="Delete Item">🗑️</span>
+                    <input type="checkbox" [(ngModel)]="item.checked" (change)="updateChecklistProgress(list.id, item)" />
+                    <span *ngIf="item.id !== editingItemIds[list.id]">{{ item.name }}</span>
+                    <input *ngIf="item.id === editingItemIds[list.id]" [(ngModel)]="item.name" [ngModelOptions]="{ standalone: true }" />
+                    <ng-container *ngIf="item.id !== editingItemIds[list.id]; else editButtons">
+                      <button (click)="editItemName(list.id, item)" class="edit-item-btn btn btn-primary" style="background-color: transparent; border-color: transparent">Edit</button>
+                      <button (click)="deleteItem(list, item)" class="delete-icon btn btn-primary" title="Delete Item" style="background-color: transparent; border-color: transparent">🗑️</button>
+                    </ng-container>
+                    <ng-template #editButtons>
+                      <button (click)="saveItemName(list, item)" class="btn btn-success">Save</button>
+                      <button (click)="cancelEditItemName(list.id)" class="btn btn-primary" style="background-color: transparent; border-color: transparent">Cancel</button>
+                    </ng-template>
                   </li>
                   <li *ngIf="list.id === editingItemId" style="margin-bottom: 5px">
                     <input class="form-control add-item-input" type="text" [(ngModel)]="checklistItem" [ngModelOptions]="{ standalone: true }" />
@@ -308,7 +337,7 @@
 
           <!---  ATTACHMENT -->
           <div>
-            <input #fileInput type="file" style="display: none" (change)="onFileSelected($event)" accept="image/*, application/pdf, .doc, .docx">
+            <input #fileInput type="file" style="display: none" (change)="onFileSelected($event)">
             <button class="btn btn-primary custom-button d-flex align-items-center mb-2" (click)="fileInput.click()">
               <i class="bi bi-paperclip"></i>
               <span style="margin-left: 10px;">Attachment</span>
