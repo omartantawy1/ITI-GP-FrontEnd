@@ -21,11 +21,12 @@ export class SidebarComponent {
     setInterval(()=>{
       this.workspaceService.getAllWorkspaces().subscribe(
         (res:any)=>{
-          this.workspaces = res.data
+          this.workspaces = res.data;
+          console.log(true);
         },
         (error) => {console.log()}
       );
-    },1000)
+    },3000)
   }
 
   close(){

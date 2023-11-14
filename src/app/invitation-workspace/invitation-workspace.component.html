@@ -1,6 +1,4 @@
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Open Invitation Workspace
-  </button>
+
   
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -13,8 +11,8 @@
         <div class="modal-body">
           <!-- Search Input and Share Button on the same line -->
           <div class="mb-3 d-flex align-items-center">
-            <input type="text" class="form-control" id="searchInput" placeholder="Type here...">
-            <button type="button" class="btn btn-primary ms-2">Share</button>
+            <input type="text" class="form-control" id="searchInput" placeholder="Type here..." [(ngModel)]="userAccount">
+            <button type="button" class="btn btn-primary ms-2" (click)="inviteUser()">Share</button>
           </div>
           
           <!-- Your other modal body content goes here -->

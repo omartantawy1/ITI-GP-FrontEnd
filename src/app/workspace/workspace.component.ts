@@ -7,6 +7,8 @@ import { WorkspaceService } from '../services/workspace.service';
 import { BoardInterface as Board } from '../interfaces/board-interface';
 import { BoardService } from '../services/board.service';
 import { NavbarWithAccountService } from '../services/navbar-with-account.service';
+import {MatDialog,} from '@angular/material/dialog';
+import { InvitationWorkspaceComponent } from '../invitation-workspace/invitation-workspace.component';
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
@@ -14,7 +16,7 @@ import { NavbarWithAccountService } from '../services/navbar-with-account.servic
 })
 export class WorkspaceComponent  {
   
-  constructor(private navbarService:NavbarWithAccountService,private router: Router,private workspaceService:WorkspaceService,private boardService:BoardService) { }
+  constructor(private dialog:MatDialog,private navbarService:NavbarWithAccountService,private router: Router,private workspaceService:WorkspaceService,private boardService:BoardService) { }
   myWorkspaces: { id: number, name: string, description: string }[] = []; 
  /*  workspaces: { id: number, name: string ,description: string}[] = []; */
   workspaces:Array<Workspace> = [] ;
@@ -34,16 +36,18 @@ export class WorkspaceComponent  {
 
   isCreateBoardVisible = false;
 
+  selectedBackgroundImage = '';
+
 
   ngOnInit(){
     this.navbarService.display();
-    this.workspaceService.getAllWorkspaces().subscribe(
-      (res:any)=>{
-        this.workspaces = res.data;
-      },
-      (error)=>{console.log(error)}
-      );
-      setInterval(()=>{
+    setTimeout(()=>{
+        this.workspaceService.getAllWorkspaces().subscribe(
+          (res:any)=>{
+            this.workspaces = res.data;
+          },
+          (error)=>{console.log(error)}
+          );
         this.workspaceService.getWorkspace$.subscribe((workspace)=>{
           this.workspace = workspace; 
           console.log(workspace);
@@ -57,6 +61,18 @@ export class WorkspaceComponent  {
     },3000)
   }
 
+
+  openDialogInvitation(): void {
+    const dialogRef = this.dialog.open(InvitationWorkspaceComponent, {
+      data:{workspace_id:this.workspace.id},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+     this.workspaces = result.workspaces;
+    });
+  }
 
   toggleCreateBoardSection() {
     this.isCreateBoardVisible = !this.isCreateBoardVisible;
@@ -101,6 +117,23 @@ addWorkspaceInModal() {
     'linear-gradient(to right, #0F2027, #2C5364)',
     
   ];
+  backgroundImages: string[] = [
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards1.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards2.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards3.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards4.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards5.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards6.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards7.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards8.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards9.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards10.jpg')"
+  ];
+
+  selectImage(){
+    this.selectedBackgroundImage =  this.backgroundImages[Math.floor(Math.random() * this.backgroundImages.length)]
+  }
   
 
 
@@ -300,9 +333,8 @@ getSelectedWorkspace(){
 
 
 
-navigateToBoard(board: Board) {
-  this.router.navigate(['/board', board.workspace_id, board.title], {
-    /* queryParams: { background: board.background }, */
-  });
+navigateToBoard(boardId: number) {
+  this.boardService.SelectedBoard(boardId);
+  this.router.navigate(['board', boardId]);
 }
 }

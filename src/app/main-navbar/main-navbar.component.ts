@@ -4,6 +4,7 @@ import { Workspace } from '../interfaces/workspace';
 import { PopupCreateWorkspaceComponent } from '../popup-create-workspace/popup-create-workspace.component';
 import {MatDialog,} from '@angular/material/dialog';
 import { data } from 'jquery';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-main-navbar',
   templateUrl: './main-navbar.component.html',
@@ -15,19 +16,18 @@ export class MainNavbarComponent {
 
   workspaces:Array<Workspace> = [];
 
-  constructor(private workspaceService:WorkspaceService,private dialog:MatDialog){
+  constructor(private workspaceService:WorkspaceService,private dialog:MatDialog,private router:Router){
   }
 
   ngOnInit(){
-    setInterval(()=>{
+    setTimeout(()=>{
       this.workspaceService.getAllWorkspaces().subscribe(
         (res:any)=>{
           this.workspaces = res.data
-          console.log("true");
         },
         (error) => {console.log()}
       );
-    },2000)
+    },3000)
   }
 
 
@@ -45,6 +45,7 @@ export class MainNavbarComponent {
 
   selectWorkspace(workspace:Workspace){
     this.workspaceService.SelectedWorkspace(workspace);
+    this.router.navigate(['workspace', workspace.id]);
   }
 
 

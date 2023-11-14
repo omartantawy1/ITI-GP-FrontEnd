@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { BoardInterface as Board }  from '../interfaces/board-interface';
 import { TokenService } from './token.service';
+import { Observable,Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,9 @@ import { TokenService } from './token.service';
 export class BoardService {
   
   private api_boards = 'http://127.0.0.1:8000/api/boards';
-
+  public workspace = new Subject<Board>;
+  getWorkspace$ = this.workspace.asObservable();
+  
   private headers: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient,private tokenService:TokenService) { 
@@ -19,6 +21,12 @@ export class BoardService {
       'Authorization': `Bearer ${this.tokenService.getToken()}`
     })
   }
+
+  SelectedBoard(board:any){
+    console.log(board);
+    this.workspace.next(board);
+  }
+
 
   getAllBoards(): Observable<Board[]> {
     return this.http.get<Board[]>(this.api_boards,{headers:this.headers});
