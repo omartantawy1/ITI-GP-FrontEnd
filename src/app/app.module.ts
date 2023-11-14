@@ -39,6 +39,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { SidebarWithWorkspaceComponent } from './sidebar-with-workspace/sidebar-with-workspace.component';
 import { InvitationWorkspaceComponent } from './invitation-workspace/invitation-workspace.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
+import { PaypalComponent } from './paypal/paypal.component';
 
 
 
@@ -66,7 +69,10 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
     ForgetPasswordComponent,
     ResetPasswordComponent,
     SidebarWithWorkspaceComponent,
-    InvitationWorkspaceComponent
+    InvitationWorkspaceComponent,
+    PaymentSuccessComponent,
+    PaymentFailedComponent,
+    PaypalComponent
 
   ],
   imports: [
