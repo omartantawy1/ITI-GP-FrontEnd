@@ -5,143 +5,83 @@
 </head>
 <body class="background">
 
-    <br>
-    <br>
+  <br><br><br>
 
-    <div class="container">
-        <div class="row big-box">
-            <div class="col-md-8">
-                <!-- Profile Heading -->
-                <div class="panel">
-                    <form action="" class="panel-bg-cover">
-                        <label for="cover-image" class="cover-label">
-                            <img class="img-responsive" [src]="coverImageSrc" alt="Cover Image">
-                            <input type="file" id="cover-image" accept="image/*" style="display: none" (change)="onCoverImageSelected($event)">
-                        </label>
-                    </form>
+<div class="page-content page-container" id="page-content">
     
-                    <div class="panel-media">
-                        <label for="profile-image" class="profile-label">
-                            <img [src]="profileImageSrc" class="panel-media-img img-circle img-border-light" alt="Profile Picture">
-                            <input type="file" id="profile-image" accept="image/*" style="display: none" (change)="onProfileImageSelected($event)">
-                        </label>
-    
-                        <div class="row">
-                            <div class="col-md-7">
-                                <h3 class="panel-media-heading">Omar Ashraf</h3>
-                                <a href="#" class="btn-link">My Boards</a>
-                                <p class="text-muted mar-btm">Web and Graphic designer</p>
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+<div class="col-xl-6 col-md-12">
+    <h4>My Profile Info</h4>
+    <div class="card user-card-full">
+        
+        <div class="row m-l-0 m-r-0">
+            <div class="col-sm-12 bg-c-lite-green user-profile">
+                <div class="card-block text-center text-white">
+
+                    <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                        <div (click)="fileInput.click()" style="cursor: pointer;">
+                          <img
+                            [src]="imagePath"
+                            alt=""
+                            style="height: 80px; width: 80px; border-radius: 15px"
+                          />
+                          <input
+                            type="file"
+                            #fileInput
+                            style="display: none"
+                            (change)="onFileSelected($event)"
+                          />
+                        </div>
+                      </form>
+
+                    
+                    <h6 class="f-w-600">{{fullName}}</h6>
+                    <p>Web Designer</p>
+                    <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card-block">
+                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600 text-center">Email</p>
+                            <h6 class="text-muted f-w-400 text-center">rntng@gmail.com</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600 text-center">Full Name</p>
+                            <div *ngIf="!isEditMode" (click)="enterEditMode()">
+                              <h6 class="text-muted f-w-400 text-center">{{ fullName }}</h6>
                             </div>
-                            <div class="col-md-5 pull-right">
-                                <strong>Who can see this profile ?</strong>
+                            <div *ngIf="isEditMode" class="text-center">
+                              <input [(ngModel)]="fullName" autofocus>
+                              <div class="button-container">
+                                <button (click)="saveChanges()" class="btn btn-primary save-button">Save</button>
+                                <button (click)="cancelEdit()" class="btn btn-primary cancel-button">Cancel</button>
+                              </div>
                             </div>
+                          </div>
+                    </div>
+                    <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Projects</h6>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600 text-center">Workspaces</p>
+                            <h6 class="text-muted f-w-400 text-center">1</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600 text-center" >Boards</p>
+                            <h6 class="text-muted f-w-400 text-center" >1</h6>
                         </div>
                     </div>
+                   
                 </div>
             </div>
         </div>
     </div>
-
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="signup-form form">
-                    <form action="" class="mt-5 border p-4 bg-light shadow" method="get">
-                        <h4 class="mb-5 text-secondary">About You</h4>
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label>Full Name<span class="text-danger">*</span></label>
-                                <ng-container *ngIf="!editingFullName; else editFullName">
-                                    <p (click)="editingFullName = true">Your Full Name</p>
-                                </ng-container>
-                                <ng-template #editFullName>
-                                    <input type="text" name="full-name" class="form-control form-control-sm" placeholder="Enter Full Name">
-                                </ng-template>
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label>Who can see this?<span class="text-danger">*</span></label>
-                                <select class="form-select form-select-sm" aria-label="Small select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label>Public Name<span class="text-danger">*</span></label>
-                                <ng-container *ngIf="!editingPublicName; else editPublicName">
-                                    <p (click)="editingPublicName = true">Your Public Name</p>
-                                </ng-container>
-                                <ng-template #editPublicName>
-                                    <input type="text" name="public-name" class="form-control form-control-sm" placeholder="Enter Public Name">
-                                </ng-template>
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label>Who can see this?<span class="text-danger">*</span></label>
-                                <select class="form-select form-select-sm" aria-label="Small select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label>Job Title<span class="text-danger">*</span></label>
-                                <ng-container *ngIf="!editingJobTitle; else editJobTitle">
-                                    <p (click)="editingJobTitle = true">Your Job Title</p>
-                                </ng-container>
-                                <ng-template #editJobTitle>
-                                    <input type="text" name="job-title" class="form-control form-control-sm" placeholder="Enter Job Title">
-                                </ng-template>
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label>Who can see this?<span class="text-danger">*</span></label>
-                                <select class="form-select form-select-sm" aria-label="Small select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                            <div class="col-md-7">
-                                <button class="btn btn-primary float-end">Update</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+</div>
+</div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="signup-form ">
-                    <form action="" class="mt-5 border p-4 bg-light shadow">
-                        <h4 class="mb-5 text-secondary">Contact</h4>
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label>Email Address<span class="text-danger">*</span></label>
-                                <strong>amoraashraf2000@gmail.com</strong>
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label>Who can see this ?<span class="text-danger">*</span></label>
-                                <select class="form-select form-select-sm" aria-label="Small select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <br>
-    <br>
-
+</div>
 </body>
 </html>

@@ -7,38 +7,55 @@ import { Component } from '@angular/core';
 })
 export class EditMyProfileComponent {
 
-  coverImageSrc: string = '../../assets/images/header.avif';
-  profileImageSrc: string = 'https://bootdey.com/img/Content/user_6.jpg';
 
-  editingFullName: boolean = false;
-  editingPublicName: boolean = false;
-  editingJobTitle: boolean = false;
+  originalFullName = 'Omar';
+  fullName = this.originalFullName;
+  isEditMode = false;
 
-  constructor() { }
-
-  chooseCoverImage() {
-    // Trigger the file input for choosing the cover image
-    document.getElementById('cover-image')?.click();
+  enterEditMode() {
+    this.isEditMode = true;
   }
 
-  chooseProfileImage() {
-    // Trigger the file input for choosing the profile image
-    document.getElementById('profile-image')?.click();
+  exitEditMode() {
+    this.isEditMode = false;
+  
+    this.fullName = this.originalFullName;
   }
 
-  onCoverImageSelected(event: any) {
-    // Handle the selected cover image here
-    const coverImageFile = event.target.files[0];
-    // Update the cover image source
-    this.coverImageSrc = URL.createObjectURL(coverImageFile);
+  saveChanges() {
+
+    this.originalFullName = this.fullName;
+    this.exitEditMode(); 
   }
 
-  onProfileImageSelected(event: any) {
-    // Handle the selected profile image here
-    const profileImageFile = event.target.files[0];
-    // Update the profile image source
-    this.profileImageSrc = URL.createObjectURL(profileImageFile);
+  cancelEdit() {
+    this.exitEditMode();
   }
 
+
+/* Image */
+
+
+imagePath = '../../assets/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg';
+selectedFile: File | null = null;
+
+onFileSelected(event: any): void {
+  const fileInput = event.target;
+  if (fileInput.files && fileInput.files.length > 0) {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.imagePath = e.target.result;
+      console.log('Selected image path:', this.imagePath);
+    };
+    reader.readAsDataURL(fileInput.files[0]);
+
+    this.selectedFile = fileInput.files[0];
+  }
+}
+
+onSubmit(): void {
+  // Handle form submission here, e.g., send data to the server
+  console.log('Form submitted:', this.selectedFile);
+}
 
 }
