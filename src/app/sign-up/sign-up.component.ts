@@ -31,6 +31,10 @@ export class SignUpComponent implements OnInit {
       validators: this.passwordMatchValidator
     });
   }
+  
+  ngOnDestroy(){
+    this.navbarService.display();
+  }
 
   // Custom password match validator
   passwordMatchValidator(group: AbstractControl) {

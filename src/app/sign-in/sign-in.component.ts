@@ -73,4 +73,9 @@ export class SignInComponent implements OnInit {
   Github(){
     this.SignInService.signWithGithub();
   }
+
+  ngOnDestroy(){
+    this.navbarService.display();
+  }
+
 }

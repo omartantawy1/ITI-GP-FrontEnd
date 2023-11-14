@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Workspace } from '../interfaces/workspace';
 import { WorkspaceService } from '../services/workspace.service';
 import { BoardInterface as Board } from '../interfaces/board-interface';
+import { BoardService } from '../services/board.service';
+import { NavbarWithAccountService } from '../services/navbar-with-account.service';
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
@@ -12,7 +14,7 @@ import { BoardInterface as Board } from '../interfaces/board-interface';
 })
 export class WorkspaceComponent  {
   
-  constructor(private router: Router,private workspaceService:WorkspaceService) { }
+  constructor(private navbarService:NavbarWithAccountService,private router: Router,private workspaceService:WorkspaceService,private boardService:BoardService) { }
   myWorkspaces: { id: number, name: string, description: string }[] = []; 
  /*  workspaces: { id: number, name: string ,description: string}[] = []; */
   workspaces:Array<Workspace> = [] ;
@@ -20,7 +22,7 @@ export class WorkspaceComponent  {
   selectedWorkspaceId: number = 0;
   newWorkspaceNameInModal: string = '';
   newWorkspaceDescriptionInModal: string = ''; // Add description variable
-  boards: { workspaceId: number, title: string,background:string}[] = [];
+ /*  boards:Array<Board>=[]; */
   newBoardName = '';
   workspace!:Workspace;
 
@@ -34,7 +36,7 @@ export class WorkspaceComponent  {
 
 
   ngOnInit(){
-
+    this.navbarService.display();
     this.workspace!;
     this.workspaceService.getAllWorkspaces().subscribe(
       (res:any)=>{
@@ -80,8 +82,8 @@ addWorkspaceInModal() {
       (error)=>{console.log(error)}
     );
 
-    console.log('Updated Workspaces:', this.workspaces);
-    console.log('Boards:', this.boards); // Log the boards when a workspace is added
+   /*  console.log('Updated Workspaces:', this.workspaces);
+    console.log('Boards:', this.boards);  Log the boards when a workspace is added*/
   }
 }
   backgroundColors: string[] = [
@@ -100,26 +102,33 @@ addWorkspaceInModal() {
   createBoard() {
     if (this.newBoardName && this.selectedColorIndex >= 0) {
       const newBoard = {
-        workspaceId: this.selectedWorkspaceId,
-        title: this.newBoardName,
-        background: this.backgroundColors[this.selectedColorIndex],
+        'title': this.newBoardName,
+        'background': this.backgroundColors[this.selectedColorIndex],
+        'workspace_id':this.workspace.id
       };
-      this.boards.push(newBoard);
-      this.newBoardName = '';
-      this.isCreateBoardVisible = false;
-      console.log('Updated Boards:', this.boards); // Log the boards when a new board is created
+      this.boardService.createBoard(newBoard).subscribe(
+        (res:any)=>{
+
+          this.workspace.boards.push(res.data);
+          this.newBoardName = '';
+          this.isCreateBoardVisible = false; // Log the boards when a new board is created
+        },
+        (error)=>{
+          console.log(error);
+        }
+      );
     }
   }
 
 
-  deleteBoard(board: Board) {
-    const index = this.boards.findIndex(b => b.workspaceId === board.workspace_id && b.title === board.title /* && b.background === board.background */);
-    if (index !== -1) {
+/*   deleteBoard(board: Board) { */
+    //const index = this.workspace.boards.findIndex(b => b.id === board.id /* && b.background === board.background */);
+/*     if (index !== -1) {
       this.boards.splice(index, 1);
       console.log('Updated Boards:', this.boards);
     }
   }
-
+ */
   
  isDeleteConfirmationModalVisible = false;
   boardToDelete!: Board;
@@ -134,11 +143,22 @@ addWorkspaceInModal() {
     this.boardToDelete!;
   }
 
-  confirmDeleteBoard() {
-    if (this.boardToDelete) {
-      this.deleteBoard(this.boardToDelete);
-      this.closeDeleteConfirmationModal();
+  confirmDeleteBoard(boardId:number) {
+    if(boardId){
+     /*  let board = this.workspace.boards.find(b => b.id === boardId ) */
+      let index = this.workspace.boards.findIndex(b => b.id === boardId )
+        this.boardService.deleteBoard(boardId).subscribe(
+          (res:any)=>{
+            console.log(res);
+            this.workspace.boards.splice(index,1);
+            this.workspaceService.SelectedWorkspace(this.workspace);
+            this.closeDeleteConfirmationModal();
+           /*  this.deleteBoard(board); */
+          },
+          (error)=>{console.log(error);}
+        );
     }
+
   }
 
   
@@ -155,7 +175,7 @@ addWorkspaceInModal() {
   }
   
   getBoardsInSelectedWorkspace() {
-    return this.boards.filter(board => board.workspaceId === this.selectedWorkspaceId);
+    return this.workspace.boards.filter(board => board.workspace_id === this.selectedWorkspaceId);
   }
 
   isWorkspaceSelected: boolean = false;
@@ -278,9 +298,9 @@ getSelectedWorkspace(){
 
 
 
-navigateToBoard(board: { workspaceId: number, title: string, background: string }) {
-  this.router.navigate(['/board', board.workspaceId, board.title], {
-    queryParams: { background: board.background },
+navigateToBoard(board: Board) {
+  this.router.navigate(['/board', board.workspace_id, board.title], {
+    /* queryParams: { background: board.background }, */
   });
 }
 }
