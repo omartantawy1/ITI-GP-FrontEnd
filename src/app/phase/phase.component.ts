@@ -4,6 +4,7 @@ import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 import { PhaseService } from '../services/phase.service';
 import { CardService } from '../services/card.service';
 import { CardInterface as Card } from '../interfaces/card-interface';
+import { group } from '@angular/animations';
 
 
 @Component({
@@ -196,5 +197,26 @@ deleteCategory(id:number){
 this.deleteCategoryById.emit(id);
 
 }
-  
+
+/* outer card tasks counters */
+taskCounter: number = 0;
+checkedCounter: number = 0;
+
+countTasks(card: Card){
+  this.taskCounter = 0;
+  this.checkedCounter = 0;
+  card.groups.forEach(group => {
+    group.items.forEach((task: { checked: number; }) => {
+      this.taskCounter++;
+      if (task.checked) {
+        this.checkedCounter++;
+      }
+    });
+  });
+  return this.taskCounter;
+}
+
+countChecked(){
+  return this.checkedCounter;
+}
 }
