@@ -42,6 +42,9 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
 import { PaypalComponent } from './paypal/paypal.component';
+import { PricingComponent } from './pricing/pricing.component';
+import { UserfoundPopupComponent } from './userfound-popup/userfound-popup.component';
+import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-popup.component';
 
 
 
@@ -72,7 +75,10 @@ import { PaypalComponent } from './paypal/paypal.component';
     InvitationWorkspaceComponent,
     PaymentSuccessComponent,
     PaymentFailedComponent,
-    PaypalComponent
+    PaypalComponent,
+    PricingComponent,
+    UserfoundPopupComponent,
+    UsernotfoundPopupComponent
 
   ],
   imports: [
