@@ -1,7 +1,7 @@
 import { Component , Input, Output,EventEmitter } from '@angular/core';
 import { Workspace } from '../interfaces/workspace';
 import { WorkspaceService } from '../services/workspace.service';
-import { error } from 'jquery';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +14,8 @@ export class SidebarComponent {
   workspaces:Array<Workspace> = [];
   @Output() closeSide = new EventEmitter<boolean>();
 
-  constructor(private workspaceService:WorkspaceService){};
+  constructor(private workspaceService:WorkspaceService,private router:Router){
+  };
 
   ngOnInit(){
     setInterval(()=>{
@@ -24,12 +25,17 @@ export class SidebarComponent {
         },
         (error) => {console.log()}
       );
-    },3000)
+    },2000)
   }
 
   close(){
     this.closeSide.emit(false);
   }
-  
+
+  selectWorkspace(workspace:Workspace){
+    this.workspaceService.SelectedWorkspace(workspace);
+    this.router.navigate(['/workspace']);
+  }
+
   
 }

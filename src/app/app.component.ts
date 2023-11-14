@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NavbarWithAccountService } from './services/navbar-with-account.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,5 +17,22 @@ export class AppComponent {
    setWorkSpace(workspace:any){
     this.workspace=workspace;
    }
+
+
+   showNaAllBar:boolean = false;
+  subscription:Subscription;
+  
+  constructor(private navbarService:NavbarWithAccountService){
+    this.subscription = this.navbarService.showNavBar.subscribe(
+      (value)=>{
+        this.showNaAllBar = value;
+      }
+    );
+  }
+
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
 
   }

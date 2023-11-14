@@ -19,12 +19,15 @@ export class MainNavbarComponent {
   }
 
   ngOnInit(){
-    this.workspaceService.getAllWorkspaces().subscribe(
-      (res:any)=>{
-        this.workspaces = res.data;
-      },
-      (error)=>{console.log(error);}
-    );
+    setInterval(()=>{
+      this.workspaceService.getAllWorkspaces().subscribe(
+        (res:any)=>{
+          this.workspaces = res.data
+          console.log("true");
+        },
+        (error) => {console.log()}
+      );
+    },2000)
   }
 
 
@@ -38,6 +41,10 @@ export class MainNavbarComponent {
       console.log(result);
      this.workspaces = result.workspaces;
     });
+  }
+
+  selectWorkspace(workspace:Workspace){
+    this.workspaceService.SelectedWorkspace(workspace);
   }
 
 

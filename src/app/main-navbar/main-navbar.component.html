@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-dark-subtle" style="background-color: rgba(201, 202, 202, 0.382) !important;">
   <div class="container-fluid">
-    <a class="navbar-brand logo-brand fw-bold fs-5 rounded" style="letter-spacing: 1px;" routerLink="workspace"><i class="bi bi-box-fill me-1 d-inline-block logo"></i> TaskFlow</a>
+    <a class="navbar-brand logo-brand fw-bold fs-5 rounded" style="letter-spacing: 1px;" routerLink="sign-in"><i class="bi bi-box-fill me-1 d-inline-block logo"></i> TaskFlow</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -14,15 +14,15 @@
         <ul class="navbar-nav flex-grow-1 pe-3">
          
           <li class="nav-item me-2">
-            <a class="nav-link text-dark rounded fw-bolder" style="cursor: pointer;" [routerLinkActive]="'active'">Home</a>
+            <a class="nav-link text-dark rounded fw-bolder" style="cursor: pointer;" [routerLinkActive]="'active'" routerLink="">Home</a>
           </li>
           <li class="nav-item dropdown me-2 mb">
             <a class="nav-link dropdown-toggle btn btn-light text-dark workspace fw-medium" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Workspaces
             </a>
-            <ul  class="dropdown-menu mb-2 workspaces-dropdown" style="height: 70vh; overflow: auto;">
+            <ul  class="dropdown-menu mb-2 workspaces-dropdown" style="max-height: 70vh; overflow: auto;">
               <li *ngFor="let workspace of workspaces" >
-                <a *ngIf="workspace!=undefined" class="dropdown-item d-flex align-items-center" style="cursor: pointer !important;">
+                <a *ngIf="workspace!=undefined" class="dropdown-item d-flex align-items-center" style="cursor: pointer !important;" (click)="selectWorkspace(workspace)" >
                 <p class="p-0 m-0  rounded m-2 fw-bold fs-6 text-center text-uppercase" style="width: 50px;height: 50px;line-height: 50px;background: linear-gradient(to bottom, #4bce97, #216e4e);">{{workspace.title[0]}}</p>
                     <p class=" m-0 p-0 text-dark-emphasis fw-medium" style="overflow: hidden; text-overflow: ellipsis;">{{workspace.title}}</p>
                 </a>

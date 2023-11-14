@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Workspace } from '../interfaces/workspace';
 import { WorkspaceService } from '../services/workspace.service';
+import { BoardInterface as Board } from '../interfaces/board-interface';
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
@@ -21,6 +22,7 @@ export class WorkspaceComponent  {
   newWorkspaceDescriptionInModal: string = ''; // Add description variable
   boards: { workspaceId: number, title: string,background:string}[] = [];
   newBoardName = '';
+  workspace!:Workspace;
 
   selectedColorIndex = -1;
 
@@ -32,12 +34,21 @@ export class WorkspaceComponent  {
 
 
   ngOnInit(){
+
+    this.workspace!;
     this.workspaceService.getAllWorkspaces().subscribe(
       (res:any)=>{
         this.workspaces = res.data;
       },
       (error)=>{console.log(error)}
     );
+    setInterval(()=>{
+      this.workspaceService.getWorkspace$.subscribe((workspace)=>{
+        this.workspace = workspace; 
+        console.log(workspace);
+      }
+      );
+    },3000)
   }
 
   toggleCreateBoardSection() {
@@ -101,8 +112,8 @@ addWorkspaceInModal() {
   }
 
 
-  deleteBoard(board: { workspaceId: number, title: string, background: string }) {
-    const index = this.boards.findIndex(b => b.workspaceId === board.workspaceId && b.title === board.title && b.background === board.background);
+  deleteBoard(board: Board) {
+    const index = this.boards.findIndex(b => b.workspaceId === board.workspace_id && b.title === board.title /* && b.background === board.background */);
     if (index !== -1) {
       this.boards.splice(index, 1);
       console.log('Updated Boards:', this.boards);
@@ -111,16 +122,16 @@ addWorkspaceInModal() {
 
   
  isDeleteConfirmationModalVisible = false;
-  boardToDelete: { workspaceId: number, title: string, background: string } | null = null;
+  boardToDelete!: Board;
 
-  openDeleteConfirmationModal(board: { workspaceId: number, title: string, background: string }) {
+  openDeleteConfirmationModal(board:Board) {
     this.boardToDelete = board;
     this.isDeleteConfirmationModalVisible = true;
   }
 
   closeDeleteConfirmationModal() {
     this.isDeleteConfirmationModalVisible = false;
-    this.boardToDelete = null;
+    this.boardToDelete!;
   }
 
   confirmDeleteBoard() {
@@ -151,7 +162,7 @@ addWorkspaceInModal() {
 
   // ... existing code ...
 
-  selectWorkspace(workspaceId: number) {
+ selectWorkspace(workspaceId: number) {
     this.selectedWorkspaceId = workspaceId;
     this.isWorkspaceSelected = true;
   
@@ -204,30 +215,37 @@ addWorkspaceInModal() {
 
 
   isDeleteWorkspaceConfirmationModalVisible = false;
-workspaceToDelete: any = null;
 
 openDeleteWorkspaceConfirmationModal(workspace: Workspace) {
   if (workspace) {
-    this.workspaceToDelete = workspace;
     this.isDeleteWorkspaceConfirmationModalVisible = true;
+
   }
 }
 
 closeDeleteWorkspaceConfirmationModal() {
   this.isDeleteWorkspaceConfirmationModalVisible = false;
-  this.workspaceToDelete = null;
 }
 
 
 isWorkspaceDeleted = false;
 
 confirmDeleteWorkspace() {
-  if (this.workspaceToDelete) {
-    const index = this.workspaces.findIndex(workspace => workspace.id === this.workspaceToDelete!.id);
-    if (index !== -1) {
+  if (this.workspace) {
+    const index = this.workspaces.findIndex(workspace => workspace.id === this.workspace.id);
+ 
       // Delete the workspace and its boards
       this.workspaces.splice(index, 1);
-      this.boards = this.boards.filter(board => board.workspaceId !== this.workspaceToDelete!.id);
+      console.log("workspace delted "+this.workspace);
+      console.log("hereee delete")
+      this.workspaceService.deleteWorkspace(this.workspace.id).subscribe(
+        (res:any)=>{
+          console.log("hereee delete")
+          console.log(res);
+        },
+        (error)=>{console.log(error);}
+      );
+      this.workspaceService.SelectedWorkspace(null);
 
       // Set the flag to true when the workspace is deleted
       this.isWorkspaceDeleted = true;
@@ -236,16 +254,14 @@ confirmDeleteWorkspace() {
       /* this.myWorkspaces = this.workspaces.slice();  */// Create a copy of workspaces
 
       // Log the updated workspaces and boards
-      console.log('Updated Workspaces:', this.workspaces);
-      console.log('Updated Boards:', this.boards);
+   
 
-      // Reset variables and close the modal
-      this.workspaceToDelete = null;
+    
       this.isDeleteWorkspaceConfirmationModalVisible = false;
 
       // Reset the flag when appropriate
       this.isWorkspaceDeleted = false;
-    }
+    
   }
 }
 

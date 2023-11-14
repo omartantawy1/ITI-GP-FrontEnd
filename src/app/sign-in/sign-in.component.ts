@@ -5,6 +5,7 @@ import { SignInService } from '../services/sign-in.service';
 import { TokenService } from '../services/token.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { NavbarWithAccountService } from '../services/navbar-with-account.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,7 +18,7 @@ export class SignInComponent implements OnInit {
   errormsg: any = '';
   res: any = '';
 
-  constructor(private activatedRoute:ActivatedRoute ,private fb: FormBuilder, private router: Router, private SignInService: SignInService, private tokenservice: TokenService,private userService:UserService) {
+  constructor(private navbarService:NavbarWithAccountService,private activatedRoute:ActivatedRoute ,private fb: FormBuilder, private router: Router, private SignInService: SignInService, private tokenservice: TokenService,private userService:UserService) {
     this.userService.getCurrentUser().subscribe(
       (res:any)=>{res.email?this.router.navigate(['workspace']):this.router.navigate(['sign-in']);},
       (error)=>{console.log(error)}
@@ -25,6 +26,7 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.navbarService.hide();
       this.activatedRoute.queryParams.subscribe(params => {
         let data = params['token']  ;
         if(data){

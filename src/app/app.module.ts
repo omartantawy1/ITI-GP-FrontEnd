@@ -38,9 +38,8 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SidebarWithWorkspaceComponent } from './sidebar-with-workspace/sidebar-with-workspace.component';
 import { InvitationWorkspaceComponent } from './invitation-workspace/invitation-workspace.component';
-import {MAT_DIALOG_DEFAULT_OPTIONS
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 
-} from '@angular/material/dialog';
 
 
 

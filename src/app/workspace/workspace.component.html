@@ -1,63 +1,21 @@
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            My Workspaces
-          </a>
-              <ul class="dropdown-menu ml-5" id="workspaceDropdown">
-      <li *ngFor="let workspace of workspaces">
-        <a class="nav-link dropdown-item" (click)="selectWorkspace(workspace.id)">
-          <div class="grad-div col-3 d-flex align-items-center justify-content-center">
-            <p class="letter-div">{{ workspace.title[0] }}</p>
-          </div>
-          <div class="col-6 d-flex align-items-center workspace-name">
-            <p style="font-size: 17px; font-weight: bold; margin-top:5px">{{ workspace.title }}</p>
-          </div>
-        </a>
-      </li>
-    </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
-
-
-
-
     <!-- Main Content Area -->
 
    
     <br>
      
     <p class="text-secondary">Workspace</p>
-    <div *ngIf="isWorkspaceSelected && !isWorkspaceDeleted" class="container current-ws row">
+    <div *ngIf="workspace" class="container current-ws row">
       <!-- Display view -->
       <ng-container *ngIf="!isWorkspaceEditMode; else editModeView">
         <div class="grad-div col-3 d-flex align-items-center justify-content-center">
-          <p class="letter-div text-uppercase">{{ getSelectedWorkspaceName().charAt(0) }}</p>
+          <p class="letter-div text-uppercase">{{ workspace.title[0] }}</p>
         </div>
     
         <div class="col-6 d-flex align-items-center">
-          <h5>{{ getSelectedWorkspaceName() }}</h5>
+          <h5>{{ workspace.title }}</h5>
           <i class="bi bi-pencil-fill" style="margin-left: 5px" (click)="startEditWorkspace()"></i>
-          <i class="bi bi-trash" style="margin-left: 5px" (click)="openDeleteWorkspaceConfirmationModal(getSelectedWorkspace()!)" data-bs-toggle="modal" data-bs-target="#deleteWorkspaceConfirmationModal"></i>
+          <i class="bi bi-trash" style="margin-left: 5px" (click)="openDeleteWorkspaceConfirmationModal(workspace)" data-bs-toggle="modal" data-bs-target="#deleteWorkspaceConfirmationModal"></i>
         </div>
       </ng-container>
     
@@ -123,12 +81,12 @@
     <h4>My Boards</h4>
 
       <div class="boards">
-        <div *ngIf="selectedWorkspaceId && isWorkspacePresent(selectedWorkspaceId)" class="d-flex flex-wrap">
+        <div *ngIf="workspace" class="d-flex flex-wrap">
           <div class="create-board" (click)="isCreateBoardVisible = !isCreateBoardVisible">
             <p>Create new board</p>
           </div>
-        
-          <div *ngFor="let board of getBoardsInSelectedWorkspace()" class="created-boards" [style.background]="board.background" (click)="navigateToBoard(board)">
+        <!-- [style.background]="board.background" (click)="navigateToBoard(board)" -->
+          <div *ngFor="let board of workspace.boards" class="created-boards"  >
             <i class="bi bi-trash delete-board-icon" (click)="openDeleteConfirmationModal(board)" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i>
             <p class="board-title">{{ board.title }}</p>
           </div>
@@ -143,7 +101,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeDeleteConfirmationModal()"></button>
               </div>
               <div class="modal-body">
-                Are you sure you want to delete the board "{{ boardToDelete?.title }}"?
+                Are you sure you want to delete the board "{{ boardToDelete.title }}"?
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeDeleteConfirmationModal()">Cancel</button>

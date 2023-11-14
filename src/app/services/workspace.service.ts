@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Workspace } from '../interfaces/workspace';
-import { Observable } from 'rxjs';
+import { Observable,Subject } from 'rxjs';
 
 
 @Injectable({
@@ -11,7 +11,8 @@ import { Observable } from 'rxjs';
 export class WorkspaceService {
 
   private api_workspace = 'http://127.0.0.1:8000/api/workspaces';
-  workspaces:Array<Workspace> = [];
+  public workspace = new Subject<Workspace>;
+  getWorkspace$ = this.workspace.asObservable();
   
   private headers: HttpHeaders = new HttpHeaders();
 
@@ -21,25 +22,29 @@ export class WorkspaceService {
       'Authorization': `Bearer ${this.tokenService.getToken()}`
     }); 
   }
+  SelectedWorkspace(workspace:any){
+    console.log(workspace);
+    this.workspace.next(workspace);
+  }
 
   getAllWorkspaces(): Observable<Workspace[]> {
     return this.http.get<Workspace[]>(this.api_workspace,{headers:this.headers});
   }
 
-  getWorkspace(workspaceId: number) {
-    return this.http.get(`${this.api_workspace}/${workspaceId}`,{headers:this.headers});
+  getWorkspace(workspaceId: number): Observable<Workspace>{
+    return this.http.get<Workspace>(`${this.api_workspace}/${workspaceId}`,{headers:this.headers});
   }
 
-  createWorkspace(workspace: any) {
-    return this.http.post(this.api_workspace, workspace,{headers:this.headers});
+  createWorkspace(workspace: any) : Observable<Workspace>{
+    return this.http.post<Workspace>(this.api_workspace, workspace,{headers:this.headers});
   }
 
-  updateWorkspace(workspaceId: number, workspace: any) {
-    return this.http.put(`${this.api_workspace}/${workspaceId}`, workspace,{headers:this.headers});
+  updateWorkspace(workspaceId: number, workspace: any): Observable<Workspace> {
+    return this.http.put<Workspace>(`${this.api_workspace}/${workspaceId}`, workspace,{headers:this.headers});
   }
 
-  deleteWorkspace(workspaceId: number) {
-    return this.http.delete(`${this.api_workspace}/${workspaceId}`,{headers:this.headers});
+  deleteWorkspace(workspaceId: number): Observable<any> {
+    return this.http.delete<any>(`${this.api_workspace}/${workspaceId}`,{headers:this.headers});
   }
   
 }
