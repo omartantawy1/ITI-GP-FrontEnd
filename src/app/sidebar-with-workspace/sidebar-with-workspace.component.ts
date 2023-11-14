@@ -9,6 +9,7 @@ export class SidebarWithWorkspaceComponent {
   opened:boolean=false;
   showIconSide:boolean = false;
 
+
   ngOnInit(){
     this.opened=false;
     if(window.innerWidth<1000){

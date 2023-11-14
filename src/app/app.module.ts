@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { SecondNavComponent } from './second-nav/second-nav.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DropDownButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
-import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDropList, CdkDrag} from '@angular/cdk/drag-drop';
 import {CdkMenu, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
 import { HomeComponent } from './home/home.component';
 import { FilterButtonComponent } from './filter-button/filter-button.component';
@@ -29,8 +29,6 @@ import { MainNavbarComponent } from './main-navbar/main-navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PopupCreateWorkspaceComponent } from './popup-create-workspace/popup-create-workspace.component';
 import { CardComponent } from './card/card.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -40,6 +38,10 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SidebarWithWorkspaceComponent } from './sidebar-with-workspace/sidebar-with-workspace.component';
 import { InvitationWorkspaceComponent } from './invitation-workspace/invitation-workspace.component';
+import {MAT_DIALOG_DEFAULT_OPTIONS
+
+} from '@angular/material/dialog';
+
 
 
 @NgModule({
@@ -49,8 +51,8 @@ import { InvitationWorkspaceComponent } from './invitation-workspace/invitation-
     SignInComponent,
     BoardComponent,
     SecondNavComponent,
-       HomeComponent,
-      FilterButtonComponent,
+    HomeComponent,
+    FilterButtonComponent,
     EditMyProfileComponent,
     AccountButtonComponent,
     PhaseComponent,
@@ -64,7 +66,6 @@ import { InvitationWorkspaceComponent } from './invitation-workspace/invitation-
     UserInviteComponent,
     ForgetPasswordComponent,
     ResetPasswordComponent,
-    SignUpComponent,
     SidebarWithWorkspaceComponent,
     InvitationWorkspaceComponent
 
@@ -85,12 +86,7 @@ import { InvitationWorkspaceComponent } from './invitation-workspace/invitation-
      MatDialogModule, 
      HttpClientModule,
      MatButtonModule,
-     MatFormFieldModule,
      MatInputModule,
-     MatInputModule,
-     FormsModule,
-     ReactiveFormsModule,
-     MatButtonModule,
      BrowserAnimationsModule,
      MatNativeDateModule, // Required for the date picker
      MatFormFieldModule, 
@@ -100,7 +96,7 @@ import { InvitationWorkspaceComponent } from './invitation-workspace/invitation-
 
     
   ],
-  providers: [],
+  providers: [{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

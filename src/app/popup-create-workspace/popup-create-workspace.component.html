@@ -1,10 +1,10 @@
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
   <div class="modal-dialog modal-l modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Your WorkSpace</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onNoClick()"></button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -14,21 +14,21 @@
               <div class="text-center">
                 <div class="form-group">
                   <label for="input1">WorkSpace Name</label>
-                  <input type="text" class="form-control ws-name" id="input1" [(ngModel)]="newWorkspaceNameInModal">
+                  <input type="text" class="form-control ws-name" id="input1" [(ngModel)]="data.title">
                 </div>
                 <br>
                 <div class="form-group">
                   <label for="input2">Workspace Description</label>
-                  <input type="text" class="form-control ws-desc" id="input2" [(ngModel)]="newWorkspaceDescriptionInModal">
+                  <input type="text" class="form-control ws-desc" id="input2" [(ngModel)]="data.description">
                 </div>
                 <br>
-                <button class="btn btn-primary" (click)="addWorkspaceInModal()" data-bs-dismiss="modal">Submit</button>
+                <button class="btn btn-primary" [mat-dialog-close]="data"  (click)="addWorkspaceInModal()" data-bs-dismiss="modal">Submit</button>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <!-- Right Side with Image -->
-            <img src="../../assets/man-holding-clock-time-management-concept_23-2148823171.jpg" alt="Your Image" class="img-fluid">
+            <img src="../../assets/Task.png" alt="Your Image" class="img-fluid">
           </div>
         </div>
       </div>

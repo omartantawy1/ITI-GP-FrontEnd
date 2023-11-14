@@ -7,22 +7,23 @@
       <i class="bi bi-clipboard2-x"></i>
     </div>
   </div>
-  <hr>
-  <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item mb-2">
-      <a class="nav-link dropdown fs-4 centerd  animate"  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" routerLink="workspace" aria-current="page">
+  <ul class="nav nav-pills flex-column mb-auto ">
+    
+    <li class="nav-item">
+      <a class="nav-link dropdown fs-6 text-secondary  animate"  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}" routerLink="workspace" aria-current="page">
           <i class="bi bi-person-workspace"></i>
         <span> Workspaces</span>
       </a>
-    <li class="nav-item">
-      <a  class="nav-link dropdown fs-4 centerd animate" [routerLinkActive]="'active'" routerLink="boards" aria-current="page">
-          <i class="bi bi-clipboard-data"></i>
-          <span>
-
-              Boards
-          </span>
+    </li>
+    <hr>
+    <li *ngFor="let workspace of workspaces"  >
+      <a *ngIf="workspace!=undefined" class="dropdown-item d-flex align-items-center" style="cursor: pointer !important;">
+      <p class="p-0 m-0  rounded my-2 me-2 fw-bold  text-center text-uppercase" style="width: 25px;height: 25px;line-height: 25px;background: linear-gradient(to bottom, #4bce97, #216e4e);">{{workspace.title[0]}}</p>
+          <p class=" m-0 p-0 text-dark-emphasis fw-medium" style="max-width: 180px;overflow: hidden; text-overflow: ellipsis;">{{workspace.title}}</p>
       </a>
     </li>
+     
+    
   </ul>
  
 </div>
