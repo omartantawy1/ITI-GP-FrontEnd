@@ -24,7 +24,7 @@
               <li *ngFor="let workspace of workspaces" >
                 <a *ngIf="workspace!=undefined" class="dropdown-item d-flex align-items-center" style="cursor: pointer !important;" (click)="selectWorkspace(workspace)" >
                 <p class="p-0 m-0  rounded m-2 fw-bold fs-6 text-center text-uppercase" style="width: 50px;height: 50px;line-height: 50px;background: linear-gradient(to bottom, #4bce97, #216e4e);">{{workspace.title[0]}}</p>
-                    <p class=" m-0 p-0 text-dark-emphasis fw-medium" style="overflow: hidden; text-overflow: ellipsis;">{{workspace.title}}</p>
+                    <p class=" m-0 p-0 text-dark-emphasis fw-medium" style="max-width: 250px;overflow: hidden; text-overflow: ellipsis;">{{workspace.title}}</p>
                 </a>
               </li>
             </ul>
