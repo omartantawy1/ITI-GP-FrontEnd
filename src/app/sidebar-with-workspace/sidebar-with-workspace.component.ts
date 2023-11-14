@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { Workspace } from '../interfaces/workspace';
 
 @Component({
   selector: 'app-sidebar-with-workspace',
@@ -9,6 +10,9 @@ export class SidebarWithWorkspaceComponent {
   opened:boolean=false;
   showIconSide:boolean = false;
 
+  workspaceSelect!:Workspace;
+
+
   ngOnInit(){
     this.opened=false;
     if(window.innerWidth<1000){
@@ -18,6 +22,11 @@ export class SidebarWithWorkspaceComponent {
 
   toggleDrawer(flag:boolean){
     this.opened = flag;
+
+  }
+
+  addWorkspace(workspace:Workspace){
+    this.workspaceSelect = workspace;
 
   }
 

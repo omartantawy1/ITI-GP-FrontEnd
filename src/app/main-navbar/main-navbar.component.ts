@@ -1,54 +1,52 @@
-import { Component,Input,Output } from '@angular/core';
-import {EventEmitter } from '@angular/core';
+import { Component,EventEmitter,Output } from '@angular/core';
+import { WorkspaceService } from '../services/workspace.service';
+import { Workspace } from '../interfaces/workspace';
+import { PopupCreateWorkspaceComponent } from '../popup-create-workspace/popup-create-workspace.component';
+import {MatDialog,} from '@angular/material/dialog';
+import { data } from 'jquery';
 @Component({
   selector: 'app-main-navbar',
   templateUrl: './main-navbar.component.html',
-  styleUrls: ['./main-navbar.component.css']
+  styleUrls: ['./main-navbar.component.css'],
 })
 export class MainNavbarComponent {
 
 
 
-  workspaces:Array<any> = [
-    {
-      id:1,
-      name:'Workpsace',
-      description:"new workspace",
-      boards:[{
-        id:1,
-        title:'Workpsace1',
-        color:'red',
-      },
-      {
-        id:2,
-        title:'workboard',
-        color:'purble',
-      },
-      {
-        id:3,
-        title:'workbench',
-        color:'fuschia',
-      }
-    ]
-    },
-    {
-      id:2,
-      name:'rewas',
-      description:"new workspace",
-      boards:[{
-        id:1,
-        title:'gp task',
-        color:'red',
-      },
-      {
-        id:2,
-        title:'Ai task',
-        color:'purble',
-      },
-    ]
-    },
-    
-  ];
+  workspaces:Array<Workspace> = [];
+
+  constructor(private workspaceService:WorkspaceService,private dialog:MatDialog){
+  }
+
+  ngOnInit(){
+    setInterval(()=>{
+      this.workspaceService.getAllWorkspaces().subscribe(
+        (res:any)=>{
+          this.workspaces = res.data
+          console.log("true");
+        },
+        (error) => {console.log()}
+      );
+    },2000)
+  }
+
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PopupCreateWorkspaceComponent, {
+      data:{title:'',description:'',workspaces:this.workspaces},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+     this.workspaces = result.workspaces;
+    });
+  }
+
+  selectWorkspace(workspace:Workspace){
+    this.workspaceService.SelectedWorkspace(workspace);
+  }
+
 
 
 
