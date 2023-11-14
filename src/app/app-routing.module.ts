@@ -9,7 +9,10 @@ import { UserInviteComponent } from './user-invite/user-invite.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SidebarWithWorkspaceComponent } from './sidebar-with-workspace/sidebar-with-workspace.component';
-
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
+import { PaypalComponent } from './paypal/paypal.component';
+import { HomeComponent } from './home/home.component';
 
   const routes: Routes = [
     { path: '', component: SignUpComponent }, 
@@ -22,8 +25,11 @@ import { SidebarWithWorkspaceComponent } from './sidebar-with-workspace/sidebar-
     {path:'edit-profile',component:EditMyProfileComponent},
     {path:'user-invitation',component:UserInviteComponent},
     {path:'forget-password',component:ForgetPasswordComponent},
-    {path:'reset-password',component:ResetPasswordComponent}
-    
+    {path:'reset-password',component:ResetPasswordComponent},
+    {path:'payment-success',component:PaymentSuccessComponent},
+    {path:'payment-failed',component:PaymentFailedComponent},
+    {path:'paypal',component:PaypalComponent},
+    {path:'home',component:HomeComponent},
   ];
 
   @NgModule({
