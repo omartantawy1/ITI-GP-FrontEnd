@@ -13,6 +13,7 @@ import { PaymentSuccessComponent } from './payment-success/payment-success.compo
 import { PaymentFailedComponent } from './payment-failed/payment-failed.component';
 import { PaypalComponent } from './paypal/paypal.component';
 import { HomeComponent } from './home/home.component';
+import { PricingComponent } from './pricing/pricing.component';
 
   const routes: Routes = [
     { path: '', component: SignUpComponent }, 
@@ -30,6 +31,7 @@ import { HomeComponent } from './home/home.component';
     {path:'payment-failed',component:PaymentFailedComponent},
     {path:'paypal',component:PaypalComponent},
     {path:'home',component:HomeComponent},
+    {path:'pricing',component:PricingComponent},
   ];
 
   @NgModule({
