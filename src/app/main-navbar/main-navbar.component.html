@@ -16,6 +16,13 @@
           <li class="nav-item me-2">
             <a class="nav-link text-dark rounded fw-bolder" style="cursor: pointer;" [routerLinkActive]="'active'" routerLink="">Home</a>
           </li>
+
+          <li>
+            <button class="gradient-button" (click)="navigateToPricing()">
+              Upgrade To Premium
+            </button>
+          </li>
+
           <li class="nav-item dropdown me-2 mb">
             <a class="nav-link dropdown-toggle btn btn-light text-dark workspace fw-medium" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Workspaces
@@ -52,13 +59,11 @@
           </li>
 
         </ul>
-        <form class="d-flex mx-2 mb-2" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+
         <div class="nav-item" *ngIf="currentUser">
+
           <div class="user-div" (click)="showAccountMenu()">
-            <p class="user-two text-white">{{ currentUser.name.substring(0, 2) }}</p>
+            <p class="user-two text-white" style="font-size: 13px; " >{{ currentUser.name.substring(0, 2) }}</p>
           </div>
         <div id="menu-comp" *ngIf="toggle">
           <app-account-button></app-account-button>
