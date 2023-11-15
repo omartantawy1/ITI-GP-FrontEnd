@@ -158,7 +158,7 @@ addWorkspaceInModal() {
     if (this.newBoardName && this.selectedColorIndex >= 0) {
       const newBoard = {
         'title': this.newBoardName,
-        'background': this.backgroundColors[this.selectedColorIndex],
+        'background_color': this.backgroundColors[this.selectedColorIndex],
         'workspace_id':this.workspace.id
       };
       this.boardService.createBoard(newBoard).subscribe(

@@ -9,6 +9,7 @@ export interface BoardInterface {
     created_at: string ,
     updated_at: string ,
     phases: Array<Phase>,
-    workspace_id: number
+    workspace_id: number,
+    background_color:string
 
 }
