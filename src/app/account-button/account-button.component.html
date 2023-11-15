@@ -1,3 +1,4 @@
+
 <div class="list-account bg-dark" *ngIf="isAccountListVisible">
   <div class="container full-visibility">
     <div class="d-flex justify-content-between align-items-center">
@@ -13,12 +14,11 @@
     <br />
 
     <div class="account-det d-flex">
-      <img src="http://placekitten.com/500/500" />
-
+      <!-- <img src="http://placekitten.com/500/500" /> -->
       <p style="margin-top: 10px; margin-left: 5px">{{currentUser.email}}</p>
     </div>
 
-    <br />
+
 
     <div class="man-acc">
       <a routerLink="edit-profile">
@@ -27,14 +27,7 @@
       </a>
     </div>
 
-    <br />
-
-    <div class="sw-acc">
-      <i class="bi bi-toggle-on"></i>
-      <p style="display: inline; margin-left: 10px">Switch Account</p>
-    </div>
-
-    <br />
+   
 
     <div class="log-out" (click)="logout()">
       <i class="bi bi-box-arrow-left"></i>

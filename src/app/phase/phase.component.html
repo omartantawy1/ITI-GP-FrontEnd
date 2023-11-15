@@ -20,7 +20,7 @@
       </button>
       <ul *ngIf="isThreeDotsVisible" >
         <li class="mb-2 py-1" style="text-align: right;border-bottom: 1px solid rgba(105, 105, 105, 0.052);"><a class="close me-2" (click)="toggleThreeDots()" style="width: min-content; display: inline-block; padding: 1px 5px;"><i class="bi bi-x-lg"></i></a></li>
-        <li><a (click)="deletePhase(phase.id)">delete this card</a></li>
+        <li><a (click)="deletePhase(phase.id)">delete this Phase</a></li>
       </ul>
     </div>
   </div>
@@ -34,7 +34,7 @@
 
       <ng-container *ngIf="editIndex !== i;else editCardField" style="cursor: pointer;">
         {{card.title}}
-        <i class="bi bi-pen-fill"  (click)="enableCardTitleEdit(i); editCardField" style="cursor: text;"></i>
+        <i class="bi bi-pen-fill end-icon"  (click)="enableCardTitleEdit(i); editCardField" style="cursor: text;"></i>
         <div *ngIf="card.categories.length>0" class="row flex-wrap mt-2 mb-1">
           <div *ngFor="let category of card.categories" class="col-3 mx-1 rounded" style="height: 8px !important;" [style.background-color]="category.color"></div>
         </div>
@@ -65,6 +65,7 @@
           </div>
         </div>
       </ng-container>
+
       <ng-template #editCardField>
         <input [(ngModel)]="newcard" class="form-control mb-2" placeholder="Edit card">
         <div class="d-flex">

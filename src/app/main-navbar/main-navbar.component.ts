@@ -66,5 +66,7 @@ export class MainNavbarComponent {
     this.toggle = !this.toggle;
   }
 
-
+  navigateToPricing() {
+    this.router.navigate(['/pricing']); // Replace 'pricing' with your actual route path
+  }
 }

@@ -3,12 +3,14 @@ import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-second-nav',
   templateUrl: './second-nav.component.html',
   styleUrls: ['./second-nav.component.css']
 })
 export class SecondNavComponent {
+  constructor(private router: Router) {}
   swatches = [
     "linear-gradient(to right, #ff9966, #ff5e62)",
     "linear-gradient(to right, #AA076B, #61045F)",
@@ -79,5 +81,9 @@ export class SecondNavComponent {
   // showAccountMenu(){
   //   this.toggle = !this.toggle;
   // }
+
+  navigateToPricing() {
+    this.router.navigate(['/pricing']); // Replace 'pricing' with your actual route path
+  }
 
 }

@@ -3,21 +3,16 @@
   <div class="modal-content custom-modal-content ">
     <div class="modal-header">
       <h1 class="modal-title fs-5" id="exampleModalLabel">{{card.title}}</h1>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: aliceblue; color:aliceblue"></button>
     </div>
     <div class="modal-body">
       <div class="row">
 
         <!-----   The left Part -- -->  
         <div class="col-sm-12 col-md-9  mb-4">
-          <label for="">Notifications</label>
+         
           <br>
           
-          <button class="btn btn-primary d-flex align-items-center custom-button">
-            <i class="bi bi-eye"></i> 
-      
-            <span style="margin-left: 10px;"> Watch </span> 
-          </button>
           <br>
 
           <div *ngIf="card.members.length > 0">
@@ -54,67 +49,68 @@
           
           <div id="fileDisplay" style="display: flex; flex-wrap: wrap;">
             <div *ngFor="let file of card.attachments; let i = index"
-              style="width: 80px; margin: 5px; position: relative;">
-                <ng-container [ngSwitch]="file.type">
-                  <div *ngSwitchCase="'image'">
-                    <img [src]="file.url" alt="{{ file.name }}" style="width: 100%; height: auto; max-width: 100%; max-height: 100%;" />
-                  </div>
-                  <div *ngSwitchCase="'pdf'">
-                    <object data="{{ file.url }}" type="application/pdf" width="100%" height="100%">
-                      This is a PDF document: {{ file.name }}
-                    </object>
-                  </div>
-                  <div *ngSwitchCase="'document'">
-                    <object data="{{ file.url }}" type="application/msword" width="100%" height="100%">
-                      This is a Word document: {{ file.name }}
-                    </object>
-                  </div>
-                  <div *ngSwitchDefault>
-                    Unsupported file type: {{ file.name }}
-                  </div>
-                </ng-container>
-                <div class="col-md-6">
-                  <p class="card-text" style="margin-left: 10px;">
-                    <span *ngIf="file.editMode; else displayMode">
-                      <input [(ngModel)]="file.newName" class="form-control" style="width: 70%;" (focus)="file.newName = file.name">
-                      <button class="btn btn-primary" (click)="saveEditedName(file)">Save</button>
-                      <button class="btn btn-secondary" (click)="cancelEditFile(file)">Cancel</button>
-                    </span>
-                
-                    <ng-template #displayMode>
-                      {{ file.name.length > 20 ? (file.name.slice(0, 20) + '...' + file.name.split('.').pop()) : file.name }}
-                      <button class="btn btn-primary" (click)="toggleEditMode(file)">Edit</button>
-                      <button class="btn btn-danger" (click)="removeFile(i)">Delete</button>
-                      <button class="btn btn-primary" (click)="downloadFile(file)">Download</button>
-                    </ng-template>
-                  </p>
+              style="width: 100%; margin: 5px; position: relative; display: flex; flex-direction: row; align-items: center;">
+          
+              <ng-container [ngSwitch]="file.type">
+                <div *ngSwitchCase="'image'" style="width: 80px;">
+                  <img [src]="file.url" alt="{{ file.name }}" style="width: 100%; height: auto; max-width: 100%; max-height: 100%;" />
                 </div>
+                <div *ngSwitchCase="'pdf'" style="width: 80px;">
+                  <object data="{{ file.url }}" type="application/pdf" width="100%" height="100%">
+                    This is a PDF document: {{ file.name }}
+                  </object>
+                </div>
+                <div *ngSwitchCase="'document'" style="width: 80px;">
+                  <object data="{{ file.url }}" type="application/msword" width="100%" height="100%">
+                    This is a Word document: {{ file.name }}
+                  </object>
+                </div>
+               
+              </ng-container>
+          
+              <div class="col-md-8">
+                <p class="card-text" style="margin-left: 10px; flex-grow: 1;">
+                  <span *ngIf="file.editMode; else displayMode">
+                    <input [(ngModel)]="file.newName" class="form-control" style="width: 70%;" (focus)="file.newName = file.name">
+                    <button class="btn btn-primary save-attach" (click)="saveEditedName(file)">Save</button>
+                    <button class="btn btn-secondary cancel-attach" (click)="cancelEditFile(file)">Cancel</button>
+                  </span>
+          
+                  <ng-template #displayMode>
+                    {{ file.name.length > 20 ? (file.name.slice(0, 20) + '...' + file.name.split('.').pop()) : file.name }}
+                    <button class="btn btn-primary edit-attach" (click)="toggleEditMode(file)" style="margin: 3px;">Edit</button>
+                    <button class="btn btn-danger delete-attach" (click)="removeFile(i)" style="margin: 3px;" >Delete</button>
+                    <button class="btn btn-primary download-attach" (click)="downloadFile(file)"  style="margin: 3px;" >Download</button>
+                  </ng-template>
+                </p>
+              </div>
             </div>
           </div>
+          
            
           
           
           
           <!--  Description Part --->
           <div class="align-items-center" style="font-size: 16px;">
-            <p class="p-0 m-1" style="flex: 1;">Description</p>
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <textarea
-                    *ngIf="editing"
-                    class="form-control desc-area"
-                    rows="1"
-                    placeholder="Description"
-                    [(ngModel)]="description">
-                </textarea>
-                <p *ngIf="!editing" class="p-0 m-1">{{ card.description }}</p>
-                <div class="button-container">
-                    <button *ngIf="editing" (click)="saveDescription()">Save</button>
-                    <button *ngIf="editing" (click)="cancelDescription()">Cancel</button>
-                </div>
+            <p class="p-0 m-0" style="flex: 1;">Description</p>
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+              <textarea
+                *ngIf="editing"
+                class="form-control desc-area"
+                rows="1"
+                placeholder="Description"
+                [(ngModel)]="description">
+              </textarea>
+              <p *ngIf="!editing" class="p-0 m-1">{{ card.description }}</p>
+              <div class="button-container" style="margin:3px">
+                <button *ngIf="editing" (click)="saveDescription()" class="btn btn-primary  cancel-attach" style="margin: 3px;">Save</button>
+                <button *ngIf="editing" (click)="cancelDescription()" class="btn btn-primary cancel-attach" style="margin:3px">Cancel</button>
               </div>
-            <button *ngIf="!editing" (click)="editDescription()">Edit</button>
+            </div>
+            <button *ngIf="!editing" (click)="editDescription()" class="btn btn-primary">Edit</button>
           </div>
-              
+          <br>
           <!-- Checklist Show part -->
           <div *ngIf="checklistTitles.length > 0">
             <ul style="list-style-type: none; padding-left: 0;">
@@ -125,7 +121,7 @@
                   <input *ngIf="list === editingChecklist" type="text" [(ngModel)]="list.name" [ngModelOptions]="{ standalone: true }" />
                   <button *ngIf="list === editingChecklist" (click)="saveChecklistTitle()" class="btn btn-success">Save</button>
                   <button *ngIf="list === editingChecklist" (click)="cancelEditChecklistTitle()" class="btn btn-primary" style="background-color: transparent; border-color: transparent">Cancel</button>
-                  <button *ngIf="list !== editingChecklist" class="delete-checklist-btn btn btn-primary" (click)="deleteChecklist(list)">Delete</button>
+                  <button *ngIf="list !== editingChecklist" class="cancel-attach btn btn-primary" (click)="deleteChecklist(list)  " style="margin:5px">Delete</button>
                 </span>
 
                 <div class="progress progress-bar-style" role="progressbar" aria-label="Basic example" aria-valuenow="{{checklistProgress[list.id]}" aria-valuemin="0" aria-valuemax="100">
@@ -133,9 +129,9 @@
                 </div>
 
                 <ul style="list-style-type: none; padding-left: 0;">
-                  <li *ngFor="let item of list.items">
+                  <li *ngFor="let item of list.items" style="margin: 3px;">
                     <input type="checkbox" [(ngModel)]="item.checked" (change)="updateChecklistProgress(list.id, item)" />
-                    <span *ngIf="item.id !== editingItemIds[list.id]">{{ item.name }}</span>
+                    <span *ngIf="item.id !== editingItemIds[list.id]" style="margin: 3px;">{{ item.name }}</span>
                     <input *ngIf="item.id === editingItemIds[list.id]" [(ngModel)]="item.name" [ngModelOptions]="{ standalone: true }" />
                     <ng-container *ngIf="item.id !== editingItemIds[list.id]; else editButtons">
                       <button (click)="editItemName(list.id, item)" class="edit-item-btn btn btn-primary" style="background-color: transparent; border-color: transparent">Edit</button>
@@ -163,7 +159,7 @@
           <div>
             <div class="d-flex align-items-center">
               <i class="bi bi-sort-down-alt"></i>
-              <p class="p-0 m-0">Activity</p>
+              <p class="p-2 m-0">Activity</p>
             </div>
             
             <div class="d-flex comment-container">
@@ -176,7 +172,7 @@
             <button class="btn save-btn" (click)="saveComment()">Save</button>
             <button class="btn cancel-btn" (click)="clearComment()">Cancel</button>
             
-            <div class="comment-history">
+            <div class="comment-history" style="margin: 5px;">
               <div *ngFor="let comment of card.comments ; let i = index " class="comment-item d-flex">
                 <div class="circular-div">
                   <div class="initials">{{comment.user.name.slice(0, 2)}}</div>
@@ -332,7 +328,7 @@
             <br>
             <br>
 
-            <div class="text-center d-flex ml-5">
+            <div class="text-center d-flex ">
                 <button class="btn btn-primary create-categ-btn" (click)="createCategory()">Create Category</button>
             </div>
 
@@ -392,9 +388,7 @@
 
       
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary">Save changes</button>
-    </div>
+    
   </div>
 </div>
+

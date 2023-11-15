@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { tns } from 'tiny-slider/src/tiny-slider';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +8,9 @@ import { tns } from 'tiny-slider/src/tiny-slider';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent  {
+  constructor(private router: Router) { }
+
+
   @ViewChild('testimonialSlider', { static: true }) sliderElement!: ElementRef;
 
   private slider: any; // Store the slider instance
@@ -61,4 +64,13 @@ export class HomeComponent  {
   }
 
   
+  navigateToSignUp() {
+    this.router.navigate(['sign-up']); 
+  }
+
+  navigateToWorkspace() {
+    this.router.navigate(['/workspace']);
+  }
+
+
 }
