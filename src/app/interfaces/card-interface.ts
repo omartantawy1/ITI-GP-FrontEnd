@@ -13,5 +13,6 @@ export interface CardInterface {
     groups : Array<any>,
     categories : Array<Category>,
     comments : Array<Comment>,
-    attachments : Array<any>
+    attachments : Array<any>,
+    members : Array<any>
 }

@@ -38,20 +38,31 @@
         <div *ngIf="card.categories.length>0" class="row flex-wrap mt-2 mb-1">
           <div *ngFor="let category of card.categories" class="col-3 mx-1 rounded" style="height: 8px !important;" [style.background-color]="category.color"></div>
         </div>
-        <div *ngIf="card.comments.length>0" class="d-flex mt-2 mb-1">
-          <i class="bi bi-chat-left-dots">
-            <span> {{ card.comments.length }} </span>
-          </i>
+        <div class="d-flex">
+          <div *ngIf="card.comments.length>0" class="d-flex mt-2 mb-1">
+            <i class="bi bi-chat-left-dots">
+              <span class="me-3"> {{ card.comments.length }} </span>
+            </i>
+          </div>
+          <div *ngIf="card.attachments.length>0" class="d-flex mt-2 mb-1">
+            <i class="bi bi-paperclip">
+              <span class="me-3"> {{ card.attachments.length }} </span>
+            </i>
+          </div>
+          <div *ngIf="countTasks(card)>0" class="d-flex mt-2 mb-1">
+            <i class="bi bi-check2-square">
+              <span class="me-3"> {{ countChecked() }}/{{ countTasks(card) }} </span>
+            </i>
+          </div>
         </div>
-        <div *ngIf="card.attachments.length>0" class="d-flex mt-2 mb-1">
-          <i class="bi bi-paperclip">
-            <span> {{ card.attachments.length }} </span>
-          </i>
-        </div>
-        <div *ngIf="countTasks(card)>0" class="d-flex mt-2 mb-1">
-          <i class="bi bi-check2-square">
-            <span> {{ countChecked() }}/{{ countTasks(card) }} </span>
-          </i>
+        <div *ngIf="card.members.length > 0">
+          <div class="member-container d-flex">
+            <div *ngFor="let member of card.members">  
+              <div class="circular-div" title="{{member.email}}">
+                <div class="initials">{{member.name.slice(0,2)}}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </ng-container>
       <ng-template #editCardField>
