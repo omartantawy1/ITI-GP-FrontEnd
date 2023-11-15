@@ -40,6 +40,8 @@ import { SidebarWithWorkspaceComponent } from './sidebar-with-workspace/sidebar-
 import { InvitationWorkspaceComponent } from './invitation-workspace/invitation-workspace.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 
@@ -90,6 +92,7 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
      MatNativeDateModule, // Required for the date picker
      MatFormFieldModule, 
      MatDatepickerModule,
+     MatProgressSpinnerModule
     
    
 
