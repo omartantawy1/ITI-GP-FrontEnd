@@ -56,6 +56,14 @@
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+        <div class="nav-item">
+          <div class="user-div" (click)="showAccountMenu()">
+            <p class="user-two text-white">{{ currentUser.name.substring(0, 2) }}</p>
+          </div>
+        <div id="menu-comp" *ngIf="toggle">
+          <app-account-button></app-account-button>
+        </div>
+      </div>
        <!--  <div class="dropdown">
           <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">

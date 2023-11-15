@@ -37,8 +37,8 @@ export class AppComponent {
     });
   }
 
-/*   ngOnInit(){
-    this.navbarService.hide();
+  ngOnInit(){
+    // this.navbarService.hide();
   }
  */
 

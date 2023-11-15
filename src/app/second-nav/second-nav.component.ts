@@ -31,14 +31,14 @@ export class SecondNavComponent {
   isFilterVisible: boolean = false;
   currentUser: any = {};
 
-constructor(private userService: UserService) {}
+// constructor(private userService: UserService) {}
 
-ngOnInit(){
-  this.userService.getCurrentUser().subscribe(
-    res => this.currentUser = res,
-    err => console.log(err)
-  );
-}
+// ngOnInit(){
+//   this.userService.getCurrentUser().subscribe(
+//     res => this.currentUser = res,
+//     err => console.log(err)
+//   );
+// }
   
 
   // Function to toggle the visibility
@@ -75,9 +75,9 @@ ngOnInit(){
     this.workspaceListVisible = !this.workspaceListVisible;
   }
 
-  toggle: boolean = false;
-  showAccountMenu(){
-    this.toggle = !this.toggle;
-  }
+  // toggle: boolean = false;
+  // showAccountMenu(){
+  //   this.toggle = !this.toggle;
+  // }
 
 }

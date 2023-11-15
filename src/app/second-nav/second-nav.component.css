@@ -176,7 +176,7 @@ color: #2abb7f
 }
 
 /************ account-button *********/
-.user-two{
+/* .user-two{
     font-size: 20px;
     display: flex;
     justify-content: center;
@@ -192,7 +192,7 @@ color: #2abb7f
     border: none;
     background-color: #1c3352 ;
     cursor: pointer;
-}
+} */
 
 
 /**************** media query **************/
