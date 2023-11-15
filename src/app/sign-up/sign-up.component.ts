@@ -16,12 +16,13 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   errorarr: any = '';
 
-  constructor(private navbarService:NavbarWithAccountService,private fb: FormBuilder, private router: Router, private SignUpService: SignUpService, private tokenservice: TokenService) {}
+  constructor(private navbarService:NavbarWithAccountService,private fb: FormBuilder, private router: Router, private SignUpService: SignUpService, private tokenservice: TokenService) {
+    this.navbarService.hide();
+  }
 
   
 
   ngOnInit() {
-    this.navbarService.hide();
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required, Validators.pattern(/\w+/), Validators.minLength(3)]],

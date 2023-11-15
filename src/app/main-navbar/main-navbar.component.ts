@@ -7,7 +7,6 @@ import { data } from 'jquery';
 import { Router } from '@angular/router';
 import { LoaderServicesService } from '../services/loader-services.service';
 import { UserService } from '../services/user.service';
-import { UserInterface } from '../interfaces/user-interface';
 @Component({
   selector: 'app-main-navbar',
   templateUrl: './main-navbar.component.html',
@@ -19,28 +18,26 @@ export class MainNavbarComponent {
 
   workspaces:Array<Workspace> = [];
   showLoader: boolean=true;
-  currentUser!: UserInterface;
+  currentUser: any = {};
 
   constructor(private loaderService:LoaderServicesService,private workspaceService:WorkspaceService,private dialog:MatDialog,private router:Router, private userService: UserService){
-    loaderService.display(true);
   }
 
   ngOnInit(){
     this.showLoader = true;
-    
+
+    this.userService.getCurrentUser().subscribe(
+      res => this.currentUser = res,
+      err => console.log(err)
+    );
+
     setTimeout(()=>{
-      this.userService.getCurrentUser().subscribe(
-        (res:any) => {
-          this.currentUser = res;
-          this.workspaceService.getAllWorkspaces().subscribe(
-            (res:any)=>{
-              this.workspaces = res.data;
-              this.showLoader =false;
-            },
-             (error) => {console.log(error);this.showLoader =false;}
-          );
+      this.workspaceService.getAllWorkspaces().subscribe(
+        (res:any)=>{
+          this.workspaces = res.data;
+          this.showLoader =false;
         },
-        err => console.log(err)
+        (error) => {console.log(error);this.showLoader =false;}
       );
     },1000)
   }

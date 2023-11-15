@@ -20,14 +20,16 @@ export class SignInComponent implements OnInit {
   res: any = '';
 
   constructor(private loaderService:LoaderServicesService,private navbarService:NavbarWithAccountService,private activatedRoute:ActivatedRoute ,private fb: FormBuilder, private router: Router, private SignInService: SignInService, private tokenservice: TokenService,private userService:UserService) {
+
+    this.navbarService.hide();
+
     this.userService.getCurrentUser().subscribe(
       (res:any)=>{res.email?this.router.navigate(['workspace']):this.router.navigate(['sign-in']);},
       (error)=>{console.log(error)},
-    ); 
-  }
-
-  ngOnInit() {
-    this.navbarService.hide();
+      ); 
+    }
+    
+    ngOnInit() {
       this.activatedRoute.queryParams.subscribe(params => {
         let data = params['token']  ;
         if(data){
