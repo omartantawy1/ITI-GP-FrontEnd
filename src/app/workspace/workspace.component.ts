@@ -17,7 +17,10 @@ import { LoaderServicesService } from '../services/loader-services.service';
 })
 export class WorkspaceComponent  {
   
-  constructor(private loaderService: LoaderServicesService,private route:ActivatedRoute,private dialog:MatDialog,private navbarService:NavbarWithAccountService,private router: Router,private workspaceService:WorkspaceService,private boardService:BoardService) { }
+  constructor(private loaderService: LoaderServicesService,private route:ActivatedRoute,private dialog:MatDialog,private navbarService:NavbarWithAccountService,private router: Router,private workspaceService:WorkspaceService,private boardService:BoardService) { 
+    
+    this.loaderService.display(true);
+  }
   myWorkspaces: { id: number, name: string, description: string }[] = []; 
  /*  workspaces: { id: number, name: string ,description: string}[] = []; */
   workspaces:Array<Workspace> = [] ;
@@ -41,7 +44,6 @@ export class WorkspaceComponent  {
 
   ngOnInit(){
     this.navbarService.display();
-    this.loaderService.display(true);
     this.route.params.subscribe(params => {
         let data = params['id']  ;
         if(data){
