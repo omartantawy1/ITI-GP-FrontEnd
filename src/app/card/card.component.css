@@ -1,7 +1,52 @@
-body{
-    color: #B6C2CF;
+
+/***** Attachments ****/
+
+.edit-attach{
+  width: 50px;
+  background-color: #454F59;
+  color: white;
+  border-color: #454F59;;
+  
+
 }
 
+.delete-attach{
+  min-width: 50px;
+  background-color: #454F59;
+  color: white;
+  border-color: #454F59;
+
+}
+.download-attach{
+  min-width: 50px;
+  background-color: #454F59;
+  color: white;
+  border-color: #454F59;
+  
+}
+.save-attach{
+  min-width: 50px;
+  background-color: #454F59;
+  color: white;
+  border-color: #454F59;
+  margin: 2px;
+  
+}
+.cancel-attach{
+  min-width: 50px;
+  background-color: #454F59;
+  color: white;
+  border-color: #454F59;
+  margin: 2px;
+  
+}
+
+
+
+
+
+
+/******************/
 .custom-button {
 width: 180px; 
 font-size: 14px;
@@ -40,14 +85,14 @@ border-radius: 50%;
   }
 
   .desc-area{
-    background-color: #22272b;
+    background-color: #22272bd4;
     color: #B6C2CF;
   }
 
  .custom-modal-content {
 
-    background-color:#f1f2f4;
-    color: #172B4D;
+  background-color: #12192c;
+    color: white
   }
   .circular-div {
     width: 40px !important;
@@ -147,8 +192,19 @@ margin-top:6px;
 
 .save-btn{
     width: 80px;
+    color: white;
 }
-
+.cancel-btn{
+  width: 80px;
+  color: white;
+}
+          
+.delete-btn{
+  color: white;
+}
+.edit-btn{
+  color: white;
+}
 
       .delete-icon {
         cursor: pointer;
@@ -160,6 +216,7 @@ margin-top:6px;
       .delete-icon:hover {
         color: red; 
       }
+
 
    
      
