@@ -5,6 +5,10 @@ import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 import { CardInterface as Card } from '../interfaces/card-interface';
 import { CardService } from '../services/card.service';
 import { NavbarWithAccountService } from '../services/navbar-with-account.service';
+import { ActivatedRoute } from '@angular/router';
+import { BoardService } from '../services/board.service';
+import { LoaderServicesService } from '../services/loader-services.service';
+import { BoardInterface as Board } from '../interfaces/board-interface';
 
 @Component({
   selector: 'app-board',
@@ -20,12 +24,13 @@ export class BoardComponent {
   buttonText: string = 'Add phase'; 
   showInput:boolean = false;
   newPhase:string = '';
+  board!:Board;
   
   buttonSaveText: string = 'Save'; 
   showButton:boolean = false;
   allMoves:Array<Card> = [];
 
-  constructor(private navbarService:NavbarWithAccountService,private phaseService: PhaseService,private cardService: CardService){}; 
+  constructor(private loaderService:LoaderServicesService,private boardService:BoardService,private route:ActivatedRoute,private navbarService:NavbarWithAccountService,private phaseService: PhaseService,private cardService: CardService){}; 
 
   toggleBtnSave(flag:boolean){
     this.showButton = flag;
@@ -39,6 +44,7 @@ export class BoardComponent {
   saveBtn(){ 
     this.buttonSaveText = "Loading..";
     console.log(this.allMoves);
+ 
     
    this.allMoves.forEach(element=>{
       this.cardService.updateCard(element, element.id).subscribe(
@@ -59,13 +65,32 @@ export class BoardComponent {
 
   ngOnInit(){
     this.navbarService.display();
-    this.phaseService.getAllPhases().subscribe(
+    this.route.params.subscribe(params => {
+      let data = params['id']  ;
+      if(data){
+        this.boardService.getBoard(data).subscribe(
+          (res:any)=>{
+            this.board = res.data;
+            this.phases = this.board.phases;
+            this.loaderService.display(false);
+          },
+          (error)=>{
+            console.log(error);
+          }
+          );
+      }
+
+    });
+    setTimeout(()=>{
+
+    },1000)
+/*     this.phaseService.getAllPhases().subscribe(
       (data:any) => (this.phases = data.data),
       (error)=>  console.log(error),
       ()=>{
         this.buttonText = this.phases.length > 0 ? 'Add Another phase' : 'Add phase'; 
       }
-      );
+      ); */
   }
 
   ngOnDestroy(){
@@ -84,7 +109,7 @@ export class BoardComponent {
       let phase = {
         'title':this.newPhase,
         'position': this.phases.length,
-        'board_id': 1
+        'board_id': this.board.id
 
       };
       this.phaseService.createPhase(phase).subscribe(
@@ -120,7 +145,7 @@ export class BoardComponent {
               let phase = {
                 'title':element.title,
                 'position': ++element.position,
-                'board_id': element.board_id
+                'board_id': this.board.id
               };
               let index = this.phases.indexOf(element);
               this.phaseService.updatePhase(phase,element.id).subscribe(
@@ -135,7 +160,7 @@ export class BoardComponent {
               let phase = {
                 'title':element.title,
                 'position': --element.position,
-                'board_id': element.board_id
+                'board_id': this.board.id
               };
               let index = this.phases.indexOf(element);
               this.phaseService.updatePhase(phase,element.id).subscribe(
@@ -147,7 +172,7 @@ export class BoardComponent {
           let phase = {
             'title':phasePosition.title,
             'position': event.currentIndex,
-            'board_id': phasePosition.board_id
+            'board_id': this.board.id
           };
   
           let index = this.phases.indexOf(phasePosition);
