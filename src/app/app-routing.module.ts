@@ -14,22 +14,23 @@ import { PaymentFailedComponent } from './payment-failed/payment-failed.componen
 import { PaypalComponent } from './paypal/paypal.component';
 import { HomeComponent } from './home/home.component';
 import { PricingComponent } from './pricing/pricing.component';
+import { authGuardGuard } from './guards/auth-guard.guard';
 
   const routes: Routes = [
-    { path: '', component: SignUpComponent }, 
+    { path: '', component: HomeComponent }, 
     { path:'sign-in', component: SignInComponent },
     { path:'sign-up', component: SignUpComponent },
-    {path:'board',component:BoardComponent},
-    {path:'board/:id',component:BoardComponent},
-    {path:'workspace',component:SidebarWithWorkspaceComponent},
-    {path:'workspace/:id',component:SidebarWithWorkspaceComponent},
-    {path:'edit-profile',component:EditMyProfileComponent},
-    {path:'user-invitation',component:UserInviteComponent},
+    {path:'board',component:BoardComponent, canActivate: [authGuardGuard]},
+    {path:'board/:id',component:BoardComponent, canActivate: [authGuardGuard]},
+    {path:'workspace',component:SidebarWithWorkspaceComponent, canActivate: [authGuardGuard]},
+    {path:'workspace/:id',component:SidebarWithWorkspaceComponent, canActivate: [authGuardGuard]},
+    {path:'edit-profile',component:EditMyProfileComponent, canActivate: [authGuardGuard]},
+    {path:'user-invitation',component:UserInviteComponent, canActivate: [authGuardGuard]},
     {path:'forget-password',component:ForgetPasswordComponent},
     {path:'reset-password',component:ResetPasswordComponent},
-    {path:'payment-success',component:PaymentSuccessComponent},
-    {path:'payment-failed',component:PaymentFailedComponent},
-    {path:'paypal',component:PaypalComponent},
+    {path:'payment-success',component:PaymentSuccessComponent, canActivate: [authGuardGuard]},
+    {path:'payment-failed',component:PaymentFailedComponent, canActivate: [authGuardGuard]},
+    {path:'paypal',component:PaypalComponent, canActivate: [authGuardGuard]},
     {path:'home',component:HomeComponent},
     {path:'pricing',component:PricingComponent},
   ];
