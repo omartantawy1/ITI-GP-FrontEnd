@@ -309,6 +309,7 @@ closeDeleteWorkspaceConfirmationModal() {
 isWorkspaceDeleted = false;
 
 confirmDeleteWorkspace() {
+  this.loaderService.display(true);
   if (this.workspace) {
     const index = this.workspaces.findIndex(workspace => workspace.id === this.workspace.id);
  
@@ -316,6 +317,7 @@ confirmDeleteWorkspace() {
       this.workspaces.splice(index, 1);
       this.workspaceService.deleteWorkspace(this.workspace.id).subscribe();
       this.workspaceService.SelectedWorkspace(null);
+      this.router.navigate(['workspace']);
 
       // Set the flag to true when the workspace is deleted
       this.isWorkspaceDeleted = true;

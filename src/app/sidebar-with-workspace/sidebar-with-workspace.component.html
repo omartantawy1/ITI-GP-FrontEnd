@@ -1,3 +1,4 @@
+<div  >
 <span class="mx-2 m-2" style="position: absolute;right: 0;" *ngIf="showIconSide" >
     <button *ngIf="!opened"  (click)="toggleDrawer(true)"  class="btn p-0 m-0"><i class="bi bi-clipboard-check fs-3 "></i></button>
     <button *ngIf="opened"  (click)="toggleDrawer(false)"  class="btn p-0 m-0"><i class="bi bi-clipboard-check-fill fs-3 "></i></button>
@@ -20,3 +21,5 @@
 <div [ngClass]="{'openSideBar':showIconSide&&opened}">
 
 </div>
+</div>
+

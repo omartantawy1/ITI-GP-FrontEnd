@@ -43,7 +43,19 @@ export class SidebarWithWorkspaceComponent {
       }
   }
 
-
+  backgroundImages: string[] = [
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards1.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards2.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards3.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards4.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards5.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards6.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards7.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards8.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards9.jpg')",
+    "linear-gradient(to top, #00000037, #00000041),url('../../assets/background_boards10.jpg')"
+  ];
 
   
 }
