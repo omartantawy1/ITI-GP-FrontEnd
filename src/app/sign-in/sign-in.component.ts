@@ -52,9 +52,9 @@ export class SignInComponent implements OnInit {
 
         (response: any) => {
             console.log('User logged in successfully', response);
-            // localStorage.setItem('token', response.token);
+            localStorage.setItem('token', response.token);
             this.tokenservice.setToken(response.token);
-            this.router.navigate(['workspace']);
+            /* this.router.navigate(['workspace']); */
         },
         (error) => {
           // Registration failed, handle the error here

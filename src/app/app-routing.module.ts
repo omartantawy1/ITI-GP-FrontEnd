@@ -24,6 +24,7 @@ import { authGuardGuard } from './guards/auth-guard.guard';
     {path:'board/:id',component:BoardComponent, canActivate: [authGuardGuard]},
     {path:'workspace',component:SidebarWithWorkspaceComponent, canActivate: [authGuardGuard]},
     {path:'workspace/:id',component:SidebarWithWorkspaceComponent, canActivate: [authGuardGuard]},
+    {path:'workspace/token',component:SidebarWithWorkspaceComponent, canActivate: [authGuardGuard]},
     {path:'edit-profile',component:EditMyProfileComponent, canActivate: [authGuardGuard]},
     {path:'user-invitation',component:UserInviteComponent, canActivate: [authGuardGuard]},
     {path:'forget-password',component:ForgetPasswordComponent},

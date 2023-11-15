@@ -59,8 +59,9 @@
           </li>
 
         </ul>
-    
-        <div class="nav-item">
+
+        <div class="nav-item" *ngIf="currentUser">
+
           <div class="user-div" (click)="showAccountMenu()">
             <p class="user-two text-white" style="font-size: 13px; " >{{ currentUser.name.substring(0, 2) }}</p>
           </div>
