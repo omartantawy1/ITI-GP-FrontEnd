@@ -37,9 +37,9 @@ export class MainNavbarComponent {
           this.workspaces = res.data;
           this.showLoader =false;
         },
-        (error) => {console.log()}
+        (error) => {console.log(error);this.showLoader =false;}
       );
-    },500)
+    },1000)
   }
 
 
