@@ -23,15 +23,15 @@ export class MainNavbarComponent {
 
   ngOnInit(){
     this.showLoader = true;
-    setTimeout(()=>{
+    setInterval(()=>{
       this.workspaceService.getAllWorkspaces().subscribe(
         (res:any)=>{
           this.workspaces = res.data;
           this.showLoader =false;
         },
-        (error) => {console.log()}
+        (error) => {console.log(error);this.showLoader =false;}
       );
-    },500)
+    },1000)
   }
 
 
