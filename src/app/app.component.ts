@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavbarWithAccountService } from './services/navbar-with-account.service';
 import { Subscription } from 'rxjs';
+import { LoaderServicesService } from './services/loader-services.service';
 
 @Component({
   selector: 'app-root',
@@ -19,16 +20,27 @@ export class AppComponent {
    }
 
 
-   showNaAllBar:boolean = false;
+  showNaAllBar:boolean = false;
   subscription:Subscription;
+  showLoader: boolean=false;
   
-  constructor(private navbarService:NavbarWithAccountService){
+  constructor(private navbarService:NavbarWithAccountService,private loaderService: LoaderServicesService){
+    //for the navbar
     this.subscription = this.navbarService.showNavBar.subscribe(
       (value)=>{
         this.showNaAllBar = value;
       }
     );
+    //for the spinner
+    this.loaderService.status.subscribe((val: boolean) => {
+      this.showLoader = val;
+    });
   }
+
+  ngOnInit(){
+    this.navbarService.hide();
+  }
+
 
 
   ngOnDestroy(){

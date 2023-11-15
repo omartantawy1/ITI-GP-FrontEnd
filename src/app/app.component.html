@@ -1,6 +1,11 @@
-<app-main-navbar *ngIf="showNaAllBar"></app-main-navbar>
-
-<router-outlet></router-outlet>
+<div class="load" *ngIf="showLoader" >
+    <span class="loader"></span>
+</div>
+<div  [ngClass]="{'loading':showLoader}">
+    
+    <app-main-navbar *ngIf="showNaAllBar"></app-main-navbar>
+    <router-outlet></router-outlet>
+</div>
 
 
 

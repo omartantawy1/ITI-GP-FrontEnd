@@ -1,7 +1,9 @@
 
-  
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="load" *ngIf="showLoader">
+      <span class="loader"></span>
+    </div>
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -12,8 +14,9 @@
           <!-- Search Input and Share Button on the same line -->
           <div class="mb-3 d-flex align-items-center">
             <input type="text" class="form-control" id="searchInput" placeholder="Type here..." [(ngModel)]="userAccount">
-            <button type="button" class="btn btn-primary ms-2" (click)="inviteUser()">Share</button>
+            <button type="button" class="btn btn-primary ms-2"  (click)="inviteUser()">Share</button>
           </div>
+          <p>{{error}}</p>
           
           <!-- Your other modal body content goes here -->
         </div>

@@ -46,6 +46,8 @@ import { PricingComponent } from './pricing/pricing.component';
 import { UserfoundPopupComponent } from './userfound-popup/userfound-popup.component';
 import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-popup.component';
 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 
@@ -102,6 +104,7 @@ import { UsernotfoundPopupComponent } from './usernotfound-popup/usernotfound-po
      MatNativeDateModule, // Required for the date picker
      MatFormFieldModule, 
      MatDatepickerModule,
+     MatProgressSpinnerModule
     
     
 

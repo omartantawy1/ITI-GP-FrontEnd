@@ -5,6 +5,7 @@ import { PopupCreateWorkspaceComponent } from '../popup-create-workspace/popup-c
 import {MatDialog,} from '@angular/material/dialog';
 import { data } from 'jquery';
 import { Router } from '@angular/router';
+import { LoaderServicesService } from '../services/loader-services.service';
 @Component({
   selector: 'app-main-navbar',
   templateUrl: './main-navbar.component.html',
@@ -15,19 +16,22 @@ export class MainNavbarComponent {
 
 
   workspaces:Array<Workspace> = [];
+  showLoader: boolean=true;
 
-  constructor(private workspaceService:WorkspaceService,private dialog:MatDialog,private router:Router){
+  constructor(private loaderService:LoaderServicesService,private workspaceService:WorkspaceService,private dialog:MatDialog,private router:Router){
   }
 
   ngOnInit(){
+    this.showLoader = true;
     setTimeout(()=>{
       this.workspaceService.getAllWorkspaces().subscribe(
         (res:any)=>{
-          this.workspaces = res.data
+          this.workspaces = res.data;
+          this.showLoader =false;
         },
         (error) => {console.log()}
       );
-    },3000)
+    },500)
   }
 
 
@@ -44,8 +48,9 @@ export class MainNavbarComponent {
   }
 
   selectWorkspace(workspace:Workspace){
+    this.loaderService.display(true);
     this.workspaceService.SelectedWorkspace(workspace);
-    this.router.navigate(['workspace', workspace.id]);
+    this.router.navigate(['workspace',workspace.id]);
   }
 
 

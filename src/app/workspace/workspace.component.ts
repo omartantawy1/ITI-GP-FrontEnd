@@ -1,5 +1,4 @@
 import { Component,ViewChild,ElementRef,AfterViewInit,OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PopupCreateWorkspaceComponent } from '../popup-create-workspace/popup-create-workspace.component';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Workspace } from '../interfaces/workspace';
@@ -9,6 +8,8 @@ import { BoardService } from '../services/board.service';
 import { NavbarWithAccountService } from '../services/navbar-with-account.service';
 import {MatDialog,} from '@angular/material/dialog';
 import { InvitationWorkspaceComponent } from '../invitation-workspace/invitation-workspace.component';
+import { LoaderServicesService } from '../services/loader-services.service';
+
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
@@ -16,7 +17,7 @@ import { InvitationWorkspaceComponent } from '../invitation-workspace/invitation
 })
 export class WorkspaceComponent  {
   
-  constructor(private dialog:MatDialog,private navbarService:NavbarWithAccountService,private router: Router,private workspaceService:WorkspaceService,private boardService:BoardService) { }
+  constructor(private loaderService: LoaderServicesService,private route:ActivatedRoute,private dialog:MatDialog,private navbarService:NavbarWithAccountService,private router: Router,private workspaceService:WorkspaceService,private boardService:BoardService) { }
   myWorkspaces: { id: number, name: string, description: string }[] = []; 
  /*  workspaces: { id: number, name: string ,description: string}[] = []; */
   workspaces:Array<Workspace> = [] ;
@@ -38,39 +39,53 @@ export class WorkspaceComponent  {
 
   selectedBackgroundImage = '';
 
-
   ngOnInit(){
     this.navbarService.display();
-    setTimeout(()=>{
+    this.loaderService.display(true);
+    this.route.params.subscribe(params => {
+        let data = params['id']  ;
+        if(data){
+        this.workspaceService.getWorkspace(data).subscribe(
+          (res:any)=>{
+            this.workspace = res.data;
+            this.boards = this.workspace.boards;
+            this.newWorkspaceName = this.workspace.title;
+            this.newWorkspaceDescriptionInModal = this.workspace.description;
+            this.loaderService.display(false);
+          },
+          (error)=>{
+            console.log(error);
+          }
+          );
+        }
+      });
+      setTimeout(()=>{
         this.workspaceService.getAllWorkspaces().subscribe(
           (res:any)=>{
             this.workspaces = res.data;
-          },
-          (error)=>{console.log(error)}
-          );
+            this.loaderService.display(false);
+        },
+        (error)=>{console.log(error)}
+        );
+        /* 
         this.workspaceService.getWorkspace$.subscribe((workspace)=>{
           this.workspace = workspace; 
           console.log(workspace);
           if(this.workspace.boards){
             this.boards = this.workspace.boards;
           }
-          this.newWorkspaceName = this.workspace.title;
-          this.newWorkspaceDescriptionInModal = this.workspace.description;
       }
-      );
+      ); */
     },3000)
   }
 
 
   openDialogInvitation(): void {
     const dialogRef = this.dialog.open(InvitationWorkspaceComponent, {
-      data:{workspace_id:this.workspace.id},
-    });
-
+      data:{workspace_id:this.workspace.id,message:''},
+    }); 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log(result);
-     this.workspaces = result.workspaces;
     });
   }
 
@@ -294,6 +309,7 @@ closeDeleteWorkspaceConfirmationModal() {
 isWorkspaceDeleted = false;
 
 confirmDeleteWorkspace() {
+  this.loaderService.display(true);
   if (this.workspace) {
     const index = this.workspaces.findIndex(workspace => workspace.id === this.workspace.id);
  
@@ -301,6 +317,7 @@ confirmDeleteWorkspace() {
       this.workspaces.splice(index, 1);
       this.workspaceService.deleteWorkspace(this.workspace.id).subscribe();
       this.workspaceService.SelectedWorkspace(null);
+      this.router.navigate(['workspace']);
 
       // Set the flag to true when the workspace is deleted
       this.isWorkspaceDeleted = true;

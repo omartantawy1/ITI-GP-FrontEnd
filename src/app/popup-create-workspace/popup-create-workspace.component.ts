@@ -3,6 +3,8 @@ import { WorkspaceService } from '../services/workspace.service';
 import { Inject } from '@angular/core';
 import {MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 import { Workspace } from '../interfaces/workspace';
+import { Router } from '@angular/router';
+import { LoaderServicesService } from '../services/loader-services.service';
 
 @Component({
   selector: 'app-popup-create-workspace',
@@ -12,19 +14,28 @@ import { Workspace } from '../interfaces/workspace';
 export class PopupCreateWorkspaceComponent {
 
 
+  showLoader: boolean=false;
 
-
-  constructor(private workspaceService:WorkspaceService,public dialogRef: MatDialogRef<PopupCreateWorkspaceComponent>,
+  constructor(private loaderService:LoaderServicesService,private router:Router,private workspaceService:WorkspaceService,public dialogRef: MatDialogRef<PopupCreateWorkspaceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {title:string,description:string,workspaces:Array<Workspace>}){}
 
   addWorkspaceInModal() {
-    if (this.data.title.trim()!=''&&this.data.description.trim()!='') {
+    this.showLoader = true;
+    if (this.data.title.trim()!='') {
       this.workspaceService.createWorkspace(this.data).subscribe(
         (res:any)=>{ 
           this.data.workspaces.unshift(res.data);
-          this.dialogRef.close();// Emit the new workspace data
+          if(res.data){
+            this.showLoader = false;
+            this.loaderService.display(true);
+            this.workspaceService.SelectedWorkspace(res.data);
+            this.router.navigate(['workspace',res.data.id]);
+          }
         },
-        (error)=>{console.log(error)}
+        (error)=>{
+          this.showLoader = false;
+          console.log(error);
+        }
       );
 
     }
@@ -32,5 +43,6 @@ export class PopupCreateWorkspaceComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 
 }

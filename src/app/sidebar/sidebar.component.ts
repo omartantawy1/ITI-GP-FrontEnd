@@ -2,6 +2,7 @@ import { Component , Input, Output,EventEmitter } from '@angular/core';
 import { Workspace } from '../interfaces/workspace';
 import { WorkspaceService } from '../services/workspace.service';
 import { Router } from '@angular/router';
+import { LoaderServicesService } from '../services/loader-services.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,20 +14,25 @@ export class SidebarComponent {
   @Input() opened:boolean = true;
   workspaces:Array<Workspace> = [];
   @Output() closeSide = new EventEmitter<boolean>();
+  showLoader: boolean=true;
 
-  constructor(private workspaceService:WorkspaceService,private router:Router){
+  constructor(private loaderService:LoaderServicesService,private workspaceService:WorkspaceService,private router:Router){
   };
 
+
   ngOnInit(){
-    setInterval(()=>{
+    this.showLoader = true;
+    setTimeout(()=>{
       this.workspaceService.getAllWorkspaces().subscribe(
         (res:any)=>{
           this.workspaces = res.data;
           console.log(true);
+          this.showLoader = false;
+          
         },
         (error) => {console.log()}
       );
-    },3000)
+    },1000)
   }
 
   close(){
@@ -34,8 +40,9 @@ export class SidebarComponent {
   }
 
   selectWorkspace(workspace:Workspace){
+    this.loaderService.display(true);
     this.workspaceService.SelectedWorkspace(workspace);
-    this.router.navigate(['/workspace']);
+    this.router.navigate(['workspace',workspace.id]);
   }
 
   
