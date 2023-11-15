@@ -87,6 +87,7 @@ export class WorkspaceComponent  {
       data:{workspace_id:this.workspace.id,message:''},
     }); 
     dialogRef.afterClosed().subscribe(result => {
+    
       console.log('The dialog was closed');
     });
   }
@@ -111,15 +112,15 @@ addWorkspaceInModal() {
       'title': this.newWorkspaceNameInModal,
       'description': this.newWorkspaceDescriptionInModal,
     };
-    this.workspaceService.createWorkspace(newWorkspace).subscribe(
-      (res:any)=>{
-        this.workspaces.unshift(res.workspace);
-        this.newWorkspaceNameInModal = '';
-        this.newWorkspaceDescriptionInModal = '';
-      },
-      (error)=>{console.log(error)}
+    
+      this.workspaceService.createWorkspace(newWorkspace).subscribe(
+        (res:any)=>{
+          this.workspaces.unshift(res.workspace);
+          this.newWorkspaceNameInModal = '';
+          this.newWorkspaceDescriptionInModal = '';
+        },
+        (error)=>{console.log(error)}
     );
-
    /*  console.log('Updated Workspaces:', this.workspaces);
     console.log('Boards:', this.boards);  Log the boards when a workspace is added*/
   }
@@ -161,6 +162,9 @@ addWorkspaceInModal() {
         'background_color': this.backgroundColors[this.selectedColorIndex],
         'workspace_id':this.workspace.id
       };
+      if(this.boards.length>0){
+        this.router.navigate(['pricing']);
+      }else {
       this.boardService.createBoard(newBoard).subscribe(
         (res:any)=>{
 
@@ -173,6 +177,7 @@ addWorkspaceInModal() {
           console.log(error);
         }
       );
+      }
     }
   }
 
