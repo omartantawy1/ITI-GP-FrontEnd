@@ -6,6 +6,7 @@ import {MatDialog,} from '@angular/material/dialog';
 import { data } from 'jquery';
 import { Router } from '@angular/router';
 import { LoaderServicesService } from '../services/loader-services.service';
+import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-main-navbar',
   templateUrl: './main-navbar.component.html',
@@ -17,12 +18,19 @@ export class MainNavbarComponent {
 
   workspaces:Array<Workspace> = [];
   showLoader: boolean=true;
+  currentUser: any = {};
 
-  constructor(private loaderService:LoaderServicesService,private workspaceService:WorkspaceService,private dialog:MatDialog,private router:Router){
+  constructor(private loaderService:LoaderServicesService,private workspaceService:WorkspaceService,private dialog:MatDialog,private router:Router, private userService: UserService){
   }
 
   ngOnInit(){
     this.showLoader = true;
+
+    this.userService.getCurrentUser().subscribe(
+      res => this.currentUser = res,
+      err => console.log(err)
+    );
+
     setTimeout(()=>{
       this.workspaceService.getAllWorkspaces().subscribe(
         (res:any)=>{
@@ -53,7 +61,10 @@ export class MainNavbarComponent {
     this.router.navigate(['workspace',workspace.id]);
   }
 
-
+  toggle: boolean = false;
+  showAccountMenu(){
+    this.toggle = !this.toggle;
+  }
 
 
 }

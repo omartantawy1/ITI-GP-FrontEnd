@@ -99,3 +99,21 @@ nav:hover .logo{
     0%    { transform: rotate(0deg)}
     100%  { transform: rotate(360deg)}
   } 
+
+
+  .user-two{
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+    font-weight:bold;
+    color: white !;
+}
+
+.user-div{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: #1c3352 ;
+    cursor: pointer;
+}
