@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { BoardInterface } from '../interfaces/board-interface';
 @Component({
   selector: 'app-second-nav',
   templateUrl: './second-nav.component.html',
@@ -49,6 +50,7 @@ export class SecondNavComponent {
   }
 
 
+  @Input() board!:BoardInterface;
   @Output() newItemEvent = new EventEmitter<string>();
   
 
