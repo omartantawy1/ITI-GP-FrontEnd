@@ -98,7 +98,7 @@ list-style: none;
 color: #fff;
 font-size: 16px;
 }
-.card a {
+.card button {
   position: relative;
   z-index: 2;
   background: #fff;
