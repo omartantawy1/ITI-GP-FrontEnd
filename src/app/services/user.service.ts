@@ -7,7 +7,7 @@ import { TokenService } from './token.service';
 })
 export class UserService {
 
-  private api_current_user = 'http://127.0.0.1:8000/api/user';
+  private api_current_user = 'http://127.0.0.1:8000/api/auth/user';
   
   private headers: HttpHeaders = new HttpHeaders();
 
