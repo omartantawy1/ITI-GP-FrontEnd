@@ -4,6 +4,7 @@ import { PhaseService } from '../services/phase.service';
 import { PhaseInterface as Phase } from '../interfaces/phase-interface';
 import { CardInterface as Card } from '../interfaces/card-interface';
 import { CardService } from '../services/card.service';
+import { NavbarWithAccountService } from '../services/navbar-with-account.service';
 
 @Component({
   selector: 'app-board',
@@ -24,7 +25,7 @@ export class BoardComponent {
   showButton:boolean = false;
   allMoves:Array<Card> = [];
 
-  constructor(private phaseService: PhaseService,private cardService: CardService){}; 
+  constructor(private navbarService:NavbarWithAccountService,private phaseService: PhaseService,private cardService: CardService){}; 
 
   toggleBtnSave(flag:boolean){
     this.showButton = flag;
@@ -57,13 +58,19 @@ export class BoardComponent {
 
 
   ngOnInit(){
+    this.navbarService.display();
     this.phaseService.getAllPhases().subscribe(
       (data:any) => (this.phases = data.data),
       (error)=>  console.log(error),
       ()=>{
         this.buttonText = this.phases.length > 0 ? 'Add Another phase' : 'Add phase'; 
       }
-    );
+      );
+  }
+
+  ngOnDestroy(){
+    this.navbarService.hide();
+    
   }
 
   addphase() {
