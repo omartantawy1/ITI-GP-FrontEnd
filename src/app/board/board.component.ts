@@ -30,7 +30,10 @@ export class BoardComponent {
   showButton:boolean = false;
   allMoves:Array<Card> = [];
 
-  constructor(private loaderService:LoaderServicesService,private boardService:BoardService,private route:ActivatedRoute,private navbarService:NavbarWithAccountService,private phaseService: PhaseService,private cardService: CardService){}; 
+  constructor(private loaderService:LoaderServicesService,private boardService:BoardService,private route:ActivatedRoute,private navbarService:NavbarWithAccountService,private phaseService: PhaseService,private cardService: CardService){
+    
+    this.loaderService.display(true);
+  }; 
 
   toggleBtnSave(flag:boolean){
     this.showButton = flag;
@@ -71,6 +74,7 @@ export class BoardComponent {
         this.boardService.getBoard(data).subscribe(
           (res:any)=>{
             this.board = res.data;
+            this.backgroundcolor = this.board.background_color;
             this.phases = this.board.phases;
             this.loaderService.display(false);
           },
@@ -81,9 +85,6 @@ export class BoardComponent {
       }
 
     });
-    setTimeout(()=>{
-
-    },1000)
 /*     this.phaseService.getAllPhases().subscribe(
       (data:any) => (this.phases = data.data),
       (error)=>  console.log(error),
@@ -91,6 +92,10 @@ export class BoardComponent {
         this.buttonText = this.phases.length > 0 ? 'Add Another phase' : 'Add phase'; 
       }
       ); */
+  }
+
+  editBackroundBoad(board:Board){
+    this.board = board;
   }
 
   ngOnDestroy(){

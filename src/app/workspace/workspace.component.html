@@ -12,7 +12,7 @@
       </div>
       <hr>
       <div *ngIf="workspace.boards" class="row">
-        <div  *ngFor="let board of workspace.boards" class="btndiv col-sm-12 col-md-4 col-lg-3 mb-2 me-2 rounded boards-creates" [style.background]="selectedBackgroundImage" (click)="navigateToBoard(board.id)" >
+        <div  *ngFor="let board of workspace.boards" class="btndiv col-sm-12 col-md-4 col-lg-3 mb-2 me-2 rounded boards-creates" [style.background]="board.background_color" (click)="navigateToBoard(board.id)" >
           <div class="inner-boards-creates"></div>
           <p class="board-title fs-5 fw-bolder text-white">{{ board.title }}</p>
         </div>
@@ -114,7 +114,7 @@
 
       <div class="boards">
         <div *ngIf="workspace" class="d-flex flex-wrap">
-          <div *ngFor="let board of boards" class="created-boards" [style.background]="backgroundImages[2]" >
+          <div *ngFor="let board of boards" class="created-boards" [style.background]="board.background_color" >
             <i class="bi bi-trash delete-board-icon" (click)="openDeleteConfirmationModal(board)" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"></i>
             <p class="board-title fw-bolder" (click)="navigateToBoard(board.id)">{{ board.title }}</p>
           </div>

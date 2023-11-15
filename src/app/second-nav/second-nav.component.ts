@@ -5,13 +5,27 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { BoardInterface } from '../interfaces/board-interface';
+import { BoardService } from '../services/board.service';
+import { error } from 'jquery';
 @Component({
   selector: 'app-second-nav',
   templateUrl: './second-nav.component.html',
   styleUrls: ['./second-nav.component.css']
 })
 export class SecondNavComponent {
-  constructor(private router: Router) {}
+  selectedColor: string = '';
+  selectedBackgroundColor: string = '';
+  @Input() board!:BoardInterface;
+  @Output() newItemEvent = new EventEmitter<string>();
+  @Output() newBoard = new EventEmitter<BoardInterface>();
+  constructor(private router: Router,private boardService:BoardService) {}
+
+
+  ngOnInit(){
+    this.selectedBackgroundColor = this.board.background_color;
+    this.selectedColor = this.board.background_color;
+
+  }
   swatches = [
     "linear-gradient(to right, #ff9966, #ff5e62)",
     "linear-gradient(to right, #AA076B, #61045F)",
@@ -27,8 +41,7 @@ export class SecondNavComponent {
     
     
   ];
-  selectedColor: string = '';
-  selectedBackgroundColor: string = '';
+ 
   popupVisible: boolean = false;
   workspaceListVisible: boolean = false;
   isFilterVisible: boolean = false;
@@ -50,8 +63,7 @@ export class SecondNavComponent {
   }
 
 
-  @Input() board!:BoardInterface;
-  @Output() newItemEvent = new EventEmitter<string>();
+
   
 
   getContrastColor(background: string): string {
@@ -65,8 +77,16 @@ export class SecondNavComponent {
     this.selectedColor = color;
     this.selectedBackgroundColor = color;
     document.body.style.backgroundColor = color;
+    this.board.background_color = color;
+    this.boardService.updateBoard(this.board.id,this.board).subscribe(
+      (res:any)=>{
+        this.board = res.data;
+        this.newItemEvent.emit(this.selectedColor);
+        this.newBoard.emit(this.board);
+      },
+      (error)=>{console.log(error)}
+    );
     this.togglePopup();
-    this.newItemEvent.emit(this.selectedColor);
   }
 
   togglePopup() {
