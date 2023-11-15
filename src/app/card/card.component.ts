@@ -11,6 +11,7 @@ import { error } from 'jquery';
 import { TaskService } from '../services/task.service';
 import { GroupService } from '../services/group.service';
 import { AttachmentService } from '../services/attachment.service';
+import { InvitationService } from '../services/invitation.service';
 
 @Component({
   selector: 'app-card',
@@ -34,6 +35,8 @@ export class CardComponent {
 
   checklistTitles: { id: number; name: string; items: { id: number, name: string; checked: boolean }[] }[] = [];
   DataCast: any = {};
+  showInviteMember = false;
+  memberEmail: string = '';
   
   categories: Array<Category> = [];
   
@@ -46,7 +49,8 @@ export class CardComponent {
     private categoryService:CategoryService,
     private groupService: GroupService,
     private taskService: TaskService,
-    private attachmentService: AttachmentService){}
+    private attachmentService: AttachmentService,
+    private invitationService: InvitationService){}
 
 
   /* initalize all thing on card */
@@ -285,6 +289,48 @@ export class CardComponent {
     }
 
     this.editingItemIds[checklistId] = null;
+  }
+
+  /******Members *********/
+
+  isMemberEmpty(): boolean {
+    return this.memberEmail.trim() === '';
+  }
+
+  toggleInviteMember() {
+    const memberInput = document.getElementById('member') as HTMLInputElement | null;
+    if (memberInput) {
+      memberInput.value = '';
+    }
+    this.memberRes = '';
+    this.showInviteMember = !this.showInviteMember;
+  }
+
+  memberRes = '';
+  inviteMember(){
+    if (this.memberEmail.trim() !== '' && this.currentUser.email !== this.memberEmail) {
+      
+      this.DataCast.email = this.memberEmail;
+      this.DataCast.invitation_on = 'card';
+      this.DataCast.invitation_on_id = this.card.id;
+      this.invitationService.sendInvitaion(this.DataCast).subscribe(
+        (response: any) => {
+          this.memberRes = response.message;
+          // this.checklistid = response.data.id;
+          // const newItem = { id: this.checklistid, name: this.checklistName, items: [] };
+          // this.checklistTitles.push(newItem);
+          // this.checklistName = '';
+          console.log("success");
+        },
+        (error) => {
+          this.memberRes = error.error.message;
+          console.error(error);
+        }
+      );
+      this.DataCast = {}
+    } else if (this.currentUser.email === this.memberEmail){
+      this.memberRes = "You can't invite yourself";
+    }
   }
 
   /*****    Categories   *** */

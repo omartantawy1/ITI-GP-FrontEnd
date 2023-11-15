@@ -78,6 +78,29 @@ border-radius: 50%;
         color: white;
       }
 
+      .member {
+        background-color:#1D212a;
+        border: 1px solid #ccc;
+        padding: 10px;
+        position: absolute;
+        top: 50px;
+        left: 550px;
+        width: 300px;
+        height: 200px;
+        border-radius: 20px;
+        border-color: #1D212a;
+        color: white;
+      }
+
+      .invite-button {
+        width: 100px; 
+        font-size: 14px;
+        background-color: #454F59;
+        border-color: #454F59;
+        text-align: center;
+        
+          }
+
       @media (max-width: 768px) {
         .checklist {
          top:100%;

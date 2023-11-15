@@ -200,10 +200,40 @@
           </button>
           <p class="p-0 m-0">Add to card</p>
     
-          <button class="btn btn-primary custom-button d-flex align-items-center mb-2">
+          <button (click)="toggleInviteMember()" class="btn btn-primary custom-button d-flex align-items-center mb-2">
             <i class="bi bi-person"></i>
             <span style="margin-left: 10px;"> Members</span> 
           </button>
+
+          <!---  Member Toggle Div-->
+          <div class="container member" [hidden]="!showInviteMember">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="mx-auto">
+                <p class="mb-0 text-center">Invite Members</p>
+              </div>
+                <div (click)="toggleInviteMember()">
+                  <p class="mb-0">
+                    <i class="bi bi-x close-acc-icon" style="font-size: 18px; "></i>
+                  </p>
+                </div>
+            </div>
+                <input type="email" class="form-control"
+                class="form-control"
+                id="member"
+                name="email"
+                placeholder="Enter User's Email to Invite"
+                [(ngModel)]="memberEmail">
+
+                <button class="btn btn-primary invite-button text-center align-items-center mt-2 ms-2"  [disabled]="isMemberEmpty()"   (click)="inviteMember()">
+                  Invite
+                </button>
+                
+                <button class="btn btn-primary invite-button text-center mt-2 ms-5" (click)="toggleInviteMember()">Close</button>
+
+                <div>
+                  <p>{{memberRes}}</p>  
+                </div>
+          </div>
       
           <!------   Categories  ----->
 
