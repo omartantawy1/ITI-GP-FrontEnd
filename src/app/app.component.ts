@@ -37,6 +37,10 @@ export class AppComponent {
     });
   }
 
+  ngOnInit(){
+    this.navbarService.hide();
+  }
+
 
 
   ngOnDestroy(){
