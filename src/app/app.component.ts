@@ -38,7 +38,7 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    // this.navbarService.hide();
+    this.navbarService.hide();
   }
 
 
