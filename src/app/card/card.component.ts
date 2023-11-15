@@ -8,6 +8,10 @@ import { CardService } from '../services/card.service';
 import { CategoryService } from '../services/category.service';
 import { CategoryInterface as Category } from '../interfaces/category-interface';
 import { error } from 'jquery';
+import { TaskService } from '../services/task.service';
+import { GroupService } from '../services/group.service';
+import { AttachmentService } from '../services/attachment.service';
+import { InvitationService } from '../services/invitation.service';
 
 @Component({
   selector: 'app-card',
@@ -28,22 +32,33 @@ export class CardComponent {
   editingItemIds: { [checklistId: number]: number | null } = {};
   additem:boolean = false;
   checklistProgress: { [checklistId: number]: number } = {};
+
+  checklistTitles: { id: number; name: string; items: { id: number, name: string; checked: boolean }[] }[] = [];
+  DataCast: any = {};
+  showInviteMember = false;
+  memberEmail: string = '';
   
   categories: Array<Category> = [];
   
 /*   comments: Array<Comment> = []; */
   
-  checklistTitles: { id: number; title: string; items: { id:number, name: string; checked: boolean }[] }[] = [];
 
   constructor(private commentService:CommentService,
     private userService:UserService,
     private cardService:CardService,
-    private categoryService:CategoryService){}
+    private categoryService:CategoryService,
+    private groupService: GroupService,
+    private taskService: TaskService,
+    private attachmentService: AttachmentService,
+    private invitationService: InvitationService){}
 
 
   /* initalize all thing on card */
   ngOnInit(){
     console.log(this.card);
+    this.checklistTitles = this.card.groups? this.card.groups:[];
+    // this.uploadedFiles = this.card.attachments? this.card.attachments:[];
+    
   
     this.userService.getCurrentUser().subscribe(
       (res:any) => {
@@ -72,17 +87,67 @@ export class CardComponent {
 
   showChecklistTitles() {
     if (this.checklistName.trim() !== '') {
-      const newItem = { id: this.checklistTitles.length, title: this.checklistName, items: [] };
-      this.checklistTitles.push(newItem);
-      this.checklistName = '';
+      
+      this.DataCast.name = this.checklistName;
+      this.DataCast.card_id = this.card.id;
+      this.groupService.createGroup(this.DataCast).subscribe(
+        (response: any) => {
+          this.checklistid = response.data.id;
+          const newItem = { id: this.checklistid, name: this.checklistName, items: [] };
+          this.checklistTitles.push(newItem);
+          this.checklistName = '';
+          console.log("success");
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+      this.DataCast = {}
     }
     this.toggleChecklist();
   }
 
-  deleteChecklist(checklistId: number) {
-    const index = this.checklistTitles.findIndex(item => item.id === checklistId);
+  editingChecklist: any;
+
+  editChecklistTitle(checklist: any) {
+    this.editingChecklist = checklist;
+  }
+
+  saveChecklistTitle() {
+    this.groupService.updateGroup(this.editingChecklist).subscribe(
+      (response: any) => {
+
+        console.log("success");
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+    this.editingChecklist = null;
+  }
+
+  cancelEditChecklistTitle() {
+    this.editingChecklist = null;
+  }
+
+  deleteChecklist(checklist: { id: number, name: string, items: { id: number, name: string, checked: boolean }[] }) {
+
+    this.groupService.deleteGroup(checklist).subscribe(
+      (response: any) => {
+
+        console.log("deleted");
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
+    const index = this.checklistTitles.findIndex(item => item.id === checklist.id);
     if (index !== -1) {
       this.checklistTitles.splice(index, 1);
+      if (this.editingItemId === checklist.id) {
+        this.editingItemId = null;
+      }
     }
   }
 
@@ -90,24 +155,53 @@ export class CardComponent {
   addItem(checklistid: number) {
     this.editingItemId = checklistid;
   }
-  
+
 
   addItemToChecklist(checklistId: number) {
-    const checklist = this.checklistTitles.find(item => item.id === checklistId);
-    if (checklist && this.checklistItem.trim() !== '') {
-      checklist.items.push({ id: checklist.items.length, name: this.checklistItem, checked: false });
-      this.checklistItem = '';
-      this.editingItemId = null;
-  
-      // Initialize the checklist progress to 0%
-      this.checklistProgress[checklist.id] = 0;
-  
-      // Log the checklist and its items here
-      console.log('Checklist:', checklist);
-    }
+
+    this.DataCast.name = this.checklistItem;
+    this.DataCast.is_done = 0;
+    this.DataCast.group_id = checklistId;
+    this.taskService.createTask(this.DataCast).subscribe(
+      (response: any) => {
+        console.log("success");
+        const checklist = this.checklistTitles.find(item => item.id === checklistId);
+        if (checklist && this.checklistItem.trim() !== '') {
+         checklist.items.push({ id: response.data.id, name: this.checklistItem, checked: false });
+         this.checklistItem = '';
+         this.editingItemId = null;
+
+         // Initialize the checklist progress to 0%
+         this.checklistProgress[checklist.id] = 0;
+
+         // Log the checklist and its items here
+         console.log('Checklist:', checklist);
+        }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+    this.DataCast = {};
   }
 
-  updateChecklistProgress(checklistId: number) {
+  updateChecklistProgress(checklistId: number, item: { id: number, name: string, checked: boolean }) {
+
+    this.DataCast.id = item.id;
+      this.DataCast.name = item.name;
+      this.DataCast.is_done = item.checked;
+      this.DataCast.group_id = checklistId;
+      this.taskService.updateTask(this.DataCast).subscribe(
+        (response: any) => {
+
+          console.log("success");
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+      this.DataCast = {};
+
     const checklist = this.checklistTitles.find(item => item.id === checklistId);
     if (checklist) {
       const totalItems = checklist.items.length;
@@ -118,14 +212,25 @@ export class CardComponent {
   }
 
 
-  deleteItem(checklist: { id: number; title: string; items: { id: number, name: string, checked: boolean }[] }, item: { id: number, name: string, checked: boolean }) {
+  deleteItem(checklist: { id: number; name: string; items: { id: number, name: string, checked: boolean }[] }, item: { id: number, name: string, checked: boolean }) {
+    
+    this.taskService.deleteTask(item).subscribe(
+      (response: any) => {
+
+        console.log("deleted");
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+
     const checklistIndex = this.checklistTitles.findIndex(list => list.id === checklist.id);
     if (checklistIndex !== -1) {
       const itemIndex = checklist.items.findIndex(i => i === item);
       if (itemIndex !== -1) {
         checklist.items.splice(itemIndex, 1);
-  
-       
+
+
         const totalItems = checklist.items.length;
         const checkedItems = checklist.items.filter(item => item.checked).length;
         const progress = totalItems === 0 ? 0 : (checkedItems / totalItems) * 100;
@@ -133,11 +238,99 @@ export class CardComponent {
       }
     }
   }
-  
+
 
   cancelAddItem() {
     this.checklistItem = '';
     this.editingItemId = null;
+  }
+
+  editItemName(checklistId: number, item: { id: number, name: string, checked: boolean }) {
+    this.editingItemIds[checklistId] = item.id;
+  }
+
+  saveItemName(checklist: { id: number, name: string, items: { id: number, name: string, checked: boolean }[] }, item: { id: number, name: string, checked: boolean }) {
+
+    item.name = item.name.trim();
+    if (item.name === '') {
+
+    } else {
+      this.DataCast.id = item.id;
+      this.DataCast.name = item.name;
+      this.DataCast.is_done = item.checked;
+      this.DataCast.group_id = checklist.id;
+      this.taskService.updateTask(this.DataCast).subscribe(
+        (response: any) => {
+          this.editingItemIds[checklist.id] = null;
+          console.log("success");
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+      this.DataCast = {};
+      this.editingItemIds[checklist.id] = null;
+    }
+  }
+
+  cancelEditItemName(checklistId: number) {
+    const checklist = this.checklistTitles.find(item => item.id === checklistId);
+
+    if (checklist) {
+      const item = checklist.items.find(i => i.id === this.editingItemIds[checklistId]);
+
+      if (item) {
+        const trimmedName = item.name.trim();
+        if (trimmedName === '') {
+          console.log("Item name cannot be empty.");
+          return;
+        }
+      }
+    }
+
+    this.editingItemIds[checklistId] = null;
+  }
+
+  /******Members *********/
+
+  isMemberEmpty(): boolean {
+    return this.memberEmail.trim() === '';
+  }
+
+  toggleInviteMember() {
+    const memberInput = document.getElementById('member') as HTMLInputElement | null;
+    if (memberInput) {
+      memberInput.value = '';
+    }
+    this.memberRes = '';
+    this.showInviteMember = !this.showInviteMember;
+  }
+
+  memberRes = '';
+  inviteMember(){
+    if (this.memberEmail.trim() !== '' && this.currentUser.email !== this.memberEmail) {
+      
+      this.DataCast.email = this.memberEmail;
+      this.DataCast.invitation_on = 'card';
+      this.DataCast.invitation_on_id = this.card.id;
+      this.invitationService.sendInvitaion(this.DataCast).subscribe(
+        (response: any) => {
+          this.memberRes = response.message;
+          // this.checklistid = response.data.id;
+          // const newItem = { id: this.checklistid, name: this.checklistName, items: [] };
+          // this.checklistTitles.push(newItem);
+          // this.checklistName = '';
+          console.log("success");
+        },
+        (error) => {
+          this.memberRes = error.error.message;
+          console.error(error);
+        }
+      );
+      this.DataCast = {}
+    } else if (this.currentUser.email === this.memberEmail){
+      this.memberRes = "You can't invite yourself";
+    }
   }
 
   /*****    Categories   *** */
@@ -312,47 +505,134 @@ colors = [
   /***   Attachments Part */
 
   showDeleteIcon = false;
-  uploadedFiles: Array<any> = [];
-
-  onFileSelected(event: any) {
-    const files = event.target.files;
-    if (files.length > 0) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-
-        reader.onload = () => {
-          this.uploadedFiles.push({
-            name: file.name,
-            type: this.getFileType(file.type),
-            url: reader.result,
-          });
-        };
-
-        reader.readAsDataURL(file);
-      }
-    }
-  }
-
-  removeFile(file: any) {
-    const index = this.uploadedFiles.indexOf(file);
-    if (index !== -1) {
-      this.uploadedFiles.splice(index, 1);
-    }
-  }
-
+  // uploadedFiles: Array<any> = [];
   
 
-  getFileType(type: string) {
-    if (type.includes('image')) {
-      return 'image';
-    } else if (type.includes('pdf')) {
-      return 'pdf';
-    } else if (type.includes('msword') || type.includes('officedocument')) {
-      return 'document';
-    } else {
-      return 'other';
+  onFileSelected(event: any) {
+
+    // let inputEl: HTMLInputElement = this.inputEl.nativeElement;
+    // const file: any = inputEl.files ? inputEl.files.item(0) : 0;
+
+
+    let file = event.target.files[0]
+    const formData = new FormData();
+
+    formData.append('attachment', file);
+    formData.append('user_id', this.currentUser.id.toString());
+    formData.append('card_id', this.card.id.toString());
+    
+
+    this.attachmentService.createAttachment(formData).subscribe(
+      (res: any) => {
+        console.log("uploaded");
+        this.card.attachments.unshift(res.data);
+
+        // const reader = new FileReader();
+      //   reader.readAsDataURL(file);
+      // reader.onload = () => {
+      //   this.uploadedFiles.push({
+      //     id: file.id,
+      //     name: file.name,
+      //     type: this.getFileType(file.type),
+      //     url: reader.result as string,
+        },
+        (err) => console.log(err)
+      );
+
+        // console.log(this.uploadedFiles); // Move the log statement here
+      // };
+      
+  }
+
+  removeFile(index: number) {
+    this.attachmentService.deleteAttachment(this.card.attachments[index]).subscribe(
+      (response: any) => {
+        console.log('deleted');
+        this.card.attachments.splice(index, 1);
+    },
+    (error) => {
+      // Registration failed, handle the error here
+      console.error(error);
     }
+    );
+  }
+
+  // getFileType(type: string) {
+  //   if (type.includes('image')) {
+  //     return 'image';
+  //   } else if (type.includes('pdf')) {
+  //     return 'pdf';
+  //   } else if (type.includes('msword') || type.includes('officedocument')) {
+  //     return 'document';
+  //   } else {
+  //     return 'other';
+  //   }
+  // }
+
+
+  downloadFile(file: any) {
+
+
+    this.attachmentService.downloadAttachment(file).subscribe(
+      (data) => {
+        const newblob = new Blob([data], {type: file.type});
+
+         var downloadURL = window.URL.createObjectURL(newblob);
+         var link = document.createElement('a');
+         link.href = downloadURL;
+         link.target = '_blank';
+         link.download = file.name;
+         link.click();
+         console.log('downloaded');
+         
+      }
+    );
+ 
+  }
+  
+  img(file: any) {
+
+
+    this.attachmentService.downloadAttachment(file).subscribe(
+      (data) => {
+        return data;
+         
+      }
+    );
+ 
+  }
+ 
+  toggleEditMode(file: any) {
+    file.editMode = !file.editMode;
+  
+  }
+
+
+  saveEditedName(file: any) {
+    file.name = file.newName; // Update the name with the new name
+    file.editMode = false; // Exit edit mode
+
+    this.DataCast.name = file.name;
+    this.DataCast.id = file.id;
+    this.attachmentService.updateAttachment(this.DataCast).subscribe(
+      (response: any) => {
+        console.log('edited', response);
+
+    },
+    (error) => {
+      // Registration failed, handle the error here
+      console.error(error);
+    }
+    );
+
+    this.DataCast = {};
+  }
+  cancelEditFile(file: any) {
+  
+    if (!file.newName || file.newName.trim() === '') {
+      file.newName = file.name;
+    }
+    file.editMode = false;
   }
 
 

@@ -78,16 +78,13 @@
       </li>
 
       <li class="nav-item">
-        <button
-          class="btn btn-dark border-0 btn-circle fw-semibold"
-          (click)="showAccountMenu()"
-        >
-          <i class="bi bi-person-fill acc-ico"></i>
-        </button>
-        <div id="menu-comp" *ngIf="toggle">
-          <app-account-button></app-account-button>
+        <div class="user-div" (click)="showAccountMenu()">
+          <p class="user-two text-white">{{ currentUser.name.substring(0, 2) }}</p>
         </div>
-      </li>
+      <div id="menu-comp" *ngIf="toggle">
+        <app-account-button></app-account-button>
+      </div>
+    </li>
     </ul>
     <div
       class="swatchy-element"

@@ -1,93 +1,150 @@
-.background {
-  background-image: url('../../assets/hand-painted-watercolor-abstract-watercolor-background_23-2149009911.jpg'); /* Replace 'path-to-your-image.jpg' with the image URL */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  position: relative;
-}
-
-
-
-.panel {
-  box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+/*** My Edits ***/
+input{
+  width: 200px !important;
   border-radius: 20px;
-  border: 0;
-  margin-bottom: 24px;
-  margin-bottom: 20px;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
-  box-shadow: 5px 10px 8px #888888;
+  height: 30px;
 }
 
-
-
-.panel .panel-bg-cover {
-  max-height: 180px;
-  overflow: hidden;
+.button-container {
+  margin: 10px;
+  padding: 10px; 
+}
+.button-container {
+  margin-top: 10px; 
 }
 
-.panel .panel-bg-cover img {
-  min-width: 100%;
-  min-height: 100%;
-  background-size: cover;
-  border-radius: 20px;
-}
-
-.panel-media {
-  padding: 10px 15px 15px 140px;
-  position: relative;
-}
-
-.big-box {
-
-  justify-content: center;
-  align-items: center;
-
-}
-
-
-.about-content{
+/* Optional: You can add specific styles for each button */
+.save-button {
+  margin-right: 2px;
+  background-color: #ee5a6f; 
+  border-color: #ee5a6f;
+  height: 30px;
   text-align: center;
 }
-.panel-media-img {
-  position: absolute;
-  width: 96px;
-  height: 96px;
-  left: 20px;
-  top: -48px;
-  border-radius: 20px;
+
+.cancel-button {
+  margin-right:2px ;
+  background-color: #f29263;
+  border-color: #f29263;
+  height: 30px;
+  text-align: center;
 }
 
-.img-border-light {
-  box-shadow: 0 0 0 4px #fff;
+
+/**   */
+.card {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+  border: none;
+  margin-bottom: 30px;
+  width: 700px;
 }
 
-@media (min-width: 1200px){
-    .text-lg-right {
-      text-align: right;
-    }
+.m-r-0 {
+  margin-right: 0px;
 }
 
-.panel-media-heading {
-  color: #fff;
-  position: absolute;
-  top: -2.7em;
+.m-l-0 {
+  margin-left: 0px;
 }
 
-.btn-link {
-  border-color: transparent;
+.user-card-full .user-profile {
+  border-radius: 5px 0 0 5px;
 }
 
-.text-muted, a.text-muted:hover, a.text-muted:focus, a.text-muted:focus {
-  color: #606060;
+.bg-c-lite-green {
+      background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+  background: linear-gradient(to right, #ee5a6f, #f29263);
 }
 
-.mar-btm {
-  margin-bottom: 15px;
+.user-profile {
+  padding: 20px 0;
 }
 
-.panel-body {
-  padding: 25px 20px;
+.card-block {
+  padding: 1.25rem;
 }
+
+.m-b-25 {
+  margin-bottom: 25px;
+}
+
+
+
+
+h6 {
+  font-size: 20px;
+}
+
+.card .card-block p {
+  line-height: 25px;
+}
+
+@media only screen and (min-width: 1400px){
+p {
+  font-size: 14px;
+}
+}
+
+.card-block {
+  padding: 1.25rem;
+}
+
+.b-b-default {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
+.p-b-5 {
+  padding-bottom: 5px !important;
+}
+
+.card .card-block p {
+  line-height: 25px;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+.text-muted {
+  color: #919aa3 !important;
+}
+
+.b-b-default {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.f-w-600 {
+  font-weight: 600;
+}
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
+.m-t-40 {
+  margin-top: 20px;
+}
+
+.p-b-5 {
+  padding-bottom: 5px !important;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+.m-t-40 {
+  margin-top: 20px;
+}
+
+
+
+
+
+
