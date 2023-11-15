@@ -120,3 +120,19 @@
 .three-dots ul a:hover {
 background-color: #091E4224;
 }
+
+/* members div */
+.circular-div {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%; 
+  background-color: #454F59; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; 
+  font-size: 15px; 
+  margin-right: 5px;
+  margin-left: 5px;
+
+}

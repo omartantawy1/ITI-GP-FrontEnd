@@ -20,6 +20,19 @@
           </button>
           <br>
 
+          <div *ngIf="card.members.length > 0">
+            <h4>Members</h4>
+            <div class="member-container d-flex">
+              <div *ngFor="let member of card.members">  
+                <div class="circular-div" title="{{member.email}}">
+                  <div class="initials">{{member.name.slice(0,2)}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+
           <div class="selected-category">
             <div class="row flex-d">
               <div class="category-color-moved" *ngFor="let selectedCategory of card.categories" [style.background-color]="selectedCategory.color">
@@ -155,7 +168,7 @@
             
             <div class="d-flex comment-container">
               <div class="circular-div">
-                <div class="initials">RS</div>
+                <div class="initials">{{currentUser.name.slice(0,2)}}</div>
               </div>
               <input [(ngModel)]="commentText" class="form-control comment-input" placeholder="Write a comment" />
             </div>
