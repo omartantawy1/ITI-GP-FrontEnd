@@ -56,7 +56,7 @@
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
-        <div class="nav-item">
+        <div class="nav-item" *ngIf="currentUser">
           <div class="user-div" (click)="showAccountMenu()">
             <p class="user-two text-white">{{ currentUser.name.substring(0, 2) }}</p>
           </div>

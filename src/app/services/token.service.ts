@@ -14,8 +14,10 @@ export class TokenService {
   }
 
   setToken(temp: string){
-    localStorage.setItem('token', temp);
-    this.router.navigate(['workspace']);
+    console.log(temp);
+    localStorage.setItem('token', temp);/* 
+    this.router.navigate(['workspace/token',temp]); */
+    window.open('http://localhost:4200/workspace/token?token='+temp,'_self');
     
   }
 

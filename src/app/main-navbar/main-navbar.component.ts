@@ -4,9 +4,10 @@ import { Workspace } from '../interfaces/workspace';
 import { PopupCreateWorkspaceComponent } from '../popup-create-workspace/popup-create-workspace.component';
 import {MatDialog,} from '@angular/material/dialog';
 import { data } from 'jquery';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderServicesService } from '../services/loader-services.service';
 import { UserService } from '../services/user.service';
+import { UserInterface } from '../interfaces/user-interface';
 @Component({
   selector: 'app-main-navbar',
   templateUrl: './main-navbar.component.html',
@@ -18,28 +19,50 @@ export class MainNavbarComponent {
 
   workspaces:Array<Workspace> = [];
   showLoader: boolean=true;
-  currentUser: any = {};
+  currentUser!: UserInterface;
 
-  constructor(private loaderService:LoaderServicesService,private workspaceService:WorkspaceService,private dialog:MatDialog,private router:Router, private userService: UserService){
+  constructor(private route:ActivatedRoute,private loaderService:LoaderServicesService,private workspaceService:WorkspaceService,private dialog:MatDialog,private router:Router, private userService: UserService){
   }
 
   ngOnInit(){
     this.showLoader = true;
-
-    this.userService.getCurrentUser().subscribe(
-      res => this.currentUser = res,
-      err => console.log(err)
-    );
-
+    
+    this.loaderService.display(true);
+    this.route.queryParams.subscribe(params => {
+      let data = params['token']  ;
+      console.log('token',data);
+      if(data){
+        this.userService.getCurrentUserWithToken(data).subscribe(
+          (res:any) => {this.currentUser = res;
+          
+            this.loaderService.display(false);
+            this.router.navigate(['workspace'])
+          },
+          (err) => {console.log(err)}
+          );
+        }else{
+          this.userService.getCurrentUser().subscribe(
+            (res:any) => {this.currentUser = res;
+            
+              this.loaderService.display(false);
+            },
+            (err) => (console.log(err))
+          );
+        }
+     
+      });
     setTimeout(()=>{
+
       this.workspaceService.getAllWorkspaces().subscribe(
         (res:any)=>{
           this.workspaces = res.data;
           this.showLoader =false;
+          
         },
         (error) => {console.log(error);this.showLoader =false;}
       );
-    },1000)
+    },3000)
+    
   }
 
 
