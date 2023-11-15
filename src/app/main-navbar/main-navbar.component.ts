@@ -74,7 +74,12 @@ export class MainNavbarComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-     this.workspaces = result.workspaces;
+      if(this.workspaces.length>0&&result){
+        this.router.navigate(['pricing']);
+      }else if(result){
+
+        this.workspaces = result.workspaces;
+      }
     });
   }
 

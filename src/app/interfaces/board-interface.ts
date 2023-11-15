@@ -1,4 +1,5 @@
 import { PhaseInterface as Phase } from "./phase-interface";
+import { UserInterface } from "./user-interface";
 
 export interface BoardInterface {
 
@@ -10,6 +11,7 @@ export interface BoardInterface {
     updated_at: string ,
     phases: Array<Phase>,
     workspace_id: number,
-    background_color:string
+    background_color:string,
+    user:Array<UserInterface>,
 
 }

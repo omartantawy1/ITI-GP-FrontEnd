@@ -3,6 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InvitationService } from '../services/invitation.service';
 import { data } from 'jquery';
+import { ActivatedRoute } from '@angular/router';
+import { BoardInterface } from '../interfaces/board-interface';
+import { BoardService } from '../services/board.service';
 @Component({
   selector: 'app-share-dialog',
   templateUrl: './share-dialog.component.html',
@@ -12,6 +15,7 @@ import { data } from 'jquery';
 export class ShareDialogComponent {
 
   emailModel:string = "";
+    board!:BoardInterface;
   usersShare: any[] = [
     {
       id: 1,
@@ -28,7 +32,26 @@ export class ShareDialogComponent {
 
   ];
 
-  constructor(private invitationService:InvitationService){}
+  constructor(private boardService:BoardService,private invitationService:InvitationService,private route:ActivatedRoute){
+    
+  }
+
+  ngOnInit(){
+    this.route.params.subscribe(params => {
+      let data = params['id']  ;
+      if(data){
+        this.boardService.getBoard(data).subscribe(
+          (res:any)=>{
+            this.board = res.data;
+          },
+          (error)=>{
+            console.log(error);
+          }
+          );
+      }
+
+    });
+  }
 
   dropdownOptions: string[] = ["Menu item 1", "Menu item 2", "Menu item 3"];
 
