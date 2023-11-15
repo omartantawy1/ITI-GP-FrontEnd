@@ -24,7 +24,7 @@ export class SignUpComponent implements OnInit {
     this.navbarService.hide();
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      name: ['', [Validators.required, Validators.pattern(/\w+/), Validators.minLength(8)]],
+      name: ['', [Validators.required, Validators.pattern(/\w+/), Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
     }, {
